@@ -1,0 +1,22 @@
+이 프로젝트에서 HWP 파일을 파싱하고 생성해야 해.
+프로젝트 루트에 참고용 스크립트 3개를 넣어뒀어. 읽어줘:
+
+1. skills_for_claude_code/soffice.py
+   — 샌드박스 환경에서 LibreOffice를 안전하게 실행하는 래퍼야.
+   — AF_UNIX 소켓이 차단된 환경에서 LD_PRELOAD shim으로 우회해.
+   — 바이너리 HWP → HWPX 변환할 때 이걸 써야 해.
+
+2. skills_for_claude_code/unpack.py
+   — ZIP+XML 포맷을 언팩하는 패턴이야.
+   — HWPX도 ZIP+XML이라 이 패턴을 파싱에 응용할 거야.
+
+3. skills_for_claude_code/pack.py
+   — XML을 ZIP으로 리팩하는 패턴이야.
+   — HWPML 템플릿으로 HWP 파일 생성할 때 참고.
+
+이 3개를 읽은 후, backend/core/office/ 디렉토리에 
+soffice.py를 복사하고, 이를 활용하는 hwp_converter.py를 만들어줘.
+hwp_converter.py는 다음 기능을 제공해야 해:
+- detect_format(file_path) → "HWPML" | "HWP_BINARY" | "HWPX" (매직 바이트 기반)
+- convert_binary_to_hwpml(input_path, output_path) → soffice.py를 사용한 변환
+- unpack_hwpx(file_path, output_dir) → HWPX ZIP 해제

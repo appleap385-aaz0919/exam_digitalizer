@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기능정의서 v1.0 — 시험 문항 디지털라이징 시스템</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1f;--ink-light:#4a4a55;--ink-muted:#8a8a95;--surface:#fafaf8;--card:#fff;--border:#e8e8e4;--border-light:#f0f0ec;--accent:#2d5be3;--accent-light:#eef2fd;--accent-dark:#1a3a9e;--pass:#0d8a5e;--pass-bg:#e8f8f0;--fail:#d43b3b;--fail-bg:#fdeaea;--warn:#c27a1a;--warn-bg:#fef6e8;--purple:#6c5ce7;--purple-bg:#f0eeff;--teal:#0d9488;--teal-bg:#e8f7f6;--coral:#e8593c;--coral-bg:#fef0ec}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Noto Sans KR',sans-serif;background:var(--surface);color:var(--ink);line-height:1.78;font-size:14px;-webkit-font-smoothing:antialiased}.pw{max-width:1100px;margin:0 auto;padding:50px 40px 120px}
+
+.cover{text-align:center;padding:60px 0 35px;border-bottom:1px solid var(--border);margin-bottom:35px}.cover-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);background:var(--accent-light);padding:5px 14px;border-radius:20px;margin-bottom:16px}.cover h1{font-size:28px;font-weight:900;line-height:1.3;margin-bottom:8px}.cover h1 em{font-style:normal;color:var(--accent)}.cover-meta{font-size:12px;color:var(--ink-muted)}.cover-meta span+span::before{content:'·';margin:0 7px}
+
+.toc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:40px}.toc h2{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-muted);margin-bottom:14px}.toc-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 28px}.toc a{text-decoration:none;color:var(--ink);font-size:12.5px;display:block;padding:4px 0;border-bottom:1px solid var(--border-light)}.toc a:hover{color:var(--accent)}.toc .tn{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-muted);margin-right:6px}.toc .tp{font-size:10px;font-weight:700;margin:12px 0 4px;text-transform:uppercase;letter-spacing:1px;color:var(--accent)}
+
+.sec{margin-bottom:40px}.sn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1px;margin-bottom:3px}.sec h2{font-size:21px;font-weight:900;margin-bottom:5px;letter-spacing:-0.3px}.sd{font-size:13px;color:var(--ink-light);margin-bottom:18px;max-width:720px}.sec h3{font-size:15px;font-weight:700;margin:26px 0 10px;padding-bottom:4px;border-bottom:2px solid var(--border)}.sec h4{font-size:13.5px;font-weight:700;margin:16px 0 6px}
+
+.fc{background:var(--card);border:1px solid var(--border);border-radius:11px;margin-bottom:18px;overflow:hidden;page-break-inside:avoid}
+.fh{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid var(--border)}
+.fh-id{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);font-weight:600}
+.fh-title{font-size:15px;font-weight:800;flex:1;margin-left:12px}
+.fh-badges{display:flex;gap:5px}
+.badge{font-size:9px;font-weight:600;padding:3px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace}
+.badge.teacher{background:var(--purple-bg);color:var(--purple)}.badge.student{background:var(--teal-bg);color:var(--teal)}.badge.admin{background:var(--coral-bg);color:var(--coral)}.badge.system{background:#f0f0ec;color:var(--ink-light)}.badge.mvp{background:var(--pass-bg);color:var(--pass)}.badge.later{background:var(--warn-bg);color:var(--warn)}
+.fb{padding:16px 20px}
+
+.field{display:grid;grid-template-columns:90px 1fr;gap:2px 12px;margin:5px 0;font-size:13px}.field-l{font-weight:700;color:var(--ink-light);font-size:11.5px}.field-v{color:var(--ink)}
+
+.flow{margin:10px 0;padding:14px 18px;background:var(--surface);border-radius:8px;border:1px solid var(--border-light)}
+.step{display:flex;gap:10px;margin:5px 0;font-size:12.5px;align-items:flex-start}
+.snum{background:var(--accent);color:white;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.snum.alt{background:var(--purple)}.snum.err{background:var(--fail)}.snum.sys{background:var(--teal)}
+.stxt{flex:1}
+.branch{margin-left:30px;padding:5px 12px;background:var(--card);border-radius:5px;font-size:12px;border-left:3px solid var(--purple);margin-top:3px;margin-bottom:3px}
+
+.rb{padding:10px 14px;border-radius:7px;margin:8px 0;font-size:12.5px}.rb.info{background:var(--accent-light);border:1px solid rgba(45,91,227,.15);color:var(--accent-dark)}.rb.warn{background:var(--warn-bg);border:1px solid rgba(194,122,26,.15);color:#8a5a10}.rb.critical{background:var(--fail-bg);border:1px solid rgba(212,59,59,.15);color:var(--fail)}.rb.success{background:var(--pass-bg);border:1px solid rgba(13,138,94,.15);color:#076840}
+.rb strong{font-weight:700}
+
+table{width:100%;border-collapse:separate;border-spacing:0;margin:8px 0;font-size:12px;border:1px solid var(--border);border-radius:8px;overflow:hidden}thead{background:#f5f5f2}th{text-align:left;padding:7px 10px;font-weight:700;font-size:10.5px;color:var(--ink-light);border-bottom:2px solid var(--border);white-space:nowrap}td{padding:7px 10px;border-bottom:1px solid var(--border-light);vertical-align:top}tbody tr:last-child td{border-bottom:none}
+
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:12px 0}.si{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 16px}.si .sl{font-size:9px;color:var(--ink-muted);font-weight:500;margin-bottom:2px}.si .sv{font-size:14px;font-weight:700}
+
+.doc-footer{margin-top:60px;padding-top:16px;border-top:1px solid var(--border);text-align:center;font-size:11px;color:var(--ink-muted)}
+@media print{body{font-size:10px}.pw{padding:16px}.fc{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="pw">
+
+<header class="cover">
+<div class="cover-badge">Functional Specification v1.0</div>
+<h1>기능정의서<br><em>시험 문항 디지털라이징 시스템</em></h1>
+<div class="cover-meta"><span>교사 15 · 학생 9 · 관리자 6 · 시스템 4 = 34개 기능</span><span>MVP 33개</span><span>2025.04</span></div>
+</header>
+
+<!-- ═══ TOC ═══ -->
+<nav class="toc">
+<h2>목차</h2>
+<div class="toc-grid">
+<div>
+<div class="tp">개요</div>
+<a href="#ov"><span class="tn">§1</span>시스템 개요 · 사용자 역할 · MVP 범위</a>
+<div class="tp">교사 기능 (T-01 ~ T-15)</div>
+<a href="#t01"><span class="tn">T-01</span>로그인 / 인증</a>
+<a href="#t02"><span class="tn">T-02</span>HWP 파일 업로드</a>
+<a href="#t03"><span class="tn">T-03</span>문항 관리 (조회·검색·상세)</a>
+<a href="#t04"><span class="tn">T-04</span>학급 관리</a>
+<a href="#t05"><span class="tn">T-05</span>학생 관리</a>
+<a href="#t06"><span class="tn">T-06</span>시험지 구성</a>
+<a href="#t07"><span class="tn">T-07</span>시험지 편집 (배점·순서·미리보기)</a>
+<a href="#t08"><span class="tn">T-08</span>시험지 배포</a>
+<a href="#t09"><span class="tn">T-09</span>HWP 다운로드 & 인쇄</a>
+<a href="#t10"><span class="tn">T-10</span>실시간 응시 모니터링</a>
+<a href="#t11"><span class="tn">T-11</span>성적 조회 & 서술형 채점 관리</a>
+<a href="#t12"><span class="tn">T-12</span>성적 내보내기 (CSV/XLSX)</a>
+<a href="#t13"><span class="tn">T-13</span>정답 정정 & 재채점</a>
+<a href="#t14"><span class="tn">T-14</span>시험 시간 연장</a>
+<a href="#t15"><span class="tn">T-15</span>알림 센터</a>
+</div>
+<div>
+<div class="tp">학생 기능 (S-01 ~ S-09)</div>
+<a href="#s01"><span class="tn">S-01</span>학급 접속 (QR / 초대코드)</a>
+<a href="#s02"><span class="tn">S-02</span>학생 식별 (이름 선택·입력)</a>
+<a href="#s03"><span class="tn">S-03</span>학급 메인 화면</a>
+<a href="#s04"><span class="tn">S-04</span>시험 응시 (CBT)</a>
+<a href="#s05"><span class="tn">S-05</span>답안 자동 저장 & 복구</a>
+<a href="#s06"><span class="tn">S-06</span>답안 제출 & 자동 제출</a>
+<a href="#s07"><span class="tn">S-07</span>채점 결과 확인</a>
+<a href="#s08"><span class="tn">S-08</span>추천 문항 & 오답 피드백</a>
+<a href="#s09"><span class="tn">S-09</span>시험지 QR 직접 접속</a>
+<div class="tp">관리자 기능 (A-01 ~ A-06)</div>
+<a href="#a01"><span class="tn">A-01</span>AI 정답 확인 (경로 B 게이트)</a>
+<a href="#a02"><span class="tn">A-02</span>수동 검토 (3회 반려)</a>
+<a href="#a03"><span class="tn">A-03</span>파이프라인 대시보드</a>
+<a href="#a04"><span class="tn">A-04</span>메타 스키마 관리</a>
+<a href="#a05"><span class="tn">A-05</span>문항 수명 관리</a>
+<a href="#a06"><span class="tn">A-06</span>사용자(교사) 계정 관리</a>
+<div class="tp">시스템 기능 (SYS-01 ~ SYS-04)</div>
+<a href="#sys01"><span class="tn">SYS-01</span>에이전트 파이프라인 (자동 처리)</a>
+<a href="#sys02"><span class="tn">SYS-02</span>자동 채점 엔진</a>
+<a href="#sys03"><span class="tn">SYS-03</span>유사문항 추천 엔진</a>
+<a href="#sys04"><span class="tn">SYS-04</span>세션 · 타이머 · 자동 전환</a>
+</div>
+</div>
+</nav>
+
+<!-- ═══ 개요 ═══ -->
+<div class="sec" id="ov"><div class="sn">§1 OVERVIEW</div>
+<h2>시스템 개요</h2>
+
+<h3>사용자 역할 & 인증</h3>
+<table><thead><tr><th>역할</th><th>인증</th><th>주요 활동</th></tr></thead><tbody>
+<tr><td><strong>교사</strong></td><td>email + password → JWT (30분/7일)</td><td>HWP 업로드, 문항 관리, 시험지 구성·배포, 성적 관리</td></tr>
+<tr><td><strong>학생</strong></td><td>QR/초대코드 → 이름 선택 → 세션 토큰 (24h)</td><td>CBT 응시, 결과 확인, 추천 문항</td></tr>
+<tr><td><strong>관리자</strong></td><td>email + password → JWT</td><td>AI 정답 확인, 파이프라인 관리, 교사 계정, 메타 스키마</td></tr>
+</tbody></table>
+
+<h3>MVP 범위</h3>
+<div class="sg">
+<div class="si"><div class="sl">과목</div><div class="sv">수학 1과목</div></div>
+<div class="si"><div class="sl">문항 유형</div><div class="sv">객관식 + 단답형 + 서술형</div></div>
+<div class="si"><div class="sl">채점 대상</div><div class="sv">온라인 CBT 응시만</div></div>
+<div class="si"><div class="sl">HWP 다운로드</div><div class="sv">인쇄 참고용 (채점 X)</div></div>
+<div class="si"><div class="sl">파일럿 규모</div><div class="sv">교사 10명 · 학생 300명</div></div>
+<div class="si"><div class="sl">복수정답</div><div class="sv">지원 (any/all 모드)</div></div>
+</div>
+<div class="rb warn"><strong>MVP 제외:</strong> 수학 외 과목 · 종이 시험 답안 입력 · OMR 인식 · xAPI(가이드 수령 후) · 교육청 규모 스케일링 · 교사 셀프 회원가입</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     교사 기능
+     ═══════════════════════════════════════════════ -->
+<div class="sec"><div class="sn">TEACHER</div><h2>교사 기능 (T-01 ~ T-15)</h2></div>
+
+<!-- T-01 -->
+<div class="fc" id="t01"><div class="fh"><span class="fh-id">T-01</span><span class="fh-title">로그인 / 인증</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">교사가 이메일·비밀번호로 로그인하여 JWT 토큰을 발급받습니다.</span></div>
+<div class="field"><span class="field-l">사전 조건</span><span class="field-v">관리자가 교사 계정을 사전 생성해 둔 상태</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">POST /api/v1/auth/login · POST /api/v1/auth/refresh</span></div>
+<div class="flow">
+<div class="step"><div class="snum">1</div><div class="stxt">교사가 로그인 페이지에서 이메일 + 비밀번호 입력</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt">서버: bcrypt 해싱 비교 → 성공 시 JWT 액세스 토큰(30분) + 리프레시 토큰(7일) 발급</div></div>
+<div class="step"><div class="snum">3</div><div class="stxt">교사 메인 화면(학급 목록)으로 리다이렉트</div></div>
+<div class="step"><div class="snum err">E1</div><div class="stxt">비밀번호 불일치 → "이메일 또는 비밀번호가 올바르지 않습니다" (5회 실패 시 15분 잠금)</div></div>
+<div class="step"><div class="snum err">E2</div><div class="stxt">비활성 계정 → "관리자에게 문의하세요"</div></div>
+</div>
+<div class="rb info"><strong>토큰 갱신:</strong> 액세스 토큰 만료 5분 전에 프론트엔드가 자동으로 리프레시. 리프레시 토큰 만료 시 재로그인 필요.</div>
+</div></div>
+
+<!-- T-02 -->
+<div class="fc" id="t02"><div class="fh"><span class="fh-id">T-02</span><span class="fh-title">HWP 파일 업로드</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">HWP/HWPX 시험지를 업로드하면 AI 파이프라인이 자동으로 문항을 분석·구조화·제작하여 문항 DB에 등록합니다.</span></div>
+<div class="field"><span class="field-l">입력</span><span class="field-v">① 문제지 HWP/HWPX (필수) ② 정답지 HWP/HWPX (선택)</span></div>
+<div class="field"><span class="field-l">출력</span><span class="field-v">배치 ID, 파싱된 문항 수, 파이프라인 실시간 진행률</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">POST /api/v1/batches (multipart/form-data)</span></div>
+<div class="flow">
+<div class="step"><div class="snum">1</div><div class="stxt">"파일 업로드" 클릭 → 문제지 HWP 선택</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt">"정답지도 함께 업로드하시겠습니까?" 모달 → 정답지 선택 or 건너뛰기</div></div>
+<div class="step"><div class="snum sys">3</div><div class="stxt">서버: 파일 검증(확장자, 크기, 해시) → S3 업로드 → 배치 생성 → L1 파이프라인 시작</div></div>
+<div class="step"><div class="snum">4</div><div class="stxt">업로드 상태 화면: 문항별 진행 상태 실시간 표시 (파싱 중 → 메타 구조화 → 제작 → 완료)</div></div>
+<div class="step"><div class="snum">5</div><div class="stxt">전체 완료 → "N개 문항이 등록되었습니다" + 알림(T-15)</div></div>
+<div class="step"><div class="snum err">E1</div><div class="stxt">동일 파일 해시 → "이미 업로드된 파일입니다 (배치: BATCH-xxxx)" + 기존 배치 링크</div></div>
+<div class="step"><div class="snum err">E2</div><div class="stxt">파일 50MB 초과 → "50MB 이하 파일만 업로드 가능합니다"</div></div>
+<div class="step"><div class="snum err">E3</div><div class="stxt">확장자 불일치 → "HWP 또는 HWPX 파일만 업로드 가능합니다"</div></div>
+<div class="step"><div class="snum err">E4</div><div class="stxt">동시 업로드 5건 초과 → "처리 중인 파일이 5건입니다. 완료 후 다시 시도해 주세요"</div></div>
+</div>
+<h4>정답 확보 3경로</h4>
+<table><thead><tr><th>경로</th><th>조건</th><th>처리</th><th>교사/관리자 개입</th></tr></thead><tbody>
+<tr><td><strong>A. 정답지 추출</strong></td><td>정답지 함께 업로드</td><td>정답지에서 답 자동 추출 → 문항과 매칭</td><td>없음</td></tr>
+<tr><td><strong>B. AI 도출</strong></td><td>정답지 없음</td><td>AI가 2~3회 독립 풀이 → 정답 도출 → HUMAN_CONFIRM</td><td><strong>관리자 확인 필수 (A-01)</strong></td></tr>
+<tr><td><strong>C. 교사 입력</strong></td><td>정답지 없음 + AI 도출 실패/부적절</td><td>교사가 문항 상세에서 직접 정답 입력</td><td><strong>교사 직접 입력</strong></td></tr>
+</tbody></table>
+<div class="rb info"><strong>중복 방지:</strong> ① 파일 해시(SHA-256)로 동일 파일 차단 ② 문항 content_hash로 내용 중복 탐지 ③ 임베딩 유사도≥0.95로 실질 중복 경고</div>
+</div></div>
+
+<!-- T-03 -->
+<div class="fc" id="t03"><div class="fh"><span class="fh-id">T-03</span><span class="fh-title">문항 관리 (조회 · 검색 · 상세)</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">디지털라이징 완료(L1_COMPLETED)된 문항을 조회·검색·상세 확인합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">GET /api/v1/questions · GET /api/v1/questions/{pkey}</span></div>
+<h4>필터 항목</h4>
+<table><thead><tr><th>필터</th><th>입력 방식</th><th>예시</th></tr></thead><tbody>
+<tr><td>과목</td><td>드롭다운</td><td>수학</td></tr>
+<tr><td>학년</td><td>드롭다운</td><td>중1, 중2, 중3, 고1, 고2, 고3</td></tr>
+<tr><td>단원</td><td>체크박스 (복수)</td><td>수와 연산, 문자와 식</td></tr>
+<tr><td>소단원</td><td>체크박스 (단원 선택 후)</td><td>일차방정식, 연립방정식</td></tr>
+<tr><td>난이도</td><td>체크박스</td><td>상/중/하</td></tr>
+<tr><td>유형</td><td>체크박스</td><td>객관식/단답형/서술형/빈칸채우기</td></tr>
+<tr><td>복수정답</td><td>토글</td><td>복수정답만 / 단일정답만 / 전체</td></tr>
+<tr><td>배치</td><td>드롭다운</td><td>BATCH-2408</td></tr>
+<tr><td>키워드</td><td>텍스트 입력</td><td>"이차방정식" (발문 텍스트 검색)</td></tr>
+</tbody></table>
+<h4>문항 상세 화면</h4>
+<table><thead><tr><th>영역</th><th>내용</th></tr></thead><tbody>
+<tr><td>발문</td><td>수식(KaTeX) + 이미지 + 표 포함 완전 렌더링. 수식 변환 실패 시 원본 이미지 폴백</td></tr>
+<tr><td>선지</td><td>객관식: ①~⑤ 표시. 정답 선지 강조</td></tr>
+<tr><td>정답·풀이</td><td>정답, AI 생성 풀이(단계별), 서술형 루브릭</td></tr>
+<tr><td>메타데이터</td><td>단원, 개념, 난이도, 블룸 수준, 교육과정 코드</td></tr>
+<tr><td>유사 문항</td><td>벡터 유사도 상위 5건 리스트 (클릭 시 해당 문항 상세)</td></tr>
+<tr><td>파이프라인</td><td>처리 이력 타임라인 (각 단계별 시각, 점수, 반려 사유)</td></tr>
+<tr><td>출처</td><td>원본 배치 ID, 원본 파일명, 파일 내 위치(N번 문항)</td></tr>
+</tbody></table>
+</div></div>
+
+<!-- T-04 -->
+<div class="fc" id="t04"><div class="fh"><span class="fh-id">T-04</span><span class="fh-title">학급 관리</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">교사가 학급을 생성하고 관리합니다. 학급마다 고유 초대코드(6자리)와 QR이 자동 생성됩니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">POST/GET/PATCH/DELETE /api/v1/classrooms</span></div>
+<h4>기능 상세</h4>
+<table><thead><tr><th>기능</th><th>동작</th><th>비즈니스 규칙</th></tr></thead><tbody>
+<tr><td><strong>학급 생성</strong></td><td>학급명 입력 → 6자리 영숫자 초대코드 + QR 이미지 자동 생성</td><td>같은 교사 내 학급명 중복 불가</td></tr>
+<tr><td><strong>학급 목록</strong></td><td>교사의 전체 학급. 학급별 학생 수, 진행 중 시험 수 표시</td><td></td></tr>
+<tr><td><strong>학급 상세</strong></td><td>학생 리스트 + 시험지 리스트(상태별) 탭 구조</td><td></td></tr>
+<tr><td><strong>초대코드 재생성</strong></td><td>기존 코드 무효화 + 새 코드 발급</td><td>이미 접속한 학생에게는 영향 없음</td></tr>
+<tr><td><strong>QR 다운로드</strong></td><td>PNG 이미지 다운로드 (300dpi, A4 1/4 크기)</td><td>QR URL: https://{domain}/join/{invite_code}</td></tr>
+<tr><td><strong>학급 삭제</strong></td><td>소프트 삭제. 연결된 시험·성적 데이터 보존</td><td>진행 중(ACTIVE) 시험이 있으면 삭제 불가</td></tr>
+</tbody></table>
+</div></div>
+
+<!-- T-05 -->
+<div class="fc" id="t05"><div class="fh"><span class="fh-id">T-05</span><span class="fh-title">학생 관리</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">학급 내 학생 명단을 관리합니다. 학생은 계정이 없으며 이름으로만 식별됩니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">POST/GET/PATCH/DELETE /api/v1/classrooms/{id}/students</span></div>
+<h4>기능 상세</h4>
+<table><thead><tr><th>기능</th><th>동작</th><th>비즈니스 규칙</th></tr></thead><tbody>
+<tr><td><strong>개별 추가</strong></td><td>이름 입력 → classroom_students 레코드 생성</td><td>같은 학급 내 동일 이름 불가</td></tr>
+<tr><td><strong>CSV 일괄 등록</strong></td><td>CSV 업로드 (이름 한 줄에 하나) → 일괄 생성</td><td>중복 이름 건은 스킵 + 결과 리포트</td></tr>
+<tr><td><strong>이름 수정</strong></td><td>기존 이름 변경</td><td>기존 시험 기록은 자동 연결 유지 (student_id 기반)</td></tr>
+<tr><td><strong>삭제</strong></td><td>소프트 삭제</td><td>기존 시험 기록 보존. 응시 중 시험이 있으면 삭제 불가</td></tr>
+<tr><td><strong>자기 등록 관리</strong></td><td>학생이 스스로 입력한 이름에 "미확인" 뱃지 표시</td><td>교사가 확인 클릭 → 뱃지 제거. 확인 전에도 응시 가능</td></tr>
+</tbody></table>
+<div class="rb warn"><strong>동명이인:</strong> 같은 학급 내 동일 이름은 시스템이 차단합니다. 실제 동명이인이 있으면 교사가 구분자를 붙여 등록합니다 (예: "김민준(1번)", "김민준(2번)").</div>
+<div class="rb info"><strong>CSV 형식:</strong> UTF-8 인코딩. 헤더 없이 이름만 한 줄에 하나. 첫 행이 "이름" 또는 "name"이면 헤더로 인식하여 건너뜁니다.</div>
+</div></div>
+
+<!-- T-06 -->
+<div class="fc" id="t06"><div class="fh"><span class="fh-id">T-06</span><span class="fh-title">시험지 구성</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">교사가 메타 조건을 입력하면 시스템이 문항 풀에서 자동 선별하여 시험지를 구성합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">POST /api/v1/exams/compose</span></div>
+<h4>입력 조건</h4>
+<table><thead><tr><th>항목</th><th>입력 방식</th><th>필수</th><th>기본값</th></tr></thead><tbody>
+<tr><td>시험명</td><td>텍스트</td><td>✅</td><td>—</td></tr>
+<tr><td>과목</td><td>드롭다운</td><td>✅</td><td>수학</td></tr>
+<tr><td>학년</td><td>드롭다운</td><td>✅</td><td>—</td></tr>
+<tr><td>단원</td><td>복수 체크박스</td><td>✅ (1개 이상)</td><td>—</td></tr>
+<tr><td>난이도 분포</td><td>슬라이더 (상:중:하 비율)</td><td>✅</td><td>20:60:20</td></tr>
+<tr><td>객관식 문항 수</td><td>숫자 입력</td><td>✅</td><td>—</td></tr>
+<tr><td>단답형 문항 수</td><td>숫자 입력</td><td>✅</td><td>—</td></tr>
+<tr><td>서술형 문항 수</td><td>숫자 입력</td><td>✅</td><td>—</td></tr>
+<tr><td>시험 시간(분)</td><td>숫자 입력</td><td>✅</td><td>50</td></tr>
+<tr><td>유형별 기본 배점</td><td>숫자 입력 (객관식 N, 단답형 N, 서술형 N)</td><td>✅</td><td>3/4/5</td></tr>
+<tr><td>이전 출제 제외</td><td>토글 + 학급 선택</td><td>선택</td><td>OFF</td></tr>
+</tbody></table>
+<div class="flow">
+<div class="step"><div class="snum">1</div><div class="stxt">조건 입력. 입력 중 "조건 충족 문항: 객관식 47건 / 단답형 12건 / 서술형 8건" 실시간 카운트</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt">"시험지 구성" 클릭 → 시스템이 난이도 밸런싱 + 단원 분배 + 중복 방지 후 문항 선별</div></div>
+<div class="step"><div class="snum">3</div><div class="stxt">선별 결과 목록 표시: 문항번호, 발문 요약, 유형, 난이도, 단원, 배점, 복수정답 뱃지</div></div>
+<div class="step"><div class="snum">4</div><div class="stxt">부적절한 문항 → "교체" 버튼 → 같은 조건(유형·난이도·단원)의 대체 후보 3~5개 모달</div></div>
+<div class="step"><div class="snum">5</div><div class="stxt">만족 시 → T-07(편집) 화면으로 이동</div></div>
+<div class="step"><div class="snum err">E1</div><div class="stxt">충족 문항 부족(요청의 80% 미만) → "단답형 문항이 부족합니다 (요청 5건, 가용 2건). 조건을 완화하거나 문항 수를 줄여 주세요"</div></div>
+<div class="step"><div class="snum err">E2</div><div class="stxt">선택한 단원에 문항 0건 → "선택한 단원에 등록된 문항이 없습니다"</div></div>
+</div>
+<div class="rb info"><strong>세트 문항:</strong> 공통 지문을 공유하는 문항([1-2], [10-11] 등)은 question_group으로 묶여 있어, 그룹 전체를 포함하거나 전체를 제외합니다. 세트 내 일부만 선택하는 것은 불가능합니다.</div>
+<div class="rb info"><strong>복수정답 문항 표시:</strong> is_multiple_answer=true인 문항은 목록에서 "복수" 뱃지가 표시되어, 교사가 사전에 인지하고 포함/제외를 결정할 수 있습니다.</div>
+</div></div>
+
+<!-- T-07 -->
+<div class="fc" id="t07"><div class="fh"><span class="fh-id">T-07</span><span class="fh-title">시험지 편집 (배점 · 순서 · 미리보기)</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">구성된 시험지를 확정하기 전에 배점 수정, 순서 변경, 미리보기를 수행합니다.</span></div>
+<div class="field"><span class="field-l">상태</span><span class="field-v">EXAM_COMPOSE 상태에서만 편집 가능</span></div>
+<h4>기능 상세</h4>
+<table><thead><tr><th>기능</th><th>동작</th><th>제약</th></tr></thead><tbody>
+<tr><td><strong>개별 배점 수정</strong></td><td>문항별 점수 직접 입력. 총점 자동 재계산</td><td>0점 이상, 소수점 불가</td></tr>
+<tr><td><strong>순서 변경</strong></td><td>드래그&드롭으로 문항 순서 재배치</td><td>세트 문항은 그룹 단위로만 이동</td></tr>
+<tr><td><strong>문항 교체</strong></td><td>특정 문항 → 같은 조건의 대체 후보 3~5개 선택</td><td></td></tr>
+<tr><td><strong>문항 삭제</strong></td><td>시험지에서 제거. 총 문항 수·총점 재계산</td><td>세트 문항은 그룹 전체 삭제</td></tr>
+<tr><td><strong>CBT 미리보기</strong></td><td>학생이 보게 될 화면 그대로 미리보기 (수식·이미지·선지 렌더링)</td><td></td></tr>
+<tr><td><strong>확정</strong></td><td>EXAM_COMPOSE → EXAM_CONFIRMED. 콘텐츠 잠금</td><td></td></tr>
+</tbody></table>
+<div class="rb critical"><strong>확정 후 수정 불가 원칙:</strong> EXAM_CONFIRMED 이후 문항·배점·순서 변경 불가. 단, 학급에 아직 배포(classroom_exams)되지 않은 시험지는 확정 취소 → EXAM_COMPOSE로 롤백 가능. 1개 이상 학급에 배포된 시험지는 롤백 불가 — 새 시험지를 생성해야 합니다.</div>
+</div></div>
+
+<!-- T-08 -->
+<div class="fc" id="t08"><div class="fh"><span class="fh-id">T-08</span><span class="fh-title">시험지 배포</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">확정된 시험지를 1개 이상의 학급에 배포합니다. 같은 시험지를 여러 학급에 서로 다른 시간대로 배포할 수 있습니다.</span></div>
+<div class="field"><span class="field-l">사전 조건</span><span class="field-v">시험지가 EXAM_CONFIRMED 상태</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">POST /api/v1/classrooms/{id}/exams</span></div>
+<div class="flow">
+<div class="step"><div class="snum">1</div><div class="stxt">확정된 시험지 선택 → "학급에 배포" 버튼</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt">배포 대상 학급 선택 (복수 선택 가능)</div></div>
+<div class="step"><div class="snum">3</div><div class="stxt">학급별 시간 설정:
+  · 시작 시각(opens_at) — 비워두면 즉시
+  · 종료 시각(closes_at) — 비워두면 무제한(교사 수동 종료)</div></div>
+<div class="step"><div class="snum sys">4</div><div class="stxt">서버: classroom_exams 레코드 생성 → L2-B 파이프라인 시작 → 학급별 HWP 생성(학급 전용 QR 삽입) + 시험 QR 생성</div></div>
+<div class="step"><div class="snum">5</div><div class="stxt">HWP 생성 완료(DEPLOY_READY) → HWP 다운로드 버튼 활성화, QR 인쇄 버튼 활성화</div></div>
+<div class="step"><div class="snum err">E1</div><div class="stxt">opens_at ≥ closes_at → "종료 시각은 시작 시각 이후여야 합니다"</div></div>
+<div class="step"><div class="snum err">E2</div><div class="stxt">이미 같은 시험지가 해당 학급에 배포됨 → "이 학급에 이미 배포된 시험지입니다"</div></div>
+</div>
+<div class="rb info"><strong>다중 학급 시간차 예시:</strong> 동일 수학 시험지 → 1반(09:50~10:30), 2반(10:40~11:20), 3반(13:10~13:50) 각각 다른 시간대로 배포.</div>
+<h4>배포 상태 흐름 (교사에게 표시)</h4>
+<table><thead><tr><th>상태</th><th>교사 화면</th><th>학생 화면</th><th>HWP</th></tr></thead><tbody>
+<tr><td>PREPARING</td><td>"시험지 생성 중"</td><td>미노출</td><td>❌</td></tr>
+<tr><td>READY</td><td>"배포 준비 완료"</td><td>미노출</td><td>✅</td></tr>
+<tr><td>SCHEDULED</td><td>"예정 (시작: HH:MM)"</td><td>"시험 예정" (응시 불가)</td><td>✅</td></tr>
+<tr><td>ACTIVE</td><td>"진행 중"</td><td>"응시 가능"</td><td>✅</td></tr>
+<tr><td>CLOSED</td><td>"종료됨"</td><td>"종료됨" (결과 확인)</td><td>✅</td></tr>
+<tr><td>CANCELLED</td><td>"취소됨"</td><td>미노출</td><td>❌</td></tr>
+</tbody></table>
+</div></div>
+
+<!-- T-09 -->
+<div class="fc" id="t09"><div class="fh"><span class="fh-id">T-09</span><span class="fh-title">HWP 다운로드 & 인쇄</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">학급별 생성된 HWP 시험지를 다운로드합니다. 인쇄 참고용이며 채점은 CBT에서만 가능합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">GET /api/v1/classrooms/{id}/exams/{ce_id}/hwp (presigned S3 URL 리다이렉트)</span></div>
+<div class="rb warn"><strong>다운로드 화면 안내:</strong> "이 파일은 인쇄 참고용입니다. 채점은 온라인 응시를 통해서만 진행됩니다." 문구를 다운로드 버튼 하단에 항상 표시.</div>
+<div class="rb info"><strong>학급별 QR:</strong> 각 학급 HWP에는 해당 학급+시험 전용 QR이 삽입됩니다. 학생이 스캔 시 해당 학급·시험에 바로 접속됩니다.</div>
+</div></div>
+
+<!-- T-10 -->
+<div class="fc" id="t10"><div class="fh"><span class="fh-id">T-10</span><span class="fh-title">실시간 응시 모니터링</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">ACTIVE 시험의 학생 응시 현황을 실시간으로 확인합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">WebSocket /ws/monitor/{classroom_exam_id}</span></div>
+<h4>모니터링 화면</h4>
+<table><thead><tr><th>영역</th><th>표시 항목</th><th>갱신 주기</th></tr></thead><tbody>
+<tr><td><strong>전체 요약</strong></td><td>접속 N명 / 응시 중 N명 / 제출 완료 N명 / 미접속 N명</td><td>5초</td></tr>
+<tr><td><strong>남은 시간</strong></td><td>시험 종료까지 카운트다운 (closes_at 기준)</td><td>1초</td></tr>
+<tr><td><strong>학생 리스트</strong></td><td>이름 | 상태(응시중/제출완료/미접속/연결끊김) | 진행률(15/25) | 마지막 응답 시각</td><td>5초</td></tr>
+</tbody></table>
+<div class="rb info"><strong>연결 끊김:</strong> 60초간 heartbeat 없으면 "연결 끊김" 표시. 학생이 재접속하면 자동 복귀.</div>
+<div class="rb info"><strong>실시간 방식:</strong> WebSocket(Socket.io) → SSE → polling(10초) 순차 폴백.</div>
+</div></div>
+
+<!-- T-11 -->
+<div class="fc" id="t11"><div class="fh"><span class="fh-id">T-11</span><span class="fh-title">성적 조회 & 서술형 채점 관리</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">학급별 시험 성적을 조회하고, AI 서술형 채점을 확인·수정합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">GET /api/v1/classrooms/{id}/exams/{ce_id}/grades · PATCH .../grades/{grade_id}</span></div>
+<h4>화면 구성</h4>
+<table><thead><tr><th>탭</th><th>내용</th></tr></thead><tbody>
+<tr><td><strong>요약</strong></td><td>평균/중앙값/최고/최저, 점수대 분포 히스토그램, 문항별 정답률 막대그래프</td></tr>
+<tr><td><strong>학생별</strong></td><td>학생 리스트 (이름, 총점, 등수). 클릭 → 문항별 정/오답, 획득 점수, 응답 시간</td></tr>
+<tr><td><strong>문항별</strong></td><td>각 문항의 정답률, 오답 분포, 변별도. 클릭 → 해당 문항에 대한 학생별 응답 분포</td></tr>
+<tr><td><strong>서술형 관리</strong></td><td>AI 채점 결과 리스트. confidence 낮은 순 정렬. 교사가 점수 직접 수정 가능</td></tr>
+<tr><td><strong>학급 비교</strong></td><td>같은 시험지의 모든 학급 통합 요약 (학급 간 평균·분포 비교)</td></tr>
+</tbody></table>
+<div class="rb info"><strong>서술형 AI 채점:</strong> confidence: HIGH/MEDIUM/LOW. LOW인 문항은 빨간 테두리 강조 + "교사 확인 권장" 뱃지. 교사가 점수를 수정하면 modified_by_teacher=true 플래그.</div>
+</div></div>
+
+<!-- T-12 -->
+<div class="fc" id="t12"><div class="fh"><span class="fh-id">T-12</span><span class="fh-title">성적 내보내기 (CSV / XLSX)</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">학급별 성적을 파일로 내보냅니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">GET /api/v1/classrooms/{id}/exams/{ce_id}/grades/export?format=csv|xlsx</span></div>
+<div class="field"><span class="field-l">포맷 선택</span><span class="field-v">CSV (간단 호환) / XLSX (서식·차트 포함)</span></div>
+<h4>XLSX 포함 시트</h4>
+<table><thead><tr><th>시트</th><th>내용</th></tr></thead><tbody>
+<tr><td>학생별 성적</td><td>이름, 총점, 문항1~N 각 점수, 등수</td></tr>
+<tr><td>문항 분석</td><td>문항번호, 유형, 배점, 정답률, 변별도</td></tr>
+<tr><td>성취도 요약</td><td>단원별/유형별/난이도별 정답률 요약</td></tr>
+</tbody></table>
+</div></div>
+
+<!-- T-13 -->
+<div class="fc" id="t13"><div class="fh"><span class="fh-id">T-13</span><span class="fh-title">정답 정정 & 재채점</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">출제 후 정답 오류가 발견된 경우, 정답을 수정하고 모든 학생의 점수를 재계산합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">POST /api/v1/exams/{exam_id}/questions/{pkey}/correct</span></div>
+<div class="flow">
+<div class="step"><div class="snum">1</div><div class="stxt">성적 화면에서 문항 선택 → "정답 정정" 버튼</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt">현재 정답 표시 + 올바른 정답 입력 + 정정 사유 텍스트</div></div>
+<div class="step"><div class="snum">3</div><div class="stxt">영향 범위 미리보기: "이 시험지가 배포된 학급 3개, 총 학생 87명에 영향"</div></div>
+<div class="step"><div class="snum">4</div><div class="stxt">"정정 실행" 확인 → 재채점 시작</div></div>
+<div class="step"><div class="snum sys">5</div><div class="stxt">서버: answer_corrections 레코드 생성 → 해당 문항 모든 submission_answers 재채점 → grade_results 재계산 → 성취도 재분석</div></div>
+<div class="step"><div class="snum">6</div><div class="stxt">완료 알림: "정정 완료. 87명 중 12명 점수 변동 (+3~+5점)"</div></div>
+</div>
+<div class="rb info"><strong>이력 보존:</strong> 정정 전 정답, 정정 후 정답, 정정 사유, 정정자, 정정 시각이 모두 answer_corrections 테이블에 보존됩니다.</div>
+<div class="rb info"><strong>전원 정답 처리:</strong> "전원 정답 처리" 체크박스 → 해당 문항 모든 학생에게 만점 부여 (정답 오류가 심각할 때).</div>
+</div></div>
+
+<!-- T-14 -->
+<div class="fc" id="t14"><div class="fh"><span class="fh-id">T-14</span><span class="fh-title">시험 시간 연장</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">진행 중(ACTIVE) 시험의 종료 시각을 연장합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">PATCH /api/v1/classrooms/{id}/exams/{ce_id}/extend</span></div>
+<div class="flow">
+<div class="step"><div class="snum">1</div><div class="stxt">모니터링 화면에서 "시간 연장" 버튼</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt">연장 시간 입력 (분 단위, 예: +10분)</div></div>
+<div class="step"><div class="snum">3</div><div class="stxt">확인 모달: "현재 응시 중 N명. 시간 만료 자동 제출 M명. 자동 제출된 학생은 복구 불가합니다. 시간을 연장하시겠습니까?"</div></div>
+<div class="step"><div class="snum">4</div><div class="stxt">"연장" 확인 → classroom_exams.closes_at 업데이트 + 활성 세션 타이머 갱신 + 학생 화면 카운트다운 실시간 업데이트</div></div>
+</div>
+<div class="rb critical"><strong>자동 제출 학생 재응시 불가:</strong> 시간 만료로 이미 자동 제출된 답안은 확정됩니다. 시간 연장 후에도 재응시 불가. 이유: ① 이미 채점 파이프라인 진입 가능 ② 다른 학생과의 형평성 ③ 이중 제출 방지. <strong>시간 연장은 closes_at 이전에 하는 것을 권장합니다.</strong></div>
+</div></div>
+
+<!-- T-15 -->
+<div class="fc" id="t15"><div class="fh"><span class="fh-id">T-15</span><span class="fh-title">알림 센터</span><div class="fh-badges"><span class="badge teacher">TEACHER</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">시스템 이벤트를 교사에게 알려줍니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">GET /api/v1/notifications · PATCH /api/v1/notifications/{id}/read</span></div>
+<h4>알림 유형</h4>
+<table><thead><tr><th>유형</th><th>트리거</th><th>메시지 예시</th></tr></thead><tbody>
+<tr><td>파이프라인 완료</td><td>배치의 모든 문항이 L1_COMPLETED</td><td>"03_단항식과_다항식.hwp 처리 완료: 19개 문항 등록"</td></tr>
+<tr><td>정답 확인 대기</td><td>경로B 문항이 HUMAN_CONFIRM 도달</td><td>"AI 정답 확인 대기: 5건 (배치: BATCH-2408)"</td></tr>
+<tr><td>채점 완료</td><td>학급 시험 전체 채점 완료</td><td>"1학년 2반 중단원평가 채점 완료 (평균 72점)"</td></tr>
+<tr><td>자기 등록 학생</td><td>학생이 스스로 이름 입력하여 등록</td><td>"1학년 2반에 새 학생 '홍길동' 등록 (미확인)"</td></tr>
+<tr><td>정답 정정 완료</td><td>정답 정정 + 재채점 완료</td><td>"정답 정정 완료: 중단원평가 15번 문항, 12명 점수 변동"</td></tr>
+<tr><td>3회 반려 문항</td><td>문항이 HUMAN_REVIEW 진입</td><td>"문항 QI-2408-0015-02 3회 반려 — 관리자 검토 필요"</td></tr>
+</tbody></table>
+<div class="field"><span class="field-l">UI</span><span class="field-v">헤더 우측 벨 아이콘 + 읽지 않은 알림 수 뱃지. 클릭 → 드롭다운 리스트. 각 알림 클릭 → 관련 화면으로 이동.</span></div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════
+     학생 기능
+     ═══════════════════════════════════════════════ -->
+<div class="sec"><div class="sn">STUDENT</div><h2>학생 기능 (S-01 ~ S-09)</h2></div>
+
+<!-- S-01 -->
+<div class="fc" id="s01"><div class="fh"><span class="fh-id">S-01</span><span class="fh-title">학급 접속 (QR / 초대코드)</span><div class="fh-badges"><span class="badge student">STUDENT</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">학급 QR을 스캔하거나 6자리 초대코드를 입력하여 학급에 접속합니다. 로그인/계정 없음.</span></div>
+<div class="field"><span class="field-l">진입점</span><span class="field-v">① 브라우저에서 https://{domain}/join 접속 ② QR 스캔 ③ 시험지 QR 스캔 (S-09)</span></div>
+<div class="flow">
+<div class="step"><div class="snum">1</div><div class="stxt">학생이 /join 페이지 접속 → 6자리 코드 입력란 표시</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt">코드 입력(또는 QR 스캔으로 자동 입력) → "접속" 버튼</div></div>
+<div class="step"><div class="snum sys">3</div><div class="stxt">서버: invite_code로 classroom 조회 → 존재하면 학생 식별 화면(S-02)으로 이동</div></div>
+<div class="step"><div class="snum err">E1</div><div class="stxt">코드 불일치 → "올바르지 않은 코드입니다. 선생님께 확인해 주세요."</div></div>
+<div class="step"><div class="snum err">E2</div><div class="stxt">삭제된 학급 → "더 이상 활성화되지 않은 학급입니다."</div></div>
+</div>
+</div></div>
+
+<!-- S-02 -->
+<div class="fc" id="s02"><div class="fh"><span class="fh-id">S-02</span><span class="fh-title">학생 식별 (이름 선택 · 입력)</span><div class="fh-badges"><span class="badge student">STUDENT</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">학급에 접속 후, 등록된 학생 이름 리스트에서 자신을 선택하거나 새 이름을 입력합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">GET /api/v1/join/{invite_code}/students · POST /api/v1/join/select-student</span></div>
+<div class="flow">
+<div class="step"><div class="snum">1</div><div class="stxt">학급 학생 이름 리스트 표시 (가나다순). 이미 시험 응시 중인 학생은 "응시 중" 표시</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt">자신의 이름 탭 → 세션 토큰 발급 → 학급 메인(S-03)으로 이동</div></div>
+<div class="branch">"내 이름이 없어요" 버튼 → 이름 입력 필드 → 입력·확인 → 자동 등록 + 교사에게 알림(T-15) + 세션 토큰 발급</div>
+<div class="step"><div class="snum err">E1</div><div class="stxt">입력한 이름이 기존 이름과 동일 → "이미 등록된 이름입니다. 목록에서 선택해 주세요."</div></div>
+</div>
+<div class="rb warn"><strong>보안 한계 (MVP):</strong> 학생이 타인의 이름을 선택하여 대리 응시가 가능합니다. MVP에서는 교사가 교실에서 감독하는 것을 전제합니다.</div>
+<div class="rb info"><strong>세션 토큰:</strong> Redis에 student_token:{token} → {classroom_id, student_id} 저장. TTL 24시간. X-Student-Token 헤더로 이후 모든 API에 전달.</div>
+</div></div>
+
+<!-- S-03 -->
+<div class="fc" id="s03"><div class="fh"><span class="fh-id">S-03</span><span class="fh-title">학급 메인 화면</span><div class="fh-badges"><span class="badge student">STUDENT</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">학생이 보는 메인 화면. 미응시 시험과 완료된 시험이 분리 표시됩니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">GET /api/v1/students/me/exams</span></div>
+<h4>화면 구성</h4>
+<table><thead><tr><th>영역</th><th>내용</th><th>시험 상태별 표시</th></tr></thead><tbody>
+<tr><td><strong>미응시 시험</strong></td><td>시험명, 문항 수, 시간, 상태</td><td>SCHEDULED → "시작 예정 (HH:MM)" (비활성)<br>ACTIVE → "응시 가능" (시작 버튼 활성)</td></tr>
+<tr><td><strong>완료된 시험</strong></td><td>시험명, 점수 (채점 완료 시)</td><td>GRADE_COMPLETED → 점수 표시 + 클릭 시 S-07<br>채점 중 → "채점 중..." 표시</td></tr>
+</tbody></table>
+<div class="rb info"><strong>미노출 조건:</strong> PREPARING, READY, CANCELLED 상태의 시험은 학생에게 보이지 않습니다.</div>
+</div></div>
+
+<!-- S-04 -->
+<div class="fc" id="s04"><div class="fh"><span class="fh-id">S-04</span><span class="fh-title">시험 응시 (CBT)</span><div class="fh-badges"><span class="badge student">STUDENT</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">온라인으로 시험에 응시합니다. 수식·이미지가 포함된 문항을 풀고 답을 입력합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">POST /api/v1/sessions/start · POST /api/v1/sessions/{id}/answers</span></div>
+<h4>CBT 화면 레이아웃</h4>
+<table><thead><tr><th>영역</th><th>위치</th><th>내용</th></tr></thead><tbody>
+<tr><td>상단 바</td><td>고정</td><td>시험명 · 남은 시간 카운트다운 · 진행률(15/25)</td></tr>
+<tr><td>문항 영역</td><td>중앙</td><td>발문(수식 KaTeX·이미지·표) + 선지/입력란</td></tr>
+<tr><td>네비게이션</td><td>하단 또는 사이드</td><td>◀ 이전 / 다음 ▶ · 문항번호 그리드(응답완료=파랑, 미응답=회색, 현재=강조)</td></tr>
+<tr><td>제출 버튼</td><td>하단 고정</td><td>"제출하기" (항시 접근 가능)</td></tr>
+</tbody></table>
+<h4>문항 유형별 입력 UI</h4>
+<table><thead><tr><th>유형</th><th>UI</th><th>특기사항</th></tr></thead><tbody>
+<tr><td>객관식 (단일)</td><td>라디오 버튼 ①②③④⑤</td><td>선택 후 자동 다음 문항 이동 (옵션)</td></tr>
+<tr><td>객관식 (복수)</td><td>체크박스 ①②③④⑤ + "복수 선택 가능" 안내</td><td>is_multiple_answer=true인 문항만</td></tr>
+<tr><td>단답형</td><td>한 줄 텍스트 입력</td><td>숫자/분수/소수 입력 가이드 표시</td></tr>
+<tr><td>서술형</td><td>여러 줄 텍스트에리어 (최대 2000자)</td><td>수식 입력은 MVP에서 텍스트 기반 ("2x+3")</td></tr>
+</tbody></table>
+<div class="rb info"><strong>이어서 풀기:</strong> 브라우저 종료 → 재접속 시, POST /sessions/start가 기존 세션을 감지하여 resumed=true로 응답. Redis에서 저장된 답안을 복원하여 이어서 풀기.</div>
+<div class="rb info"><strong>세트 문항:</strong> 공통 지문이 있는 세트 문항은 지문을 상단에 고정 표시하고, 하위 문항을 탭으로 전환.</div>
+</div></div>
+
+<!-- S-05 -->
+<div class="fc" id="s05"><div class="fh"><span class="fh-id">S-05</span><span class="fh-title">답안 자동 저장 & 복구</span><div class="fh-badges"><span class="badge student">STUDENT</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">시험 중 답안이 자동 저장되어, 네트워크 끊김이나 브라우저 종료 시에도 답안이 보존됩니다.</span></div>
+<h4>저장 전략 (3단계)</h4>
+<table><thead><tr><th>계층</th><th>트리거</th><th>저장 위치</th><th>용도</th></tr></thead><tbody>
+<tr><td><strong>즉시</strong></td><td>답안 변경 시 (debounce 500ms)</td><td>React 상태 (메모리)</td><td>UI 즉시 반영</td></tr>
+<tr><td><strong>주기적</strong></td><td>30초 간격</td><td>서버 Redis (session:{id}:answers)</td><td>서버 측 영속 보관</td></tr>
+<tr><td><strong>폴백</strong></td><td>네트워크 끊김 감지 시</td><td>로컬 버퍼 (메모리 큐)</td><td>재연결 시 서버 동기화</td></tr>
+</tbody></table>
+<div class="rb info"><strong>저장 상태 표시:</strong> 화면 우상단에 "저장됨 ✓" / "저장 중..." / "오프라인 (재연결 시 저장)" 상태 표시.</div>
+</div></div>
+
+<!-- S-06 -->
+<div class="fc" id="s06"><div class="fh"><span class="fh-id">S-06</span><span class="fh-title">답안 제출 & 자동 제출</span><div class="fh-badges"><span class="badge student">STUDENT</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">답안을 최종 제출합니다. 제출 후에는 수정 불가입니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">POST /api/v1/sessions/{id}/submit</span></div>
+<div class="flow">
+<div class="step"><div class="snum">1</div><div class="stxt">"제출하기" 버튼 클릭</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt">미응답 확인 모달: "3개 문항에 응답하지 않았습니다. 그래도 제출하시겠습니까?" (미응답 문항 번호 하이라이트)</div></div>
+<div class="step"><div class="snum">3</div><div class="stxt">"제출" 최종 확인 → 서버에 답안 전송 → submitted_at 기록</div></div>
+<div class="step"><div class="snum sys">4</div><div class="stxt">서버: Redis 답안 → DB(submission_answers)로 영속화 → 채점 파이프라인 시작</div></div>
+<div class="step"><div class="snum">5</div><div class="stxt">"제출 완료" 화면. "채점이 완료되면 결과를 확인할 수 있습니다."</div></div>
+</div>
+<h4>자동 제출 (2가지 트리거)</h4>
+<table><thead><tr><th>트리거</th><th>처리</th></tr></thead><tbody>
+<tr><td><strong>개인 시간 만료</strong></td><td>세션의 expires_at 도래 → 서버가 현재 답안 자동 제출 (auto_submitted=true)</td></tr>
+<tr><td><strong>시험 종료(CLOSED)</strong></td><td>classroom_exams.closes_at 도래 → 모든 미제출 세션 일괄 자동 제출</td></tr>
+</tbody></table>
+<div class="rb critical"><strong>제출 후 수정/재응시 불가:</strong> 수동 제출이든 자동 제출이든, 한 번 제출된 답안은 변경할 수 없습니다. 같은 시험에 재응시할 수 없습니다. 시험 시작 시 이 내용을 안내합니다.</div>
+</div></div>
+
+<!-- S-07 -->
+<div class="fc" id="s07"><div class="fh"><span class="fh-id">S-07</span><span class="fh-title">채점 결과 확인</span><div class="fh-badges"><span class="badge student">STUDENT</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">채점 완료 후 결과를 확인합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">GET /api/v1/students/me/exams/{ce_id}/result</span></div>
+<h4>화면 구성</h4>
+<table><thead><tr><th>영역</th><th>내용</th></tr></thead><tbody>
+<tr><td><strong>총점</strong></td><td>획득 점수 / 만점 (큰 글씨). 예: "76 / 100"</td></tr>
+<tr><td><strong>문항별 결과</strong></td><td>문항번호 | 유형 | 내 답 | 정답 | ✅/❌ | 획득/배점. 틀린 문항 빨간 강조</td></tr>
+<tr><td><strong>풀이 보기</strong></td><td>각 문항 펼치기 → AI 생성 단계별 풀이 표시</td></tr>
+<tr><td><strong>성취도 요약</strong></td><td>단원별 정답률 막대그래프 + 취약 단원 강조</td></tr>
+<tr><td><strong>추천 문항</strong></td><td>틀린 문항 옆 "유사 문항 풀어보기" 버튼 → S-08</td></tr>
+</tbody></table>
+</div></div>
+
+<!-- S-08 -->
+<div class="fc" id="s08"><div class="fh"><span class="fh-id">S-08</span><span class="fh-title">추천 문항 & 오답 피드백</span><div class="fh-badges"><span class="badge student">STUDENT</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">틀린 문항에 대해 오답 원인 피드백과 유사 연습 문항을 제공합니다.</span></div>
+<h4>제공 항목</h4>
+<table><thead><tr><th>항목</th><th>내용</th><th>생성 방식</th></tr></thead><tbody>
+<tr><td><strong>오답 피드백</strong></td><td>"왜 틀렸을 수 있는지" + "복습할 개념" 안내. 학년 수준에 맞춘 설명</td><td>AI 생성 (채점팀 #13 output)</td></tr>
+<tr><td><strong>추천 문항 3~5개</strong></td><td>같은 단원/개념의 유사 문항. 같거나 한 단계 쉬운 난이도</td><td>벡터 유사도 ≥ 0.7 + 필터링</td></tr>
+<tr><td><strong>추천 문항 풀기</strong></td><td>CBT와 동일한 UI로 문항 풀기 → 즉시 정답·풀이 확인</td><td>채점 없이 학습 모드</td></tr>
+</tbody></table>
+<div class="rb info"><strong>추천 제외:</strong> 같은 시험에 포함된 문항, 이전에 풀어본 문항, DEPRECATED/ARCHIVED 문항은 추천에서 제외.</div>
+</div></div>
+
+<!-- S-09 -->
+<div class="fc" id="s09"><div class="fh"><span class="fh-id">S-09</span><span class="fh-title">시험지 QR 직접 접속</span><div class="fh-badges"><span class="badge student">STUDENT</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">인쇄된 HWP 시험지의 QR을 스캔하면, 해당 학급+시험에 바로 접속됩니다.</span></div>
+<div class="field"><span class="field-l">QR URL</span><span class="field-v">https://{domain}/join/exam/{classroom_exam_id}?code={invite_code}</span></div>
+<div class="flow">
+<div class="step"><div class="snum">1</div><div class="stxt">학생이 종이 시험지의 QR 스캔 → URL 접속</div></div>
+<div class="step"><div class="snum">2</div><div class="stxt">URL에서 classroom_exam_id + invite_code 파싱 → 해당 학급의 학생 식별(S-02)</div></div>
+<div class="step"><div class="snum">3</div><div class="stxt">이름 선택/입력 후 → 해당 시험 바로 시작(S-04)</div></div>
+<div class="branch">이미 응시 완료 → 결과 화면(S-07)으로 이동</div>
+<div class="branch">SCHEDULED → "시험은 HH:MM에 시작됩니다" 안내</div>
+<div class="branch">CLOSED → "시험이 종료되었습니다" 안내</div>
+</div>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════
+     관리자 기능
+     ═══════════════════════════════════════════════ -->
+<div class="sec"><div class="sn">ADMIN</div><h2>관리자 기능 (A-01 ~ A-06)</h2></div>
+
+<!-- A-01 -->
+<div class="fc" id="a01"><div class="fh"><span class="fh-id">A-01</span><span class="fh-title">AI 정답 확인 (경로 B 게이트)</span><div class="fh-badges"><span class="badge admin">ADMIN</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">정답지 없이 업로드된 문항의 AI 도출 정답을 관리자가 확인·승인·수정합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">GET /api/v1/admin/pending-confirmations · POST /api/v1/admin/confirm-answer/{pkey}</span></div>
+<h4>화면 구성</h4>
+<table><thead><tr><th>영역</th><th>내용</th></tr></thead><tbody>
+<tr><td><strong>대기 리스트</strong></td><td>HUMAN_CONFIRM_ANSWER 상태 문항. confidence(HIGH/LOW) 뱃지. LOW는 빨간 강조</td></tr>
+<tr><td><strong>문항 상세</strong></td><td>발문 + 선지(수식 렌더링) + AI 도출 정답 + AI 풀이 과정 (2~3회 독립 풀이 결과 비교)</td></tr>
+<tr><td><strong>액션</strong></td><td>① "승인" → confirmed_by/at 기록, DATA 단계로 진행<br>② "수정" → 올바른 정답 입력 → answer_source='admin_corrected', DATA 진행<br>③ "반려" → 제작팀(#5)으로 재도출 지시</td></tr>
+</tbody></table>
+<div class="rb info"><strong>confidence 산출:</strong> AI가 2~3회 독립 풀이 → 결과 일치=HIGH, 불일치=LOW. LOW 문항은 관리자가 더 신중하게 확인해야 합니다.</div>
+</div></div>
+
+<!-- A-02 -->
+<div class="fc" id="a02"><div class="fh"><span class="fh-id">A-02</span><span class="fh-title">수동 검토 (3회 반려)</span><div class="fh-badges"><span class="badge admin">ADMIN</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">파이프라인에서 3회 연속 반려된 문항을 관리자가 수동으로 검토합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">GET /api/v1/admin/human-reviews · POST /api/v1/admin/human-reviews/{pkey}/resolve</span></div>
+<h4>화면 구성</h4>
+<table><thead><tr><th>영역</th><th>내용</th></tr></thead><tbody>
+<tr><td><strong>대기 리스트</strong></td><td>HUMAN_REVIEW 문항. 반려 횟수, 마지막 반려 단계, 마지막 반려 사유 표시</td></tr>
+<tr><td><strong>이력 패널</strong></td><td>전체 파이프라인 이력 타임라인 (각 단계 점수, 세부 항목별 점수, 반려 사유)</td></tr>
+<tr><td><strong>원본 비교</strong></td><td>원본 HWP(이미지) vs 파싱 결과 vs 구조화 결과 좌우 비교</td></tr>
+<tr><td><strong>액션</strong></td><td>① "수동 수정" → 관리자가 직접 데이터 수정 후 특정 단계로 재투입<br>② "폐기" → ARCHIVED 처리 (복구 불가)<br>③ "재투입" → 특정 단계로 재투입 (반려 카운트 리셋)</td></tr>
+</tbody></table>
+</div></div>
+
+<!-- A-03 -->
+<div class="fc" id="a03"><div class="fh"><span class="fh-id">A-03</span><span class="fh-title">파이프라인 대시보드</span><div class="fh-badges"><span class="badge admin">ADMIN</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">전체 파이프라인 운영 현황을 실시간 모니터링합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">GET /api/v1/admin/dashboard</span></div>
+<h4>대시보드 항목</h4>
+<table><thead><tr><th>카드</th><th>내용</th><th>경보 조건</th></tr></thead><tbody>
+<tr><td>처리량</td><td>시간당 처리 완료 문항 수 (L1_COMPLETED/h)</td><td>-</td></tr>
+<tr><td>큐 현황</td><td>각 스테이지별 대기 문항 수 (병목 감지)</td><td>특정 스테이지 대기 50건 이상</td></tr>
+<tr><td>반려율</td><td>에이전트별 반려율 (최근 24h)</td><td>40% 이상 → 빨간 경보</td></tr>
+<tr><td>에이전트 상태</td><td>각 에이전트 alive/dead 표시. 마지막 heartbeat 시각</td><td>300초 이상 미응답 → dead</td></tr>
+<tr><td>정답 확인 대기</td><td>HUMAN_CONFIRM 대기 건수</td><td>10건 이상 → 주의</td></tr>
+<tr><td>수동 검토 대기</td><td>HUMAN_REVIEW 대기 건수</td><td>5건 이상 → 주의</td></tr>
+<tr><td>LLM 사용량</td><td>일별 API 호출 수, 토큰 소비량, 비용 추정</td><td>일 예산 80% 초과 → 경보</td></tr>
+</tbody></table>
+</div></div>
+
+<!-- A-04 -->
+<div class="fc" id="a04"><div class="fh"><span class="fh-id">A-04</span><span class="fh-title">메타 스키마 관리</span><div class="fh-badges"><span class="badge admin">ADMIN</span><span class="badge later">후속</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">과목별 메타데이터 스키마(단원 구조, 난이도 체계, 블룸 수준 등)를 관리합니다.</span></div>
+<div class="rb warn"><strong>MVP:</strong> 수학 meta_schema는 시드 데이터(scripts/seed.py)로 사전 등록합니다. 관리 UI는 후속 개발입니다. 스키마 변경이 필요하면 DB 직접 수정 또는 seed 재실행.</div>
+</div></div>
+
+<!-- A-05 -->
+<div class="fc" id="a05"><div class="fh"><span class="fh-id">A-05</span><span class="fh-title">문항 수명 관리</span><div class="fh-badges"><span class="badge admin">ADMIN</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">문항의 lifecycle_status를 변경합니다.</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">PATCH /api/v1/admin/questions/{pkey}/lifecycle</span></div>
+<table><thead><tr><th>상태</th><th>의미</th><th>시험지 구성 시</th><th>전환 조건</th></tr></thead><tbody>
+<tr><td><strong>ACTIVE</strong></td><td>정상</td><td>후보에 포함</td><td>기본 상태</td></tr>
+<tr><td><strong>DEPRECATED</strong></td><td>사용 비권장</td><td>후보 포함, "비권장" 경고 뱃지</td><td>교육과정 개정, 오류 의심</td></tr>
+<tr><td><strong>ARCHIVED</strong></td><td>완전 퇴출</td><td>후보에서 완전 제외</td><td>관리자만 가능. 이미 출제된 시험 기록은 보존</td></tr>
+</tbody></table>
+</div></div>
+
+<!-- A-06 -->
+<div class="fc" id="a06"><div class="fh"><span class="fh-id">A-06</span><span class="fh-title">사용자(교사) 계정 관리</span><div class="fh-badges"><span class="badge admin">ADMIN</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">교사 계정을 생성·수정·비활성화합니다. 교사는 스스로 가입할 수 없습니다 (MVP).</span></div>
+<div class="field"><span class="field-l">API</span><span class="field-v">POST/GET/PATCH /api/v1/admin/users</span></div>
+<h4>기능 상세</h4>
+<table><thead><tr><th>기능</th><th>동작</th><th>비즈니스 규칙</th></tr></thead><tbody>
+<tr><td>계정 생성</td><td>이름 + 이메일 + 초기 비밀번호</td><td>이메일 중복 불가. 생성 시 역할=TEACHER</td></tr>
+<tr><td>정보 수정</td><td>이름, 이메일 변경</td><td>본인 또는 관리자만</td></tr>
+<tr><td>비밀번호 초기화</td><td>임시 비밀번호 발급 → 교사에게 전달</td><td>다음 로그인 시 변경 강제 (MVP에서는 권장만)</td></tr>
+<tr><td>비활성화</td><td>is_active=false → 로그인 차단</td><td>학급·시험 데이터 보존. 재활성화 가능</td></tr>
+</tbody></table>
+</div></div>
+
+<!-- ═══════════════════════════════════════════════
+     시스템 기능
+     ═══════════════════════════════════════════════ -->
+<div class="sec"><div class="sn">SYSTEM</div><h2>시스템 기능 (SYS-01 ~ SYS-04)</h2>
+<p class="sd">사용자에게 직접 노출되지 않지만, 핵심 비즈니스 로직을 수행하는 백엔드 시스템 기능입니다.</p>
+</div>
+
+<!-- SYS-01 -->
+<div class="fc" id="sys01"><div class="fh"><span class="fh-id">SYS-01</span><span class="fh-title">에이전트 파이프라인 (자동 처리)</span><div class="fh-badges"><span class="badge system">SYSTEM</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">HWP 업로드 후 14개 에이전트가 순차적으로 문항을 처리합니다. 사용자에게는 진행률만 표시됩니다.</span></div>
+<h4>L1 파이프라인 (문항 단위)</h4>
+<table><thead><tr><th>단계</th><th>에이전트</th><th>처리</th><th>사용자 개입</th></tr></thead><tbody>
+<tr><td>PARSING</td><td>#1 파싱팀</td><td>HWP에서 텍스트, 수식(SCRIPT), 이미지(BINDATA), 표 추출</td><td>없음</td></tr>
+<tr><td>PARSE_REVIEW</td><td>#2 파싱검수팀</td><td>5항목 채점, 85점 합격. 불합격 시 PARSING으로 반려</td><td>없음</td></tr>
+<tr><td>META</td><td>#3 메타팀</td><td>발문/선지/정답 구조화, 메타 태깅(단원·난이도·유형), 수식 LaTeX 변환</td><td>없음</td></tr>
+<tr><td>META_REVIEW</td><td>#4 메타검수팀</td><td>구조화 결과 검증. 불합격 시 META로 반려</td><td>없음</td></tr>
+<tr><td>PRODUCTION</td><td>#5 제작팀</td><td>정/오답 확정, AI 풀이 생성, 서술형 루브릭 생성, 렌더링 데이터 조립</td><td>없음</td></tr>
+<tr><td>PROD_REVIEW</td><td>#6 제작검수팀</td><td>렌더링, 정답, 풀이 품질 검증. 불합격 시 PRODUCTION으로 반려</td><td>없음</td></tr>
+<tr><td>HUMAN_CONFIRM</td><td>—</td><td>경로B(AI 도출 정답)만. 관리자 확인 대기</td><td><strong>관리자 (A-01)</strong></td></tr>
+<tr><td>DATA</td><td>#7 데이터팀</td><td>xAPI 설정 (MVP 스킵)</td><td>없음</td></tr>
+<tr><td>DATA_REVIEW</td><td>#8 데이터검수팀</td><td>xAPI 검증 (MVP 스킵)</td><td>없음</td></tr>
+<tr><td>EMBEDDING</td><td>임베딩 모듈</td><td>text-embedding-3-small로 벡터 생성, HNSW 인덱스 등록</td><td>없음</td></tr>
+<tr><td>L1_COMPLETED</td><td>—</td><td>완료. 문항 DB에 등록 완료. 시험지 구성(T-06)에서 사용 가능</td><td>없음</td></tr>
+</tbody></table>
+<div class="rb info"><strong>검수 기준:</strong> 100점 만점, 85점 이상 합격. 단일 항목 배점의 50% 미만이면 총점 무관 자동 반려. 3회 연속 반려 → HUMAN_REVIEW(A-02).</div>
+<div class="rb info"><strong>PKey 버전:</strong> 반려 시 version +1. QI-2408-0015-<strong>00</strong> → QI-2408-0015-<strong>01</strong>. 각 버전의 작업 이력이 pipeline_history에 보존됩니다.</div>
+</div></div>
+
+<!-- SYS-02 -->
+<div class="fc" id="sys02"><div class="fh"><span class="fh-id">SYS-02</span><span class="fh-title">자동 채점 엔진</span><div class="fh-badges"><span class="badge system">SYSTEM</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">학생 답안 제출 → 자동 채점 → 검수 → 결과 전달. 에이전트 #13(채점팀) + #14(채점검수팀).</span></div>
+<h4>유형별 채점 로직</h4>
+<table><thead><tr><th>유형</th><th>채점 방식</th><th>정규화</th><th>정확도</th></tr></thead><tbody>
+<tr><td><strong>객관식 (단일)</strong></td><td>정답 번호 == 학생 답 번호</td><td>—</td><td>100%</td></tr>
+<tr><td><strong>객관식 (복수, any)</strong></td><td>학생 선택 중 1개라도 정답에 포함 → 정답</td><td>—</td><td>100%</td></tr>
+<tr><td><strong>객관식 (복수, all)</strong></td><td>학생 선택 == 정답 집합 (순서 무관, 완전 일치)</td><td>—</td><td>100%</td></tr>
+<tr><td><strong>단답형</strong></td><td>허용 정답 목록과 비교</td><td>공백 제거, 분수 정규화(½→0.5), 단위 무시 옵션</td><td>99%+</td></tr>
+<tr><td><strong>서술형</strong></td><td>AI가 루브릭 기반 채점. 0~만점 사이 점수 부여 + confidence</td><td>—</td><td>참고 (교사 확인 권장)</td></tr>
+</tbody></table>
+<div class="rb warn"><strong>서술형 채점:</strong> confidence: HIGH(루브릭 전 항목 명확 판단)/MEDIUM/LOW(핵심 논거 판단 불확실). LOW 문항은 T-11에서 교사 확인 강조.</div>
+<div class="rb info"><strong>채점 흐름:</strong> 제출 → 채점팀(#13) → 채점검수팀(#14, 85점 합격) → GRADE_COMPLETED → 교사 알림(T-15) + 학생 결과 공개(S-07).</div>
+</div></div>
+
+<!-- SYS-03 -->
+<div class="fc" id="sys03"><div class="fh"><span class="fh-id">SYS-03</span><span class="fh-title">유사문항 추천 엔진</span><div class="fh-badges"><span class="badge system">SYSTEM</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">틀린 문항에 대해 벡터 유사도 기반으로 연습 문항을 추천합니다.</span></div>
+<h4>추천 알고리즘</h4>
+<table><thead><tr><th>단계</th><th>처리</th><th>파라미터</th></tr></thead><tbody>
+<tr><td>1. 벡터 검색</td><td>틀린 문항의 임베딩으로 pgvector HNSW 검색</td><td>상위 20건</td></tr>
+<tr><td>2. 유사도 필터</td><td>코사인 유사도 &lt; 0.7 제외</td><td>threshold: 0.7</td></tr>
+<tr><td>3. 제외 필터</td><td>같은 시험 문항 제외, 이미 풀어본 문항 제외, DEPRECATED/ARCHIVED 제외</td><td>—</td></tr>
+<tr><td>4. 우선순위</td><td>같은 단원/개념 > 같은 유형 > 같거나 1단계 낮은 난이도</td><td>가중 스코어</td></tr>
+<tr><td>5. 최종 선별</td><td>상위 3~5건 반환</td><td>3~5건</td></tr>
+</tbody></table>
+</div></div>
+
+<!-- SYS-04 -->
+<div class="fc" id="sys04"><div class="fh"><span class="fh-id">SYS-04</span><span class="fh-title">세션 · 타이머 · 자동 전환</span><div class="fh-badges"><span class="badge system">SYSTEM</span><span class="badge mvp">MVP</span></div></div>
+<div class="fb">
+<div class="field"><span class="field-l">설명</span><span class="field-v">학생 응시 세션 관리, 시간 만료 처리, 시험 상태 자동 전환을 수행합니다.</span></div>
+<h4>세션 관리</h4>
+<table><thead><tr><th>이벤트</th><th>처리</th><th>저장소</th></tr></thead><tbody>
+<tr><td>시험 시작</td><td>세션 생성 + 만료 타이머(Redis TTL) 설정</td><td>DB(submissions) + Redis(session:*)</td></tr>
+<tr><td>답안 저장</td><td>30초 주기 서버 동기화</td><td>Redis(session:{id}:answers)</td></tr>
+<tr><td>heartbeat</td><td>클라이언트 30초 간격 전송</td><td>Redis(session:{id}:heartbeat)</td></tr>
+<tr><td>연결 끊김</td><td>60초간 heartbeat 없음 → 교사 모니터링에 "연결 끊김" 표시</td><td>Redis</td></tr>
+<tr><td>개인 시간 만료</td><td>Redis TTL 만료 → 현재 답안 자동 제출</td><td>DB(submissions.auto_submitted=true)</td></tr>
+<tr><td>이어서 풀기</td><td>재접속 → 기존 세션 복구 + 저장된 답안 복원</td><td>Redis → 클라이언트</td></tr>
+</tbody></table>
+<h4>시험 상태 자동 전환</h4>
+<table><thead><tr><th>전환</th><th>트리거</th><th>처리</th></tr></thead><tbody>
+<tr><td>SCHEDULED → ACTIVE</td><td>opens_at 도래 (1분 간격 폴링)</td><td>classroom_exams.status='ACTIVE'. 학생 화면에 "응시 가능" 활성화</td></tr>
+<tr><td>ACTIVE → CLOSED</td><td>closes_at 도래</td><td>모든 미제출 세션 자동 제출 + classroom_exams.status='CLOSED'</td></tr>
+</tbody></table>
+</div></div>
+
+<!-- ═══ 기능 수량 요약 ═══ -->
+<div class="sec"><div class="sn">SUMMARY</div>
+<h2>기능 수량 요약</h2>
+<div class="sg">
+<div class="si"><div class="sl">교사 기능</div><div class="sv">15개 (T-01 ~ T-15)</div></div>
+<div class="si"><div class="sl">학생 기능</div><div class="sv">9개 (S-01 ~ S-09)</div></div>
+<div class="si"><div class="sl">관리자 기능</div><div class="sv">6개 (A-01 ~ A-06)</div></div>
+<div class="si"><div class="sl">시스템 기능</div><div class="sv">4개 (SYS-01 ~ SYS-04)</div></div>
+<div class="si"><div class="sl">총 기능</div><div class="sv">34개</div></div>
+<div class="si"><div class="sl">MVP 범위</div><div class="sv">33개 (A-04 후속)</div></div>
+</div>
+
+<h3>참조 설계 문서</h3>
+<table><thead><tr><th>문서</th><th>이 기능정의서와의 관계</th></tr></thead><tbody>
+<tr><td>시스템 설계 초안 v1.0</td><td>파이프라인 구조, PKey, 검수 기준 → SYS-01</td></tr>
+<tr><td>에이전트 스펙 v2.1 Final</td><td>14개 에이전트 상세 로직 → SYS-01, SYS-02</td></tr>
+<tr><td>기술 아키텍처 v1.3</td><td>DB 스키마, API 목록, Redis 키 → 전 기능의 API·DB 매핑</td></tr>
+<tr><td>기술 아키텍처 v1.4 패치</td><td>세션 스키마, 상태 동기화, 롤백 규칙 → T-07, T-08, T-14, SYS-04</td></tr>
+<tr><td>Phase 0 작업 지시서</td><td>인프라 구축 태스크 → 전 기능의 기반</td></tr>
+</tbody></table>
+</div>
+
+<footer class="doc-footer">
+<p>기능정의서 v1.0 · 시험 문항 디지털라이징 시스템 · 2025.04</p>
+<p style="margin-top:3px">교사 15 + 학생 9 + 관리자 6 + 시스템 4 = 34개 기능 · MVP 33개</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HWPML>
+  <HEAD>
+    <MAPPINGTABLE>
+      <BINDATALIST>
+      </BINDATALIST>
+    </MAPPINGTABLE>
+  </HEAD>
+  <BODY>
+    <SECTION>
+      <P><TEXT><CHAR>[1-2] 다음 식을 보고 물음에 답하시오.</CHAR></TEXT></P>
+      <P><TEXT><EQUATION><SCRIPT>2x LEFT ( 2x+4y-1 RIGHT )</SCRIPT></EQUATION></TEXT></P>
+
+      <P><TEXT><CHAR>1. 위 식을 전개하시오.</CHAR></TEXT></P>
+      <P><TEXT><CHAR>풀이 과정을 서술하시오.</CHAR></TEXT></P>
+
+      <P><TEXT><CHAR>2. x=3, y=2일 때 값을 구하시오.</CHAR></TEXT></P>
+
+      <P><TEXT><CHAR>3. 다음 중 올바른 것은?</CHAR></TEXT></P>
+      <P><TEXT><CHAR>① 2x+3  ② 3x-1  ③ 4x+2  ④ x-5  ⑤ 2x-1</CHAR></TEXT></P>
+
+      <P><TEXT><CHAR>4. 다음 분수를 계산하시오.</CHAR></TEXT></P>
+      <P><TEXT><EQUATION><SCRIPT>{1} over {3} + {2} over {5}</SCRIPT></EQUATION></TEXT></P>
+
+      <P><TEXT><CHAR>5. 빈칸에 알맞은 수를 넣으시오. (  )</CHAR></TEXT></P>
+      <P><TEXT><EQUATION><SCRIPT>sqrt {16} = (  )</SCRIPT></EQUATION></TEXT></P>
+    </SECTION>
+  </BODY>
+</HWPML>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기술 아키텍처 설계서 v1.4 — 최종 검증 반영</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1f;--ink-light:#4a4a55;--ink-muted:#8a8a95;--surface:#fafaf8;--card:#fff;--border:#e8e8e4;--border-light:#f0f0ec;--accent:#2d5be3;--accent-light:#eef2fd;--accent-dark:#1a3a9e;--pass:#0d8a5e;--pass-bg:#e8f8f0;--fail:#d43b3b;--fail-bg:#fdeaea;--warn:#c27a1a;--warn-bg:#fef6e8;--purple:#6c5ce7;--purple-bg:#f0eeff;--teal:#0d9488;--teal-bg:#e8f7f6}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Noto Sans KR',sans-serif;background:var(--surface);color:var(--ink);line-height:1.72;font-size:13.5px;-webkit-font-smoothing:antialiased}.pw{max-width:1140px;margin:0 auto;padding:50px 40px 100px}
+.cover{text-align:center;padding:50px 0 30px;border-bottom:1px solid var(--border);margin-bottom:28px}.cover-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);background:var(--accent-light);padding:5px 14px;border-radius:20px;margin-bottom:14px}.cover h1{font-size:26px;font-weight:900;line-height:1.3;margin-bottom:8px}.cover h1 em{font-style:normal;color:var(--accent)}.cover-meta{font-size:11.5px;color:var(--ink-muted)}.cover-meta span+span::before{content:'·';margin:0 6px}
+.cl{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:24px}.cl h2{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--fail);margin-bottom:8px}.cl ul{list-style:none;font-size:11.5px;line-height:1.85}.cl li::before{margin-right:5px;font-size:10px}.cl li.c::before{content:'🟡'}.cl li.a::before{content:'🟢'}.cl li.f::before{content:'🔵'}
+.sec{margin-bottom:32px}.sn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1px;margin-bottom:2px}.sec h2{font-size:18px;font-weight:900;margin-bottom:4px}.sd{font-size:12px;color:var(--ink-light);margin-bottom:14px;max-width:700px}.sec h3{font-size:13.5px;font-weight:700;margin:18px 0 7px;padding-bottom:3px;border-bottom:2px solid var(--border)}.sec h4{font-size:12.5px;font-weight:700;margin:12px 0 5px}
+.ac{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:16px;overflow:hidden}.ah{padding:10px 18px;border-bottom:1px solid var(--border);font-size:14px;font-weight:800}.ab{padding:14px 18px}
+.code{background:#1a1a2e;color:#e0e0e8;border-radius:7px;padding:12px 14px;margin:6px 0;font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.6;overflow-x:auto;white-space:pre;tab-size:2}.code .k{color:#74b9ff}.code .s{color:#55efc4}.code .n{color:#ffeaa7}.code .b{color:#fd79a8}.code .c{color:#636e72;font-style:italic}.code .f{color:#a29bfe}
+table{width:100%;border-collapse:separate;border-spacing:0;margin:6px 0;font-size:11.5px;border:1px solid var(--border);border-radius:7px;overflow:hidden}thead{background:#f5f5f2}th{text-align:left;padding:6px 9px;font-weight:700;font-size:10px;color:var(--ink-light);border-bottom:2px solid var(--border);white-space:nowrap}td{padding:6px 9px;border-bottom:1px solid var(--border-light);vertical-align:top}tbody tr:last-child td{border-bottom:none}
+.info{padding:9px 12px;border-radius:6px;margin:6px 0;font-size:11.5px}.info.rule{background:var(--accent-light);border:1px solid rgba(45,91,227,.15);color:var(--accent-dark)}.info.warn{background:var(--warn-bg);border:1px solid rgba(194,122,26,.15);color:#8a5a10}.info.success{background:var(--pass-bg);border:1px solid rgba(13,138,94,.15);color:#076840}.info.critical{background:var(--fail-bg);border:1px solid rgba(212,59,59,.15);color:var(--fail)}
+.vt{display:inline-block;font-size:8px;font-weight:700;padding:2px 5px;border-radius:3px;margin-left:4px;vertical-align:middle;background:#e8def8;color:#5b21b6}
+.badge{display:inline-block;font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;font-family:'JetBrains Mono',monospace;margin-left:2px}.badge.pk{background:var(--fail-bg);color:var(--fail)}.badge.fk{background:var(--accent-light);color:var(--accent)}.badge.idx{background:var(--warn-bg);color:var(--warn)}.badge.uq{background:var(--purple-bg);color:var(--purple)}
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:9px;margin:10px 0}.si{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:10px 14px}.si .sl{font-size:9px;color:var(--ink-muted);font-weight:500;margin-bottom:1px}.si .sv{font-size:13px;font-weight:700}.si .sv.mono{font-family:'JetBrains Mono',monospace;font-size:10.5px}
+.doc-footer{margin-top:40px;padding-top:12px;border-top:1px solid var(--border);text-align:center;font-size:10px;color:var(--ink-muted)}
+@media print{body{font-size:9px}.pw{padding:12px}.ac{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="pw">
+
+<header class="cover">
+<div class="cover-badge">Technical Architecture v1.4 — Final Patch</div>
+<h1>기술 아키텍처 <em>최종 검증 반영 패치</em></h1>
+<div class="cover-meta"><span>v1.3 기반 8건 보완</span><span>구조 변경 없음</span><span>컬럼·규칙·스키마 추가만</span><span>2025.04</span></div>
+</header>
+
+<div class="cl"><h2 style="color:var(--fail)">v1.3 → v1.4 변경 이력 (최종 검증 8건 반영)</h2><ul>
+<li class="c"><strong>#1</strong> questions 테이블에 confirmed_by, confirmed_at 컬럼 추가</li>
+<li class="c"><strong>#2</strong> xapi_config 저장 전략 명시 (가이드 수령 후 정의 + 임시 JSONB)</li>
+<li class="c"><strong>#3</strong> question_metadata에 is_multiple_answer 컬럼 추가</li>
+<li class="a"><strong>#4</strong> pipeline_states ↔ classroom_exams.status 동기화 매핑 규칙</li>
+<li class="c"><strong>#5</strong> POST /sessions/start request body 스키마 명시</li>
+<li class="a"><strong>#6</strong> 오케스트레이터의 DB→에이전트 데이터 조립 책임 상세 정의</li>
+<li class="a"><strong>#7</strong> EXAM_CONFIRMED 롤백 불가 규칙 + classroom_exams 연쇄 처리</li>
+<li class="a"><strong>#8</strong> 시험 시간 연장 시 자동 제출 학생 처리 규칙</li>
+</ul></div>
+
+<div class="info rule"><strong>이 문서는 v1.3의 "패치"입니다.</strong> v1.3의 전체 내용은 유지되며, 아래는 추가/변경된 부분만 기술합니다. v1.3과 이 문서를 함께 참조하세요.</div>
+
+<!-- ═══ #1 ═══ -->
+<div class="sec"><div class="sn">패치 #1</div>
+<h2>questions 테이블 — 정답 확인 필드 추가</h2>
+<p class="sd">에이전트 스펙 v2.1에 정의된 confirmed_by, confirmed_at이 DB에 누락. 정답 확인 이력 추적을 위해 추가합니다.</p>
+
+<div class="ac"><div class="ah">questions 테이블 변경</div><div class="ab">
+<table><thead><tr><th>컬럼</th><th>타입</th><th>제약</th><th>설명</th><th>상태</th></tr></thead><tbody>
+<tr><td>pkey</td><td>VARCHAR(20)</td><td><span class="badge pk">PK</span></td><td></td><td>기존</td></tr>
+<tr><td>batch_id</td><td>VARCHAR(10)</td><td><span class="badge fk">FK→batches</span></td><td></td><td>기존</td></tr>
+<tr><td>position_in_file</td><td>INTEGER</td><td></td><td></td><td>기존</td></tr>
+<tr><td>version</td><td>INTEGER</td><td>DEFAULT 0</td><td></td><td>기존</td></tr>
+<tr><td>group_id</td><td>VARCHAR(20)</td><td><span class="badge fk">FK→question_groups</span></td><td></td><td>기존</td></tr>
+<tr><td>question_type</td><td>VARCHAR(20)</td><td></td><td></td><td>기존</td></tr>
+<tr><td>content_hash</td><td>VARCHAR(64)</td><td><span class="badge idx">IDX</span></td><td></td><td>기존</td></tr>
+<tr><td>lifecycle_status</td><td>VARCHAR(15)</td><td>DEFAULT 'ACTIVE'</td><td></td><td>기존</td></tr>
+<tr><td>answer_source</td><td>VARCHAR(20)</td><td></td><td>answer_sheet/ai_derived/teacher_input</td><td>기존</td></tr>
+<tr><td>human_confirmed</td><td>BOOLEAN</td><td>DEFAULT false</td><td>관리자 정답 확인 완료 여부</td><td>기존</td></tr>
+<tr style="background:#f3e8ff"><td>confirmed_by</td><td>UUID</td><td><span class="badge fk">FK→users</span> NULL</td><td>정답을 확인한 관리자/교사 ID. human_confirmed=false이면 null</td><td><strong>v1.4 추가</strong></td></tr>
+<tr style="background:#f3e8ff"><td>confirmed_at</td><td>TIMESTAMPTZ</td><td>NULL</td><td>정답 확인 시각. human_confirmed=false이면 null</td><td><strong>v1.4 추가</strong></td></tr>
+<tr><td>created_at</td><td>TIMESTAMPTZ</td><td></td><td></td><td>기존</td></tr>
+<tr><td>deleted_at</td><td>TIMESTAMPTZ</td><td></td><td>소프트 삭제</td><td>기존</td></tr>
+</tbody></table>
+
+<h4>정답 확인 처리 흐름</h4>
+<div class="code"><span class="c">// POST /api/v1/admin/confirm-answer/{pkey}</span>
+<span class="c">// 관리자가 AI 도출 정답을 확인할 때:</span>
+
+<span class="k">async def</span> <span class="f">confirm_answer</span>(pkey: <span class="f">str</span>, admin_user_id: <span class="f">UUID</span>, confirmed: <span class="f">bool</span>, corrected_answer=<span class="b">None</span>):
+    question = <span class="k">await</span> db.get(Question, pkey)
+
+    <span class="k">if</span> confirmed:
+        <span class="c"># 정답 승인</span>
+        question.human_confirmed = <span class="b">True</span>
+        question.confirmed_by = admin_user_id
+        question.confirmed_at = <span class="f">now</span>()
+        <span class="c"># 파이프라인: HUMAN_CONFIRM_ANSWER → DATA</span>
+        <span class="k">await</span> orchestrator.transition(pkey, <span class="s">"HUMAN_CONFIRM_ANSWER"</span>, <span class="s">"DATA"</span>)
+
+    <span class="k">else</span>:
+        <span class="c"># 정답 수정 필요 → 제작팀으로 반려</span>
+        <span class="k">if</span> corrected_answer:
+            <span class="c"># 관리자가 직접 올바른 정답을 입력한 경우</span>
+            produced = <span class="k">await</span> db.get(QuestionProduced, pkey)
+            produced.answer_correct = corrected_answer
+            question.answer_source = <span class="s">"admin_corrected"</span>  <span class="c"># 새 소스 타입</span>
+            question.human_confirmed = <span class="b">True</span>
+            question.confirmed_by = admin_user_id
+            question.confirmed_at = <span class="f">now</span>()
+            <span class="k">await</span> orchestrator.transition(pkey, <span class="s">"HUMAN_CONFIRM_ANSWER"</span>, <span class="s">"DATA"</span>)
+        <span class="k">else</span>:
+            <span class="c"># 정답 재도출 필요 → PRODUCTION으로 반려</span>
+            <span class="k">await</span> orchestrator.reject(pkey, <span class="s">"HUMAN_CONFIRM_ANSWER"</span>, <span class="s">"PRODUCTION"</span>,
+                reject_context={<span class="s">"reason"</span>: <span class="s">"관리자가 AI 도출 정답을 부적절하다고 판단"</span>})</div>
+
+<div class="info rule"><strong>answer_source 최종 값 목록:</strong> <code>answer_sheet</code>(정답지 추출) / <code>ai_derived</code>(AI 도출, 확인 전) / <code>teacher_input</code>(교사 직접 입력) / <code>admin_corrected</code>(관리자가 정답 수정). 경로 B(ai_derived) 문항은 human_confirmed=true가 되어야 DATA 단계로 진행 가능.</div>
+</div></div>
+</div>
+
+<!-- ═══ #2 ═══ -->
+<div class="sec"><div class="sn">패치 #2</div>
+<h2>xAPI Config 저장 전략</h2>
+<p class="sd">데이터팀(#7) output인 xapi_config의 저장 위치. xAPI 가이드 수령 전이므로 임시 전략을 명시합니다.</p>
+
+<div class="ac"><div class="ah">xAPI 저장 전략 (2단계)</div><div class="ab">
+<h4>Phase 1 (MVP, xAPI 가이드 수령 전)</h4>
+<div class="code"><span class="c">-- question_produced 테이블에 임시 JSONB 컬럼 추가</span>
+ALTER TABLE question_produced ADD COLUMN xapi_config JSONB DEFAULT NULL;
+
+<span class="c">-- NULL이면 xAPI 미설정 상태</span>
+<span class="c">-- 데이터팀 output을 여기에 임시 저장</span>
+<span class="c">-- 데이터검수팀은 이 JSONB의 구조를 검증</span></div>
+
+<h4>Phase 2 (xAPI 가이드 수령 후)</h4>
+<div class="code"><span class="c">-- 전용 테이블로 분리</span>
+CREATE TABLE question_xapi_configs (
+    id          SERIAL PRIMARY KEY,
+    pkey        VARCHAR(20) REFERENCES questions(pkey) UNIQUE,
+    events      JSONB NOT NULL,        <span class="c">-- xAPI 이벤트 정의 배열</span>
+    interface_mapping JSONB,           <span class="c">-- 인터페이스 규격 매핑</span>
+    test_scenarios    JSONB,           <span class="c">-- dry-run 시나리오</span>
+    validated   BOOLEAN DEFAULT false, <span class="c">-- 검수 통과 여부</span>
+    created_at  TIMESTAMPTZ
+);
+
+<span class="c">-- question_produced.xapi_config 데이터를 마이그레이션 후 컬럼 삭제</span></div>
+
+<div class="info warn"><strong>MVP 시점:</strong> xAPI 가이드가 수령되지 않은 상태에서, 데이터팀(#7)과 데이터검수팀(#8) 에이전트는 스킵 처리합니다. 파이프라인: DATA_REVIEW 통과 → EMBEDDING으로 직행. xAPI 가이드 수령 후 해당 에이전트를 활성화하고 기존 문항은 소급 처리.</div>
+</div></div>
+</div>
+
+<!-- ═══ #3 ═══ -->
+<div class="sec"><div class="sn">패치 #3</div>
+<h2>question_metadata — is_multiple_answer 추가</h2>
+<p class="sd">복수정답 문항을 시험지 구성 시 교사가 식별할 수 있도록 메타데이터에 플래그를 추가합니다.</p>
+
+<div class="ac"><div class="ah">question_metadata 테이블 변경</div><div class="ab">
+<table><thead><tr><th>컬럼</th><th>타입</th><th>설명</th><th>상태</th></tr></thead><tbody>
+<tr><td>subject</td><td>VARCHAR(20)</td><td></td><td>기존</td></tr>
+<tr><td>grade</td><td>VARCHAR(10)</td><td></td><td>기존</td></tr>
+<tr><td>unit</td><td>VARCHAR(100)</td><td></td><td>기존</td></tr>
+<tr><td>sub_unit</td><td>VARCHAR(100)</td><td></td><td>기존</td></tr>
+<tr><td>concept</td><td>VARCHAR(100)</td><td></td><td>기존</td></tr>
+<tr><td>difficulty</td><td>VARCHAR(5)</td><td></td><td>기존</td></tr>
+<tr><td>bloom_level</td><td>VARCHAR(10)</td><td></td><td>기존</td></tr>
+<tr><td>has_formula</td><td>BOOLEAN</td><td></td><td>기존</td></tr>
+<tr><td>has_figure</td><td>BOOLEAN</td><td></td><td>기존</td></tr>
+<tr style="background:#f3e8ff"><td>is_multiple_answer</td><td>BOOLEAN</td><td>복수정답 문항 여부. question_produced.answer_correct.is_multiple과 동기화</td><td><strong>v1.4 추가</strong></td></tr>
+<tr><td>curriculum_code</td><td>VARCHAR(20)</td><td></td><td>기존</td></tr>
+<tr><td>schema_version</td><td>VARCHAR(10)</td><td></td><td>기존</td></tr>
+<tr><td>extra</td><td>JSONB</td><td></td><td>기존</td></tr>
+</tbody></table>
+
+<h4>동기화 규칙</h4>
+<div class="code"><span class="c">// 제작팀(#5)이 answer_correct를 설정할 때:</span>
+<span class="k">if</span> answer_correct[<span class="s">"is_multiple"</span>] == <span class="b">True</span>:
+    question_metadata.is_multiple_answer = <span class="b">True</span>
+<span class="k">else</span>:
+    question_metadata.is_multiple_answer = <span class="b">False</span>
+
+<span class="c">// 시험지 구성 UI에서:</span>
+<span class="c">// 문항 리스트에 "복수정답" 뱃지 표시</span>
+<span class="c">// 교사가 복수정답 문항임을 사전에 인지하고 포함/제외 결정 가능</span>
+
+<span class="c">// 시험지 구성 필터:</span>
+<span class="c">// GET /questions?is_multiple_answer=true  → 복수정답 문항만</span>
+<span class="c">// GET /questions?is_multiple_answer=false → 단일정답 문항만</span></div>
+</div></div>
+</div>
+
+<!-- ═══ #4 ═══ -->
+<div class="sec"><div class="sn">패치 #4</div>
+<h2>파이프라인 상태 ↔ classroom_exams.status 동기화 매핑</h2>
+<p class="sd">pipeline_states(L2B)는 내부 파이프라인 상세 추적, classroom_exams.status는 교사/학생에게 보이는 외부 상태입니다. 두 상태 간 동기화 규칙을 명확히 합니다.</p>
+
+<div class="ac"><div class="ah">상태 동기화 매핑 테이블</div><div class="ab">
+<table><thead><tr><th>pipeline_states.current_stage (L2B)</th><th>classroom_exams.status</th><th>교사에게 표시</th><th>학생에게 표시</th><th>HWP 다운로드</th></tr></thead><tbody>
+<tr><td>DEPLOY_REQUESTED</td><td>PREPARING</td><td>"준비 중"</td><td>리스트에 미노출</td><td>❌</td></tr>
+<tr><td>HWP_GENERATING</td><td>PREPARING</td><td>"시험지 생성 중"</td><td>리스트에 미노출</td><td>❌</td></tr>
+<tr><td>HWP_REVIEW</td><td>PREPARING</td><td>"검수 중"</td><td>리스트에 미노출</td><td>❌</td></tr>
+<tr><td>DEPLOY_READY</td><td>READY</td><td>"배포 준비 완료"</td><td>리스트에 미노출</td><td>✅</td></tr>
+<tr><td>SCHEDULED</td><td>SCHEDULED</td><td>"예정됨 (시작: {opens_at})"</td><td>"시험 예정" (응시 불가)</td><td>✅</td></tr>
+<tr><td>ACTIVE</td><td>ACTIVE</td><td>"진행 중"</td><td>"응시 가능" (시험 시작 버튼)</td><td>✅</td></tr>
+<tr><td>CLOSED</td><td>CLOSED</td><td>"종료됨"</td><td>"종료됨" (결과 확인)</td><td>✅</td></tr>
+<tr><td>DEPLOY_CANCELLED</td><td>CANCELLED</td><td>"취소됨"</td><td>리스트에 미노출</td><td>❌</td></tr>
+</tbody></table>
+
+<h4>동기화 구현</h4>
+<div class="code"><span class="c">// 오케스트레이터가 L2B 상태 전이 시 자동 동기화</span>
+<span class="k">async def</span> <span class="f">sync_classroom_exam_status</span>(classroom_exam_id, pipeline_stage):
+    STATUS_MAP = {
+        <span class="s">"DEPLOY_REQUESTED"</span>: <span class="s">"PREPARING"</span>,
+        <span class="s">"HWP_GENERATING"</span>:   <span class="s">"PREPARING"</span>,
+        <span class="s">"HWP_REVIEW"</span>:       <span class="s">"PREPARING"</span>,
+        <span class="s">"DEPLOY_READY"</span>:     <span class="s">"READY"</span>,
+        <span class="s">"SCHEDULED"</span>:        <span class="s">"SCHEDULED"</span>,
+        <span class="s">"ACTIVE"</span>:           <span class="s">"ACTIVE"</span>,
+        <span class="s">"CLOSED"</span>:           <span class="s">"CLOSED"</span>,
+        <span class="s">"DEPLOY_CANCELLED"</span>: <span class="s">"CANCELLED"</span>,
+    }
+    new_status = STATUS_MAP[pipeline_stage]
+    <span class="k">await</span> db.execute(
+        <span class="s">"UPDATE classroom_exams SET status = :s WHERE id = :id"</span>,
+        {<span class="s">"s"</span>: new_status, <span class="s">"id"</span>: classroom_exam_id}
+    )
+
+<span class="c">// 이 함수는 오케스트레이터의 handleL2BTransition에서 매 전이마다 호출</span></div>
+
+<div class="info rule"><strong>SCHEDULED → ACTIVE 자동 전환:</strong> 오케스트레이터가 1분 간격으로 <code>classroom_exams WHERE status='SCHEDULED' AND opens_at <= now()</code>를 폴링하여 ACTIVE로 전환. 또는 Redis sorted set에 opens_at을 score로 등록하고 cron-like 체크.</div>
+
+<div class="info rule"><strong>ACTIVE → CLOSED 자동 전환:</strong> 마찬가지로 <code>WHERE status='ACTIVE' AND closes_at <= now()</code> 폴링. CLOSED 전환 시 <code>close_classroom_exam()</code> 함수 호출 → 미제출 세션 자동 처리.</div>
+</div></div>
+</div>
+
+<!-- ═══ #5 ═══ -->
+<div class="sec"><div class="sn">패치 #5</div>
+<h2>POST /sessions/start — Request/Response 스키마</h2>
+<p class="sd">학생 CBT 응시 시작 API의 전체 스키마를 명시합니다.</p>
+
+<div class="ac"><div class="ah">POST /api/v1/sessions/start</div><div class="ab">
+<h4>Request</h4>
+<div class="code"><span class="c">// Headers</span>
+X-Student-Token: <span class="s">"st_abc123..."</span>   <span class="c">// /join/select-student에서 발급받은 토큰</span>
+
+<span class="c">// Body (JSON)</span>
+{
+  <span class="k">"classroom_exam_id"</span>: <span class="n">42</span>,        <span class="c">// classroom_exams.id</span>
+  <span class="k">"student_id"</span>: <span class="s">"uuid..."</span>         <span class="c">// classroom_students.id (토큰에서 추출 가능하지만 명시적 전달)</span>
+}</div>
+
+<h4>Response — 성공 (200)</h4>
+<div class="code">{
+  <span class="k">"status"</span>: <span class="s">"ok"</span>,
+  <span class="k">"data"</span>: {
+    <span class="k">"session_id"</span>: <span class="s">"SES-20250401-uuid-001"</span>,
+    <span class="k">"exam"</span>: {
+      <span class="k">"exam_id"</span>: <span class="s">"EX-20250401-001"</span>,
+      <span class="k">"total_questions"</span>: <span class="n">25</span>,
+      <span class="k">"total_points"</span>: <span class="n">100</span>,
+      <span class="k">"time_limit_minutes"</span>: <span class="n">50</span>,
+      <span class="k">"expires_at"</span>: <span class="s">"2025-04-01T14:50:00Z"</span>  <span class="c">// started_at + time_limit</span>
+    },
+    <span class="k">"questions"</span>: [
+      {
+        <span class="k">"sequence"</span>: <span class="n">1</span>,
+        <span class="k">"pkey"</span>: <span class="s">"QI-2301-0015-00"</span>,
+        <span class="k">"question_type"</span>: <span class="s">"객관식"</span>,
+        <span class="k">"is_multiple_answer"</span>: <span class="b">false</span>,
+        <span class="k">"points"</span>: <span class="n">3</span>,
+        <span class="k">"stem"</span>: { <span class="c">/* segments 배열 */</span> },
+        <span class="k">"choices"</span>: [ <span class="c">/* 객관식 선지 */</span> ],
+        <span class="k">"figure_urls"</span>: [ <span class="c">/* 이미지 URL */</span> ]
+      }
+      <span class="c">// ... 25문항</span>
+    ]
+  }
+}</div>
+
+<h4>Response — 이미 제출됨 (409)</h4>
+<div class="code">{
+  <span class="k">"status"</span>: <span class="s">"error"</span>,
+  <span class="k">"error"</span>: {
+    <span class="k">"code"</span>: <span class="s">"ALREADY_SUBMITTED"</span>,
+    <span class="k">"message"</span>: <span class="s">"이미 제출된 시험입니다."</span>,
+    <span class="k">"detail"</span>: { <span class="k">"submission_id"</span>: <span class="s">"SUB-..."</span>, <span class="k">"redirect"</span>: <span class="s">"result"</span> }
+  }
+}</div>
+
+<h4>Response — 시험 비활성 (403)</h4>
+<div class="code">{
+  <span class="k">"status"</span>: <span class="s">"error"</span>,
+  <span class="k">"error"</span>: {
+    <span class="k">"code"</span>: <span class="s">"EXAM_NOT_ACTIVE"</span>,
+    <span class="k">"message"</span>: <span class="s">"시험 응시 가능 시간이 아닙니다."</span>,
+    <span class="k">"detail"</span>: { <span class="k">"status"</span>: <span class="s">"SCHEDULED"</span>, <span class="k">"opens_at"</span>: <span class="s">"2025-04-01T15:00:00Z"</span> }
+  }
+}</div>
+
+<h4>Response — 진행 중 세션 복구 (200)</h4>
+<div class="code"><span class="c">// 이전에 시작했지만 미제출인 세션이 있으면 → 이어서 풀기</span>
+{
+  <span class="k">"status"</span>: <span class="s">"ok"</span>,
+  <span class="k">"data"</span>: {
+    <span class="k">"session_id"</span>: <span class="s">"SES-20250401-uuid-001"</span>,  <span class="c">// 기존 세션 ID</span>
+    <span class="k">"resumed"</span>: <span class="b">true</span>,                         <span class="c">// 재개 여부</span>
+    <span class="k">"saved_answers"</span>: { <span class="s">"QI-2408-0003-00"</span>: <span class="s">"2"</span>, ... },  <span class="c">// Redis에서 복원</span>
+    <span class="k">"exam"</span>: { <span class="c">/* 위와 동일 */</span> },
+    <span class="k">"questions"</span>: [ <span class="c">/* 위와 동일 */</span> ]
+  }
+}</div>
+
+<h4>서버 내부 처리 흐름</h4>
+<div class="code"><span class="k">async def</span> <span class="f">start_session</span>(classroom_exam_id, student_id):
+    ce = <span class="k">await</span> db.get(ClassroomExam, classroom_exam_id)
+
+    <span class="c"># 1. 시험 상태 확인</span>
+    <span class="k">if</span> ce.status != <span class="s">"ACTIVE"</span>:
+        <span class="k">raise</span> ExamNotActiveError(ce.status, ce.opens_at)
+
+    <span class="c"># 2. 기존 제출 확인</span>
+    existing = <span class="k">await</span> db.query(Submission).filter_by(
+        classroom_exam_id=classroom_exam_id, student_id=student_id
+    ).first()
+
+    <span class="k">if</span> existing <span class="k">and</span> existing.submitted_at:
+        <span class="k">raise</span> AlreadySubmittedError(existing.submission_id)
+
+    <span class="k">if</span> existing <span class="k">and not</span> existing.submitted_at:
+        <span class="c"># 3. 진행 중 세션 복구</span>
+        saved = <span class="k">await</span> redis.hgetall(<span class="s">f"session:{existing.session_id}:answers"</span>)
+        <span class="k">return</span> ResumeResponse(existing.session_id, saved, resumed=<span class="b">True</span>)
+
+    <span class="c"># 4. 새 세션 생성</span>
+    session_id = <span class="f">generate_session_id</span>()
+    expires_at = <span class="f">now</span>() + timedelta(minutes=ce.exam.time_limit_minutes)
+
+    <span class="c"># DB: submission 레코드 생성 (submitted_at=null → 진행 중)</span>
+    submission = Submission(
+        submission_id=session_id,
+        exam_id=ce.exam_id,
+        classroom_exam_id=classroom_exam_id,
+        student_id=student_id,
+        started_at=<span class="f">now</span>()
+    )
+    <span class="k">await</span> db.save(submission)
+
+    <span class="c"># Redis: 세션 정보 등록</span>
+    <span class="k">await</span> redis.hset(<span class="s">f"session:{session_id}:info"</span>, mapping={
+        <span class="s">"exam_id"</span>: ce.exam_id, <span class="s">"student_id"</span>: <span class="f">str</span>(student_id),
+        <span class="s">"classroom_exam_id"</span>: <span class="f">str</span>(classroom_exam_id),
+        <span class="s">"expires_at"</span>: expires_at.isoformat()
+    })
+    <span class="c"># Redis: 만료 타이머</span>
+    ttl = <span class="f">int</span>((expires_at - <span class="f">now</span>()).total_seconds())
+    <span class="k">await</span> redis.setex(<span class="s">f"exam_expiry:{session_id}"</span>, ttl, <span class="s">"1"</span>)
+    <span class="c"># Redis: 활성 세션 등록</span>
+    <span class="k">await</span> redis.sadd(<span class="s">f"exam:{ce.exam_id}:active"</span>, session_id)
+
+    <span class="k">return</span> NewSessionResponse(session_id, exam_data, questions)</div>
+</div></div>
+</div>
+
+<!-- ═══ #6 ═══ -->
+<div class="sec"><div class="sn">패치 #6</div>
+<h2>오케스트레이터의 데이터 조립 책임</h2>
+<p class="sd">에이전트는 DB에 직접 접근하지 않습니다. 오케스트레이터가 DB에서 데이터를 조회하여 에이전트에 전달하고, 에이전트의 결과를 DB에 저장합니다.</p>
+
+<div class="ac"><div class="ah">에이전트별 데이터 조립 규칙</div><div class="ab">
+<table><thead><tr><th>에이전트</th><th>오케스트레이터가 조립하여 전달하는 데이터</th><th>에이전트 결과를 저장하는 테이블</th></tr></thead><tbody>
+<tr><td>#1 파싱팀</td><td>batches 레코드 + S3 파일 경로 + (정답지 경로)</td><td>questions(마스터) + question_raw</td></tr>
+<tr><td>#2 파싱검수팀</td><td>question_raw 레코드 + 원본 파일 S3 경로</td><td>pipeline_history (점수/반려사유)</td></tr>
+<tr><td>#3 메타팀</td><td>question_raw 레코드 + meta_schemas(해당 과목)</td><td>question_structured + question_metadata</td></tr>
+<tr><td>#4 메타검수팀</td><td>question_structured + question_metadata + question_raw(대조용)</td><td>pipeline_history</td></tr>
+<tr><td>#5 제작팀</td><td>question_structured + question_metadata + question_raw.answer_from_sheet</td><td>question_produced</td></tr>
+<tr><td>#6 제작검수팀</td><td>question_produced + question_structured + question_raw(원본 대조)</td><td>pipeline_history</td></tr>
+<tr><td>#7 데이터팀</td><td>question_produced 레코드</td><td>question_produced.xapi_config</td></tr>
+<tr><td>#8 데이터검수팀</td><td>question_produced.xapi_config</td><td>pipeline_history</td></tr>
+<tr><td>임베딩</td><td>question_structured.stem_text + question_metadata</td><td>question_embeddings</td></tr>
+<tr><td>#9 시험지 구성팀</td><td>teacher_request + question_pool(필터링된 문항 목록)</td><td>exams + exam_questions</td></tr>
+<tr><td>#10 시험지 검수팀</td><td>exams + exam_questions + teacher_request.conditions</td><td>pipeline_history</td></tr>
+<tr><td>#11 서비스팀</td><td>classroom_exams 레코드 + exam_questions(전체 문항 데이터 포함)</td><td>classroom_exams.hwp_file_path, .exam_qr_path</td></tr>
+<tr><td>#12 서비스검수팀</td><td>classroom_exams(HWP 경로) + exam_questions(원본 대조)</td><td>pipeline_history</td></tr>
+<tr><td>#13 채점팀</td><td>submissions + submission_answers + question_produced(정답) + question_embeddings(추천용)</td><td>submission_answers(채점결과) + grade_results</td></tr>
+<tr><td>#14 채점검수팀</td><td>grade_results + submission_answers + question_produced</td><td>pipeline_history</td></tr>
+</tbody></table>
+
+<div class="info rule"><strong>원칙:</strong> 에이전트는 DB 커넥션을 갖지 않습니다. 오케스트레이터가 Redis pipeline:tasks Stream에 메시지를 발행할 때, payload에 필요한 데이터를 모두 직렬화하여 포함합니다. 에이전트는 payload만 처리하고 결과를 pipeline:results로 반환합니다. 오케스트레이터가 결과를 받아 DB에 저장합니다.</div>
+
+<div class="info warn"><strong>예외:</strong> 대용량 데이터(이미지 파일, HWP 파일)는 payload에 포함하지 않고, S3 경로만 전달합니다. 에이전트가 S3에서 직접 다운로드합니다. 따라서 에이전트는 S3 접근 권한은 필요합니다.</div>
+</div></div>
+</div>
+
+<!-- ═══ #7 ═══ -->
+<div class="sec"><div class="sn">패치 #7</div>
+<h2>EXAM_CONFIRMED 롤백 규칙</h2>
+<p class="sd">교사가 확정된 시험지의 콘텐츠를 수정하고 싶을 때의 규칙을 명확히 합니다.</p>
+
+<div class="ac"><div class="ah">롤백 규칙 상세</div><div class="ab">
+
+<h4>규칙 1: classroom_exams 연결 여부에 따른 분기</h4>
+<div class="code"><span class="k">async def</span> <span class="f">handle_exam_rollback_request</span>(exam_id):
+    linked = <span class="k">await</span> db.query(ClassroomExam).filter_by(exam_id=exam_id).count()
+
+    <span class="k">if</span> linked == <span class="n">0</span>:
+        <span class="c"># 어떤 학급에도 배포되지 않은 시험지 → 롤백 가능</span>
+        exam.status = <span class="s">"EXAM_COMPOSE"</span>
+        <span class="c"># 교사가 문항 교체, 배점 수정 등 자유롭게 가능</span>
+        <span class="k">return</span> {<span class="s">"action"</span>: <span class="s">"ROLLBACK_OK"</span>}
+
+    <span class="k">else</span>:
+        <span class="c"># 1개 이상의 학급에 배포됨 → 롤백 불가</span>
+        <span class="c"># 이유: 이미 생성된 HWP, QR, 진행 중인 응시에 영향</span>
+        <span class="k">return</span> {
+            <span class="s">"action"</span>: <span class="s">"ROLLBACK_DENIED"</span>,
+            <span class="s">"reason"</span>: <span class="s">"이미 학급에 배포된 시험지는 수정할 수 없습니다."</span>,
+            <span class="s">"linked_classrooms"</span>: linked,
+            <span class="s">"alternatives"</span>: [
+                <span class="s">"새 시험지를 생성하세요."</span>,
+                <span class="s">"기존 배포를 취소하고 새 시험지로 재배포하세요."</span>
+            ]
+        }</div>
+
+<h4>규칙 2: 기존 배포 취소 후 새 시험지로 재배포하는 흐름</h4>
+<div class="code"><span class="c">// 1. 기존 배포 취소</span>
+<span class="k">for</span> ce <span class="k">in</span> classroom_exams_of(exam_id):
+    <span class="k">if</span> ce.status <span class="k">in</span> [<span class="s">"ACTIVE"</span>]:
+        <span class="c"># 진행 중인 시험은 취소 불가! (학생 응시 중)</span>
+        <span class="k">raise</span> CannotCancelActiveExam()
+    <span class="k">elif</span> ce.status <span class="k">in</span> [<span class="s">"PREPARING"</span>, <span class="s">"READY"</span>, <span class="s">"SCHEDULED"</span>]:
+        <span class="c"># 아직 시작 전 → 취소 가능</span>
+        ce.status = <span class="s">"CANCELLED"</span>
+        pipeline_states[ce.id].current_stage = <span class="s">"DEPLOY_CANCELLED"</span>
+
+<span class="c">// 2. 새 시험지 생성 (기존 시험지 복제 + 수정)</span>
+new_exam = <span class="f">clone_exam</span>(exam_id)  <span class="c"># 문항 목록 복사</span>
+new_exam.status = <span class="s">"EXAM_COMPOSE"</span>  <span class="c"># 수정 가능 상태</span>
+<span class="c"># 교사가 수정 후 CONFIRM → 학급에 재배포</span></div>
+
+<div class="info critical"><strong>ACTIVE 상태 배포는 절대 취소 불가.</strong> 학생이 응시 중인 시험을 취소하면 데이터 유실. ACTIVE 배포가 있으면 해당 시험이 CLOSED될 때까지 대기하거나, 정답 정정(ANSWER_CORRECTION)으로 사후 처리.</div>
+</div></div>
+</div>
+
+<!-- ═══ #8 ═══ -->
+<div class="sec"><div class="sn">패치 #8</div>
+<h2>시험 시간 연장 + 자동 제출 처리 규칙</h2>
+<p class="sd">교사가 시험 시간을 연장할 때, 이미 자동 제출된 학생의 처리를 명확히 합니다.</p>
+
+<div class="ac"><div class="ah">시간 연장 처리 상세</div><div class="ab">
+
+<h4>PATCH /api/v1/classrooms/{id}/exams/{ce_id}/extend</h4>
+<div class="code"><span class="c">// Request</span>
+{
+  <span class="k">"new_closes_at"</span>: <span class="s">"2025-04-01T15:10:00Z"</span>,  <span class="c">// 기존 14:50 → 15:10 (20분 연장)</span>
+  <span class="k">"extend_active_sessions"</span>: <span class="b">true</span>             <span class="c">// 활성 세션의 만료 시간도 연장할지</span>
+}</div>
+
+<h4>서버 처리 로직</h4>
+<div class="code"><span class="k">async def</span> <span class="f">extend_exam_time</span>(ce_id, new_closes_at, extend_sessions):
+    ce = <span class="k">await</span> db.get(ClassroomExam, ce_id)
+
+    <span class="c"># 1. 기본 검증</span>
+    <span class="k">if</span> ce.status != <span class="s">"ACTIVE"</span>:
+        <span class="k">raise</span> ExamNotActiveError()
+    <span class="k">if</span> new_closes_at <= ce.closes_at:
+        <span class="k">raise</span> ValidationError(<span class="s">"연장 시간은 기존 종료 시간보다 이후여야 합니다"</span>)
+
+    <span class="c"># 2. classroom_exams 업데이트</span>
+    old_closes = ce.closes_at
+    ce.closes_at = new_closes_at
+    <span class="k">await</span> db.save(ce)
+
+    <span class="c"># 3. 활성 세션 처리</span>
+    <span class="k">if</span> extend_sessions:
+        active_sessions = <span class="k">await</span> redis.smembers(<span class="s">f"exam:{ce.exam_id}:active"</span>)
+        extended_count = <span class="n">0</span>
+
+        <span class="k">for</span> sid <span class="k">in</span> active_sessions:
+            info = <span class="k">await</span> redis.hgetall(<span class="s">f"session:{sid}:info"</span>)
+            <span class="k">if not</span> info:
+                <span class="k">continue</span>  <span class="c"># 이미 제출/만료된 세션</span>
+
+            <span class="c"># 세션별 만료 시간 갱신</span>
+            old_expires = <span class="f">parse</span>(info[<span class="s">"expires_at"</span>])
+            extension = new_closes_at - old_closes  <span class="c"># 연장 시간만큼 추가</span>
+            new_expires = old_expires + extension
+
+            <span class="k">await</span> redis.hset(<span class="s">f"session:{sid}:info"</span>, <span class="s">"expires_at"</span>, new_expires.isoformat())
+
+            <span class="c"># exam_expiry TTL 갱신</span>
+            new_ttl = <span class="f">int</span>((new_expires - <span class="f">now</span>()).total_seconds())
+            <span class="k">if</span> new_ttl > <span class="n">0</span>:
+                <span class="k">await</span> redis.setex(<span class="s">f"exam_expiry:{sid}"</span>, new_ttl, <span class="s">"1"</span>)
+                extended_count += <span class="n">1</span>
+
+    <span class="c"># 4. 이미 자동 제출된 학생 처리</span>
+    <span class="c"># → 자동 제출된 답안(auto_submitted=true)은 유지됨</span>
+    <span class="c"># → 재응시 불가 (이미 submitted_at이 있으므로)</span>
+    <span class="c"># → 교사에게 안내: "N명의 학생이 시간 만료로 자동 제출되었습니다"</span>
+    auto_submitted = <span class="k">await</span> db.query(Submission).filter_by(
+        classroom_exam_id=ce_id, auto_submitted=<span class="b">True</span>
+    ).count()
+
+    <span class="k">return</span> {
+        <span class="s">"extended_sessions"</span>: extended_count,
+        <span class="s">"auto_submitted_before_extension"</span>: auto_submitted,
+        <span class="s">"message"</span>: <span class="s">f"시험 시간이 연장되었습니다. 활성 세션 {extended_count}건 연장. "</span>
+                   <span class="s">f"자동 제출 {auto_submitted}건은 복구 불가."</span>
+    }</div>
+
+<div class="info critical"><strong>자동 제출 후 재응시 불가 규칙:</strong> 한 번 제출된(auto_submitted=true) 답안은 확정됩니다. 시간 연장 후에도 재응시할 수 없습니다. 이유: ① 이미 제출된 답안과 새 응시 간 점수 비교 문제 ② 다른 학생과의 형평성 ③ 채점 파이프라인에 이미 진입했을 수 있음.</div>
+
+<div class="info warn"><strong>교사 안내 (UI):</strong> 시간 연장 버튼 클릭 시 확인 모달: "현재 N명이 응시 중이며, M명이 시간 만료로 자동 제출되었습니다. 자동 제출된 학생의 답안은 복구할 수 없습니다. 시간을 연장하시겠습니까?" 연장은 closes_at **이전에** 하는 것을 권장한다는 안내도 포함.</div>
+</div></div>
+</div>
+
+<!-- ═══ SUMMARY ═══ -->
+<div class="sec"><div class="sn">SUMMARY</div><h2>v1.4 패치 요약</h2>
+
+<table><thead><tr><th>#</th><th>패치</th><th>영향 범위</th><th>변경 유형</th></tr></thead><tbody>
+<tr><td>1</td><td>questions에 confirmed_by, confirmed_at 추가</td><td>DB + API + 에이전트 스펙</td><td>컬럼 추가</td></tr>
+<tr><td>2</td><td>xapi_config 저장 전략 (임시 JSONB → 전용 테이블)</td><td>DB + 데이터팀 스펙</td><td>전략 명시</td></tr>
+<tr><td>3</td><td>question_metadata에 is_multiple_answer 추가</td><td>DB + 시험지 구성 + CBT UI</td><td>컬럼 추가</td></tr>
+<tr><td>4</td><td>pipeline_states ↔ classroom_exams.status 동기화</td><td>오케스트레이터 + DB</td><td>규칙 명시</td></tr>
+<tr><td>5</td><td>POST /sessions/start 전체 스키마</td><td>API + 학생 프론트엔드</td><td>스키마 명시</td></tr>
+<tr><td>6</td><td>오케스트레이터 데이터 조립 책임</td><td>오케스트레이터 + 전 에이전트</td><td>역할 명시</td></tr>
+<tr><td>7</td><td>EXAM_CONFIRMED 롤백 규칙</td><td>시험지 관리 + 배포</td><td>규칙 명시</td></tr>
+<tr><td>8</td><td>시간 연장 + 자동 제출 처리</td><td>Redis + API + 오케스트레이터</td><td>규칙 + 코드</td></tr>
+</tbody></table>
+
+<div class="sg">
+<div class="si"><div class="sl">구조 변경</div><div class="sv" style="color:var(--pass)">없음</div></div>
+<div class="si"><div class="sl">DB 컬럼 추가</div><div class="sv mono">4개</div></div>
+<div class="si"><div class="sl">규칙 명시</div><div class="sv mono">5건</div></div>
+<div class="si"><div class="sl">API 스키마</div><div class="sv mono">1건 상세화</div></div>
+</div>
+
+<h4>최종 산출물 현황</h4>
+<table><thead><tr><th>문서</th><th>최종 버전</th><th>상태</th></tr></thead><tbody>
+<tr><td>시스템 설계 초안</td><td>v1.0</td><td>✅ 확정</td></tr>
+<tr><td>에이전트 스펙</td><td>v2.1 + v1.3/v1.4 보충</td><td>✅ 확정</td></tr>
+<tr><td>기술 아키텍처</td><td>v1.3 + <strong>v1.4 패치</strong></td><td>✅ 확정</td></tr>
+</tbody></table>
+
+<div class="info success"><strong>3개 문서 간 정합성 검증 완료.</strong> 구조적 모순 없음. 데이터 흐름 끊김 없음. 논리적 모순 없음. 8건 보완 완료.</div>
+</div>
+
+<footer class="doc-footer">
+<p>기술 아키텍처 설계서 v1.4 (v1.3 패치) · 2025.04</p>
+<p style="margin-top:2px">최종 검증 8건 반영: 컬럼 4개 추가, 규칙 5건 명시, API 스키마 1건 상세화</p>
+</footer>
+
+</div>
+</body>
+</html>

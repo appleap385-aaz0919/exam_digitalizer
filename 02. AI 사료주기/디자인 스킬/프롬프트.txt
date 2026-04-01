@@ -1,0 +1,11 @@
+프론트엔드 UI를 만들 때 아래 디자인 가이드를 참조해:
+
+skills_for_claude_code/frontend-design/SKILL.md 를 읽어줘.
+— "AI 슬롭" 회피 원칙, 타이포그래피·컬러·모션·레이아웃 가이드야.
+— Inter, Roboto 같은 제네릭 폰트 금지. 보라색 그라디언트 금지.
+— 모든 UI에 이 원칙을 적용해.
+
+skills_for_claude_code/web-artifacts-builder/SKILL.md 를 읽어줘.
+— React + Tailwind + shadcn/ui 세팅 가이드야.
+— scripts/shadcn-components.tar.gz에 40+ 컴포넌트가 있어.
+— 교사 대시보드, 학생 CBT, 성적 화면에 shadcn 컴포넌트를 활용해.

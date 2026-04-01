@@ -1,0 +1,2930 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<HWPML Style="embed" SubVersion="7.0.0.0" Version="2.7">
+<HEAD SecCnt="1">
+<DOCSUMMARY>
+<DATE>2026년 3월 31일 화요일 오후 17:16:36</DATE>
+</DOCSUMMARY>
+<DOCSETTING>
+<BEGINNUMBER Endnote="1" Equation="1" Footnote="1" Page="1" Picture="1" Table="1"/>
+<CARETPOS List="0" Para="1" Pos="3"/>
+</DOCSETTING>
+<MAPPINGTABLE>
+<FACENAMELIST>
+  <FONTFACE Count="4" Lang="Hangul">
+    <FONT Id="0" Name="맑은 고딕" Type="ttf">
+      <TYPEINFO ArmStyle="0" Contrast="2" FamilyType="2" Letterform="2" Midline="0" Proportion="3" StrokeVariation="0" Weight="5" XHeight="4" />
+    </FONT>
+    <FONT Id="1" Name="새굴림" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="0" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+    <FONT Id="2" Name="함초롬돋움" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+    <FONT Id="3" Name="함초롬바탕" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+  </FONTFACE>
+  <FONTFACE Count="4" Lang="Latin">
+    <FONT Id="0" Name="맑은 고딕" Type="ttf">
+      <TYPEINFO ArmStyle="0" Contrast="2" FamilyType="2" Letterform="2" Midline="0" Proportion="3" StrokeVariation="0" Weight="5" XHeight="4" />
+    </FONT>
+    <FONT Id="1" Name="새굴림" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="0" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+    <FONT Id="2" Name="함초롬돋움" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+    <FONT Id="3" Name="함초롬바탕" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+  </FONTFACE>
+  <FONTFACE Count="4" Lang="Hanja">
+    <FONT Id="0" Name="맑은 고딕" Type="ttf">
+      <TYPEINFO ArmStyle="0" Contrast="2" FamilyType="2" Letterform="2" Midline="0" Proportion="3" StrokeVariation="0" Weight="5" XHeight="4" />
+    </FONT>
+    <FONT Id="1" Name="새굴림" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="0" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+    <FONT Id="2" Name="함초롬돋움" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+    <FONT Id="3" Name="함초롬바탕" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+  </FONTFACE>
+  <FONTFACE Count="4" Lang="Japanese">
+    <FONT Id="0" Name="맑은 고딕" Type="ttf">
+      <TYPEINFO ArmStyle="0" Contrast="2" FamilyType="2" Letterform="2" Midline="0" Proportion="3" StrokeVariation="0" Weight="5" XHeight="4" />
+    </FONT>
+    <FONT Id="1" Name="새굴림" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="0" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+    <FONT Id="2" Name="함초롬돋움" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+    <FONT Id="3" Name="함초롬바탕" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+  </FONTFACE>
+  <FONTFACE Count="4" Lang="Other">
+    <FONT Id="0" Name="맑은 고딕" Type="ttf">
+      <TYPEINFO ArmStyle="0" Contrast="2" FamilyType="2" Letterform="2" Midline="0" Proportion="3" StrokeVariation="0" Weight="5" XHeight="4" />
+    </FONT>
+    <FONT Id="1" Name="새굴림" Type="ttf">
+      <TYPEINFO ArmStyle="2" Contrast="2" FamilyType="2" Letterform="2" Midline="2" Proportion="4" StrokeVariation="2" Weight="6" XHeight="4" />
+    </FONT>
+    <FONT Id="2" Name="함초롬돋움" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+    <FONT Id="3" Name="함초롬바탕" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+  </FONTFACE>
+  <FONTFACE Count="4" Lang="Symbol">
+    <FONT Id="0" Name="맑은 고딕" Type="ttf">
+      <TYPEINFO ArmStyle="0" Contrast="2" FamilyType="2" Letterform="2" Midline="0" Proportion="3" StrokeVariation="0" Weight="5" XHeight="4" />
+    </FONT>
+    <FONT Id="1" Name="새굴림" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="0" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+    <FONT Id="2" Name="함초롬돋움" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+    <FONT Id="3" Name="함초롬바탕" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+  </FONTFACE>
+  <FONTFACE Count="4" Lang="User">
+    <FONT Id="0" Name="맑은 고딕" Type="ttf">
+      <TYPEINFO ArmStyle="0" Contrast="2" FamilyType="2" Letterform="2" Midline="0" Proportion="3" StrokeVariation="0" Weight="5" XHeight="4" />
+    </FONT>
+    <FONT Id="1" Name="새굴림" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="0" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+    <FONT Id="2" Name="함초롬돋움" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+    <FONT Id="3" Name="함초롬바탕" Type="ttf">
+      <TYPEINFO ArmStyle="1" Contrast="0" FamilyType="2" Letterform="1" Midline="1" Proportion="4" StrokeVariation="1" Weight="6" XHeight="1" />
+    </FONT>
+  </FONTFACE>
+</FACENAMELIST><BORDERFILLLIST Count="15">
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="1" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Type="None" Width="0.1mm" />
+  <RIGHTBORDER Type="None" Width="0.1mm" />
+  <TOPBORDER Type="None" Width="0.1mm" />
+  <BOTTOMBORDER Type="None" Width="0.1mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="2" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Type="None" Width="0.1mm" />
+  <RIGHTBORDER Type="None" Width="0.1mm" />
+  <TOPBORDER Type="None" Width="0.1mm" />
+  <BOTTOMBORDER Type="None" Width="0.1mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+  <FILLBRUSH>
+    <WINDOWBRUSH Alpha="0" FaceColor="4294967295" HatchColor="4278190080" />
+  </FILLBRUSH>
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="3" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Type="Solid" Width="0.12mm" />
+  <RIGHTBORDER Type="Solid" Width="0.12mm" />
+  <TOPBORDER Type="Solid" Width="0.12mm" />
+  <BOTTOMBORDER Type="Solid" Width="0.12mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="4" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Type="None" Width="0.2mm" />
+  <RIGHTBORDER Type="None" Width="0.2mm" />
+  <TOPBORDER Type="None" Width="0.2mm" />
+  <BOTTOMBORDER Type="None" Width="0.2mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="5" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Type="None" Width="0.1mm" />
+  <RIGHTBORDER Type="None" Width="0.1mm" />
+  <TOPBORDER Type="None" Width="0.1mm" />
+  <BOTTOMBORDER Type="None" Width="0.1mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+  <FILLBRUSH>
+    <WINDOWBRUSH Alpha="0" FaceColor="4294967295" HatchColor="0" />
+  </FILLBRUSH>
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="6" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Color="8355711" Type="None" Width="0.2mm" />
+  <RIGHTBORDER Color="8355711" Type="None" Width="0.2mm" />
+  <TOPBORDER Color="8355711" Type="None" Width="0.2mm" />
+  <BOTTOMBORDER Color="8355711" Type="None" Width="0.2mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="7" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Type="Solid" Width="0.12mm" />
+  <RIGHTBORDER Type="Solid" Width="0.12mm" />
+  <TOPBORDER Type="Solid" Width="0.12mm" />
+  <BOTTOMBORDER Type="Solid" Width="0.12mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+  <FILLBRUSH>
+    <WINDOWBRUSH Alpha="0" FaceColor="16777215" HatchColor="10066329" />
+  </FILLBRUSH>
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="8" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Color="8355711" Type="Solid" Width="0.12mm" />
+  <RIGHTBORDER Color="8355711" Type="None" Width="0.2mm" />
+  <TOPBORDER Color="8355711" Type="None" Width="0.2mm" />
+  <BOTTOMBORDER Color="8355711" Type="None" Width="0.2mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="9" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Color="8355711" Type="Solid" Width="0.12mm" />
+  <RIGHTBORDER Color="8355711" Type="None" Width="0.12mm" />
+  <TOPBORDER Color="8355711" Type="None" Width="0.2mm" />
+  <BOTTOMBORDER Color="8355711" Type="Solid" Width="0.12mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="10" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Color="8355711" Type="None" Width="0.12mm" />
+  <RIGHTBORDER Color="8355711" Type="None" Width="0.12mm" />
+  <TOPBORDER Color="8355711" Type="None" Width="0.2mm" />
+  <BOTTOMBORDER Color="8355711" Type="Solid" Width="0.12mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="11" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Color="8355711" Type="None" Width="0.12mm" />
+  <RIGHTBORDER Color="8355711" Type="Solid" Width="0.12mm" />
+  <TOPBORDER Color="8355711" Type="None" Width="0.2mm" />
+  <BOTTOMBORDER Color="8355711" Type="Solid" Width="0.12mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="12" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Color="8355711" Type="Solid" Width="0.1mm" />
+  <RIGHTBORDER Color="8355711" Type="Solid" Width="0.1mm" />
+  <TOPBORDER Color="8355711" Type="Solid" Width="0.1mm" />
+  <BOTTOMBORDER Color="8355711" Type="Solid" Width="0.1mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="13" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Color="8355711" Type="Solid" Width="0.12mm" />
+  <RIGHTBORDER Color="8355711" Type="None" Width="0.12mm" />
+  <TOPBORDER Color="8355711" Type="Solid" Width="0.12mm" />
+  <BOTTOMBORDER Color="8355711" Type="None" Width="0.2mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="14" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Color="8355711" Type="None" Width="0.12mm" />
+  <RIGHTBORDER Color="8355711" Type="Solid" Width="0.12mm" />
+  <TOPBORDER Color="8355711" Type="Solid" Width="0.12mm" />
+  <BOTTOMBORDER Color="8355711" Type="None" Width="0.2mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="0" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="15" Shadow="false" Slash="0" ThreeD="false">
+  <LEFTBORDER Color="8355711" Type="None" Width="0.12mm" />
+  <RIGHTBORDER Color="8355711" Type="None" Width="0.12mm" />
+  <TOPBORDER Color="8355711" Type="Solid" Width="0.12mm" />
+  <BOTTOMBORDER Color="8355711" Type="None" Width="0.2mm" />
+  <DIAGONAL Type="Solid" Width="0.1mm" />
+</BORDERFILL>
+<BORDERFILL BackSlash="0" BreakCellSeparateLine="1" CenterLine="0" CounterBackSlash="0" CounterSlash="0" CrookedSlash="0" Id="16" Shadow="false" Slash="0" ThreeD="false">
+<LEFTBORDER Type="Solid" Width="0.12mm"/>
+<RIGHTBORDER Type="Solid" Width="0.12mm"/>
+<TOPBORDER Type="Solid" Width="0.12mm"/>
+<BOTTOMBORDER Type="Solid" Width="0.12mm"/>
+</BORDERFILL>
+ </BORDERFILLLIST>
+<CHARSHAPELIST Count="20">
+<CHARSHAPE BorderFillId="2" Height="1000" Id="0" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="3" Hanja="3" Japanese="3" Latin="3" Other="3" Symbol="3" User="3" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="1000" Id="1" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="2" Hanja="2" Japanese="2" Latin="2" Other="2" Symbol="2" User="2" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="900" Id="2" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="2" Hanja="2" Japanese="2" Latin="2" Other="2" Symbol="2" User="2" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="900" Id="3" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="3" Hanja="3" Japanese="3" Latin="3" Other="3" Symbol="3" User="3" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="900" Id="4" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="2" Hanja="2" Japanese="2" Latin="2" Other="2" Symbol="2" User="2" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="-5" Hanja="-5" Japanese="-5" Latin="-5" Other="-5" Symbol="-5" User="-5" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="1600" Id="5" ShadeColor="4294967295" SymMark="0" TextColor="11891758" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="2" Hanja="2" Japanese="2" Latin="2" Other="2" Symbol="2" User="2" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="1100" Id="6" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="2" Hanja="2" Japanese="2" Latin="2" Other="2" Symbol="2" User="2" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="100" Id="7" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="3" Hanja="3" Japanese="3" Latin="3" Other="3" Symbol="3" User="3" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="1000" Id="8" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="1" Hanja="1" Japanese="1" Latin="1" Other="1" Symbol="1" User="1" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="1000" Id="9" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="1200" Id="10" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <BOLD />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="1000" Id="11" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <BOLD />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="100" Id="12" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="900" Id="13" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="5" Height="900" Id="14" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="2" Height="1300" Id="15" ShadeColor="4294967295" SymMark="0" TextColor="0" UseFontSpace="false" UseKerning="false">
+  <FONTID Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+  <CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+  <BOLD />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="0" Id="16" Height="1000" ShadeColor="4294967295" TextColor="0" SymMark="0" UseFontSpace="false" UseKerning="false">
+<FONTID Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+<RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+<CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+<RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+<CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="0" Id="17" Height="1100" ShadeColor="4294967295" TextColor="0" SymMark="0" UseFontSpace="false" UseKerning="false">
+<FONTID Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+<RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+<CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+<RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+<CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+
+<BOLD />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="0" Id="18" Height="1000" ShadeColor="4294967295" TextColor="0" SymMark="0" UseFontSpace="false" UseKerning="false">
+<FONTID Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+<RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+<CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+<RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+<CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+
+<BOLD />
+</CHARSHAPE>
+<CHARSHAPE BorderFillId="0" Id="19" Height="1100" ShadeColor="4294967295" TextColor="0" SymMark="0" UseFontSpace="false" UseKerning="false">
+<FONTID Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+<RATIO Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+<CHARSPACING Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+<RELSIZE Hangul="100" Hanja="100" Japanese="100" Latin="100" Other="100" Symbol="100" User="100" />
+<CHAROFFSET Hangul="0" Hanja="0" Japanese="0" Latin="0" Other="0" Symbol="0" User="0" />
+
+</CHARSHAPE>
+</CHARSHAPELIST>
+<TABDEFLIST Count="3">
+  <TABDEF AutoTabLeft="false" AutoTabRight="false" Id="0" />
+  <TABDEF AutoTabLeft="true" AutoTabRight="false" Id="1" />
+  <TABDEF AutoTabLeft="false" AutoTabRight="true" Id="2" />
+</TABDEFLIST><NUMBERINGLIST Count="1">
+  <NUMBERING Id="1" Start="0">
+    <PARAHEAD Alignment="Left" AutoIndent="true" Level="1" NumFormat="Digit" Start="1" TextOffset="50" TextOffsetType="percent" UseInstWidth="true" WidthAdjust="0">^1.</PARAHEAD>
+    <PARAHEAD Alignment="Left" AutoIndent="true" Level="2" NumFormat="HangulSyllable" Start="1" TextOffset="50" TextOffsetType="percent" UseInstWidth="true" WidthAdjust="0">^2.</PARAHEAD>
+    <PARAHEAD Alignment="Left" AutoIndent="true" Level="3" NumFormat="Digit" Start="1" TextOffset="50" TextOffsetType="percent" UseInstWidth="true" WidthAdjust="0">^3)</PARAHEAD>
+    <PARAHEAD Alignment="Left" AutoIndent="true" Level="4" NumFormat="HangulSyllable" Start="1" TextOffset="50" TextOffsetType="percent" UseInstWidth="true" WidthAdjust="0">^4)</PARAHEAD>
+    <PARAHEAD Alignment="Left" AutoIndent="true" Level="5" NumFormat="Digit" Start="1" TextOffset="50" TextOffsetType="percent" UseInstWidth="true" WidthAdjust="0">(^5)</PARAHEAD>
+    <PARAHEAD Alignment="Left" AutoIndent="true" Level="6" NumFormat="HangulSyllable" Start="1" TextOffset="50" TextOffsetType="percent" UseInstWidth="true" WidthAdjust="0">(^6)</PARAHEAD>
+    <PARAHEAD Alignment="Left" AutoIndent="true" Level="7" NumFormat="CircledDigit" Start="1" TextOffset="50" TextOffsetType="percent" UseInstWidth="true" WidthAdjust="0">^7</PARAHEAD>
+    <PARAHEAD Alignment="Left" AutoIndent="true" Level="8" NumFormat="Digit" Start="1" TextOffset="50" TextOffsetType="percent" UseInstWidth="false" WidthAdjust="0"></PARAHEAD>
+    <PARAHEAD Alignment="Left" AutoIndent="true" Level="9" NumFormat="Digit" Start="1" TextOffset="50" TextOffsetType="percent" UseInstWidth="false" WidthAdjust="0"></PARAHEAD>
+    <PARAHEAD Alignment="Left" AutoIndent="true" Level="10" NumFormat="Digit" Start="1" TextOffset="50" TextOffsetType="percent" UseInstWidth="false" WidthAdjust="0"></PARAHEAD>
+  </NUMBERING>
+</NUMBERINGLIST><PARASHAPELIST Count="36">
+<PARASHAPE Align="Justify" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="true" Condense="0" FontLineHeight="false" HeadingType="None" Id="0" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Left" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="1" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="130" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Justify" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="true" Condense="0" FontLineHeight="false" HeadingType="None" Id="2" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="-2620" Left="0" LineSpacing="130" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Justify" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="3" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="150" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Justify" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="true" Condense="20" FontLineHeight="false" HeadingType="Outline" Id="4" KeepLines="false" KeepWithNext="false" Level="6" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="1" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="14000" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Justify" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="true" Condense="20" FontLineHeight="false" HeadingType="Outline" Id="5" KeepLines="false" KeepWithNext="false" Level="5" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="1" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="12000" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Justify" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="true" Condense="20" FontLineHeight="false" HeadingType="Outline" Id="6" KeepLines="false" KeepWithNext="false" Level="4" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="1" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="10000" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Justify" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="true" Condense="20" FontLineHeight="false" HeadingType="Outline" Id="7" KeepLines="false" KeepWithNext="false" Level="3" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="1" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="8000" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Justify" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="true" Condense="20" FontLineHeight="false" HeadingType="Outline" Id="8" KeepLines="false" KeepWithNext="false" Level="2" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="1" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="6000" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Justify" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="true" Condense="20" FontLineHeight="false" HeadingType="Outline" Id="9" KeepLines="false" KeepWithNext="false" Level="1" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="1" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="4000" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Justify" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="true" Condense="20" FontLineHeight="false" HeadingType="Outline" Id="10" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="1" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="2000" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Justify" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="true" Condense="0" FontLineHeight="false" HeadingType="None" Id="11" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="3000" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Left" AutoSpaceEAsianEng="true" AutoSpaceEAsianNum="true" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="20" FontLineHeight="false" HeadingType="None" Id="12" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="1" VerAlign="Baseline" WidowOrphan="true">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="160" LineSpacingType="Percent" Next="600" Prev="2400" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Left" AutoSpaceEAsianEng="true" AutoSpaceEAsianNum="true" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="13" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="true">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="160" LineSpacingType="Percent" Next="1400" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Left" AutoSpaceEAsianEng="true" AutoSpaceEAsianNum="true" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="14" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="true">
+  <PARAMARGIN Indent="0" Left="2200" LineSpacing="160" LineSpacingType="Percent" Next="1400" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Left" AutoSpaceEAsianEng="true" AutoSpaceEAsianNum="true" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="15" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="true">
+  <PARAMARGIN Indent="0" Left="4400" LineSpacing="160" LineSpacingType="Percent" Next="1400" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Center" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="16" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Right" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="17" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Center" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="18" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="2" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="150" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" OffsetBottom="283" OffsetLeft="283" OffsetRight="283" OffsetTop="283" />
+</PARASHAPE>
+<PARASHAPE Align="Center" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="19" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="150" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Justify" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="true" Condense="0" FontLineHeight="false" HeadingType="None" Id="20" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="2" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="150" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" OffsetBottom="283" OffsetLeft="283" OffsetRight="283" OffsetTop="283" />
+</PARASHAPE>
+<PARASHAPE Align="Right" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="21" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="2" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="150" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" OffsetBottom="283" OffsetLeft="283" OffsetRight="283" OffsetTop="283" />
+</PARASHAPE>
+<PARASHAPE Align="Center" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="22" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Center" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Justify" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="true" Condense="0" FontLineHeight="false" HeadingType="None" Id="23" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="-200" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Center" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="24" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="-6000" LineSpacing="150" LineSpacingType="Percent" Next="0" Prev="0" Right="-4000" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Center" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="25" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Center" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="130" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Align="Left" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" HeadingType="None" Id="26" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="true" TabDef="0" VerAlign="Baseline" WidowOrphan="false">
+  <PARAMARGIN Indent="0" Left="0" LineSpacing="160" LineSpacingType="Percent" Next="0" Prev="0" Right="0" />
+  <PARABORDER BorderFill="2" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Id="27" Align="Left" VerAlign="Baseline" HeadingType="None" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="false" TabDef="0" WidowOrphan="false">
+<PARAMARGIN Indent="-3800" Left="-3800" Right="0" Prev="0" Next="0" LineSpacing="160" LineSpacingType="Percent" />
+<PARABORDER BorderFill="1" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Id="28" Align="Left" VerAlign="Center" HeadingType="None" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="false" TabDef="0" WidowOrphan="false">
+<PARAMARGIN Indent="0" Left="0" Right="0" Prev="0" Next="0" LineSpacing="160" LineSpacingType="Percent" />
+<PARABORDER Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Id="29" Align="Justify" VerAlign="Baseline" HeadingType="None" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="false" TabDef="0" WidowOrphan="false">
+<PARAMARGIN Indent="-4250" Left="0" Right="0" Prev="0" Next="350" LineSpacing="160" LineSpacingType="Percent" />
+<PARABORDER BorderFill="1" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Id="30" Align="Left" VerAlign="Center" HeadingType="None" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="false" TabDef="0" WidowOrphan="false">
+<PARAMARGIN Indent="0" Left="0" Right="0" Prev="0" Next="0" LineSpacing="160" LineSpacingType="Percent" />
+<PARABORDER BorderFill="1" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Id="31" Align="Left" VerAlign="Baseline" HeadingType="None" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="false" TabDef="0" WidowOrphan="false">
+<PARAMARGIN Indent="0" Left="0" Right="0" Prev="0" Next="0" LineSpacing="140" LineSpacingType="Percent" />
+<PARABORDER BorderFill="1" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Id="32" Align="Left" VerAlign="Baseline" HeadingType="None" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="false" TabDef="0" WidowOrphan="false">
+<PARAMARGIN Indent="-3800" Left="-3800" Right="0" Prev="0" Next="0" LineSpacing="160" LineSpacingType="Percent" />
+<PARABORDER Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Id="33" Align="Justify" VerAlign="Baseline" HeadingType="None" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="false" TabDef="0" WidowOrphan="false">
+<PARAMARGIN Indent="-4250" Left="0" Right="0" Prev="0" Next="350" LineSpacing="160" LineSpacingType="Percent" />
+<PARABORDER Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Id="34" Align="Left" VerAlign="Baseline" HeadingType="None" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="false" TabDef="0" WidowOrphan="false">
+<PARAMARGIN Indent="0" Left="0" Right="0" Prev="0" Next="0" LineSpacing="140" LineSpacingType="Percent" />
+<PARABORDER Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+<PARASHAPE Id="35" Align="Center" VerAlign="Baseline" HeadingType="None" AutoSpaceEAsianEng="false" AutoSpaceEAsianNum="false" BreakLatinWord="KeepWord" BreakNonLatinWord="false" Condense="0" FontLineHeight="false" KeepLines="false" KeepWithNext="false" Level="0" LineWrap="Break" PageBreakBefore="false" SnapToGrid="false" TabDef="0" WidowOrphan="false">
+<PARAMARGIN Indent="0" Left="0" Right="0" Prev="0" Next="0" LineSpacing="160" LineSpacingType="Percent" />
+<PARABORDER BorderFill="1" Connect="false" IgnoreMargin="false" />
+</PARASHAPE>
+</PARASHAPELIST>
+<STYLELIST Count="2">
+<STYLELIST Count="18">
+  <STYLE CharShape="0" EngName="Normal" Id="0" LangId="1042" LockForm="0" Name="바탕글" NextStyle="0" ParaShape="0" Type="Para" />
+  <STYLE CharShape="0" EngName="Body" Id="1" LangId="1042" LockForm="0" Name="본문" NextStyle="1" ParaShape="11" Type="Para" />
+  <STYLE CharShape="0" EngName="Outline 1" Id="2" LangId="1042" LockForm="0" Name="개요 1" NextStyle="2" ParaShape="10" Type="Para" />
+  <STYLE CharShape="0" EngName="Outline 2" Id="3" LangId="1042" LockForm="0" Name="개요 2" NextStyle="3" ParaShape="9" Type="Para" />
+  <STYLE CharShape="0" EngName="Outline 3" Id="4" LangId="1042" LockForm="0" Name="개요 3" NextStyle="4" ParaShape="8" Type="Para" />
+  <STYLE CharShape="0" EngName="Outline 4" Id="5" LangId="1042" LockForm="0" Name="개요 4" NextStyle="5" ParaShape="7" Type="Para" />
+  <STYLE CharShape="0" EngName="Outline 5" Id="6" LangId="1042" LockForm="0" Name="개요 5" NextStyle="6" ParaShape="6" Type="Para" />
+  <STYLE CharShape="0" EngName="Outline 6" Id="7" LangId="1042" LockForm="0" Name="개요 6" NextStyle="7" ParaShape="5" Type="Para" />
+  <STYLE CharShape="0" EngName="Outline 7" Id="8" LangId="1042" LockForm="0" Name="개요 7" NextStyle="8" ParaShape="4" Type="Para" />
+  <STYLE CharShape="1" EngName="Page Number" Id="9" LangId="1042" LockForm="0" Name="쪽 번호" NextStyle="0" Type="Char" />
+  <STYLE CharShape="2" EngName="Header" Id="10" LangId="1042" LockForm="0" Name="머리말" NextStyle="10" ParaShape="3" Type="Para" />
+  <STYLE CharShape="3" EngName="Footnote" Id="11" LangId="1042" LockForm="0" Name="각주" NextStyle="11" ParaShape="2" Type="Para" />
+  <STYLE CharShape="3" EngName="Endnote" Id="12" LangId="1042" LockForm="0" Name="미주" NextStyle="12" ParaShape="2" Type="Para" />
+  <STYLE CharShape="4" EngName="Memo" Id="13" LangId="1042" LockForm="0" Name="메모" NextStyle="13" ParaShape="1" Type="Para" />
+  <STYLE CharShape="5" EngName="TOC Heading" Id="14" LangId="1042" LockForm="0" Name="차례 제목" NextStyle="14" ParaShape="12" Type="Para" />
+  <STYLE CharShape="6" EngName="TOC 1" Id="15" LangId="1042" LockForm="0" Name="차례 1" NextStyle="15" ParaShape="13" Type="Para" />
+  <STYLE CharShape="6" EngName="TOC 2" Id="16" LangId="1042" LockForm="0" Name="차례 2" NextStyle="16" ParaShape="14" Type="Para" />
+  <STYLE CharShape="6" EngName="TOC 3" Id="17" LangId="1042" LockForm="0" Name="차례 3" NextStyle="17" ParaShape="15" Type="Para" />
+</STYLELIST>
+<STYLE CharShape="16" EngName="CdmlBasic" LangId="1042" LockForm="0" Name="CdmlBasic" NextStyle="0" ParaShape="26" Id="1" Type="Para" />
+</STYLELIST>
+</MAPPINGTABLE>
+<COMPATIBLEDOCUMENT TargetProgram="None">
+<LAYOUTCOMPATIBILITY AdjustBaselineInFixedLinespacing="false" AdjustLineheightToFont="false" AdjustParaBorderOffsetWithBorder="false" AdjustParaBorderfillToSpacing="false" ApplyAtLeastToPercent100Pct="false" ApplyCharSpacingToCharGrid="false" ApplyExtendHeaderFooterEachSection="false" ApplyFontWeightToBold="false" ApplyFontspaceToLatin="false" ApplyNextspacingOfLastPara="false" ApplyParaBorderToOutside="false" ApplyPrevspacingBeneathObject="false" BaseCharUnitOfIndentOnFirstChar="false" BaseCharUnitOnEAsian="false" BaseLinespacingOnLinegrid="false" ConnectParaBorderfillOfEqualBorder="false" DoNotAdjustEmptyAnchorLine="false" DoNotAdjustWordInJustify="false" DoNotAlignWhitespaceOnRight="false" DoNotApplyAutoSpaceEAsianEng="false" DoNotApplyAutoSpaceEAsianNum="false" DoNotApplyExtensionCharCompose="false" DoNotApplyGridInHeaderFooter="false" DoNotApplyImageEffect="false" DoNotApplyShapeComment="false" DoNotApplyStrikeoutWithUnderline="false" DoNotApplyVertOffsetOfForward="false" DoNotFormattingAtBeneathAnchor="false" DoNotHoldAnchorOfTable="false" ExtendLineheightToOffset="false" ExtendLineheightToParaBorderOffset="false" ExtendVertLimitToPageMargins="false" FixedUnderlineWidth="false" OverlapBothAllowOverlap="false" TreatQuotationAsLatin="false" UseInnerUnderline="false" UseLowercaseStrikeout="false"/>
+</COMPATIBLEDOCUMENT>
+</HEAD><BODY>
+<SECTION Id="0">
+<P ColumnBreak="false" InstId="2764991984" PageBreak="false" ParaShape="0" Style="0">
+  <TEXT CharShape="7">
+    <SECDEF CharGrid="0" FirstBorder="false" FirstFill="false" LineGrid="0" OutlineShape="1" SpaceColumns="1134" TabStop="8000" TextDirection="0" TextVerticalWidthHead="0">
+      <STARTNUMBER Equation="0" Figure="0" Page="0" PageStartsOn="Both" Table="0" />
+      <HIDE Border="false" EmptyLine="false" Fill="false" Footer="false" Header="false" MasterPage="false" PageNumPos="false" />
+      <PAGEDEF GutterType="LeftOnly" Height="84188" Landscape="0" Width="59528">
+        <PAGEMARGIN Bottom="2834" Footer="4251" Gutter="0" Header="4251" Left="5669" Right="4251" Top="2834" />
+      </PAGEDEF>
+      <FOOTNOTESHAPE>
+        <AUTONUMFORMAT SuffixChar=")" Superscript="false" Type="Digit" />
+        <NOTELINE Length="5cm" Type="Solid" Width="0.12mm" />
+        <NOTESPACING AboveLine="850" BelowLine="567" BetweenNotes="283" />
+        <NOTENUMBERING NewNumber="1" Type="Continuous" />
+        <NOTEPLACEMENT BeneathText="false" Place="EachColumn" />
+      </FOOTNOTESHAPE>
+      <ENDNOTESHAPE>
+        <AUTONUMFORMAT SuffixChar=")" Superscript="false" Type="Digit" />
+        <NOTELINE Length="14692344" Type="Solid" Width="0.12mm" />
+        <NOTESPACING AboveLine="850" BelowLine="567" BetweenNotes="0" />
+        <NOTENUMBERING NewNumber="1" Type="Continuous" />
+        <NOTEPLACEMENT BeneathText="false" Place="EndOfDocument" />
+      </ENDNOTESHAPE>
+      <PAGEBORDERFILL BorferFill="12" FillArea="Paper" FooterInside="false" HeaderInside="false" TextBorder="true" Type="Both">
+        <PAGEOFFSET Bottom="1417" Left="2834" Right="1417" Top="1417" />
+      </PAGEBORDERFILL>
+      <PAGEBORDERFILL BorferFill="1" FillArea="Paper" FooterInside="false" HeaderInside="false" TextBorder="true" Type="Even">
+        <PAGEOFFSET Bottom="1417" Left="1417" Right="1417" Top="1417" />
+      </PAGEBORDERFILL>
+      <PAGEBORDERFILL BorferFill="1" FillArea="Paper" FooterInside="false" HeaderInside="false" TextBorder="true" Type="Odd">
+        <PAGEOFFSET Bottom="1417" Left="1417" Right="1417" Top="1417" />
+      </PAGEBORDERFILL>
+      <MASTERPAGE Type="Both">
+        <PARALIST HasNumRef="false" HasTextRef="false" LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" TextHeight="70018" TextWidth="49608" VertAlign="Top">
+          <P ParaShape="0" Style="0">
+            <TEXT CharShape="0">
+              <LINE EndX="100" EndY="100" IsReverseHV="false" StartX="0" StartY="0">
+                <SHAPEOBJECT InstId="1340715056" Lock="false" NumberingType="Figure" TextWrap="InFrontOfText" ZOrder="2">
+                  <SIZE Height="72850" HeightRelTo="Absolute" Protect="false" Width="1" WidthRelTo="Absolute" />
+                  <POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="false" HoldAnchorAndSO="false" HorzAlign="Center" HorzOffset="-5" HorzRelTo="Paper" TreatAsChar="false" VertAlign="Bottom" VertOffset="5669" VertRelTo="Paper" />
+                  <OUTSIDEMARGIN Bottom="0" Left="0" Right="0" Top="0" />
+                  <SHAPECOMMENT>선입니다.</SHAPECOMMENT>
+                </SHAPEOBJECT>
+                <DRAWINGOBJECT>
+                  <SHAPECOMPONENT CurHeight="72850" CurWidth="1" GroupLevel="0" HorzFlip="false" InstID="266973233" OriHeight="100" OriWidth="100" VertFlip="false" XPos="0" YPos="-5252">
+                    <ROTATIONINFO Angle="0" CenterX="0" CenterY="36425" Rotate="1" />
+                    <RENDERINGINFO>
+                      <TRANSMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+                      <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+                      <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+                      <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+                      <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+                      <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+                      <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+                      <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+                      <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+                      <SCAMATRIX E1="0.01000" E2="0.00000" E3="0.00000" E4="0.00000" E5="728.50000" E6="0.00000" />
+                      <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+                    </RENDERINGINFO>
+                  </SHAPECOMPONENT>
+                  <LINESHAPE Alpha="0" Color="8355711" EndCap="Flat" HeadSize="MediumMedium" HeadStyle="Normal" Style="Solid" TailSize="MediumMedium" TailStyle="Normal" Width="33" />
+                  <SHADOW Alpha="0" Color="11711154" OffsetX="0" OffsetY="0" Type="0" />
+                </DRAWINGOBJECT>
+              </LINE>
+              <CHAR />
+            </TEXT>
+          </P>
+        </PARALIST>
+      </MASTERPAGE>
+    </SECDEF>
+    <COLDEF Count="1" Layout="Left" SameGap="0" SameSize="true" Type="Newspaper" />
+    <CONTAINER>
+      <SHAPEOBJECT InstId="1213254904" Lock="false" NumberingType="Figure" TextWrap="InFrontOfText" ZOrder="10">
+        <SIZE Height="9040" HeightRelTo="Absolute" Protect="false" Width="52882" WidthRelTo="Absolute" />
+        <POSITION AffectLSpacing="false" AllowOverlap="false" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="2985" HorzRelTo="Paper" TreatAsChar="false" VertAlign="Top" VertOffset="3381" VertRelTo="Paper" />
+        <OUTSIDEMARGIN Bottom="0" Left="0" Right="0" Top="0" />
+        <SHAPECOMMENT>묶음 개체입니다.</SHAPECOMMENT>
+      </SHAPEOBJECT>
+      <SHAPECOMPONENT GroupLevel="0" HorzFlip="false" InstID="139513081" OriHeight="9040" OriWidth="52882" VertFlip="false" XPos="0" YPos="0">
+        <ROTATIONINFO Angle="0" CenterX="26441" CenterY="4520" Rotate="1" />
+        <RENDERINGINFO>
+          <TRANSMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+          <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+          <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+        </RENDERINGINFO>
+      </SHAPECOMPONENT>
+      <RECTANGLE Ratio="0" X0="0" X1="9188" X2="9188" X3="0" Y0="0" Y1="0" Y2="1881" Y3="1881">
+        <DRAWINGOBJECT>
+          <SHAPECOMPONENT GroupLevel="1" HorzFlip="false" InstID="626413825" OriHeight="1881" OriWidth="9188" VertFlip="false" XPos="46347" YPos="-227">
+            <ROTATIONINFO Angle="0" CenterX="3118" CenterY="3118" Rotate="1" />
+            <RENDERINGINFO>
+              <TRANSMATRIX E1="1.00000" E2="0.00000" E3="46347.00000" E4="0.00000" E5="1.00000" E6="-227.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.22227" E2="0.00000" E3="-66.45747" E4="0.00000" E5="1.22227" E6="-50.45433" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="0.55529" E2="0.00000" E3="299.00000" E4="0.00000" E5="2.71238" E6="227.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+            </RENDERINGINFO>
+          </SHAPECOMPONENT>
+          <LINESHAPE Alpha="0" EndCap="Flat" Style="None" Width="33" />
+          <SHADOW Alpha="0" Color="11711154" OffsetX="0" OffsetY="0" Type="0" />
+          <DRAWTEXT Editable="false" LastWidth="6236">
+            <TEXTMARGIN Bottom="283" Left="283" Right="283" Top="283" />
+            <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+              <P ParaShape="0" Style="0">
+                <TEXT CharShape="9">
+                  <CHAR></CHAR>
+                </TEXT>
+              </P>
+            </PARALIST>
+          </DRAWTEXT>
+        </DRAWINGOBJECT>
+      </RECTANGLE>
+      <RECTANGLE Ratio="0" X0="0" X1="9188" X2="9188" X3="0" Y0="0" Y1="0" Y2="1881" Y3="1881">
+        <DRAWINGOBJECT>
+          <SHAPECOMPONENT GroupLevel="1" HorzFlip="false" InstID="626413826" OriHeight="1881" OriWidth="9188" VertFlip="false" XPos="30178" YPos="7104">
+            <ROTATIONINFO Angle="0" CenterX="10548" CenterY="940" Rotate="1" />
+            <RENDERINGINFO>
+              <TRANSMATRIX E1="1.00000" E2="0.00000" E3="30178.00000" E4="0.00000" E5="1.00000" E6="7104.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="2.32096" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="2.03853" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="0.48531" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+            </RENDERINGINFO>
+          </SHAPECOMPONENT>
+          <LINESHAPE Alpha="0" EndCap="Flat" Style="None" Width="33" />
+          <SHADOW Alpha="0" Color="11711154" OffsetX="0" OffsetY="0" Type="0" />
+          <DRAWTEXT Editable="false" LastWidth="21097">
+            <TEXTMARGIN Bottom="283" Left="283" Right="283" Top="283" />
+            <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+              <P ParaShape="0" Style="0">
+                <TEXT CharShape="9">
+                  <CHAR></CHAR>
+                </TEXT>
+              </P>
+            </PARALIST>
+          </DRAWTEXT>
+        </DRAWINGOBJECT>
+      </RECTANGLE>
+      <RECTANGLE Ratio="0" X0="0" X1="9188" X2="9188" X3="0" Y0="0" Y1="0" Y2="1881" Y3="1881">
+        <DRAWINGOBJECT>
+          <SHAPECOMPONENT GroupLevel="1" HorzFlip="false" InstID="626413827" OriHeight="1881" OriWidth="9188" VertFlip="false" XPos="6865" YPos="7159">
+            <ROTATIONINFO Angle="0" CenterX="12051" CenterY="940" Rotate="1" />
+            <RENDERINGINFO>
+              <TRANSMATRIX E1="1.00000" E2="0.00000" E3="6865.00000" E4="0.00000" E5="1.00000" E6="7159.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.10993" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="4.00370" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="0.59034" E2="0.00000" E3="-965.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+            </RENDERINGINFO>
+          </SHAPECOMPONENT>
+          <LINESHAPE Alpha="0" EndCap="Flat" Style="None" Width="33" />
+          <SHADOW Alpha="0" Color="11711154" OffsetX="0" OffsetY="0" Type="0" />
+          <DRAWTEXT Editable="false" LastWidth="24103" Name="">
+            <TEXTMARGIN Bottom="283" Left="283" Right="283" Top="283" />
+            <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+              <P ParaShape="26" Style="0">
+                <TEXT CharShape="9">
+                  <CHAR></CHAR>
+                </TEXT>
+              </P>
+            </PARALIST>
+          </DRAWTEXT>
+        </DRAWINGOBJECT>
+      </RECTANGLE>
+      <RECTANGLE Ratio="0" X0="0" X1="9188" X2="9188" X3="0" Y0="0" Y1="0" Y2="1881" Y3="1881">
+        <DRAWINGOBJECT>
+          <SHAPECOMPONENT GroupLevel="1" HorzFlip="false" InstID="626413828" OriHeight="1881" OriWidth="9188" VertFlip="false" XPos="11543" YPos="1839">
+            <ROTATIONINFO Angle="0" CenterX="16173" CenterY="2632" Rotate="1" />
+            <RENDERINGINFO>
+              <TRANSMATRIX E1="1.00000" E2="0.00000" E3="11543.00000" E4="0.00000" E5="1.00000" E6="1839.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="3.52057" E2="0.00000" E3="-965.00000" E4="0.00000" E5="2.79904" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+            </RENDERINGINFO>
+          </SHAPECOMPONENT>
+          <LINESHAPE Alpha="0" EndCap="Flat" Style="None" Width="33" />
+          <SHADOW Alpha="0" Color="11711154" OffsetX="0" OffsetY="0" Type="0" />
+          <DRAWTEXT Editable="false" LastWidth="32347">
+            <TEXTMARGIN Bottom="283" Left="283" Right="283" Top="283" />
+            <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+              <P ParaShape="25" Style="0">
+                <TEXT CharShape="15">
+                  <CHAR>02. 식의 계산 - 02. 단항식과 다항식의 계산 5회차 03. 단항식과 다항식의 곱셈과 나눗셈</CHAR>
+                </TEXT>
+              </P>
+            </PARALIST>
+          </DRAWTEXT>
+        </DRAWINGOBJECT>
+      </RECTANGLE>
+      <RECTANGLE Ratio="0" X0="0" X1="9188" X2="9188" X3="0" Y0="0" Y1="0" Y2="1881" Y3="1881">
+        <DRAWINGOBJECT>
+          <SHAPECOMPONENT GroupLevel="1" HorzFlip="false" InstID="626413829" OriHeight="1881" OriWidth="9188" VertFlip="false" XPos="11560" YPos="14">
+            <ROTATIONINFO Angle="0" CenterX="5909" CenterY="940" Rotate="1" />
+            <RENDERINGINFO>
+              <TRANSMATRIX E1="1.00000" E2="0.00000" E3="11560.00000" E4="0.00000" E5="1.00000" E6="14.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="0.35263" E2="0.00000" E3="-667.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="0.93274" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="3.91086" E2="0.00000" E3="-965.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+            </RENDERINGINFO>
+          </SHAPECOMPONENT>
+          <LINESHAPE Alpha="0" EndCap="Flat" Style="None" Width="33" />
+          <SHADOW Alpha="0" Color="11711154" OffsetX="0" OffsetY="0" Type="0" />
+          <DRAWTEXT Editable="false" LastWidth="11819">
+            <TEXTMARGIN Bottom="283" Left="283" Right="283" Top="283" />
+            <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+              <P ParaShape="0" Style="0">
+                <TEXT CharShape="9">
+                  <CHAR>[평가자료 시험지]</CHAR>
+                </TEXT>
+                <TEXT CharShape="11" />
+              </P>
+            </PARALIST>
+          </DRAWTEXT>
+        </DRAWINGOBJECT>
+      </RECTANGLE>
+      <RECTANGLE Ratio="0" X0="0" X1="9188" X2="9188" X3="0" Y0="0" Y1="0" Y2="1881" Y3="1881">
+        <DRAWINGOBJECT>
+          <SHAPECOMPONENT GroupLevel="1" HorzFlip="false" InstID="626413830" OriHeight="1881" OriWidth="9188" VertFlip="false" XPos="965" YPos="1559">
+            <ROTATIONINFO Angle="0" CenterX="5198" CenterY="2800" Rotate="1" />
+            <RENDERINGINFO>
+              <TRANSMATRIX E1="1.00000" E2="0.00000" E3="965.00000" E4="0.00000" E5="1.00000" E6="1559.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.13148" E2="0.00000" E3="-965.00000" E4="0.00000" E5="2.97714" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+            </RENDERINGINFO>
+          </SHAPECOMPONENT>
+          <LINESHAPE Alpha="0" EndCap="Flat" Style="None" Width="33" />
+          <SHADOW Alpha="0" Color="11711154" OffsetX="0" OffsetY="0" Type="0" />
+          <DRAWTEXT Editable="false" LastWidth="10396">
+            <TEXTMARGIN Bottom="283" Left="283" Right="283" Top="283" />
+            <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+              <P ParaShape="16" Style="0">
+                <TEXT CharShape="10">
+                  <CHAR>서울신동초등학교</CHAR>
+                </TEXT>
+              </P>
+            </PARALIST>
+          </DRAWTEXT>
+        </DRAWINGOBJECT>
+      </RECTANGLE>
+      <RECTANGLE Ratio="0" X0="0" X1="9188" X2="9188" X3="0" Y0="0" Y1="0" Y2="1881" Y3="1881">
+        <DRAWINGOBJECT>
+          <SHAPECOMPONENT GroupLevel="1" HorzFlip="false" InstID="139513077" OriHeight="1881" OriWidth="9188" VertFlip="false" XPos="22945" YPos="143">
+            <ROTATIONINFO Angle="0" CenterX="2852" CenterY="876" Rotate="1" />
+            <RENDERINGINFO>
+              <TRANSMATRIX E1="1.00000" E2="0.00000" E3="22945.00000" E4="0.00000" E5="1.00000" E6="143.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="0.17022" E2="0.00000" E3="0.00000" E4="0.00000" E5="0.93142" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="0.93274" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="3.91086" E2="0.00000" E3="-965.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+            </RENDERINGINFO>
+          </SHAPECOMPONENT>
+          <LINESHAPE Alpha="0" EndCap="Flat" Style="None" Width="33" />
+          <SHADOW Alpha="0" Color="11711154" OffsetX="0" OffsetY="0" Type="0" />
+          <DRAWTEXT Editable="false" LastWidth="5705" Name="">
+            <TEXTMARGIN Bottom="283" Left="283" Right="283" Top="283" />
+            <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+              <P ParaShape="17" Style="0">
+                <TEXT CharShape="9">
+                  <CHAR>19</CHAR>
+                </TEXT>
+                <TEXT CharShape="11" />
+              </P>
+            </PARALIST>
+          </DRAWTEXT>
+        </DRAWINGOBJECT>
+      </RECTANGLE>
+      <RECTANGLE Ratio="0" X0="0" X1="9188" X2="9188" X3="0" Y0="0" Y1="0" Y2="1881" Y3="1881">
+        <DRAWINGOBJECT>
+          <SHAPECOMPONENT GroupLevel="1" HorzFlip="false" InstID="139513079" OriHeight="1881" OriWidth="9188" VertFlip="false" XPos="28522" YPos="143">
+            <ROTATIONINFO Angle="0" CenterX="1503" CenterY="876" Rotate="1" />
+            <RENDERINGINFO>
+              <TRANSMATRIX E1="1.00000" E2="0.00000" E3="28522.00000" E4="0.00000" E5="1.00000" E6="143.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="0.08968" E2="0.00000" E3="0.00000" E4="0.00000" E5="0.93142" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="0.93274" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <SCAMATRIX E1="3.91086" E2="0.00000" E3="-965.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+              <ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+            </RENDERINGINFO>
+          </SHAPECOMPONENT>
+          <LINESHAPE Alpha="0" EndCap="Flat" Style="None" Width="33" />
+          <SHADOW Alpha="0" Color="11711154" OffsetX="0" OffsetY="0" Type="0" />
+          <DRAWTEXT Editable="false" LastWidth="3006" Name="">
+            <TEXTMARGIN Bottom="283" Left="283" Right="283" Top="283" />
+            <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+              <P ParaShape="0" Style="0">
+                <TEXT CharShape="11">
+                  <CHAR>문항</CHAR>
+                </TEXT>
+              </P>
+            </PARALIST>
+          </DRAWTEXT>
+        </DRAWINGOBJECT>
+      </RECTANGLE>
+    </CONTAINER>
+    <HEADER ApplyPageType="Both" SeriesNum="3">
+      <PARALIST HasNumRef="false" HasTextRef="false" LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" TextHeight="4251" TextWidth="49608" VertAlign="Top">
+        <P ParaShape="19" Style="10">
+          <TEXT CharShape="8" />
+        </P>
+        <P ParaShape="24" Style="10">
+          <TEXT CharShape="13" />
+        </P>
+      </PARALIST>
+    </HEADER>
+    <FOOTER ApplyPageType="Both" SeriesNum="47">
+      <PARALIST HasNumRef="false" HasTextRef="false" LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" TextHeight="4251" TextWidth="49608" VertAlign="Bottom">
+        <P ParaShape="20" Style="10">
+          <TEXT CharShape="2">
+            <TABLE BorderFill="3" CellSpacing="0" ColCount="3" PageBreak="Cell" RepeatHeader="true" RowCount="1">
+              <SHAPEOBJECT InstId="1340715126" Lock="false" NumberingType="Table" TextWrap="TopAndBottom" ZOrder="0">
+                <SIZE Height="1182" HeightRelTo="Absolute" Protect="false" Width="53856" WidthRelTo="Absolute" />
+                <POSITION AffectLSpacing="false" AllowOverlap="false" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Center" HorzOffset="-650" HorzRelTo="Paper" TreatAsChar="false" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+                <OUTSIDEMARGIN Bottom="283" Left="283" Right="283" Top="283" />
+              </SHAPEOBJECT>
+              <INSIDEMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+              <ROW>
+                <CELL BorderFill="4" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="false" Header="false" Height="282" Protect="false" RowAddr="0" RowSpan="1" Width="24461">
+                  <CELLMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+                  <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+                    <P ParaShape="20" Style="10">
+                      <TEXT CharShape="13" />
+                    </P>
+                  </PARALIST>
+                </CELL>
+                <CELL BorderFill="4" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="false" Header="false" Height="282" Protect="false" RowAddr="0" RowSpan="1" Width="4934">
+                  <CELLMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+                  <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+                    <P ParaShape="18" Style="10">
+                      <TEXT CharShape="13">
+                        <AUTONUM Number="1" NumberType="Page">
+                          <AUTONUMFORMAT Superscript="false" Type="Digit" />
+                        </AUTONUM>
+                        <CHAR>/</CHAR>
+                      </TEXT>
+                      <TEXT CharShape="14">
+                        <AUTONUM Number="1" NumberType="TotalPage">
+                          <AUTONUMFORMAT Superscript="false" Type="Digit" />
+                        </AUTONUM>
+                        <CHAR />
+                      </TEXT>
+                    </P>
+                  </PARALIST>
+                </CELL>
+                <CELL BorderFill="4" ColAddr="2" ColSpan="1" Dirty="false" Editable="false" HasMargin="false" Header="false" Height="282" Protect="false" RowAddr="0" RowSpan="1" Width="24461">
+                  <CELLMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+                  <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+                    <P ParaShape="21" Style="10">
+                      <TEXT CharShape="13" />
+                    </P>
+                  </PARALIST>
+                </CELL>
+              </ROW>
+            </TABLE>
+            <CHAR />
+          </TEXT>
+        </P>
+      </PARALIST>
+    </FOOTER>
+    <TABLE BorderFill="7" CellSpacing="0" ColCount="5" PageBreak="Cell" RepeatHeader="true" RowCount="3">
+      <SHAPEOBJECT InstId="1341789094" Lock="false" NumberingType="Table" TextWrap="TopAndBottom" ZOrder="1">
+        <SIZE Height="9090" HeightRelTo="Absolute" Protect="false" Width="53858" WidthRelTo="Absolute" />
+        <POSITION AffectLSpacing="false" AllowOverlap="false" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="2551" HorzRelTo="Paper" TreatAsChar="false" VertAlign="Top" VertOffset="2822" VertRelTo="Paper" />
+        <OUTSIDEMARGIN Bottom="0" Left="283" Right="566" Top="566" />
+      </SHAPEOBJECT>
+      <INSIDEMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+      <ROW>
+        <CELL BorderFill="13" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="false" Header="false" Height="1848" Protect="false" RowAddr="0" RowSpan="1" Width="10594">
+          <CELLMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+          <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+            <P ParaShape="17" Style="0">
+              <TEXT CharShape="9" />
+            </P>
+          </PARALIST>
+        </CELL>
+        <CELL BorderFill="15" ColAddr="1" ColSpan="3" Dirty="false" Editable="false" HasMargin="false" Header="false" Height="1848" Protect="false" RowAddr="0" RowSpan="1" Width="32385">
+          <CELLMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+          <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+            <P ParaShape="0" Style="0">
+              <TEXT CharShape="9" />
+            </P>
+          </PARALIST>
+        </CELL>
+        <CELL BorderFill="14" ColAddr="4" ColSpan="1" Dirty="false" Editable="false" HasMargin="false" Header="false" Height="6959" Protect="false" RowAddr="0" RowSpan="2" Width="10879">
+          <CELLMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+          <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+            <P ParaShape="23" Style="0">
+              <TEXT CharShape="9" />
+            </P>
+          </PARALIST>
+        </CELL>
+      </ROW>
+      <ROW>
+        <CELL BorderFill="8" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="false" Header="false" Height="4999" Protect="false" RowAddr="1" RowSpan="1" Width="10594">
+          <CELLMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+          <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+            <P ParaShape="16" Style="0">
+              <TEXT CharShape="10" />
+            </P>
+          </PARALIST>
+        </CELL>
+        <CELL BorderFill="6" ColAddr="1" ColSpan="3" Dirty="false" Editable="false" HasMargin="false" Header="false" Height="4999" Protect="false" RowAddr="1" RowSpan="1" Width="32385">
+          <CELLMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+          <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+            <P ParaShape="22" Style="0">
+              <TEXT CharShape="10" />
+            </P>
+          </PARALIST>
+        </CELL>
+      </ROW>
+      <ROW>
+        <CELL BorderFill="9" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="false" Header="false" Height="2131" Protect="false" RowAddr="2" RowSpan="1" Width="10594">
+          <CELLMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+          <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+            <P ParaShape="26" Style="0">
+              <TEXT CharShape="11">
+                <CHAR>학급:</CHAR>
+              </TEXT>
+            </P>
+          </PARALIST>
+        </CELL>
+        <CELL BorderFill="10" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="false" Header="false" Height="2131" Protect="false" RowAddr="2" RowSpan="1" Width="16555">
+          <CELLMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+          <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+            <P ParaShape="0" Style="0">
+              <TEXT CharShape="11" />
+            </P>
+          </PARALIST>
+        </CELL>
+        <CELL BorderFill="10" ColAddr="2" ColSpan="1" Dirty="false" Editable="false" HasMargin="false" Header="false" Height="2131" Protect="false" RowAddr="2" RowSpan="1" Width="5651">
+          <CELLMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+          <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+            <P ParaShape="0" Style="0">
+              <TEXT CharShape="11">
+                <CHAR>이름:</CHAR>
+              </TEXT>
+            </P>
+          </PARALIST>
+        </CELL>
+        <CELL BorderFill="10" ColAddr="3" ColSpan="1" Dirty="false" Editable="false" HasMargin="false" Header="false" Height="2131" Protect="false" RowAddr="2" RowSpan="1" Width="10179">
+          <CELLMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+          <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+            <P ParaShape="0" Style="0">
+              <TEXT CharShape="9" />
+            </P>
+          </PARALIST>
+        </CELL>
+        <CELL BorderFill="11" ColAddr="4" ColSpan="1" Dirty="false" Editable="false" HasMargin="false" Header="false" Height="2131" Protect="false" RowAddr="2" RowSpan="1" Width="10879">
+          <CELLMARGIN Bottom="141" Left="510" Right="510" Top="141" />
+          <PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+            <P ParaShape="0" Style="0">
+              <TEXT CharShape="9">
+                <CHAR> </CHAR>
+              </TEXT>
+            </P>
+          </PARALIST>
+        </CELL>
+      </ROW>
+    </TABLE>
+  </TEXT>
+  <TEXT CharShape="12">
+    <CHAR />
+  </TEXT>
+</P>
+<P ColumnBreak="false" PageBreak="false" ParaShape="27" Style="0">
+  <TEXT CharShape="7">
+    <COLDEF Count="2" Layout="Left" SameGap="4254" SameSize="true" Type="Newspaper" />
+  </TEXT>
+  <TEXT CharShape="9">
+    <CHAR></CHAR>
+  </TEXT>
+<TEXT CharShape="17">
+    <CHAR>1.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR>  </CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>다음 식을 전개하시오. </CHAR>
+  </TEXT></P>
+<P ParaShape="16" Style="1">
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="6841" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>2x LEFT ( 2x+4y-1 RIGHT )</SCRIPT>
+</EQUATION>
+</TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>2.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR>  </CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>다음 식을 간단히 하시오.</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="16" Style="1">
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="65" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="2580" HeightRelTo="Absolute" Protect="false" Width="10580" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>(6a+2b-4ab) TIMES  LEFT ( - {b} over {2} RIGHT )</SCRIPT>
+</EQUATION>
+</TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>3.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR>  </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="65" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="2580" HeightRelTo="Absolute" Protect="false" Width="7932" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>2x left( 1 over2 x^2 -5x-3  right)</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>을 전개하시오.</CHAR>
+  </TEXT>
+</P>
+<P ColumnBreak="true" ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>4.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR>  </CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>다음 중 다항식을 바르게 전개한 것은?</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="29" Style="1">
+  <TEXT CharShape="16">
+    <TABLE BorderFill="16" CellSpacing="0" ColCount="2" PageBreak="Cell" RepeatHeader="true" RowCount="5">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Table" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="6405" HeightRelTo="Absolute" Protect="false" Width="22350" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Center" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="150" Left="150" Right="150" Top="150" />
+</SHAPEOBJECT>
+<INSIDEMARGIN Bottom="141" Left="141" Right="141" Top="141" />
+<ROW><CELL BorderFill="1" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="0" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="30" Style="1"><TEXT CharShape="16"><CHAR>①</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="0" RowSpan="1" Width="21030">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="31" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="7457" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>2(a+b)=2a+b</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL></ROW><ROW><CELL BorderFill="1" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="30" Style="1"><TEXT CharShape="16"><CHAR>②</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="21030">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="31" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="9709" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>-3(a-b)=-3a-3b</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL></ROW><ROW><CELL BorderFill="1" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="2" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="30" Style="1"><TEXT CharShape="16"><CHAR>③</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="2" RowSpan="1" Width="21030">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="31" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="87" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1313" HeightRelTo="Absolute" Protect="false" Width="9098" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>2a(4a-3)=8a  ^{2}-3</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL></ROW><ROW><CELL BorderFill="1" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="3" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="30" Style="1"><TEXT CharShape="16"><CHAR>④</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="3" RowSpan="1" Width="21030">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="31" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="8659" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>-(2x-y)=2x+y</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL></ROW><ROW><CELL BorderFill="1" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="4" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="30" Style="1"><TEXT CharShape="16"><CHAR>⑤</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="4" RowSpan="1" Width="21030">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="31" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="8282" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>2(3x+1)=6x+2</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL></ROW></TABLE>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="32" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>5.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR>  </CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>다항식 </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="87" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1313" HeightRelTo="Absolute" Protect="false" Width="7811" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>-3x LEFT ( x ^{2} -3x+2 RIGHT )</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>를 전개한 것은?</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="33" Style="1">
+  <TEXT CharShape="16">
+    <TABLE BorderFill="16" CellSpacing="0" ColCount="4" PageBreak="Cell" RepeatHeader="true" RowCount="3">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Table" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="3843" HeightRelTo="Absolute" Protect="false" Width="22350" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Center" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="150" Left="150" Right="150" Top="150" />
+</SHAPEOBJECT>
+<INSIDEMARGIN Bottom="141" Left="141" Right="141" Top="141" />
+<ROW><CELL BorderFill="1" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="0" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="30" Style="1"><TEXT CharShape="16"><CHAR>①</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="0" RowSpan="1" Width="9836">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="87" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1313" HeightRelTo="Absolute" Protect="false" Width="4957" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>x^2 -6x+2</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="2" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="0" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="30" Style="1"><TEXT CharShape="16"><CHAR>②</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="3" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="0" RowSpan="1" Width="9836">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="87" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1313" HeightRelTo="Absolute" Protect="false" Width="5482" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>3x^2 -9x+6</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL></ROW><ROW><CELL BorderFill="1" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="30" Style="1"><TEXT CharShape="16"><CHAR>③</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="9836">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="87" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1313" HeightRelTo="Absolute" Protect="false" Width="6523" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>3x^3 -9x^2 +6x</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="2" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="30" Style="1"><TEXT CharShape="16"><CHAR>④</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="3" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="9836">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="87" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1313" HeightRelTo="Absolute" Protect="false" Width="7502" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>-3x^3 +9x^2 -6x</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL></ROW><ROW><CELL BorderFill="1" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="2" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="30" Style="1"><TEXT CharShape="16"><CHAR>⑤</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="2" RowSpan="1" Width="9836">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="87" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1313" HeightRelTo="Absolute" Protect="false" Width="6461" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>-3x^3 -3x+2</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="2" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="2" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="30" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="3" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="2" RowSpan="1" Width="9836">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="30" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT></P></PARALIST></CELL></ROW></TABLE>
+  </TEXT>
+</P>
+<P ColumnBreak="true" ParaShape="32" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>6.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR>  </CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>다항식 </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="87" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1313" HeightRelTo="Absolute" Protect="false" Width="13443" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>3LEFT ( x^2 -5x+10 RIGHT )- LEFT ( 4x^2 +x-6 RIGHT )</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>을 간단히 할 때, </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="87" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1313" HeightRelTo="Absolute" Protect="false" Width="975" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>x^2</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>의 계수와 상수항의 합은?</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="29" Style="1">
+  <TEXT CharShape="16">
+    <TABLE BorderFill="16" CellSpacing="0" ColCount="6" PageBreak="Cell" RepeatHeader="true" RowCount="2">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Table" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="2563" HeightRelTo="Absolute" Protect="false" Width="22250" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Center" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="150" Left="150" Right="150" Top="150" />
+</SHAPEOBJECT>
+<INSIDEMARGIN Bottom="141" Left="141" Right="141" Top="141" />
+<ROW><CELL BorderFill="1" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1282" Protect="false" RowAddr="0" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR>①</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="0" RowSpan="1" Width="6103">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="1050" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>31</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="2" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1282" Protect="false" RowAddr="0" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR>②</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="3" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="0" RowSpan="1" Width="6103">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="1050" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>32</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="4" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1282" Protect="false" RowAddr="0" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR>③</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="5" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="0" RowSpan="1" Width="6103">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="1050" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>33</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL></ROW><ROW><CELL BorderFill="1" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR>④</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="6103">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="1050" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>34</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="2" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR>⑤</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="3" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="6103">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="1050" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>35</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="4" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="5" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="6103">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT></P></PARALIST></CELL></ROW></TABLE>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="32" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>7.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR>  </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="87" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1313" HeightRelTo="Absolute" Protect="false" Width="18873" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>3x(5x-2)-(2x  ^{2} +5x-4)=ax  ^{2} +bx+c</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>일 때, 세 상수 </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="525" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>a</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>, </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="450" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>b</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>, </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="450" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>c</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>에 대하여 </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="3691" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>a+b+c</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>의 값은?</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="29" Style="1">
+  <TEXT CharShape="16">
+    <TABLE BorderFill="16" CellSpacing="0" ColCount="6" PageBreak="Cell" RepeatHeader="true" RowCount="2">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Table" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="2563" HeightRelTo="Absolute" Protect="false" Width="22250" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Center" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="150" Left="150" Right="150" Top="150" />
+</SHAPEOBJECT>
+<INSIDEMARGIN Bottom="141" Left="141" Right="141" Top="141" />
+<ROW><CELL BorderFill="1" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1282" Protect="false" RowAddr="0" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR>①</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="0" RowSpan="1" Width="6103">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="1504" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>-4</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="2" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1282" Protect="false" RowAddr="0" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR>②</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="3" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="0" RowSpan="1" Width="6103">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="1504" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>-2</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="4" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1282" Protect="false" RowAddr="0" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR>③</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="5" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="0" RowSpan="1" Width="6103">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="525" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>0</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL></ROW><ROW><CELL BorderFill="1" ColAddr="0" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR>④</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="1" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="6103">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="525" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>3</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="2" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR>⑤</CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="3" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="6103">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="34" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT><TEXT CharShape="19"><EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="525" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>6</SCRIPT>
+</EQUATION>
+</TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="4" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="1360">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT></P></PARALIST></CELL><CELL BorderFill="1" ColAddr="5" ColSpan="1" Dirty="false" Editable="false" HasMargin="true" Header="false" Height="1281" Protect="false" RowAddr="1" RowSpan="1" Width="6103">
+<CELLMARGIN Bottom="300" Left="0" Right="0" Top="300" />
+<PARALIST LineWrap="Break" LinkListID="0" LinkListIDNext="0" TextDirection="0" VertAlign="Center">
+<P ParaShape="28" Style="1"><TEXT CharShape="16"><CHAR></CHAR></TEXT></P></PARALIST></CELL></ROW></TABLE>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="32" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>8.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR>  </CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>다항식</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="0" Style="1">
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="11736" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>2a(3a-4b)- 3b(-a-3b)</SCRIPT>
+</EQUATION>
+</TEXT>
+</P>
+<P ParaShape="0" Style="1">
+  <TEXT CharShape="16">
+    <CHAR>를 전개하여 간단히 하시오.</CHAR>
+  </TEXT>
+</P>
+<P ColumnBreak="true" ParaShape="32" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>9.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR>  </CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>다음 식을 전개하시오.</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="0" Style="1">
+  <TEXT CharShape="16">
+    <CHAR>(1) </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="6245" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>2a(3a-b+3)</SCRIPT>
+</EQUATION>
+</TEXT>
+</P>
+<P ParaShape="0" Style="1">
+  <TEXT CharShape="16">
+    <CHAR>(2) </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="7220" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>2ab(3a-5b+1)</SCRIPT>
+</EQUATION>
+</TEXT>
+</P>
+<P ParaShape="0" Style="1">
+  <TEXT CharShape="16">
+    <CHAR>(3) </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="85" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1125" HeightRelTo="Absolute" Protect="false" Width="5945" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>6x(x-y+3)</SCRIPT>
+</EQUATION>
+</TEXT>
+</P>
+<P ParaShape="0" Style="1">
+  <TEXT CharShape="16">
+    <CHAR>(4) </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="87" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1313" HeightRelTo="Absolute" Protect="false" Width="7824" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>x ^{2} y(-2x+y+3)</SCRIPT>
+</EQUATION>
+</TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>10.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR> </CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>다음 식을 전개하시오.</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="16" Style="1">
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="65" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="2580" HeightRelTo="Absolute" Protect="false" Width="8695" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>- {1} over {2} a LEFT ( 4a+8b-10 RIGHT )</SCRIPT>
+</EQUATION>
+</TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>11.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR> </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="88" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1323" HeightRelTo="Absolute" Protect="false" Width="10631" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>3x^2  (2x-5)   = ax^3    -bx^2</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>일 때, 상수 </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="86" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1114" HeightRelTo="Absolute" Protect="false" Width="1629" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>a,``b</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>에 대하여 </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="86" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1114" HeightRelTo="Absolute" Protect="false" Width="2126" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>a-b</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>의 값을 구하시오.</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="17" Style="1">
+  <TEXT CharShape="16">
+    <CHAR>(</CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <POLYGON>
+<SHAPEOBJECT InstId="1219012573" Lock="false" NumberingType="None" ZOrder="1">
+<SIZE Height="1615" HeightRelTo="Absolute" Protect="false" Width="6349" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="0" Left="0" Right="0" Top="0" />
+</SHAPEOBJECT>
+<DRAWINGOBJECT>
+<SHAPECOMPONENT CurHeight="1615" CurWidth="6349" GroupLevel="0" HorzFlip="false" InstID="145270750" OriHeight="1615" OriWidth="6349" VertFlip="false" XPos="0" YPos="0">
+<ROTATIONINFO CenterY="807" CenterX="3174" Angle="0" />
+<RENDERINGINFO>
+<TRANSMATRIX E1="1.00000" E2="0.00000" E3="0.0000" E4="0.00000" E5="1.00000" E6="0.0000" />
+<SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+<ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+<SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+<ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+</RENDERINGINFO>
+</SHAPECOMPONENT>
+<LINESHAPE Alpha="0" EndCap="Round" Style="None" />
+<SHADOW Alpha="0" Color="11711154" OffsetX="0" OffsetY="0" Type="0" />
+<DRAWTEXT LastWidth="6349" Editable="false">
+<TEXTMARGIN Right="0" Left="0" Top="0" Bottom="0" />
+<PARALIST LineWrap="Break" TextDirection="0" VertAlign="Center" LinkListIDNext="0" LinkListID="0">
+<P ParaShape="35" Style="1"><TEXT CharShape="16"><CHAR> </CHAR></TEXT></P></PARALIST></DRAWTEXT></DRAWINGOBJECT>
+<POINT X="0" Y="0" />
+<POINT X="0" Y="1615" />
+<POINT X="5079" Y="1615" />
+<POINT X="6349" Y="1292" />
+<POINT X="6349" Y="0" />
+<POINT X="0" Y="0" />
+</POLYGON>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>)</CHAR>
+  </TEXT>
+</P>
+<P ColumnBreak="true" ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>12.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR> </CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>다음 식을 간단히 하시오.</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="16" Style="1">
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="87" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1313" HeightRelTo="Absolute" Protect="false" Width="8848" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>(3y^2 -2x^2 )(-6xy^2 )</SCRIPT>
+</EQUATION>
+</TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>13.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR> </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="86" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1114" HeightRelTo="Absolute" Protect="false" Width="12406" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>-3x(x-2)-2(2x-1)+5</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>를 간단히 한 식에서 </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="88" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1323" HeightRelTo="Absolute" Protect="false" Width="945" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>x  ^{2}</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>의 계수를 </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="86" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1114" HeightRelTo="Absolute" Protect="false" Width="1629" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>a,`x</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>의 계수를 </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="86" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1114" HeightRelTo="Absolute" Protect="false" Width="743" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>b,</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR> 상수항을 </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="86" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1114" HeightRelTo="Absolute" Protect="false" Width="472" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>c</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>라 할 때, </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="86" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1114" HeightRelTo="Absolute" Protect="false" Width="3713" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>a-b+c</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>의 값을 구하시오.</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="17" Style="1">
+  <TEXT CharShape="16">
+    <CHAR>(</CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <POLYGON>
+<SHAPEOBJECT InstId="1219012573" Lock="false" NumberingType="None" ZOrder="1">
+<SIZE Height="1615" HeightRelTo="Absolute" Protect="false" Width="6349" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="0" Left="0" Right="0" Top="0" />
+</SHAPEOBJECT>
+<DRAWINGOBJECT>
+<SHAPECOMPONENT CurHeight="1615" CurWidth="6349" GroupLevel="0" HorzFlip="false" InstID="145270750" OriHeight="1615" OriWidth="6349" VertFlip="false" XPos="0" YPos="0">
+<ROTATIONINFO CenterY="807" CenterX="3174" Angle="0" />
+<RENDERINGINFO>
+<TRANSMATRIX E1="1.00000" E2="0.00000" E3="0.0000" E4="0.00000" E5="1.00000" E6="0.0000" />
+<SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+<ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+<SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+<ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+</RENDERINGINFO>
+</SHAPECOMPONENT>
+<LINESHAPE Alpha="0" EndCap="Round" Style="None" />
+<SHADOW Alpha="0" Color="11711154" OffsetX="0" OffsetY="0" Type="0" />
+<DRAWTEXT LastWidth="6349" Editable="false">
+<TEXTMARGIN Right="0" Left="0" Top="0" Bottom="0" />
+<PARALIST LineWrap="Break" TextDirection="0" VertAlign="Center" LinkListIDNext="0" LinkListID="0">
+<P ParaShape="35" Style="1"><TEXT CharShape="16"><CHAR> </CHAR></TEXT></P></PARALIST></DRAWTEXT></DRAWINGOBJECT>
+<POINT X="0" Y="0" />
+<POINT X="0" Y="1615" />
+<POINT X="5079" Y="1615" />
+<POINT X="6349" Y="1292" />
+<POINT X="6349" Y="0" />
+<POINT X="0" Y="0" />
+</POLYGON>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>)</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>14.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR> </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="66" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="2562" HeightRelTo="Absolute" Protect="false" Width="19368" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>{1} over {2} x(x+1)- {2} over {3} x(6x-9)-(-7x  ^{2} +x-1)</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR> </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="88" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1323" HeightRelTo="Absolute" Protect="false" Width="7247" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>=Ax  ^{2} +Bx+C</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>일 때, </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="86" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1114" HeightRelTo="Absolute" Protect="false" Width="4591" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>A+B-C</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>의 값을 구하시오.</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="17" Style="1">
+  <TEXT CharShape="16">
+    <CHAR>(</CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <POLYGON>
+<SHAPEOBJECT InstId="1219012573" Lock="false" NumberingType="None" ZOrder="1">
+<SIZE Height="1615" HeightRelTo="Absolute" Protect="false" Width="6349" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="0" Left="0" Right="0" Top="0" />
+</SHAPEOBJECT>
+<DRAWINGOBJECT>
+<SHAPECOMPONENT CurHeight="1615" CurWidth="6349" GroupLevel="0" HorzFlip="false" InstID="145270750" OriHeight="1615" OriWidth="6349" VertFlip="false" XPos="0" YPos="0">
+<ROTATIONINFO CenterY="807" CenterX="3174" Angle="0" />
+<RENDERINGINFO>
+<TRANSMATRIX E1="1.00000" E2="0.00000" E3="0.0000" E4="0.00000" E5="1.00000" E6="0.0000" />
+<SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+<ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+<SCAMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+<ROTMATRIX E1="1.00000" E2="0.00000" E3="0.00000" E4="0.00000" E5="1.00000" E6="0.00000" />
+</RENDERINGINFO>
+</SHAPECOMPONENT>
+<LINESHAPE Alpha="0" EndCap="Round" Style="None" />
+<SHADOW Alpha="0" Color="11711154" OffsetX="0" OffsetY="0" Type="0" />
+<DRAWTEXT LastWidth="6349" Editable="false">
+<TEXTMARGIN Right="0" Left="0" Top="0" Bottom="0" />
+<PARALIST LineWrap="Break" TextDirection="0" VertAlign="Center" LinkListIDNext="0" LinkListID="0">
+<P ParaShape="35" Style="1"><TEXT CharShape="16"><CHAR> </CHAR></TEXT></P></PARALIST></DRAWTEXT></DRAWINGOBJECT>
+<POINT X="0" Y="0" />
+<POINT X="0" Y="1615" />
+<POINT X="5079" Y="1615" />
+<POINT X="6349" Y="1292" />
+<POINT X="6349" Y="0" />
+<POINT X="0" Y="0" />
+</POLYGON>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>)</CHAR>
+  </TEXT>
+</P>
+<P ColumnBreak="true" ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>15.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR> </CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>다음 식을 간단히 하시오. </CHAR>
+  </TEXT>
+</P>
+<P ParaShape="16" Style="1">
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="87" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1313" HeightRelTo="Absolute" Protect="false" Width="9391" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>LEFT ( 6x  ^{2} y-10x RIGHT ) ÷ LEFT ( -2x RIGHT )</SCRIPT>
+</EQUATION>
+</TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>16.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR> </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="88" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1323" HeightRelTo="Absolute" Protect="false" Width="16085" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>(8a  ^{2} +6ab)÷2a-(9ab+15b  ^{2} )÷3b</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR> 를 간단히 하시오.</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>17.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR> </CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>어떤 다항식에 </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="86" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1114" HeightRelTo="Absolute" Protect="false" Width="1080" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>2a</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>를 곱해야 할 것을 잘못하여 나누었더니 </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="86" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1114" HeightRelTo="Absolute" Protect="false" Width="3207" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>3a-4b</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR>가 되었다. 바르게 계산한 식을 구하시오.</CHAR>
+  </TEXT>
+</P>
+<P ColumnBreak="true" ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>[18-19] </CHAR>
+  </TEXT>
+  <TEXT CharShape="16">
+    <CHAR>다음 </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="86" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1114" HeightRelTo="Absolute" Protect="false" Width="1080" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>□</SCRIPT>
+</EQUATION>
+</TEXT>
+  <TEXT CharShape="16">
+    <CHAR> 안에 알맞은 식을 써넣으시오.</CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>18.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR> </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="79" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1446" HeightRelTo="Absolute" Protect="false" Width="16769" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>2xy LEFT ( x+` BOX{~~``} ``+2 RIGHT ) =2x  ^{2} y+6xy  ^{2} +4xy</SCRIPT>
+</EQUATION>
+</TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="28" Style="1">
+  <TEXT CharShape="16">
+    <CHAR></CHAR>
+  </TEXT>
+</P>
+<P ParaShape="27" Style="1">
+  <TEXT CharShape="17">
+    <CHAR>19.</CHAR>
+  </TEXT>
+  <TEXT CharShape="18">
+    <CHAR> </CHAR>
+  </TEXT>
+  <TEXT CharShape="19">
+    <EQUATION BaseLine="80" BaseUnit="1100" LineMode="false" TextColor="0" Version="Equation Version 60">
+<SHAPEOBJECT InstId="1621055629" Lock="false" NumberingType="Equation" TextFlow="BothSides" TextWrap="Square" ZOrder="1">
+<SIZE Height="1462" HeightRelTo="Absolute" Protect="false" Width="16044" WidthRelTo="Absolute" />
+<POSITION AffectLSpacing="false" AllowOverlap="true" FlowWithText="true" HoldAnchorAndSO="false" HorzAlign="Left" HorzOffset="0" HorzRelTo="Para" TreatAsChar="true" VertAlign="Top" VertOffset="0" VertRelTo="Para" />
+<OUTSIDEMARGIN Bottom="5" Left="5" Right="5" Top="5" />
+</SHAPEOBJECT>
+<SCRIPT>LEFT ( 15a  ^{2} - BOX{~~~~~} ` RIGHT ) `÷ LEFT ( -5a RIGHT ) =-3a+4b</SCRIPT>
+</EQUATION>
+</TEXT>
+</P>
+</SECTION>
+</BODY>
+<TAIL>
+<SCRIPTCODE Type="JScript" Version="1.0">
+<SCRIPTHEADER>var Documents = XHwpDocuments;
+var Document = Documents.Active_XHwpDocument;
+</SCRIPTHEADER>
+<SCRIPTSOURCE>function OnDocument_New()
+{
+	//todo : 
+}
+</SCRIPTSOURCE>
+</SCRIPTCODE>
+</TAIL>
+</HWPML>

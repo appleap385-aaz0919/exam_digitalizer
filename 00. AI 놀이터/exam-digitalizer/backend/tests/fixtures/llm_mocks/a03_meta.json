@@ -1,0 +1,16 @@
+{
+  "agent": "a03_meta",
+  "description": "메타팀 mock 응답 — 학습맵 매칭 가능한 현실적 데이터",
+  "response": {
+    "subject": "수학",
+    "grade": 3,
+    "semester": 1,
+    "unit": "덧셈과 뺄셈",
+    "topic_hint": "받아올림",
+    "difficulty": "중",
+    "bloom_level": "적용",
+    "question_type": "객관식",
+    "tags": ["덧셈", "받아올림", "세 자리 수"],
+    "reasoning": "3학년 1학기 덧셈과 뺄셈 단원의 받아올림 문제"
+  }
+}

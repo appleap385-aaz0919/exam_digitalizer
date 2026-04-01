@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase 0 작업 지시서 — 시험 문항 디지털라이징 시스템</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1f;--ink-light:#4a4a55;--ink-muted:#8a8a95;--surface:#fafaf8;--card:#fff;--border:#e8e8e4;--border-light:#f0f0ec;--accent:#2d5be3;--accent-light:#eef2fd;--accent-dark:#1a3a9e;--pass:#0d8a5e;--pass-bg:#e8f8f0;--fail:#d43b3b;--fail-bg:#fdeaea;--warn:#c27a1a;--warn-bg:#fef6e8;--purple:#6c5ce7;--purple-bg:#f0eeff;--teal:#0d9488;--teal-bg:#e8f7f6}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Noto Sans KR',sans-serif;background:var(--surface);color:var(--ink);line-height:1.75;font-size:14px;-webkit-font-smoothing:antialiased}.pw{max-width:1100px;margin:0 auto;padding:50px 40px 100px}
+.cover{text-align:center;padding:50px 0 30px;border-bottom:1px solid var(--border);margin-bottom:30px}.cover-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);background:var(--accent-light);padding:5px 14px;border-radius:20px;margin-bottom:14px}.cover h1{font-size:28px;font-weight:900;line-height:1.3;margin-bottom:8px}.cover h1 em{font-style:normal;color:var(--accent)}.cover-meta{font-size:12px;color:var(--ink-muted)}.cover-meta span+span::before{content:'·';margin:0 7px}
+.sec{margin-bottom:36px}.sn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1px;margin-bottom:3px}.sec h2{font-size:20px;font-weight:900;margin-bottom:5px}.sd{font-size:12.5px;color:var(--ink-light);margin-bottom:16px;max-width:720px}.sec h3{font-size:14.5px;font-weight:700;margin:22px 0 8px;padding-bottom:4px;border-bottom:2px solid var(--border)}.sec h4{font-size:13px;font-weight:700;margin:14px 0 6px}
+.ac{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:18px;overflow:hidden}.ah{padding:11px 18px;border-bottom:1px solid var(--border);font-size:15px;font-weight:800}.ab{padding:15px 18px}
+.code{background:#1a1a2e;color:#e0e0e8;border-radius:8px;padding:14px 16px;margin:8px 0;font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.65;overflow-x:auto;white-space:pre;tab-size:2}.code .k{color:#74b9ff}.code .s{color:#55efc4}.code .n{color:#ffeaa7}.code .b{color:#fd79a8}.code .c{color:#636e72;font-style:italic}.code .f{color:#a29bfe}.code .t{color:#fab1a0}
+table{width:100%;border-collapse:separate;border-spacing:0;margin:8px 0;font-size:12px;border:1px solid var(--border);border-radius:8px;overflow:hidden}thead{background:#f5f5f2}th{text-align:left;padding:7px 10px;font-weight:700;font-size:10.5px;color:var(--ink-light);border-bottom:2px solid var(--border);white-space:nowrap}td{padding:7px 10px;border-bottom:1px solid var(--border-light);vertical-align:top}tbody tr:last-child td{border-bottom:none}
+.info{padding:10px 14px;border-radius:7px;margin:8px 0;font-size:12.5px}.info.rule{background:var(--accent-light);border:1px solid rgba(45,91,227,.15);color:var(--accent-dark)}.info.warn{background:var(--warn-bg);border:1px solid rgba(194,122,26,.15);color:#8a5a10}.info.success{background:var(--pass-bg);border:1px solid rgba(13,138,94,.15);color:#076840}.info.critical{background:var(--fail-bg);border:1px solid rgba(212,59,59,.15);color:var(--fail)}
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:12px 0}.si{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 16px}.si .sl{font-size:9px;color:var(--ink-muted);font-weight:500;margin-bottom:2px}.si .sv{font-size:14px;font-weight:700}.si .sv.mono{font-family:'JetBrains Mono',monospace;font-size:11.5px}
+.check{list-style:none;margin:8px 0;font-size:12.5px}.check li{padding:5px 0;border-bottom:1px solid var(--border-light)}.check li::before{content:'☐';margin-right:8px;font-size:14px}
+.doc-footer{margin-top:50px;padding-top:14px;border-top:1px solid var(--border);text-align:center;font-size:10.5px;color:var(--ink-muted)}
+@media print{body{font-size:11px}.pw{padding:16px}}
+</style>
+</head>
+<body>
+<div class="pw">
+
+<header class="cover">
+<div class="cover-badge">Phase 0 Work Instruction</div>
+<h1>Phase 0 작업 지시서<br><em>시험 문항 디지털라이징 시스템</em></h1>
+<div class="cover-meta"><span>인프라 구축 (2주)</span><span>Python FastAPI + Next.js + PostgreSQL</span><span>Docker Compose</span><span>2025.04</span></div>
+</header>
+
+<!-- ═══ 프로젝트 컨텍스트 ═══ -->
+<div class="sec"><div class="sn">CONTEXT</div>
+<h2>프로젝트 전체 컨텍스트</h2>
+<p class="sd">이 섹션은 설계 과정에서 내려진 모든 결정사항을 요약합니다. 4개 설계 문서와 함께 이 지시서를 참조하면 전체 맥락을 파악할 수 있습니다.</p>
+
+<h3>프로젝트 개요</h3>
+<p>한글(HWP/HWPX) 파일로 제작된 시험지를 AI 에이전트 파이프라인으로 디지털라이징하여, 교사가 메타정보 기반으로 시험지를 구성하고, 학생에게 온라인 CBT로 배포하며, 자동채점 후 유사문항을 추천하는 End-to-End 교육 평가 시스템입니다.</p>
+
+<h3>MVP 스코프 (확정)</h3>
+<div class="sg">
+<div class="si"><div class="sl">대상 과목</div><div class="sv">수학 1과목</div></div>
+<div class="si"><div class="sl">문항 유형</div><div class="sv">객관식+단답형+서술형</div></div>
+<div class="si"><div class="sl">배포 형태</div><div class="sv mono">CBT + HWP 다운로드</div></div>
+<div class="si"><div class="sl">채점 범위</div><div class="sv mono">온라인 CBT만</div></div>
+<div class="si"><div class="sl">사용자 규모</div><div class="sv">교사10 학생300</div></div>
+<div class="si"><div class="sl">HWP 생성</div><div class="sv mono">HWPML 템플릿 방식</div></div>
+</div>
+
+<h3>핵심 비즈니스 결정사항</h3>
+<table><thead><tr><th>결정</th><th>내용</th><th>이유</th></tr></thead><tbody>
+<tr><td><strong>학생 인증</strong></td><td>계정 없음. 학급 QR/초대코드로 접속 → 이름 선택/입력</td><td>초등~중등 학생에게 계정 관리는 비현실적. 교실 감독 전제</td></tr>
+<tr><td><strong>교사 인증</strong></td><td>email + password → JWT 로그인</td><td>시험지 관리, 성적 조회 등 권한 필요</td></tr>
+<tr><td><strong>채점</strong></td><td>온라인 CBT 응시 건만 채점. HWP 다운로드는 인쇄 참고용</td><td>종이 시험 답안 입력 경로는 MVP에서 제외</td></tr>
+<tr><td><strong>배점</strong></td><td>유형별 자동 배정(points_per_type) + 교사가 개별 수정 가능</td><td>자동화 + 교사 재량권 동시 보장</td></tr>
+<tr><td><strong>복수정답</strong></td><td>지원. is_multiple_answer 메타 플래그로 교사에게 표시</td><td>실제 시험에서 복수정답·전원정답 빈번</td></tr>
+<tr><td><strong>학급 배포</strong></td><td>같은 시험지를 여러 학급에 시간차 배포 가능 (classroom_exams)</td><td>교사 1명이 3~4개 반을 가르치는 현실</td></tr>
+<tr><td><strong>HWP 생성</strong></td><td>학급별 별도 HWP 생성 (각 학급 전용 QR 삽입)</td><td>학급별 QR로 해당 학급+시험에 바로 접속</td></tr>
+<tr><td><strong>정답 확보</strong></td><td>3경로: 정답지 업로드(A) / AI 도출+관리자 확인(B) / 교사 직접 입력(C)</td><td>정답지 없는 경우 AI만으로는 위험, 관리자 게이트 필수</td></tr>
+<tr><td><strong>xAPI</strong></td><td>가이드 별도 제공 예정. MVP에서는 데이터팀/검수팀 스킵</td><td>가이드 수령 후 활성화</td></tr>
+</tbody></table>
+
+<h3>파이프라인 구조 (확정)</h3>
+<table><thead><tr><th>계층</th><th>단위</th><th>스테이지</th></tr></thead><tbody>
+<tr><td><strong>L1 (문항)</strong></td><td>pkey</td><td>PARSING → PARSE_REVIEW → META → META_REVIEW → PRODUCTION → PROD_REVIEW → [HUMAN_CONFIRM] → DATA → DATA_REVIEW → EMBEDDING → L1_COMPLETED</td></tr>
+<tr><td><strong>L2-A (시험지 콘텐츠)</strong></td><td>exam_id</td><td>EXAM_COMPOSE → EXAM_REVIEW → EXAM_CONFIRMED</td></tr>
+<tr><td><strong>L2-B (학급 배포)</strong></td><td>classroom_exam_id</td><td>DEPLOY_REQUESTED → HWP_GENERATING → HWP_REVIEW → DEPLOY_READY → SCHEDULED → ACTIVE → CLOSED</td></tr>
+</tbody></table>
+
+<h3>14개 에이전트 팀</h3>
+<table><thead><tr><th>#</th><th>팀</th><th>유형</th><th>파이프라인</th></tr></thead><tbody>
+<tr><td>1</td><td>파싱팀</td><td>작업</td><td>L1</td></tr>
+<tr><td>2</td><td>파싱검수팀</td><td>검수</td><td>L1</td></tr>
+<tr><td>3</td><td>메타팀</td><td>작업</td><td>L1</td></tr>
+<tr><td>4</td><td>메타검수팀</td><td>검수</td><td>L1</td></tr>
+<tr><td>5</td><td>제작팀</td><td>작업</td><td>L1</td></tr>
+<tr><td>6</td><td>제작검수팀</td><td>검수</td><td>L1</td></tr>
+<tr><td>7</td><td>데이터팀</td><td>작업</td><td>L1 (MVP 스킵)</td></tr>
+<tr><td>8</td><td>데이터검수팀</td><td>검수</td><td>L1 (MVP 스킵)</td></tr>
+<tr><td>9</td><td>시험지 구성팀</td><td>작업</td><td>L2-A</td></tr>
+<tr><td>10</td><td>시험지 검수팀</td><td>검수</td><td>L2-A</td></tr>
+<tr><td>11</td><td>서비스팀</td><td>작업</td><td>L2-B</td></tr>
+<tr><td>12</td><td>서비스검수팀</td><td>검수</td><td>L2-B</td></tr>
+<tr><td>13</td><td>채점팀</td><td>작업</td><td>L2-B(채점)</td></tr>
+<tr><td>14</td><td>채점검수팀</td><td>검수</td><td>L2-B(채점)</td></tr>
+</tbody></table>
+
+<h3>검수 기준</h3>
+<div class="info rule"><strong>100점 만점, 85점 이상 합격.</strong> 단일 항목 배점의 50% 미만이면 총점 무관 자동 반려. 반려 시 해당 작업팀으로 되돌아가고, 문항 version +1. 3회 연속 반려 시 HUMAN_REVIEW.</div>
+
+<h3>참조 설계 문서 (4개)</h3>
+<table><thead><tr><th>문서</th><th>버전</th><th>내용</th></tr></thead><tbody>
+<tr><td>시스템 설계 초안</td><td>v1.0</td><td>14개 팀, PKey(QI-{배치}-{순번}-{버전}), 검수 기준, 파이프라인 구조</td></tr>
+<tr><td>에이전트 스펙</td><td>v2.1 Final</td><td>14개 에이전트 동작 로직, 입출력 스키마, 정답 3경로, 세트 문항 그룹, 보안/복구/모니터링, 수식 매핑 테이블</td></tr>
+<tr><td>기술 아키텍처</td><td>v1.3</td><td>DB 25테이블, API 50개, Redis 키 설계, Docker 7서비스, L1+L2-A+L2-B 3계층, 학급 모델, 프론트 전략</td></tr>
+<tr><td>기술 아키텍처 패치</td><td>v1.4</td><td>confirmed_by/at 컬럼, xAPI 임시 전략, is_multiple_answer, 상태 동기화 매핑, sessions/start 스키마, 오케스트레이터 데이터 조립, 롤백 규칙, 시간 연장 규칙</td></tr>
+</tbody></table>
+</div>
+
+<!-- ═══ 기술 스택 ═══ -->
+<div class="sec"><div class="sn">TECH STACK</div>
+<h2>확정 기술 스택</h2>
+<div class="sg">
+<div class="si"><div class="sl">백엔드</div><div class="sv mono">Python 3.12 + FastAPI</div></div>
+<div class="si"><div class="sl">프론트엔드</div><div class="sv mono">Next.js 14 (React 18)</div></div>
+<div class="si"><div class="sl">상태 관리</div><div class="sv mono">TanStack Query v5</div></div>
+<div class="si"><div class="sl">DB</div><div class="sv mono">PostgreSQL 16 + pgvector</div></div>
+<div class="si"><div class="sl">캐시/브로커</div><div class="sv mono">Redis 7 (Streams)</div></div>
+<div class="si"><div class="sl">파일 저장</div><div class="sv mono">MinIO (dev) / S3 (prod)</div></div>
+<div class="si"><div class="sl">수식 렌더링</div><div class="sv mono">KaTeX + matplotlib</div></div>
+<div class="si"><div class="sl">LLM</div><div class="sv mono">Claude Sonnet / Haiku</div></div>
+<div class="si"><div class="sl">임베딩</div><div class="sv mono">text-embedding-3-small</div></div>
+<div class="si"><div class="sl">실시간</div><div class="sv mono">Socket.io</div></div>
+<div class="si"><div class="sl">배포</div><div class="sv mono">Docker Compose (단일 서버)</div></div>
+<div class="si"><div class="sl">CI/CD</div><div class="sv mono">GitHub Actions</div></div>
+</div>
+<h4>기술 선택 이유 (컨텍스트)</h4>
+<table><thead><tr><th>선택</th><th>이유</th></tr></thead><tbody>
+<tr><td>Python FastAPI</td><td>LLM API(Anthropic SDK), XML 파싱(lxml), 수식 변환, 이미지 처리(Pillow), 임베딩이 전부 Python 생태계. async로 LLM 대기 시간에 다른 요청 처리 가능</td></tr>
+<tr><td>Next.js</td><td>KaTeX 수식 렌더링이 React 컴포넌트로 최적 지원. SSR로 CBT 초기 로딩 빠름</td></tr>
+<tr><td>PostgreSQL + pgvector</td><td>파일럿 규모에서 벡터 DB 별도 운영은 과잉. pgvector로 RDB + 벡터 검색 올인원</td></tr>
+<tr><td>Redis Streams</td><td>메시지 큐와 세션 캐시를 Redis 하나로 해결. Consumer Group으로 워커 병렬 처리</td></tr>
+<tr><td>Docker Compose</td><td>교사 10명, 학생 300명이면 단일 서버(4코어 16GB)로 충분. K8s는 과잉</td></tr>
+</tbody></table>
+</div>
+
+<!-- ═══ HWP 파싱 분석 결과 ═══ -->
+<div class="sec"><div class="sn">HWP ANALYSIS</div>
+<h2>HWP 파싱 분석 결과 (사전 검증 완료)</h2>
+<p class="sd">샘플 5개 HWP 파일을 분석한 결과입니다. 모두 HWPML(XML) 포맷으로 확인되었습니다.</p>
+
+<table><thead><tr><th>파일</th><th>문항</th><th>수식</th><th>이미지</th><th>유형</th></tr></thead><tbody>
+<tr><td>단항식과 다항식 곱셈나눗셈</td><td>19</td><td>57</td><td>0</td><td>서술형+객관식</td></tr>
+<tr><td>각의 이등분선 성질</td><td>19</td><td>113</td><td>18</td><td>서술형+객관식, 이미지 다수</td></tr>
+<tr><td>대단원평가 2회</td><td>25</td><td>175</td><td>11</td><td>객관식 위주+서술형</td></tr>
+<tr><td>중단원평가 (순열조합)</td><td>25</td><td>147</td><td>3</td><td>객관식 위주</td></tr>
+<tr><td>중단원평가 (소수)</td><td>25</td><td>106</td><td>8</td><td>빈칸채우기+객관식+서술형</td></tr>
+</tbody></table>
+
+<h4>HWPML 구조 핵심</h4>
+<div class="code"><span class="c">HWPML XML 구조:</span>
+&lt;HWPML&gt;
+  &lt;HEAD&gt;                        <span class="c">← 문서 설정, 폰트, 스타일</span>
+    &lt;MAPPINGTABLE&gt;
+      &lt;BINDATALIST&gt;             <span class="c">← 이미지 Base64 데이터</span>
+        &lt;BINDATA Id="1" Encoding="Base64"&gt;...&lt;/BINDATA&gt;
+  &lt;BODY&gt;
+    &lt;SECTION&gt;
+      &lt;P&gt;                       <span class="c">← 문단</span>
+        &lt;TEXT&gt;
+          &lt;CHAR&gt;텍스트&lt;/CHAR&gt;   <span class="c">← 일반 텍스트</span>
+          &lt;EQUATION&gt;            <span class="c">← 수식</span>
+            &lt;SCRIPT&gt;수식문법&lt;/SCRIPT&gt;
+          &lt;PICTURE&gt;             <span class="c">← 이미지 참조</span>
+            &lt;IMAGE BinItem="1"/&gt;
+
+<span class="c">수식 예시: "2x LEFT ( 2x+4y-1 RIGHT )" → LaTeX: "2x\left(2x+4y-1\right)"</span>
+<span class="c">이미지: BINDATA Base64 → 디코딩 → PNG 파일</span>
+<span class="c">문항 경계: CHAR 텍스트에서 "1.", "2.", "[1-2]" 패턴 탐지</span></div>
+</div>
+
+<!-- ═══ PHASE 0 TASKS ═══ -->
+<div class="sec"><div class="sn">PHASE 0</div>
+<h2>Phase 0 작업 상세 (12개 태스크)</h2>
+<p class="sd">모든 태스크는 순서대로 진행합니다. 각 태스크의 완료 기준(Definition of Done)을 반드시 충족해야 다음으로 넘어갑니다.</p>
+
+<!-- Task 1 -->
+<div class="ac"><div class="ah">Task 1 — 프로젝트 초기화</div><div class="ab">
+<h4>작업 내용</h4>
+<p>프로젝트 루트 디렉토리와 전체 하위 구조를 생성합니다.</p>
+<div class="code"><span class="c">exam-digitalizer/</span>
+├── docker-compose.yml
+├── .env.example
+├── .gitignore
+├── README.md
+│
+├── <span class="k">backend/</span>
+│   ├── Dockerfile
+│   ├── pyproject.toml          <span class="c"># 또는 requirements.txt</span>
+│   ├── main.py                 <span class="c"># FastAPI app entry</span>
+│   ├── config.py               <span class="c"># 환경 설정 (pydantic-settings)</span>
+│   ├── <span class="k">api/</span>                    <span class="c"># REST API 라우터</span>
+│   │   ├── __init__.py
+│   │   ├── auth.py
+│   │   ├── batches.py
+│   │   ├── questions.py
+│   │   ├── exams.py
+│   │   ├── classrooms.py
+│   │   ├── sessions.py
+│   │   ├── grades.py
+│   │   ├── admin.py
+│   │   ├── join.py             <span class="c"># 학생 접속 (비인증)</span>
+│   │   └── notifications.py
+│   ├── <span class="k">agents/</span>                 <span class="c"># 14개 에이전트 + 오케스트레이터</span>
+│   │   ├── __init__.py
+│   │   ├── orchestrator.py
+│   │   ├── worker.py           <span class="c"># Redis Stream 소비자</span>
+│   │   ├── base_agent.py       <span class="c"># 공통 베이스 클래스</span>
+│   │   ├── a01_parser.py
+│   │   ├── a02_parse_reviewer.py
+│   │   ├── ... (a03 ~ a14)
+│   │   └── dummy_agent.py      <span class="c"># Phase 0 테스트용 더미</span>
+│   ├── <span class="k">core/</span>                   <span class="c"># 공통 모듈</span>
+│   │   ├── __init__.py
+│   │   ├── hwp_parser.py
+│   │   ├── hwp_generator.py
+│   │   ├── formula_converter.py
+│   │   ├── llm_client.py
+│   │   ├── embedding.py
+│   │   ├── scoring.py
+│   │   └── storage.py          <span class="c"># S3/MinIO 추상화</span>
+│   ├── <span class="k">models/</span>                 <span class="c"># SQLAlchemy ORM</span>
+│   │   ├── __init__.py
+│   │   ├── base.py             <span class="c"># DeclarativeBase + 공통 mixin</span>
+│   │   ├── question.py
+│   │   ├── exam.py
+│   │   ├── classroom.py
+│   │   ├── submission.py
+│   │   ├── pipeline.py
+│   │   ├── user.py
+│   │   └── notification.py
+│   ├── <span class="k">schemas/</span>                <span class="c"># Pydantic 스키마</span>
+│   │   ├── __init__.py
+│   │   ├── common.py           <span class="c"># SuccessResponse, ErrorResponse, PagedResponse</span>
+│   │   ├── auth.py
+│   │   ├── question.py
+│   │   ├── exam.py
+│   │   ├── classroom.py
+│   │   ├── submission.py
+│   │   ├── grade.py
+│   │   ├── pipeline.py
+│   │   └── notification.py
+│   ├── <span class="k">migrations/</span>             <span class="c"># Alembic</span>
+│   │   ├── env.py
+│   │   ├── alembic.ini
+│   │   └── versions/
+│   ├── <span class="k">tests/</span>
+│   │   ├── conftest.py
+│   │   ├── test_health.py
+│   │   ├── test_auth.py
+│   │   └── <span class="k">fixtures/</span>
+│   │       └── <span class="k">llm_mocks/</span>     <span class="c"># LLM mock 응답 JSON</span>
+│   └── <span class="k">scripts/</span>
+│       ├── seed.py             <span class="c"># 시드 데이터</span>
+│       └── init_s3.py          <span class="c"># S3 버킷 초기화</span>
+│
+├── <span class="k">frontend/</span>
+│   ├── Dockerfile
+│   ├── package.json
+│   └── <span class="c">(Next.js 기본 구조 — Phase 0에서는 최소 세팅만)</span>
+│
+└── <span class="k">templates/</span>
+    ├── exam_header.hwpml       <span class="c"># HWP 생성용 템플릿 (Phase 2b에서 사용)</span>
+    └── exam_body.hwpml</div>
+
+<h4>완료 기준</h4>
+<ul class="check">
+<li>위 디렉토리 구조가 모두 생성되어 있음</li>
+<li>모든 __init__.py 파일 존재</li>
+<li>.gitignore에 .env, __pycache__, node_modules, .venv 등 포함</li>
+<li>.env.example에 모든 환경 변수 나열 (값은 placeholder)</li>
+</ul>
+</div></div>
+
+<!-- Task 2 -->
+<div class="ac"><div class="ah">Task 2 — Docker Compose 환경 구성</div><div class="ab">
+<h4>작업 내용</h4>
+<p>7개 서비스를 정의합니다. 설계서 v1.3의 Docker Compose 구성 + v1.4의 orchestrator 분리를 반영합니다.</p>
+<div class="info rule"><strong>핵심 포인트:</strong> orchestrator는 replicas: 1 (단일 인스턴스, 상태 정합성). worker는 replicas: 2 (병렬 처리, consumer group). backend는 API 서버. 이 3개는 같은 코드베이스에서 다른 command로 실행됩니다.</div>
+<div class="info warn"><strong>환경 변수:</strong> .env 파일에서 로드. ANTHROPIC_API_KEY, DATABASE_URL, REDIS_URL, S3_ENDPOINT, JWT_SECRET, LLM_MODE(mock/real) 등. dev 환경 기본값 사용.</div>
+<h4>완료 기준</h4>
+<ul class="check">
+<li><code>docker-compose up -d</code> → 7개 서비스 모두 healthy</li>
+<li>PostgreSQL에 접속 가능 (psql 또는 pgAdmin)</li>
+<li>Redis에 접속 가능 (redis-cli ping → PONG)</li>
+<li>MinIO 콘솔 접속 가능 (http://localhost:9001)</li>
+<li>Backend 서버 응답 (http://localhost:8000 → 아직 404여도 OK)</li>
+</ul>
+</div></div>
+
+<!-- Task 3 -->
+<div class="ac"><div class="ah">Task 3 — DB 스키마 & ORM 모델 & 마이그레이션</div><div class="ab">
+<h4>작업 내용</h4>
+<p>설계서 v1.3의 25개 테이블 + v1.4의 추가 컬럼을 SQLAlchemy ORM 모델로 구현하고, Alembic 초기 마이그레이션을 생성합니다.</p>
+
+<h4>테이블 목록 (25개)</h4>
+<table><thead><tr><th>도메인</th><th>테이블</th><th>핵심 참고</th></tr></thead><tbody>
+<tr><td rowspan="7">문항</td><td>batches</td><td></td></tr>
+<tr><td>questions</td><td>v1.4: confirmed_by, confirmed_at 추가</td></tr>
+<tr><td>question_raw</td><td>파싱팀 output</td></tr>
+<tr><td>question_structured</td><td>메타팀 output</td></tr>
+<tr><td>question_produced</td><td>v1.4: xapi_config JSONB 임시 컬럼. 복수정답 구조</td></tr>
+<tr><td>question_embeddings</td><td>vector(1536), HNSW 인덱스</td></tr>
+<tr><td>question_metadata</td><td>v1.4: is_multiple_answer 추가. 복합 인덱스</td></tr>
+<tr><td>그룹</td><td>question_groups</td><td></td></tr>
+<tr><td rowspan="2">파이프라인</td><td>pipeline_states</td><td>pipeline_level: L1/L2A/L2B</td></tr>
+<tr><td>pipeline_history</td><td>BIGSERIAL (대량 이력)</td></tr>
+<tr><td rowspan="2">시험지</td><td>exams</td><td>hwp_file_path 없음 (학급별로 이동)</td></tr>
+<tr><td>exam_questions</td><td>points_auto, points_modified</td></tr>
+<tr><td rowspan="3">학급</td><td>classrooms</td><td>invite_code UNIQUE</td></tr>
+<tr><td>classroom_students</td><td>계정 없는 학생. (classroom_id, name) UNIQUE</td></tr>
+<tr><td>classroom_exams</td><td>hwp_file_path, exam_qr_path, opens_at/closes_at, 상태</td></tr>
+<tr><td rowspan="3">응시/채점</td><td>submissions</td><td>student_id FK→classroom_students, classroom_exam_id FK</td></tr>
+<tr><td>submission_answers</td><td>answer_type: choice/choice_multiple/short_answer/descriptive</td></tr>
+<tr><td>grade_results</td><td>delivered_to_student_at, delivered_to_teacher_at</td></tr>
+<tr><td>정정</td><td>answer_corrections</td><td></td></tr>
+<tr><td rowspan="4">시스템</td><td>users</td><td>ADMIN/TEACHER만 (STUDENT 없음)</td></tr>
+<tr><td>notifications</td><td></td></tr>
+<tr><td>ai_execution_logs</td><td>BIGSERIAL</td></tr>
+<tr><td>meta_schemas</td><td>과목별 메타 스키마 정의</td></tr>
+</tbody></table>
+
+<div class="info rule"><strong>공통 mixin:</strong> 모든 주요 테이블에 <code>deleted_at TIMESTAMPTZ DEFAULT NULL</code> (소프트 삭제). Base 모델에 mixin으로 구현.</div>
+<div class="info rule"><strong>pgvector 활성화:</strong> <code>CREATE EXTENSION IF NOT EXISTS vector;</code> 마이그레이션 첫 줄에 포함.</div>
+
+<h4>완료 기준</h4>
+<ul class="check">
+<li>models/ 디렉토리에 모든 ORM 모델 파일 존재</li>
+<li><code>alembic upgrade head</code> → 25개 테이블 생성 완료</li>
+<li>pgvector 확장 활성화 확인</li>
+<li>HNSW 인덱스 생성 확인</li>
+<li>복합 인덱스 (question_metadata: subject+grade+unit+difficulty) 확인</li>
+<li><code>alembic downgrade -1</code> → 롤백 정상</li>
+</ul>
+</div></div>
+
+<!-- Task 4 -->
+<div class="ac"><div class="ah">Task 4 — FastAPI 앱 기본 구조</div><div class="ab">
+<h4>작업 내용</h4>
+<p>main.py, config.py, 공통 미들웨어, 공통 응답 스키마, Health Check 구현.</p>
+<div class="code"><span class="c"># 구현할 것:</span>
+<span class="c"># 1. config.py — pydantic-settings 기반 환경 설정</span>
+<span class="c">#    DATABASE_URL, REDIS_URL, S3_ENDPOINT, ANTHROPIC_API_KEY,</span>
+<span class="c">#    JWT_SECRET, LLM_MODE, LOG_LEVEL 등</span>
+
+<span class="c"># 2. main.py — FastAPI app 생성, 라우터 등록, 미들웨어</span>
+<span class="c">#    CORS (localhost:3000 허용), 구조화 로깅, 에러 핸들러</span>
+
+<span class="c"># 3. schemas/common.py — 공통 응답 포맷</span>
+<span class="c">#    SuccessResponse, ErrorResponse, PagedResponse</span>
+<span class="c">#    에러 코드: VALIDATION_ERROR, UNAUTHORIZED, FORBIDDEN,</span>
+<span class="c">#    *_NOT_FOUND, DUPLICATE_FILE, FILE_TOO_LARGE, RATE_LIMITED</span>
+
+<span class="c"># 4. GET /health → {"status":"ok","db":"ok","redis":"ok","s3":"ok"}</span>
+<span class="c"># 5. GET /health/ready → 전체 의존성 정상 시 200, 아니면 503</span></div>
+
+<h4>완료 기준</h4>
+<ul class="check">
+<li><code>curl localhost:8000/health</code> → 200, DB/Redis/S3 모두 ok</li>
+<li><code>curl localhost:8000/health/ready</code> → 200</li>
+<li>CORS 헤더 정상 (localhost:3000 Origin 허용)</li>
+<li>존재하지 않는 경로 → ErrorResponse 형태의 404</li>
+<li>구조화 JSON 로그 출력 확인</li>
+</ul>
+</div></div>
+
+<!-- Task 5 -->
+<div class="ac"><div class="ah">Task 5 — 인증 시스템 (JWT + 학생 토큰)</div><div class="ab">
+<h4>작업 내용</h4>
+<div class="code"><span class="c"># 교사/관리자 인증:</span>
+<span class="c"># POST /api/v1/auth/login → {email, password} → JWT 토큰</span>
+<span class="c"># POST /api/v1/auth/refresh → 토큰 갱신</span>
+<span class="c"># 비밀번호: bcrypt 해싱</span>
+<span class="c"># JWT: python-jose, 만료 30분, refresh 7일</span>
+<span class="c"># RBAC 데코레이터: @require_role("ADMIN"), @require_role("TEACHER")</span>
+
+<span class="c"># 학생 토큰:</span>
+<span class="c"># POST /api/v1/join/select-student → student_token 발급</span>
+<span class="c"># Redis에 student_token:{token} → {classroom_id, student_id} 저장 (TTL 24h)</span>
+<span class="c"># @require_student_token 데코레이터</span></div>
+<h4>완료 기준</h4>
+<ul class="check">
+<li>시드 데이터의 관리자/교사 계정으로 로그인 성공</li>
+<li>JWT 토큰으로 보호된 API 호출 성공</li>
+<li>잘못된 토큰 → 401 UNAUTHORIZED</li>
+<li>TEACHER 토큰으로 ADMIN 전용 API → 403 FORBIDDEN</li>
+<li>학생 토큰 발급 및 검증 동작</li>
+</ul>
+</div></div>
+
+<!-- Task 6 -->
+<div class="ac"><div class="ah">Task 6 — Redis Streams 메시지 큐</div><div class="ab">
+<h4>작업 내용</h4>
+<div class="code"><span class="c"># Stream 생성 + Consumer Group 설정:</span>
+<span class="c"># pipeline:tasks → consumer group: agent-workers</span>
+<span class="c"># pipeline:results → consumer group: orchestrator</span>
+
+<span class="c"># 유틸리티 함수:</span>
+<span class="c"># publish_task(stream, message) → XADD</span>
+<span class="c"># consume_tasks(group, consumer, stream) → XREADGROUP</span>
+<span class="c"># ack_task(stream, group, message_id) → XACK</span>
+
+<span class="c"># 메시지 포맷:</span>
+<span class="c"># {task_id, agent, ref_id, level(L1/L2A/L2B), payload, created_at}</span></div>
+<h4>완료 기준</h4>
+<ul class="check">
+<li>Stream과 Consumer Group이 Redis에 생성됨</li>
+<li>메시지 발행 → 소비 → ACK 사이클 동작 확인 (테스트 코드)</li>
+<li>2개 워커가 같은 그룹으로 소비 시 메시지 중복 없음 확인</li>
+</ul>
+</div></div>
+
+<!-- Task 7 -->
+<div class="ac"><div class="ah">Task 7 — 오케스트레이터 코어</div><div class="ab">
+<h4>작업 내용</h4>
+<p>파이프라인의 두뇌. pipeline:results Stream을 소비하여 상태 전이를 실행하고, pipeline:tasks에 다음 작업을 발행합니다.</p>
+<div class="code"><span class="c"># 구현할 핵심 함수:</span>
+
+<span class="c"># 1. handle_review_result(ref_id, stage, result)</span>
+<span class="c">#    → PASS: 다음 스테이지로 전이, 다음 에이전트 작업 발행</span>
+<span class="c">#    → REJECT: version+1, 해당 작업팀으로 반려, reject_context 전달</span>
+
+<span class="c"># 2. dispatch_to_agent(stage, item)</span>
+<span class="c">#    → DB에서 에이전트 payload 조립 (v1.4 패치 #6 참조)</span>
+<span class="c">#    → pipeline:tasks에 발행</span>
+
+<span class="c"># 3. 3계층 상태 관리</span>
+<span class="c">#    L1: pkey 기준, PARSING ~ L1_COMPLETED</span>
+<span class="c">#    L2-A: exam_id 기준, EXAM_COMPOSE ~ EXAM_CONFIRMED</span>
+<span class="c">#    L2-B: classroom_exam_id 기준, DEPLOY_REQUESTED ~ CLOSED</span>
+
+<span class="c"># 4. PROD_REVIEW 분기 (v1.4 패치 #1)</span>
+<span class="c">#    answer_source == "ai_derived" → HUMAN_CONFIRM_ANSWER</span>
+<span class="c">#    그 외 → DATA</span>
+
+<span class="c"># 5. 예외 처리</span>
+<span class="c">#    타임아웃 300초, 3회 연속 반려 → HUMAN_REVIEW</span>
+<span class="c">#    EMBEDDING 실패 → 재시도 3회 → EMBEDDING_ERROR</span>
+
+<span class="c"># 6. classroom_exams.status 동기화 (v1.4 패치 #4)</span>
+<span class="c">#    L2B 상태 전이마다 sync_classroom_exam_status() 호출</span></div>
+<h4>완료 기준</h4>
+<ul class="check">
+<li>더미 에이전트(dummy_agent.py)로 E2E 파이프라인 흐름 검증</li>
+<li>L1: 더미 PARSING → PARSE_REVIEW(PASS) → META → ... → L1_COMPLETED</li>
+<li>반려 시나리오: PARSE_REVIEW(REJECT) → PARSING 재투입, version +1</li>
+<li>pipeline_states, pipeline_history에 상태 기록 확인</li>
+<li>타임아웃 처리 동작 확인</li>
+</ul>
+</div></div>
+
+<!-- Task 8 -->
+<div class="ac"><div class="ah">Task 8 — Base Agent 클래스</div><div class="ab">
+<h4>작업 내용</h4>
+<div class="code"><span class="c"># BaseAgent 클래스:</span>
+<span class="c"># - Redis Stream에서 메시지 수신 (agent 필드로 자기 메시지만 처리)</span>
+<span class="c"># - process(payload) → result (추상 메서드, 각 에이전트가 구현)</span>
+<span class="c"># - 에러 핸들링 (예외 → ERROR 결과 반환)</span>
+<span class="c"># - 타임아웃 래퍼 (300초)</span>
+<span class="c"># - 구조화 JSON 로깅 (pkey, agent, action, duration_ms)</span>
+<span class="c"># - HEARTBEAT 전송 (30초 간격, asyncio.create_task)</span>
+<span class="c"># - S3 접근 유틸리티 (storage.py 사용)</span>
+<span class="c"># - LLM 클라이언트 접근 (llm_client.py 사용)</span>
+
+<span class="c"># DummyAgent(BaseAgent):</span>
+<span class="c"># - process()에서 단순히 PASS 결과 반환 (Phase 0 테스트용)</span></div>
+<h4>완료 기준</h4>
+<ul class="check">
+<li>DummyAgent가 pipeline:tasks에서 메시지 수신 → PASS 결과 반환</li>
+<li>오케스트레이터와 연동하여 더미 파이프라인 동작</li>
+<li>에러 발생 시 ERROR 결과 정상 반환</li>
+<li>HEARTBEAT 메시지 확인</li>
+</ul>
+</div></div>
+
+<!-- Task 9~12 -->
+<div class="ac"><div class="ah">Task 9 — S3 스토리지 연동</div><div class="ab">
+<p>MinIO/S3 추상화 모듈. upload_file, download_file, get_presigned_url, delete_file. 초기 버킷(exam-storage)과 하위 경로 자동 생성 스크립트(scripts/init_s3.py).</p>
+<h4>완료 기준</h4>
+<ul class="check"><li>파일 업로드 → 다운로드 → presigned URL 접근 테스트 통과</li><li>버킷/경로 구조 자동 생성 확인</li></ul>
+</div></div>
+
+<div class="ac"><div class="ah">Task 10 — LLM 클라이언트 (Mock 포함)</div><div class="ab">
+<p>Anthropic API 래퍼. LLM_MODE=mock일 때 fixtures/llm_mocks/에서 고정 응답 반환. real 모드: 재시도(exponential backoff 5회), 대체 모델 폴백, 토큰 카운팅. ai_execution_log 자동 기록.</p>
+<h4>완료 기준</h4>
+<ul class="check"><li>mock 모드: 고정 응답 반환 확인, API 호출 0건</li><li>real 모드: 실제 API 호출 + ai_execution_logs 테이블 기록 (1회만 테스트)</li><li>재시도 로직 단위 테스트</li></ul>
+</div></div>
+
+<div class="ac"><div class="ah">Task 11 — 시드 데이터</div><div class="ab">
+<p>scripts/seed.py 실행 시 초기 데이터 삽입.</p>
+<div class="code"><span class="c"># 시드 데이터:</span>
+<span class="c"># - admin@test.com (ADMIN, password: admin1234)</span>
+<span class="c"># - teacher01@test.com ~ teacher10@test.com (TEACHER, password: teacher1234)</span>
+<span class="c"># - 수학 meta_schema v1.0:</span>
+<span class="c">#     unit: [수와 연산, 문자와 식, 함수, 기하, 확률과 통계, 좌표평면과 그래프]</span>
+<span class="c">#     difficulty: [상, 중, 하]</span>
+<span class="c">#     bloom_level: [기억, 이해, 적용, 분석, 평가, 창조]</span>
+<span class="c">#     question_type: [객관식, 단답형, 서술형, 빈칸채우기]</span>
+<span class="c"># - 샘플 학급 1개: "1학년 2반" (teacher01 소유)</span>
+<span class="c"># - 샘플 학생 5명: 김민준, 이서연, 박지호, 최수아, 정예준</span></div>
+<h4>완료 기준</h4>
+<ul class="check"><li>seed.py 실행 후 로그인 가능</li><li>meta_schemas 테이블에 수학 스키마 존재</li><li>학급 + 학생 데이터 존재</li></ul>
+</div></div>
+
+<div class="ac"><div class="ah">Task 12 — CI/CD 파이프라인 (GitHub Actions)</div><div class="ab">
+<div class="code"><span class="c"># .github/workflows/ci.yml</span>
+<span class="c"># trigger: push to main, pull_request</span>
+<span class="c"># jobs:</span>
+<span class="c">#   lint: ruff check backend/</span>
+<span class="c">#   test: docker-compose -f docker-compose.test.yml up → pytest</span>
+<span class="c">#   build: docker build backend/ + frontend/</span></div>
+<h4>완료 기준</h4>
+<ul class="check"><li>push 시 CI 파이프라인 자동 실행</li><li>린트 + 테스트 + 빌드 모두 통과</li></ul>
+</div></div>
+</div>
+
+<!-- ═══ 최종 검증 ═══ -->
+<div class="sec"><div class="sn">VERIFICATION</div>
+<h2>Phase 0 완료 최종 검증</h2>
+<p class="sd">12개 태스크 완료 후, 아래 전체 검증을 통과해야 Phase 0 완료입니다.</p>
+
+<div class="code"><span class="c"># Phase 0 완료 검증 체크리스트</span>
+
+<span class="s">✅ docker-compose up → 7개 서비스 정상 기동</span>
+   backend, orchestrator, worker(x2), frontend, db, redis, minio
+
+<span class="s">✅ curl localhost:8000/health → {"status":"ok","db":"ok","redis":"ok","s3":"ok"}</span>
+
+<span class="s">✅ POST /api/v1/auth/login → JWT 토큰 발급</span>
+   admin@test.com + admin1234 → 토큰 수신
+
+<span class="s">✅ JWT 토큰으로 보호된 API 호출 → 200</span>
+   GET /api/v1/admin/metrics (ADMIN 전용)
+
+<span class="s">✅ 학생 토큰 발급 → Redis 저장 확인</span>
+   POST /api/v1/join/select-student → student_token
+
+<span class="s">✅ 오케스트레이터 + 더미 에이전트 E2E 파이프라인</span>
+   더미 작업 발행 → worker 수신 → 결과 반환 → 오케스트레이터 상태 전이
+   pipeline_states + pipeline_history 기록 확인
+
+<span class="s">✅ DB 25개 테이블 생성 확인</span>
+   \dt 명령으로 전체 테이블 목록 확인
+
+<span class="s">✅ S3 버킷/경로 구조 확인</span>
+   MinIO 콘솔에서 exam-storage 버킷 + 하위 경로
+
+<span class="s">✅ LLM mock 모드 동작</span>
+   LLM_MODE=mock → 고정 응답 반환, API 호출 0건
+
+<span class="s">✅ 시드 데이터 로드 확인</span>
+   교사 로그인, meta_schema 존재, 학급+학생 존재
+
+<span class="s">✅ CI 파이프라인 동작</span>
+   GitHub push → lint + test + build 통과</div>
+</div>
+
+<!-- ═══ Phase 1a 예고 ═══ -->
+<div class="sec"><div class="sn">NEXT</div>
+<h2>Phase 0 이후 → Phase 1a</h2>
+<p class="sd">Phase 0이 완료되면, Phase 1a(파싱팀 + 메타팀)에 착수합니다.</p>
+<table><thead><tr><th>태스크</th><th>내용</th></tr></thead><tbody>
+<tr><td>HWP 파싱 엔진</td><td>HWPML XML 파서, 바이너리 HWP LibreOffice 변환, raw_question 생성</td></tr>
+<tr><td>수식 변환기</td><td>HWP Script → LaTeX 매핑 (에이전트 스펙 부록 B)</td></tr>
+<tr><td>에이전트 #1 파싱팀</td><td>BaseAgent 상속, process() 구현</td></tr>
+<tr><td>에이전트 #2 파싱검수팀</td><td>5항목 채점, 이종 파서 교차 검증</td></tr>
+<tr><td>에이전트 #3 메타팀</td><td>영역 분류, 메타 태깅, 수식 변환</td></tr>
+<tr><td>에이전트 #4 메타검수팀</td><td>5항목 채점, LLM 교차 검증</td></tr>
+<tr><td>검수 채점 엔진</td><td>100점 만점 채점, 자동 반려, 85점 합격 판정</td></tr>
+</tbody></table>
+</div>
+
+<footer class="doc-footer">
+<p>Phase 0 작업 지시서 · 시험 문항 디지털라이징 시스템 · 2025.04</p>
+<p style="margin-top:3px">이 문서와 함께 4개 설계 문서를 참조하세요: 시스템 설계 v1.0, 에이전트 스펙 v2.1, 기술 아키텍처 v1.3, 패치 v1.4</p>
+</footer>
+
+</div>
+</body>
+</html>

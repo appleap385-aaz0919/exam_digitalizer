@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>시험 문항 디지털라이징 시스템 — 설계 초안 v1.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a1f;
+  --ink-light: #4a4a55;
+  --ink-muted: #8a8a95;
+  --surface: #fafaf8;
+  --card: #ffffff;
+  --border: #e8e8e4;
+  --border-light: #f0f0ec;
+  --accent: #2d5be3;
+  --accent-light: #eef2fd;
+  --accent-dark: #1a3a9e;
+  --pass: #0d8a5e;
+  --pass-bg: #e8f8f0;
+  --fail: #d43b3b;
+  --fail-bg: #fdeaea;
+  --warn: #c27a1a;
+  --warn-bg: #fef6e8;
+  --purple: #6c5ce7;
+  --purple-bg: #f0eeff;
+  --teal: #0d9488;
+  --teal-bg: #e8f7f6;
+  --coral: #e8593c;
+  --coral-bg: #fef0ec;
+  --phase1: #6c5ce7;
+  --phase2: #2d5be3;
+  --phase3: #e8593c;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--surface);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page-wrapper {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 60px 40px 100px;
+}
+
+/* ── Cover ── */
+.cover {
+  text-align: center;
+  padding: 80px 0 60px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 60px;
+}
+
+.cover-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 6px 16px;
+  border-radius: 20px;
+  margin-bottom: 28px;
+}
+
+.cover h1 {
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1.3;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+
+.cover h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.cover-meta {
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+.cover-meta span + span::before {
+  content: '·';
+  margin: 0 10px;
+}
+
+/* ── TOC ── */
+.toc {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 36px 40px;
+  margin-bottom: 60px;
+}
+
+.toc h2 {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 20px;
+}
+
+.toc ol {
+  list-style: none;
+  counter-reset: toc;
+  columns: 2;
+  column-gap: 40px;
+}
+
+.toc li {
+  counter-increment: toc;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-light);
+  break-inside: avoid;
+}
+
+.toc li a {
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+
+.toc li a:hover { color: var(--accent); }
+
+.toc li a::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-muted);
+  margin-right: 12px;
+}
+
+/* ── Section ── */
+.section {
+  margin-bottom: 64px;
+}
+
+.section-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.section h2 {
+  font-size: 26px;
+  font-weight: 900;
+  margin-bottom: 8px;
+  letter-spacing: -0.3px;
+}
+
+.section-desc {
+  font-size: 15px;
+  color: var(--ink-light);
+  margin-bottom: 32px;
+  max-width: 700px;
+}
+
+.section h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 36px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border);
+}
+
+.section h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 24px 0 12px;
+  color: var(--ink);
+}
+
+/* ── Cards ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+}
+
+.card.highlight {
+  border-left: 4px solid var(--accent);
+}
+
+/* ── Pipeline Diagram ── */
+.pipeline-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 24px 0;
+}
+
+.phase-group {
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.phase-group.phase1 { border-color: var(--phase1); background: linear-gradient(135deg, rgba(108,92,231,0.03), transparent); }
+.phase-group.phase2 { border-color: var(--phase2); background: linear-gradient(135deg, rgba(45,91,227,0.03), transparent); }
+.phase-group.phase3 { border-color: var(--phase3); background: linear-gradient(135deg, rgba(232,89,60,0.03), transparent); }
+
+.phase-label {
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  background: var(--surface);
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.phase1 .phase-label { color: var(--phase1); }
+.phase2 .phase-label { color: var(--phase2); }
+.phase3 .phase-label { color: var(--phase3); }
+
+.pipeline-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 12px 0;
+}
+
+.pipeline-node {
+  flex: 1;
+  padding: 14px 18px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.pipeline-node.work {
+  background: var(--purple-bg);
+  color: var(--purple);
+  border: 1px solid rgba(108,92,231,0.2);
+}
+
+.pipeline-node.qa {
+  background: var(--teal-bg);
+  color: var(--teal);
+  border: 1px solid rgba(13,148,136,0.2);
+}
+
+.phase2 .pipeline-node.work {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: rgba(45,91,227,0.2);
+}
+
+.phase2 .pipeline-node.qa {
+  background: var(--warn-bg);
+  color: var(--warn);
+  border-color: rgba(194,122,26,0.2);
+}
+
+.phase3 .pipeline-node.work {
+  background: var(--coral-bg);
+  color: var(--coral);
+  border-color: rgba(232,89,60,0.2);
+}
+
+.phase3 .pipeline-node.qa {
+  background: #fce8f0;
+  color: #c2366b;
+  border-color: rgba(194,54,107,0.2);
+}
+
+.pipeline-arrow {
+  font-size: 18px;
+  color: var(--ink-muted);
+  flex-shrink: 0;
+}
+
+.pipeline-reject {
+  text-align: center;
+  font-size: 11px;
+  color: var(--fail);
+  font-family: 'JetBrains Mono', monospace;
+  margin: -4px 0 4px;
+  letter-spacing: 0.5px;
+}
+
+.phase-connector {
+  text-align: center;
+  padding: 8px 0;
+  color: var(--ink-muted);
+  font-size: 20px;
+}
+
+/* ── Key Design ── */
+.pkey-visual {
+  background: #1a1a2e;
+  color: #e0e0e8;
+  border-radius: 12px;
+  padding: 32px;
+  margin: 20px 0;
+  font-family: 'JetBrains Mono', monospace;
+  overflow-x: auto;
+}
+
+.pkey-main {
+  font-size: 28px;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+
+.pkey-main .seg1 { color: #a29bfe; }
+.pkey-main .seg2 { color: #74b9ff; }
+.pkey-main .seg3 { color: #55efc4; }
+.pkey-main .seg4 { color: #ffeaa7; }
+.pkey-sep { color: #636e72; }
+
+.pkey-legend {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  font-size: 12px;
+}
+
+.pkey-legend-item {
+  text-align: center;
+  padding: 12px 8px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+}
+
+.pkey-legend-item .label {
+  display: block;
+  margin-bottom: 4px;
+  opacity: 0.6;
+  font-size: 11px;
+}
+
+.pkey-legend-item.s1 .value { color: #a29bfe; }
+.pkey-legend-item.s2 .value { color: #74b9ff; }
+.pkey-legend-item.s3 .value { color: #55efc4; }
+.pkey-legend-item.s4 .value { color: #ffeaa7; }
+
+/* ── State Machine ── */
+.state-flow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 16px 0;
+  padding: 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.state-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 500;
+}
+
+.state-badge.active { background: var(--accent-light); color: var(--accent); }
+.state-badge.review { background: var(--warn-bg); color: var(--warn); }
+.state-badge.done { background: var(--pass-bg); color: var(--pass); }
+
+.state-arrow { color: var(--ink-muted); font-size: 16px; }
+
+/* ── Tables ── */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 16px 0;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+thead {
+  background: #f5f5f2;
+}
+
+th {
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ink-light);
+  border-bottom: 2px solid var(--border);
+  white-space: nowrap;
+}
+
+td {
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: rgba(45,91,227,0.02); }
+
+td:first-child { font-weight: 500; }
+
+/* ── Score Gauge ── */
+.score-bar-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.score-bar {
+  flex: 1;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.score-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--accent);
+}
+
+.score-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 32px;
+  text-align: right;
+}
+
+/* ── Review Card ── */
+.review-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.review-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.review-card-title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.review-card-number {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-muted);
+  background: var(--surface);
+  padding: 4px 12px;
+  border-radius: 6px;
+}
+
+.review-card-body { padding: 0; }
+.review-card-body table { border: none; border-radius: 0; margin: 0; }
+.review-card-body th { background: var(--surface); }
+
+.auto-reject {
+  margin: 0;
+  padding: 14px 24px;
+  background: var(--fail-bg);
+  border-top: 1px solid rgba(212,59,59,0.15);
+  font-size: 13px;
+  color: var(--fail);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.auto-reject::before {
+  content: '⛔';
+  font-size: 14px;
+}
+
+/* ── Code Block ── */
+.code-block {
+  background: #1a1a2e;
+  color: #e0e0e8;
+  border-radius: 10px;
+  padding: 24px;
+  margin: 16px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.code-block .key { color: #74b9ff; }
+.code-block .str { color: #55efc4; }
+.code-block .num { color: #ffeaa7; }
+.code-block .bool { color: #fd79a8; }
+.code-block .cmt { color: #636e72; font-style: italic; }
+
+/* ── Info Boxes ── */
+.info-box {
+  padding: 16px 20px;
+  border-radius: 10px;
+  margin: 16px 0;
+  font-size: 14px;
+}
+
+.info-box.rule {
+  background: var(--accent-light);
+  border: 1px solid rgba(45,91,227,0.15);
+  color: var(--accent-dark);
+}
+
+.info-box.warn {
+  background: var(--warn-bg);
+  border: 1px solid rgba(194,122,26,0.15);
+  color: #8a5a10;
+}
+
+.info-box.critical {
+  background: var(--fail-bg);
+  border: 1px solid rgba(212,59,59,0.15);
+  color: var(--fail);
+}
+
+.info-box strong { font-weight: 700; }
+
+/* ── Duplicate Prevention ── */
+.triple-guard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.guard-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.guard-icon {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.guard-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.guard-desc {
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1.5;
+}
+
+/* ── Summary Table ── */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.summary-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+}
+
+.summary-item .label {
+  font-size: 12px;
+  color: var(--ink-muted);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.summary-item .value {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.summary-item .value.mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+}
+
+/* ── Footer ── */
+.doc-footer {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-muted);
+}
+
+/* ── Print ── */
+@media print {
+  body { font-size: 12px; }
+  .page-wrapper { padding: 20px; }
+  .cover { padding: 40px 0 30px; }
+  .phase-group, .review-card, .card { break-inside: avoid; }
+  .pkey-visual { color: #333; background: #f0f0f0; }
+}
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+<!-- ═══════════════════════ COVER ═══════════════════════ -->
+<header class="cover">
+  <div class="cover-badge">Design Specification v1.0</div>
+  <h1>시험 문항 디지털라이징 시스템<br><em>에이전트 파이프라인 설계 초안</em></h1>
+  <div class="cover-meta">
+    <span>총 14개 에이전트 팀</span>
+    <span>3개 Phase</span>
+    <span>문항 단위 파이프라인</span>
+    <span>2025.04</span>
+  </div>
+</header>
+
+<!-- ═══════════════════════ TOC ═══════════════════════ -->
+<nav class="toc">
+  <h2>목차</h2>
+  <ol>
+    <li><a href="#sec1">시스템 개요</a></li>
+    <li><a href="#sec2">전체 파이프라인 구조</a></li>
+    <li><a href="#sec3">에이전트 팀 구성 (14개 팀)</a></li>
+    <li><a href="#sec4">문항 단위 파이프라인 관리</a></li>
+    <li><a href="#sec5">Primary Key 설계</a></li>
+    <li><a href="#sec6">문항 상태 머신</a></li>
+    <li><a href="#sec7">중복 방지 체계</a></li>
+    <li><a href="#sec8">검수 기준 총괄 (85점 합격)</a></li>
+    <li><a href="#sec9">검수팀별 세부 채점 기준</a></li>
+    <li><a href="#sec10">HWP 파싱 분석 결과</a></li>
+  </ol>
+</nav>
+
+<!-- ═══════════════════════ SEC 1 ═══════════════════════ -->
+<section class="section" id="sec1">
+  <div class="section-number">01</div>
+  <h2>시스템 개요</h2>
+  <p class="section-desc">한글(HWP/HWPX) 파일로 제작된 시험지를 디지털라이징하여, 교사가 메타정보 기반으로 시험지를 구성하고 학생에게 배포·채점·추천까지 제공하는 End-to-End 시스템입니다.</p>
+
+  <div class="card highlight">
+    <h4>핵심 요구사항</h4>
+    <table>
+      <tbody>
+        <tr><td>입력 포맷</td><td>HWP (바이너리) + HWPX (XML) 모두 지원</td></tr>
+        <tr><td>대상 과목</td><td>수학 우선 → 전 과목 확장</td></tr>
+        <tr><td>문항 유형</td><td>객관식 / 단답형 / 서술형 / 빈칸채우기 등</td></tr>
+        <tr><td>시험지 양식</td><td>자체 제작 (양식 통제 가능)</td></tr>
+        <tr><td>처리 단위</td><td>문항 1개 단위로 파이프라인 개별 진행</td></tr>
+        <tr><td>메타 스키마</td><td>과목별 동적 스키마 관리</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════ SEC 2 ═══════════════════════ -->
+<section class="section" id="sec2">
+  <div class="section-number">02</div>
+  <h2>전체 파이프라인 구조</h2>
+  <p class="section-desc">3개 Phase, 7개 작업팀 + 7개 검수팀으로 구성됩니다. 모든 검수팀은 반려권을 가지며, 반려 시 해당 작업팀으로 되돌아갑니다.</p>
+
+  <div class="pipeline-visual">
+
+    <!-- Phase 1 -->
+    <div class="phase-group phase1">
+      <div class="phase-label">PHASE 1 — 디지털라이징</div>
+      <p style="font-size:13px; color:var(--ink-muted); margin-bottom:16px; margin-top:4px;">HWP 파일 → 구조화 → 문항 제작 → 데이터 연동</p>
+
+      <div class="pipeline-row">
+        <div class="pipeline-node work">1. 파싱팀</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-node qa">2. 파싱검수팀</div>
+      </div>
+      <div class="pipeline-reject">← 반려 ←</div>
+
+      <div class="pipeline-row">
+        <div class="pipeline-node work">3. 메타팀</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-node qa">4. 메타검수팀</div>
+      </div>
+      <div class="pipeline-reject">← 반려 ←</div>
+
+      <div class="pipeline-row">
+        <div class="pipeline-node work">5. 제작팀</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-node qa">6. 제작검수팀</div>
+      </div>
+      <div class="pipeline-reject">← 반려 ←</div>
+
+      <div class="pipeline-row">
+        <div class="pipeline-node work">7. 데이터팀</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-node qa">8. 데이터검수팀</div>
+      </div>
+      <div class="pipeline-reject">← 반려 ←</div>
+    </div>
+
+    <div class="phase-connector">↓</div>
+
+    <!-- Phase 2 -->
+    <div class="phase-group phase2">
+      <div class="phase-label">PHASE 2 — 시험지 구성 & 배포</div>
+      <p style="font-size:13px; color:var(--ink-muted); margin-bottom:16px; margin-top:4px;">메타 기반 문항 선별 → 시험지 생성 → 배포 & 다운로드</p>
+
+      <div class="pipeline-row">
+        <div class="pipeline-node work">9. 시험지 구성팀</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-node qa">10. 시험지 검수팀</div>
+      </div>
+      <div class="pipeline-reject">← 반려 ←</div>
+
+      <div class="pipeline-row">
+        <div class="pipeline-node work">11. 서비스팀</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-node qa">12. 서비스검수팀</div>
+      </div>
+      <div class="pipeline-reject">← 반려 ←</div>
+    </div>
+
+    <div class="phase-connector">↓</div>
+
+    <!-- Phase 3 -->
+    <div class="phase-group phase3">
+      <div class="phase-label">PHASE 3 — 채점 & 추천</div>
+      <p style="font-size:13px; color:var(--ink-muted); margin-bottom:16px; margin-top:4px;">자동채점 → 성취도 분석 → 유사문항 추천</p>
+
+      <div class="pipeline-row">
+        <div class="pipeline-node work">13. 채점팀</div>
+        <div class="pipeline-arrow">→</div>
+        <div class="pipeline-node qa">14. 채점검수팀</div>
+      </div>
+      <div class="pipeline-reject">← 반려 ←</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ SEC 3 ═══════════════════════ -->
+<section class="section" id="sec3">
+  <div class="section-number">03</div>
+  <h2>에이전트 팀 구성 (14개 팀)</h2>
+  <p class="section-desc">각 팀의 역할과 책임 범위를 정의합니다.</p>
+
+  <table>
+    <thead>
+      <tr><th>#</th><th>팀명</th><th>유형</th><th>핵심 역할</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>파싱팀</td><td>작업</td><td>HWP/HWPX 파일에서 텍스트, 수식, 이미지, 표 등 raw 요소 추출</td></tr>
+      <tr><td>2</td><td>파싱검수팀</td><td>검수</td><td>추출 결과의 완전성, 정확성 검증. 불합격 시 파싱팀으로 반려</td></tr>
+      <tr><td>3</td><td>메타팀</td><td>작업</td><td>문항 경계 분리, 영역 분류(발문/선지/정답/해설), 과목별 메타데이터 태깅, 세트/공통지문 관리</td></tr>
+      <tr><td>4</td><td>메타검수팀</td><td>검수</td><td>구조화 결과 전수 검증. 누락/오매핑 검출. 불합격 시 메타팀으로 반려</td></tr>
+      <tr><td>5</td><td>제작팀</td><td>작업</td><td>디지털 문항 제작, 정/오답 설정, AI API를 통한 풀이 생성</td></tr>
+      <tr><td>6</td><td>제작검수팀</td><td>검수</td><td>렌더링 검증, 정/오답 확인, 오타 검출, 풀이 품질 평가. 불합격 시 제작팀으로 반려</td></tr>
+      <tr><td>7</td><td>데이터팀</td><td>작업</td><td>xAPI 이벤트 정의, 인터페이스 규격 연동. ※ xAPI/인터페이스 가이드 별도 제공 예정</td></tr>
+      <tr><td>8</td><td>데이터검수팀</td><td>검수</td><td>xAPI 커버리지 및 정합성 검증, 인터페이스 규격 준수 확인, dry-run 테스트. 불합격 시 데이터팀으로 반려</td></tr>
+      <tr><td>9</td><td>시험지 구성팀</td><td>작업</td><td>교사 메타 조건 기반 문항 필터링/선별, 시험지 밸런싱 및 렌더링</td></tr>
+      <tr><td>10</td><td>시험지 검수팀</td><td>검수</td><td>메타 조건 부합성, 구성 균형, 중복 문항 검증. 불합격 시 시험지 구성팀으로 반려</td></tr>
+      <tr><td>11</td><td>서비스팀</td><td>작업</td><td>시험지 배포(문자코드/QR코드), 한글파일 생성/다운로드/인쇄, 실시간 풀이 현황 제공</td></tr>
+      <tr><td>12</td><td>서비스검수팀</td><td>검수</td><td>한글파일 무결성, 페이지 레이아웃, 배포 기능, 모니터링 정상 동작 검증. 불합격 시 서비스팀으로 반려</td></tr>
+      <tr><td>13</td><td>채점팀</td><td>작업</td><td>자동채점(객관식/단답형/서술형), 성취도 분석, 유사문항 추천</td></tr>
+      <tr><td>14</td><td>채점검수팀</td><td>검수</td><td>채점 정확성, 추천 적절성, 유사도 정합성, 피드백 품질 검증. 불합격 시 채점팀으로 반려</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════ SEC 4 ═══════════════════════ -->
+<section class="section" id="sec4">
+  <div class="section-number">04</div>
+  <h2>문항 단위 파이프라인 관리</h2>
+  <p class="section-desc">하나의 HWP 파일에 N개의 문항이 포함되어 있어도, 파싱 이후 각 문항은 개별적으로 파이프라인을 진행합니다.</p>
+
+  <div class="info-box rule">
+    <strong>핵심 원칙:</strong> 문항 1개 = 파이프라인 인스턴스 1개. 같은 파일 내에서 통과된 문항은 다음 단계로, 반려된 문항만 재작업 대상이 됩니다. 서로 간섭하지 않습니다.
+  </div>
+
+  <h3>파일 → 문항 분리 흐름</h3>
+  <div class="code-block"><span class="cmt">// 1개 HWP 파일 업로드</span>
+대단원평가_2회_문제지.hwp (25문항)
+    │
+    ├─→ <span class="str">QI-2408-0001-00</span>  → [PARSING] → [PARSE_REVIEW] ✅ → [META] → ...
+    ├─→ <span class="str">QI-2408-0002-00</span>  → [PARSING] → [PARSE_REVIEW] ✅ → [META] → ...
+    ├─→ <span class="str">QI-2408-0003-00</span>  → [PARSING] → [PARSE_REVIEW] ❌ → <span class="bool">반려 → 재작업</span> → <span class="str">QI-2408-0003-01</span>
+    ├─→ <span class="str">QI-2408-0004-00</span>  → [PARSING] → [PARSE_REVIEW] ✅ → [META] → ...
+    │   ...
+    └─→ <span class="str">QI-2408-0025-00</span>  → [PARSING] → ...</div>
+</section>
+
+<!-- ═══════════════════════ SEC 5 ═══════════════════════ -->
+<section class="section" id="sec5">
+  <div class="section-number">05</div>
+  <h2>Primary Key 설계</h2>
+  <p class="section-desc">모든 문항은 시스템 전체에서 유일한 식별자를 가집니다. 키만 보고도 출처와 버전을 추적할 수 있어야 합니다.</p>
+
+  <div class="pkey-visual">
+    <div class="pkey-main">
+      <span class="seg1">QI</span><span class="pkey-sep"> - </span><span class="seg2">2408</span><span class="pkey-sep"> - </span><span class="seg3">0031</span><span class="pkey-sep"> - </span><span class="seg4">00</span>
+    </div>
+    <div class="pkey-legend">
+      <div class="pkey-legend-item s1">
+        <span class="label">접두어</span>
+        <span class="value">QI</span>
+        <br><span style="opacity:0.5; font-size:10px;">Question Item</span>
+      </div>
+      <div class="pkey-legend-item s2">
+        <span class="label">소스배치 ID</span>
+        <span class="value">2408</span>
+        <br><span style="opacity:0.5; font-size:10px;">파일 업로드 시 발번</span>
+      </div>
+      <div class="pkey-legend-item s3">
+        <span class="label">문항 시퀀스</span>
+        <span class="value">0031</span>
+        <br><span style="opacity:0.5; font-size:10px;">파일 내 순번 (4자리)</span>
+      </div>
+      <div class="pkey-legend-item s4">
+        <span class="label">버전</span>
+        <span class="value">00</span>
+        <br><span style="opacity:0.5; font-size:10px;">원본=00, 수정=01, 02...</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box rule">
+    <strong>버전 관리 규칙:</strong> 반려 후 재작업 시 버전이 +1 증가합니다 (00→01→02). 이전 버전은 삭제하지 않고 이력으로 보존하여 추적성을 확보합니다.
+  </div>
+</section>
+
+<!-- ═══════════════════════ SEC 6 ═══════════════════════ -->
+<section class="section" id="sec6">
+  <div class="section-number">06</div>
+  <h2>문항 상태 머신</h2>
+  <p class="section-desc">각 문항은 항상 아래 상태 중 하나에 존재하며, 정해진 전이 규칙에 따라서만 이동합니다.</p>
+
+  <h3>상태 전이 흐름</h3>
+  <div class="state-flow">
+    <span class="state-badge active">PARSING</span>
+    <span class="state-arrow">→</span>
+    <span class="state-badge review">PARSE_REVIEW</span>
+    <span class="state-arrow">→</span>
+    <span class="state-badge active">META</span>
+    <span class="state-arrow">→</span>
+    <span class="state-badge review">META_REVIEW</span>
+    <span class="state-arrow">→</span>
+    <span class="state-badge active">PRODUCTION</span>
+    <span class="state-arrow">→</span>
+    <span class="state-badge review">PROD_REVIEW</span>
+    <span class="state-arrow">→</span>
+    <span class="state-badge active">DATA</span>
+    <span class="state-arrow">→</span>
+    <span class="state-badge review">DATA_REVIEW</span>
+    <span class="state-arrow">→</span>
+    <span class="state-badge done">COMPLETED</span>
+  </div>
+
+  <h3>문항 상태 데이터 구조</h3>
+  <div class="code-block">{
+  <span class="key">"pkey"</span>: <span class="str">"QI-2408-0031-00"</span>,
+  <span class="key">"source"</span>: {
+    <span class="key">"batch_id"</span>: <span class="str">"2408"</span>,
+    <span class="key">"file_name"</span>: <span class="str">"대단원평가_2회_문제지.hwp"</span>,
+    <span class="key">"file_hash"</span>: <span class="str">"a7f3c2e8..."</span>,
+    <span class="key">"position_in_file"</span>: <span class="num">31</span>,
+    <span class="key">"total_in_file"</span>: <span class="num">25</span>
+  },
+  <span class="key">"version"</span>: <span class="num">0</span>,
+  <span class="key">"current_stage"</span>: <span class="str">"META_REVIEW"</span>,
+  <span class="key">"stage_history"</span>: [
+    {
+      <span class="key">"stage"</span>: <span class="str">"PARSING"</span>,
+      <span class="key">"entered"</span>: <span class="str">"2025-04-01T09:00:00Z"</span>,
+      <span class="key">"exited"</span>: <span class="str">"2025-04-01T09:01:23Z"</span>,
+      <span class="key">"result"</span>: <span class="str">"SUBMITTED"</span>
+    },
+    {
+      <span class="key">"stage"</span>: <span class="str">"PARSE_REVIEW"</span>,
+      <span class="key">"entered"</span>: <span class="str">"2025-04-01T09:01:23Z"</span>,
+      <span class="key">"exited"</span>: <span class="str">"2025-04-01T09:02:10Z"</span>,
+      <span class="key">"result"</span>: <span class="str">"PASS"</span>,
+      <span class="key">"score"</span>: <span class="num">92</span>
+    },
+    {
+      <span class="key">"stage"</span>: <span class="str">"META_REVIEW"</span>,
+      <span class="key">"entered"</span>: <span class="str">"2025-04-01T09:03:45Z"</span>,
+      <span class="key">"exited"</span>: <span class="bool">null</span>,
+      <span class="key">"result"</span>: <span class="bool">null</span>
+    }
+  ],
+  <span class="key">"content_hash"</span>: <span class="str">"b8e4d1f7..."</span>,
+  <span class="key">"locked_by"</span>: <span class="str">"META_REVIEW_AGENT"</span>
+}</div>
+</section>
+
+<!-- ═══════════════════════ SEC 7 ═══════════════════════ -->
+<section class="section" id="sec7">
+  <div class="section-number">07</div>
+  <h2>중복 방지 체계</h2>
+  <p class="section-desc">같은 파일 재업로드, 반려 후 재투입 등으로 인한 문항 중복을 3중으로 방지합니다.</p>
+
+  <div class="triple-guard">
+    <div class="guard-item">
+      <div class="guard-icon">🔒</div>
+      <div class="guard-title">Content Hash</div>
+      <div class="guard-desc">발문 + 수식 + 선지를 정규화하여 해시 생성. 동일 내용 문항의 이중 투입 차단</div>
+    </div>
+    <div class="guard-item">
+      <div class="guard-icon">📍</div>
+      <div class="guard-title">Source Tracking</div>
+      <div class="guard-desc">file_hash + position_in_file 조합으로 같은 파일의 같은 위치 문항 재투입 방지</div>
+    </div>
+    <div class="guard-item">
+      <div class="guard-icon">⚡</div>
+      <div class="guard-title">Pessimistic Lock</div>
+      <div class="guard-desc">문항이 스테이지에 진입하면 locked_by 점유 표시. 동시 작업 충돌 원천 차단</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ SEC 8 ═══════════════════════ -->
+<section class="section" id="sec8">
+  <div class="section-number">08</div>
+  <h2>검수 기준 총괄</h2>
+  <p class="section-desc">모든 검수팀은 동일한 합격/반려 프레임워크를 따릅니다.</p>
+
+  <div class="summary-grid">
+    <div class="summary-item">
+      <div class="label">만점</div>
+      <div class="value">100점</div>
+    </div>
+    <div class="summary-item">
+      <div class="label">합격 기준</div>
+      <div class="value" style="color:var(--pass);">85점 이상</div>
+    </div>
+    <div class="summary-item">
+      <div class="label">자동 반려 기준</div>
+      <div class="value" style="color:var(--fail);">단일항목 50% 미만</div>
+    </div>
+  </div>
+
+  <div class="info-box critical">
+    <strong>자동 반려 룰 (치명적 결함):</strong> 어떤 검수 항목이든 해당 항목 배점의 50% 미만 점수를 받으면, 총점이 85점 이상이더라도 무조건 자동 반려됩니다. 이는 핵심 품질 요소에서 치명적 결함이 있는 문항이 파이프라인을 통과하는 것을 원천 차단합니다.
+  </div>
+
+  <h3>합격/반려 판정 로직</h3>
+  <div class="code-block"><span class="cmt">// 검수 판정 Pseudocode</span>
+<span class="key">function</span> evaluate(scores, criteria):
+    total = <span class="num">0</span>
+
+    <span class="key">for each</span> item <span class="key">in</span> criteria:
+        item_score = scores[item.key]
+        item_max   = item.max_score
+        item_rate  = item_score / item_max
+
+        <span class="cmt">// 치명적 결함 체크: 단일 항목 50% 미만 → 즉시 반려</span>
+        <span class="key">if</span> item_rate < <span class="num">0.5</span>:
+            <span class="key">return</span> { result: <span class="str">"REJECT"</span>, reason: <span class="str">"AUTO_REJECT_CRITICAL"</span>, failed_item: item.key }
+
+        total += item_score
+
+    <span class="cmt">// 총점 기준 판정</span>
+    <span class="key">if</span> total >= <span class="num">85</span>:
+        <span class="key">return</span> { result: <span class="str">"PASS"</span>, score: total }
+    <span class="key">else</span>:
+        <span class="key">return</span> { result: <span class="str">"REJECT"</span>, reason: <span class="str">"BELOW_THRESHOLD"</span>, score: total }</div>
+</section>
+
+<!-- ═══════════════════════ SEC 9 ═══════════════════════ -->
+<section class="section" id="sec9">
+  <div class="section-number">09</div>
+  <h2>검수팀별 세부 채점 기준</h2>
+  <p class="section-desc">각 검수팀의 평가 항목, 배점, 기준 및 자동 반려 조건을 정의합니다. 항목은 운영 과정에서 추가·조정될 수 있습니다.</p>
+
+  <!-- ── 파싱검수팀 ── -->
+  <div class="review-card">
+    <div class="review-card-header">
+      <div class="review-card-title">파싱검수팀</div>
+      <div class="review-card-number">검수팀 #2 · Phase 1</div>
+    </div>
+    <div class="review-card-body">
+      <table>
+        <thead><tr><th>항목</th><th style="width:60px;">배점</th><th>평가 기준</th></tr></thead>
+        <tbody>
+          <tr><td>텍스트 추출 완전성</td><td><strong>25</strong></td><td>원본 대비 텍스트 누락률 0%=만점. 1자라도 누락 시 감점</td></tr>
+          <tr><td>수식 추출 정확성</td><td><strong>25</strong></td><td>EQUATION SCRIPT 원본 대비 일치율. 수식 깨짐/변형 여부</td></tr>
+          <tr><td>이미지 추출 무결성</td><td><strong>20</strong></td><td>추출 여부, 해상도 보존, 문항-이미지 매핑 정확성. 이미지 미포함 문항은 만점 처리</td></tr>
+          <tr><td>구조 보존성</td><td><strong>15</strong></td><td>문단 순서, 번호 체계, 표 구조가 원본과 일치하는지</td></tr>
+          <tr><td>인코딩/특수문자</td><td><strong>15</strong></td><td>한글, 특수기호(①②③, □, ÷ 등), 유니코드 깨짐 없이 보존</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="auto-reject">수식 포함 문항에서 수식 추출 정확성 12점 미만(50%) → 총점 무관 자동 반려</div>
+  </div>
+
+  <!-- ── 메타검수팀 ── -->
+  <div class="review-card">
+    <div class="review-card-header">
+      <div class="review-card-title">메타검수팀</div>
+      <div class="review-card-number">검수팀 #4 · Phase 1</div>
+    </div>
+    <div class="review-card-body">
+      <table>
+        <thead><tr><th>항목</th><th style="width:60px;">배점</th><th>평가 기준</th></tr></thead>
+        <tbody>
+          <tr><td>문항 경계 정확성</td><td><strong>20</strong></td><td>문항의 시작/끝이 정확히 분리되었는지. 이전/이후 문항과 혼입 없는지</td></tr>
+          <tr><td>영역 분류 정확성</td><td><strong>25</strong></td><td>발문/선지/정답/해설/지문 영역이 정확히 매핑되었는지</td></tr>
+          <tr><td>메타데이터 완전성</td><td><strong>20</strong></td><td>과목별 필수 메타필드(단원, 난이도, 유형, 성취기준코드 등) 누락 없는지</td></tr>
+          <tr><td>메타데이터 적합성</td><td><strong>20</strong></td><td>태깅된 값이 실제 문항 내용과 일치하는지 (예: 확률 문항에 '함수' 태깅 오류)</td></tr>
+          <tr><td>세트/공통지문 처리</td><td><strong>15</strong></td><td>세트 문항의 그룹핑, 공통 지문/이미지 참조 관계가 정확한지</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="auto-reject">정답이 다른 영역에 매핑되었거나 발문이 누락된 경우 → 자동 반려</div>
+  </div>
+
+  <!-- ── 제작검수팀 ── -->
+  <div class="review-card">
+    <div class="review-card-header">
+      <div class="review-card-title">제작검수팀</div>
+      <div class="review-card-number">검수팀 #6 · Phase 1</div>
+    </div>
+    <div class="review-card-body">
+      <table>
+        <thead><tr><th>항목</th><th style="width:60px;">배점</th><th>평가 기준</th></tr></thead>
+        <tbody>
+          <tr><td>문항 렌더링 완전성</td><td><strong>20</strong></td><td>디지털 문항이 원본과 동일하게 표시되는지. 수식/이미지/표 깨짐 없는지</td></tr>
+          <tr><td>정/오답 정확성</td><td><strong>25</strong></td><td>정답 설정이 올바른지. 객관식 정답번호, 단답형 정답값, 서술형 채점기준</td></tr>
+          <tr><td>오타/탈자 검증</td><td><strong>15</strong></td><td>원본 대비 오타, 탈자, 띄어쓰기 오류 발생 여부</td></tr>
+          <tr><td>풀이 품질</td><td><strong>25</strong></td><td>AI 생성 풀이가 논리적으로 정확한지, 단계적인지, 학생 수준에 적합한지</td></tr>
+          <tr><td>선지/보기 무결성</td><td><strong>15</strong></td><td>객관식 선지 개수 일치, 선지 순서 보존, 빈칸/서술형 답란 설정 적절성</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="auto-reject">정/오답이 잘못 설정되었거나, 풀이와 정답이 불일치하는 경우 → 자동 반려</div>
+  </div>
+
+  <!-- ── 데이터검수팀 ── -->
+  <div class="review-card">
+    <div class="review-card-header">
+      <div class="review-card-title">데이터검수팀</div>
+      <div class="review-card-number">검수팀 #8 · Phase 1</div>
+    </div>
+    <div class="review-card-body">
+      <table>
+        <thead><tr><th>항목</th><th style="width:60px;">배점</th><th>평가 기준</th></tr></thead>
+        <tbody>
+          <tr><td>xAPI 이벤트 커버리지</td><td><strong>30</strong></td><td>가이드에 명시된 모든 이벤트가 정의되었는지 (문항 시작/응답/제출/채점 등)</td></tr>
+          <tr><td>xAPI 데이터 정합성</td><td><strong>25</strong></td><td>actor/verb/object/result 구조가 xAPI 스펙에 부합하는지</td></tr>
+          <tr><td>인터페이스 규격 준수</td><td><strong>25</strong></td><td>플랫폼 인터페이스 규격 가이드 대비 누락/불일치 필드 없는지</td></tr>
+          <tr><td>이벤트 발화 테스트</td><td><strong>20</strong></td><td>실제 시뮬레이션에서 이벤트가 정상 발화되는지 (dry-run 테스트)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="auto-reject">필수 xAPI 이벤트 누락 또는 인터페이스 필수 필드 누락 → 자동 반려</div>
+  </div>
+
+  <!-- ── 시험지검수팀 ── -->
+  <div class="review-card">
+    <div class="review-card-header">
+      <div class="review-card-title">시험지 검수팀</div>
+      <div class="review-card-number">검수팀 #10 · Phase 2</div>
+    </div>
+    <div class="review-card-body">
+      <table>
+        <thead><tr><th>항목</th><th style="width:60px;">배점</th><th>평가 기준</th></tr></thead>
+        <tbody>
+          <tr><td>메타 조건 부합성</td><td><strong>30</strong></td><td>교사 선택 과목/단원/난이도/유형 조건과 선별 문항이 100% 일치하는지</td></tr>
+          <tr><td>문항 구성 균형성</td><td><strong>20</strong></td><td>난이도/유형/단원 분포가 편향 없이 균형적인지</td></tr>
+          <tr><td>시험지 렌더링 품질</td><td><strong>20</strong></td><td>온라인 시험지에서 수식/이미지/표가 정상 표시되는지</td></tr>
+          <tr><td>문항 순서 적절성</td><td><strong>15</strong></td><td>난이도 순 배치, 같은 유형 연속 배치 등 교육적 배려 적용 여부</td></tr>
+          <tr><td>중복 문항 검증</td><td><strong>15</strong></td><td>동일/유사 문항이 한 시험지 내에 중복 포함되지 않았는지</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="auto-reject">교사 선택 조건과 불일치하는 문항이 1개라도 포함된 경우 → 자동 반려</div>
+  </div>
+
+  <!-- ── 서비스검수팀 ── -->
+  <div class="review-card">
+    <div class="review-card-header">
+      <div class="review-card-title">서비스검수팀</div>
+      <div class="review-card-number">검수팀 #12 · Phase 2</div>
+    </div>
+    <div class="review-card-body">
+      <table>
+        <thead><tr><th>항목</th><th style="width:60px;">배점</th><th>평가 기준</th></tr></thead>
+        <tbody>
+          <tr><td>한글파일 무결성</td><td><strong>25</strong></td><td>생성된 HWP/HWPX 파일이 한글에서 정상 열리는지, 깨짐 없는지</td></tr>
+          <tr><td>원본 일치성</td><td><strong>20</strong></td><td>한글파일 내 문항이 DB 원본 문항과 텍스트/수식/이미지 동일한지</td></tr>
+          <tr><td>페이지 레이아웃</td><td><strong>20</strong></td><td>페이지 나눔 시 문항이 잘리지 않는지, 이미지가 분리되지 않는지</td></tr>
+          <tr><td>배포 기능 정상동작</td><td><strong>20</strong></td><td>문자코드/QR코드 생성, 공유 링크 접근성, 다운로드/인쇄 정상 동작</td></tr>
+          <tr><td>실시간 모니터링</td><td><strong>15</strong></td><td>학생 풀이 현황이 교사 화면에 준실시간 반영되는지</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="auto-reject">한글파일이 열리지 않거나, 문항이 페이지 경계에서 잘리는 경우 → 자동 반려</div>
+  </div>
+
+  <!-- ── 채점검수팀 ── -->
+  <div class="review-card">
+    <div class="review-card-header">
+      <div class="review-card-title">채점검수팀</div>
+      <div class="review-card-number">검수팀 #14 · Phase 3</div>
+    </div>
+    <div class="review-card-body">
+      <table>
+        <thead><tr><th>항목</th><th style="width:60px;">배점</th><th>평가 기준</th></tr></thead>
+        <tbody>
+          <tr><td>채점 정확성</td><td><strong>30</strong></td><td>객관식/단답형 자동채점 결과 정답 일치 여부. 서술형 AI채점 합리성</td></tr>
+          <tr><td>성취도 분석 정합성</td><td><strong>20</strong></td><td>단원별/유형별 취약점 분석 결과가 실제 오답 패턴과 일치하는지</td></tr>
+          <tr><td>추천 문항 적절성</td><td><strong>25</strong></td><td>추천 문항이 학생의 틀린 문항과 유사도/연관성이 실제로 높은지</td></tr>
+          <tr><td>유사도 산출 정확성</td><td><strong>15</strong></td><td>임베딩 기반 유사도 값이 합리적 범위인지, 극단값 없는지</td></tr>
+          <tr><td>피드백 품질</td><td><strong>10</strong></td><td>학생에게 제공되는 오답 피드백이 교육적으로 유의미한지</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="auto-reject">객관식 채점 오류 1건이라도 발생, 추천 문항이 전혀 다른 단원/과목에서 제시된 경우 → 자동 반려</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ SEC 10 ═══════════════════════ -->
+<section class="section" id="sec10">
+  <div class="section-number">10</div>
+  <h2>HWP 파싱 분석 결과</h2>
+  <p class="section-desc">샘플 5개 파일 분석 결과입니다. 모두 HWPML(XML) 포맷으로 확인되었으며, 바이너리 HWP 대비 파싱이 매우 용이합니다.</p>
+
+  <h3>파일별 분석 요약</h3>
+  <table>
+    <thead>
+      <tr><th>파일명</th><th>문항수</th><th>수식</th><th>이미지</th><th>유형</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>단항식과 다항식 곱셈나눗셈</td><td>19</td><td>57</td><td>0</td><td>서술형+객관식 혼합</td></tr>
+      <tr><td>각의 이등분선 성질</td><td>19</td><td>113</td><td>18</td><td>서술형+객관식, 이미지 다수</td></tr>
+      <tr><td>대단원평가 2회</td><td>25</td><td>175</td><td>11</td><td>객관식 위주+서술형</td></tr>
+      <tr><td>중단원평가 (순열조합)</td><td>25</td><td>147</td><td>3</td><td>객관식 위주</td></tr>
+      <tr><td>중단원평가 (소수)</td><td>25</td><td>106</td><td>8</td><td>빈칸채우기+객관식+서술형</td></tr>
+    </tbody>
+  </table>
+
+  <h3>파싱 가능 요소</h3>
+  <table>
+    <thead>
+      <tr><th>요소</th><th>XML 태그</th><th>추출 방식</th><th>난이도</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>텍스트</td><td>&lt;CHAR&gt;</td><td>직접 텍스트 추출</td><td>쉬움</td></tr>
+      <tr><td>수식</td><td>&lt;EQUATION&gt; → &lt;SCRIPT&gt;</td><td>한글 수식문법 → LaTeX 변환</td><td>보통</td></tr>
+      <tr><td>이미지</td><td>&lt;BINDATA&gt; (Base64 PNG)</td><td>Base64 디코딩 후 파일 저장</td><td>쉬움</td></tr>
+      <tr><td>이미지 매핑</td><td>&lt;PICTURE&gt; → &lt;IMAGE BinItem&gt;</td><td>BinItem ID로 문단-이미지 연결</td><td>보통</td></tr>
+      <tr><td>표</td><td>&lt;TABLE&gt; → &lt;ROW&gt; → &lt;CELL&gt;</td><td>계층 구조 탐색</td><td>보통</td></tr>
+      <tr><td>문항번호</td><td>&lt;CHAR&gt; text 패턴 매칭</td><td>"N." 패턴 + ①②③ 선지 패턴</td><td>쉬움</td></tr>
+      <tr><td>헤더 메타</td><td>첫 번째 &lt;P&gt; 내 &lt;CHAR&gt;</td><td>단원명/회차/평가유형 추출</td><td>쉬움</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box warn">
+    <strong>주의:</strong> 현재 샘플은 모두 HWPML(XML) 포맷입니다. 실제 바이너리 HWP(.hwp OLE2) 파일이 투입될 경우를 대비하여, olefile/pyhwp 기반 별도 파서를 병행 설계해야 합니다. 파싱팀의 포맷 감지 에이전트(A1)가 파일 매직 바이트를 확인하여 적절한 파서로 라우팅합니다.
+  </div>
+</section>
+
+<!-- ═══════════════════════ SUMMARY ═══════════════════════ -->
+<section class="section">
+  <div class="section-number">SUMMARY</div>
+  <h2>설계 결정 요약</h2>
+
+  <div class="summary-grid">
+    <div class="summary-item"><div class="label">파이프라인 단위</div><div class="value">문항 1개</div></div>
+    <div class="summary-item"><div class="label">에이전트 팀</div><div class="value">14개 (7작업+7검수)</div></div>
+    <div class="summary-item"><div class="label">Phase 구분</div><div class="value">3개 Phase</div></div>
+    <div class="summary-item"><div class="label">유니크 키 포맷</div><div class="value mono">QI-{배치}-{순번}-{버전}</div></div>
+    <div class="summary-item"><div class="label">합격 기준</div><div class="value" style="color:var(--pass);">85점 이상</div></div>
+    <div class="summary-item"><div class="label">자동 반려</div><div class="value" style="color:var(--fail);">단일항목 &lt;50%</div></div>
+    <div class="summary-item"><div class="label">중복 방지</div><div class="value mono">3중 (Hash+Source+Lock)</div></div>
+    <div class="summary-item"><div class="label">버전 관리</div><div class="value">반려 시 버전 +1</div></div>
+    <div class="summary-item"><div class="label">대상 과목</div><div class="value">수학 → 전과목 확장</div></div>
+  </div>
+
+  <div class="info-box rule">
+    <strong>다음 단계:</strong> xAPI 가이드 및 인터페이스 규격 가이드 수령 후, 데이터팀(#7)/데이터검수팀(#8)의 세부 스펙 확정. 이후 각 에이전트의 구체적 동작 로직 및 프롬프트 설계 진행.
+  </div>
+</section>
+
+<footer class="doc-footer">
+  <p>시험 문항 디지털라이징 시스템 · 설계 초안 v1.0 · 2025.04</p>
+  <p style="margin-top:4px; font-size:12px;">본 문서는 초안이며, 운영 과정에서 검수 항목 및 기준이 추가·조정될 수 있습니다.</p>
+</footer>
+
+</div>
+</body>
+</html>

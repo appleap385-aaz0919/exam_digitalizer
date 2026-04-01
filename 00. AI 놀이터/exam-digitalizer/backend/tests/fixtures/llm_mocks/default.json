@@ -1,0 +1,9 @@
+{
+  "agent": "default",
+  "description": "기본 mock 응답 (에이전트별 파일 없을 때 사용)",
+  "response": {
+    "result": "PASS",
+    "score": 95.0,
+    "note": "Mock default response"
+  }
+}

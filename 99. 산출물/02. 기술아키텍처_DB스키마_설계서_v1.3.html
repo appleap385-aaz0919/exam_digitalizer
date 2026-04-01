@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기술 아키텍처 설계서 v1.3</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1f;--ink-light:#4a4a55;--ink-muted:#8a8a95;--surface:#fafaf8;--card:#fff;--border:#e8e8e4;--border-light:#f0f0ec;--accent:#2d5be3;--accent-light:#eef2fd;--accent-dark:#1a3a9e;--pass:#0d8a5e;--pass-bg:#e8f8f0;--fail:#d43b3b;--fail-bg:#fdeaea;--warn:#c27a1a;--warn-bg:#fef6e8;--purple:#6c5ce7;--purple-bg:#f0eeff;--teal:#0d9488;--teal-bg:#e8f7f6}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Noto Sans KR',sans-serif;background:var(--surface);color:var(--ink);line-height:1.72;font-size:13.5px;-webkit-font-smoothing:antialiased}.pw{max-width:1140px;margin:0 auto;padding:50px 40px 100px}
+.cover{text-align:center;padding:50px 0 30px;border-bottom:1px solid var(--border);margin-bottom:30px}.cover-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);background:var(--accent-light);padding:5px 14px;border-radius:20px;margin-bottom:14px}.cover h1{font-size:26px;font-weight:900;line-height:1.3;margin-bottom:8px}.cover h1 em{font-style:normal;color:var(--accent)}.cover-meta{font-size:11.5px;color:var(--ink-muted)}.cover-meta span+span::before{content:'·';margin:0 6px}
+.cl{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:26px}.cl h2{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--fail);margin-bottom:8px}.cl ul{list-style:none;font-size:11.5px;line-height:1.85}.cl li::before{margin-right:5px;font-size:10px}.cl li.c::before{content:'🔴'}.cl li.e::before{content:'🟡'}.cl li.a::before{content:'🟢'}.cl li.f::before{content:'🔵'}
+.sec{margin-bottom:34px}.sn{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1px;margin-bottom:2px}.sec h2{font-size:18px;font-weight:900;margin-bottom:4px}.sd{font-size:12px;color:var(--ink-light);margin-bottom:14px;max-width:700px}.sec h3{font-size:13.5px;font-weight:700;margin:20px 0 7px;padding-bottom:3px;border-bottom:2px solid var(--border)}.sec h4{font-size:12.5px;font-weight:700;margin:12px 0 5px}
+.ac{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:16px;overflow:hidden}.ah{padding:10px 18px;border-bottom:1px solid var(--border);font-size:14px;font-weight:800}.ab{padding:14px 18px}
+.code{background:#1a1a2e;color:#e0e0e8;border-radius:7px;padding:12px 14px;margin:6px 0;font-family:'JetBrains Mono',monospace;font-size:10.5px;line-height:1.6;overflow-x:auto;white-space:pre;tab-size:2}.code .k{color:#74b9ff}.code .s{color:#55efc4}.code .n{color:#ffeaa7}.code .b{color:#fd79a8}.code .c{color:#636e72;font-style:italic}.code .f{color:#a29bfe}.code .t{color:#fab1a0}
+table{width:100%;border-collapse:separate;border-spacing:0;margin:6px 0;font-size:11.5px;border:1px solid var(--border);border-radius:7px;overflow:hidden}thead{background:#f5f5f2}th{text-align:left;padding:6px 9px;font-weight:700;font-size:10px;color:var(--ink-light);border-bottom:2px solid var(--border);white-space:nowrap}td{padding:6px 9px;border-bottom:1px solid var(--border-light);vertical-align:top}tbody tr:last-child td{border-bottom:none}
+.info{padding:9px 12px;border-radius:6px;margin:6px 0;font-size:11.5px}.info.rule{background:var(--accent-light);border:1px solid rgba(45,91,227,.15);color:var(--accent-dark)}.info.warn{background:var(--warn-bg);border:1px solid rgba(194,122,26,.15);color:#8a5a10}.info.success{background:var(--pass-bg);border:1px solid rgba(13,138,94,.15);color:#076840}.info.critical{background:var(--fail-bg);border:1px solid rgba(212,59,59,.15);color:var(--fail)}
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:9px;margin:10px 0}.si{background:var(--card);border:1px solid var(--border);border-radius:7px;padding:10px 14px}.si .sl{font-size:9px;color:var(--ink-muted);font-weight:500;margin-bottom:1px}.si .sv{font-size:13px;font-weight:700}.si .sv.mono{font-family:'JetBrains Mono',monospace;font-size:10.5px}
+.vt{display:inline-block;font-size:8px;font-weight:700;padding:2px 5px;border-radius:3px;margin-left:4px;vertical-align:middle;background:#e8def8;color:#5b21b6}
+.badge{display:inline-block;font-size:8px;font-weight:600;padding:1px 5px;border-radius:3px;font-family:'JetBrains Mono',monospace;margin-left:2px}.badge.pk{background:var(--fail-bg);color:var(--fail)}.badge.fk{background:var(--accent-light);color:var(--accent)}.badge.idx{background:var(--warn-bg);color:var(--warn)}.badge.uq{background:var(--purple-bg);color:var(--purple)}
+.endpoint{display:flex;gap:6px;padding:6px 10px;background:var(--card);border:1px solid var(--border-light);border-radius:6px;margin:3px 0;font-size:11px;align-items:center}.method{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;padding:2px 5px;border-radius:3px;min-width:36px;text-align:center}.method.get{background:#e8f8f0;color:#0d8a5e}.method.post{background:#eef2fd;color:#2d5be3}.method.patch{background:#fef6e8;color:#c27a1a}.method.delete{background:#fdeaea;color:#d43b3b}.method.ws{background:#f0eeff;color:#6c5ce7}.ep-path{font-family:'JetBrains Mono',monospace;font-size:10px;flex:1}.ep-desc{color:var(--ink-light);font-size:10px}.ep-role{font-size:8px;font-family:'JetBrains Mono',monospace;color:var(--ink-muted)}
+.pipe-row{display:flex;align-items:center;gap:4px;margin:4px 0;flex-wrap:wrap}.pipe-node{padding:4px 10px;border-radius:5px;font-size:10px;font-family:'JetBrains Mono',monospace;font-weight:600;white-space:nowrap}.pipe-node.work{background:var(--purple-bg);color:var(--purple)}.pipe-node.review{background:var(--teal-bg);color:var(--teal)}.pipe-node.done{background:var(--pass-bg);color:var(--pass)}.pipe-node.deploy{background:var(--accent-light);color:var(--accent)}.pipe-arrow{color:var(--ink-muted);font-size:12px}
+.doc-footer{margin-top:40px;padding-top:12px;border-top:1px solid var(--border);text-align:center;font-size:10px;color:var(--ink-muted)}
+@media print{body{font-size:9px}.pw{padding:12px}.ac{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="pw">
+
+<header class="cover">
+<div class="cover-badge">Technical Architecture v1.3</div>
+<h1>기술 아키텍처 & <em>DB 스키마 설계서</em></h1>
+<div class="cover-meta"><span>L2 파이프라인 2단계 분리</span><span>학급별 HWP+QR</span><span>복수정답 채점</span><span>2025.04</span></div>
+</header>
+
+<div class="cl"><h2 style="color:var(--fail)">v1.2 → v1.3 변경 이력</h2><ul>
+<li class="c"><strong>L2 파이프라인 2단계 분리</strong> — L2-A(시험지 콘텐츠, exam_id) + L2-B(학급 배포, classroom_exam_id)</li>
+<li class="c"><strong>HWP 학급별 생성</strong> — hwp_file_path를 exams → classroom_exams로 이동, 학급별 QR 삽입</li>
+<li class="c"><strong>오케스트레이터 3계층 상태 관리</strong> — L1(문항) + L2-A(시험지 콘텐츠) + L2-B(학급 배포)</li>
+<li class="e">복수정답 채점 로직 상세화 (choice_multiple 타입, scoring_mode)</li>
+<li class="e">성적 API를 classroom_exam 기준으로 변경</li>
+<li class="e">서비스팀(#11) 역할을 L2-B로 이동, 서비스검수팀(#12) 검수 항목 업데이트</li>
+<li class="e">시험지 구성팀(#9) 배점 자동 할당 로직 추가</li>
+<li class="a">재응시 방지 로직 명시</li>
+<li class="a">classroom_exam CLOSED 시 미제출 자동 처리</li>
+<li class="a">Redis TTL 정책 명확화 + 세션 cleanup 절차</li>
+<li class="a">자기등록 학생 교사 알림</li>
+<li class="a">시험 시간 연장 API</li>
+<li class="f">동명이인 처리 정책</li>
+</ul></div>
+
+<!-- ═══ 1. L2 PIPELINE SPLIT ═══ -->
+<div class="sec"><div class="sn">01</div><h2>L2 파이프라인 2단계 분리<span class="vt">v1.3 핵심</span></h2>
+<p class="sd">시험지 "콘텐츠"와 "배포"를 분리합니다. 콘텐츠는 한 번 확정, 배포는 학급마다 반복.</p>
+
+<h3>L2-A: 시험지 콘텐츠 파이프라인 (exam_id 단위)</h3>
+<div class="pipe-row">
+<span class="pipe-node work">EXAM_COMPOSE</span><span class="pipe-arrow">→</span>
+<span class="pipe-node review">EXAM_REVIEW</span><span class="pipe-arrow">→</span>
+<span class="pipe-node done">EXAM_CONFIRMED</span>
+</div>
+<table><thead><tr><th>스테이지</th><th>에이전트</th><th>처리 내용</th></tr></thead><tbody>
+<tr><td>EXAM_COMPOSE</td><td>#9 시험지 구성팀</td><td>문항 선별, 밸런싱, 순서 배치, 자동 배점 할당</td></tr>
+<tr><td>EXAM_REVIEW</td><td>#10 시험지 검수팀</td><td>조건 부합, 균형, 중복, 렌더링 검증</td></tr>
+<tr><td>EXAM_CONFIRMED</td><td>—</td><td>교사 확정 완료. 콘텐츠 불변. 이후 여러 학급에 반복 배포 가능</td></tr>
+</tbody></table>
+<div class="info rule"><strong>EXAM_CONFIRMED 이후 콘텐츠 수정 불가.</strong> 문항 교체·배점 변경은 EXAM_COMPOSE로 돌아가야 합니다. 새 시험지를 만드는 것도 가능.</div>
+
+<h3>L2-B: 학급 배포 파이프라인 (classroom_exam_id 단위)</h3>
+<div class="pipe-row">
+<span class="pipe-node deploy">DEPLOY_REQUESTED</span><span class="pipe-arrow">→</span>
+<span class="pipe-node work">HWP_GENERATING</span><span class="pipe-arrow">→</span>
+<span class="pipe-node review">HWP_REVIEW</span><span class="pipe-arrow">→</span>
+<span class="pipe-node done">DEPLOY_READY</span>
+</div>
+<div class="pipe-row">
+<span class="pipe-node done">DEPLOY_READY</span><span class="pipe-arrow">→</span>
+<span class="pipe-node deploy">SCHEDULED</span><span class="pipe-arrow">→</span>
+<span class="pipe-node deploy">ACTIVE</span><span class="pipe-arrow">→</span>
+<span class="pipe-node done">CLOSED</span>
+</div>
+<table><thead><tr><th>스테이지</th><th>에이전트</th><th>처리 내용</th></tr></thead><tbody>
+<tr><td>DEPLOY_REQUESTED</td><td>오케스트레이터</td><td>교사가 학급에 시험 배포 요청 (opens_at/closes_at 설정)</td></tr>
+<tr><td>HWP_GENERATING</td><td>#11 서비스팀</td><td>학급별 HWP 생성 (HWPML 템플릿 + 학급 전용 QR 삽입)</td></tr>
+<tr><td>HWP_REVIEW</td><td>#12 서비스검수팀</td><td>HWP 무결성, QR 접근, 페이지 레이아웃, 원본 일치</td></tr>
+<tr><td>DEPLOY_READY</td><td>—</td><td>HWP 다운로드 가능, 학생 접속 대기</td></tr>
+<tr><td>SCHEDULED</td><td>오케스트레이터</td><td>opens_at 이전, 대기 상태</td></tr>
+<tr><td>ACTIVE</td><td>오케스트레이터</td><td>opens_at 도래 → 학생 응시 가능</td></tr>
+<tr><td>CLOSED</td><td>오케스트레이터</td><td>closes_at 도래 또는 수동 종료 → 미제출 자동 처리</td></tr>
+</tbody></table>
+
+<h3>L2-B 반려 흐름</h3>
+<div class="code"><span class="c">// HWP_REVIEW에서 반려 시</span>
+HWP_REVIEW → REJECT → HWP_GENERATING (서비스팀이 재생성)
+
+<span class="c">// 콘텐츠 자체 문제 발견 시 (문항 오류 등)</span>
+<span class="c">// L2-B에서 해결 불가 → L2-A의 EXAM_COMPOSE로 에스컬레이션</span>
+<span class="c">// 해당 classroom_exam은 DEPLOY_CANCELLED 상태로 전환</span></div>
+
+<h3>오케스트레이터 상태 매핑 (v1.3 최종)</h3>
+<table><thead><tr><th>계층</th><th>기준 ID</th><th>스테이지</th><th>성공 시</th><th>반려 시</th></tr></thead><tbody>
+<tr><td rowspan="6">L1</td><td rowspan="6">pkey</td><td>PARSE_REVIEW</td><td>META</td><td>→ PARSING</td></tr>
+<tr><td>META_REVIEW</td><td>PRODUCTION</td><td>→ META</td></tr>
+<tr><td>PROD_REVIEW</td><td>HUMAN_CONFIRM(B) / DATA(A·C)</td><td>→ PRODUCTION</td></tr>
+<tr><td>HUMAN_CONFIRM</td><td>DATA</td><td>→ PRODUCTION</td></tr>
+<tr><td>DATA_REVIEW</td><td>EMBEDDING</td><td>→ DATA</td></tr>
+<tr><td>EMBEDDING</td><td>L1_COMPLETED</td><td>재시도3 → ERROR</td></tr>
+<tr><td rowspan="2">L2-A</td><td rowspan="2">exam_id</td><td>EXAM_REVIEW</td><td>EXAM_CONFIRMED</td><td>→ EXAM_COMPOSE</td></tr>
+<tr><td>EXAM_CONFIRMED</td><td>(학급 배포 대기)</td><td>—</td></tr>
+<tr><td rowspan="3">L2-B</td><td rowspan="3">classroom_exam_id</td><td>HWP_REVIEW</td><td>DEPLOY_READY</td><td>→ HWP_GENERATING</td></tr>
+<tr><td>SCHEDULED → ACTIVE</td><td>(opens_at 자동 전환)</td><td>—</td></tr>
+<tr><td>ACTIVE → CLOSED</td><td>(closes_at 자동 전환)</td><td>—</td></tr>
+</tbody></table>
+</div>
+
+<!-- ═══ 2. DB CHANGES ═══ -->
+<div class="sec"><div class="sn">02</div><h2>DB 변경사항<span class="vt">v1.3</span></h2>
+
+<h3>A. exams 테이블 변경</h3>
+<div class="code"><span class="c">-- v1.3: hwp_file_path 제거 (학급별로 이동)</span>
+<span class="c">-- exams는 콘텐츠만 담당</span>
+ALTER TABLE exams DROP COLUMN hwp_file_path;
+ALTER TABLE exams DROP COLUMN distribution_code;  <span class="c">-- 학급 코드로 대체</span>
+ALTER TABLE exams DROP COLUMN qr_code_path;       <span class="c">-- 학급별로 이동</span>
+
+<span class="c">-- status 값 변경</span>
+<span class="c">-- 기존: EXAM_REVIEW → ... → ACTIVE</span>
+<span class="c">-- v1.3: EXAM_COMPOSE → EXAM_REVIEW → EXAM_CONFIRMED</span></div>
+
+<h3>B. classroom_exams 테이블 확장</h3>
+<table><thead><tr><th>컬럼</th><th>타입</th><th>제약</th><th>v1.3 변경</th></tr></thead><tbody>
+<tr><td>id</td><td>SERIAL</td><td><span class="badge pk">PK</span></td><td>유지</td></tr>
+<tr><td>classroom_id</td><td>UUID</td><td><span class="badge fk">FK→classrooms</span></td><td>유지</td></tr>
+<tr><td>exam_id</td><td>VARCHAR(20)</td><td><span class="badge fk">FK→exams</span></td><td>유지</td></tr>
+<tr><td>opens_at</td><td>TIMESTAMPTZ</td><td></td><td>유지</td></tr>
+<tr><td>closes_at</td><td>TIMESTAMPTZ</td><td></td><td>유지</td></tr>
+<tr><td>hwp_file_path</td><td>VARCHAR(500)</td><td></td><td><strong>exams에서 이동</strong></td></tr>
+<tr><td>exam_qr_path</td><td>VARCHAR(500)</td><td></td><td>유지 (학급+시험 인코딩 QR)</td></tr>
+<tr><td>status</td><td>VARCHAR(20)</td><td></td><td><strong>확장:</strong> DEPLOY_REQUESTED → HWP_GENERATING → HWP_REVIEW → DEPLOY_READY → SCHEDULED → ACTIVE → CLOSED → DEPLOY_CANCELLED</td></tr>
+<tr><td>created_at</td><td>TIMESTAMPTZ</td><td></td><td>유지</td></tr>
+</tbody></table>
+
+<h3>C. submission_answers.value 타입 확장 (복수정답)</h3>
+<div class="code"><span class="c">-- value 컬럼은 TEXT 유지 (JSON 직렬화)</span>
+<span class="c">-- 단일 선택: "3"</span>
+<span class="c">-- 복수 선택: "[2, 4]" (JSON array 문자열)</span>
+<span class="c">-- 단답형: "3cm"</span>
+<span class="c">-- 서술형: "x=3이므로..."</span>
+<span class="c">-- 미응답: null</span>
+
+<span class="c">-- answer_type 확장</span>
+<span class="c">-- 기존: choice / short_answer / descriptive</span>
+<span class="c">-- v1.3 추가: choice_multiple (복수 선택 객관식)</span></div>
+
+<h3>D. pipeline_states 변경</h3>
+<div class="code"><span class="c">-- pipeline_level 확장</span>
+<span class="c">-- 기존: L1 / L2</span>
+<span class="c">-- v1.3: L1 / L2A / L2B</span>
+
+<span class="c">-- L2A: ref_id = exam_id</span>
+<span class="c">-- L2B: ref_id = classroom_exam_id (integer → varchar 변환 필요)</span></div>
+</div>
+
+<!-- ═══ 3. AGENT SPEC UPDATES ═══ -->
+<div class="sec"><div class="sn">03</div><h2>에이전트 스펙 업데이트<span class="vt">v1.3</span></h2>
+
+<h3>A. 시험지 구성팀(#9) — 배점 자동 할당 추가</h3>
+<div class="code"><span class="c">// 시험지 구성 시 자동 배점 (v1.3 추가)</span>
+<span class="k">for</span> question <span class="k">in</span> selected_questions:
+    q_type = question.question_type
+    question.points_auto = teacher_request.points_per_type[q_type]
+    question.points = question.points_auto
+    question.points_modified = <span class="b">False</span>
+
+<span class="c">// total_points 자동 계산</span>
+exam.total_points = <span class="f">sum</span>(q.points <span class="k">for</span> q <span class="k">in</span> selected_questions)
+
+<span class="c">// 교사가 EXAM_CONFIRMED 전에 개별 배점 수정 가능</span>
+<span class="c">// PATCH /exams/{id}/questions/{seq}/points → points 변경, points_modified=True</span>
+<span class="c">// → total_points 자동 재계산</span></div>
+
+<h3>B. 서비스팀(#11) — L2-B 전용으로 역할 변경</h3>
+<div class="info rule"><strong>v1.3 변경:</strong> 서비스팀은 L2-B(학급 배포)에서만 동작합니다. 입력은 EXAM_CONFIRMED 시험지 + classroom_exam 정보. 출력은 학급별 HWP(QR 포함) + CBT 배포.</div>
+<div class="code"><span class="c">// 서비스팀 Input (v1.3)</span>
+{
+  <span class="k">"classroom_exam_id"</span>: <span class="n">42</span>,
+  <span class="k">"exam_id"</span>: <span class="s">"EX-20250401-001"</span>,
+  <span class="k">"classroom"</span>: { <span class="k">"id"</span>: <span class="s">"uuid"</span>, <span class="k">"name"</span>: <span class="s">"1학년 2반"</span> },
+  <span class="k">"exam_questions"</span>: [ <span class="c">/* 문항 목록 + 배점 */</span> ],
+  <span class="k">"qr_data"</span>: {
+    <span class="k">"classroom_id"</span>: <span class="s">"uuid"</span>,
+    <span class="k">"exam_id"</span>: <span class="s">"EX-20250401-001"</span>,
+    <span class="k">"classroom_exam_id"</span>: <span class="n">42</span>
+  }
+}
+
+<span class="c">// 서비스팀 처리:</span>
+<span class="c">// 1. QR 생성 (qr_data를 URL 인코딩)</span>
+<span class="c">// 2. HWPML 템플릿으로 시험지 생성 (문항 + 헤더에 학급명 + QR 삽입)</span>
+<span class="c">// 3. S3에 저장 → classroom_exams.hwp_file_path 업데이트</span></div>
+
+<h3>C. 서비스검수팀(#12) — 검수 항목 업데이트</h3>
+<table><thead><tr><th>항목</th><th>배점</th><th>v1.3 변경</th></tr></thead><tbody>
+<tr><td>HWP 무결성</td><td>25</td><td>QR이 포함되어 있는지, QR 데이터가 올바른 classroom+exam을 가리키는지 확인</td></tr>
+<tr><td>원본 일치</td><td>20</td><td>유지</td></tr>
+<tr><td>페이지 레이아웃</td><td>20</td><td>유지</td></tr>
+<tr><td>QR/배포 기능</td><td>20</td><td>QR 스캔 → 올바른 학급 진입 확인, 학급별 접속 코드 테스트</td></tr>
+<tr><td>모니터링</td><td>15</td><td>classroom_exam 단위 모니터링 확인</td></tr>
+</tbody></table>
+
+<h3>D. 채점팀(#13) — 복수정답 채점 로직</h3>
+<div class="code"><span class="k">def</span> <span class="f">grade_choice</span>(student_value, answer_correct):
+    correct_list = answer_correct[<span class="s">"correct"</span>]
+    is_multiple = answer_correct.get(<span class="s">"is_multiple"</span>, <span class="b">False</span>)
+    scoring_mode = answer_correct.get(<span class="s">"scoring_mode"</span>, <span class="s">"any"</span>)
+
+    <span class="k">if not</span> is_multiple:
+        <span class="c"># 단일 정답: value는 정수</span>
+        <span class="k">return</span> student_value == correct_list[<span class="n">0</span>]
+    <span class="k">else</span>:
+        <span class="c"># 복수 정답: value는 리스트 [2, 4]</span>
+        student_set = <span class="f">set</span>(student_value) <span class="k">if</span> <span class="f">isinstance</span>(student_value, <span class="f">list</span>) <span class="k">else</span> {student_value}
+        correct_set = <span class="f">set</span>(correct_list)
+
+        <span class="k">if</span> scoring_mode == <span class="s">"any"</span>:
+            <span class="c"># 정답 중 하나라도 선택하면 정답</span>
+            <span class="k">return</span> <span class="f">bool</span>(student_set & correct_set)
+        <span class="k">elif</span> scoring_mode == <span class="s">"all"</span>:
+            <span class="c"># 정답 전부를 정확히 선택해야 정답</span>
+            <span class="k">return</span> student_set == correct_set</div>
+<div class="info warn"><strong>CBT UI 연동:</strong> <code>is_multiple: true</code> 문항은 라디오 버튼이 아닌 체크박스 UI로 표시. "복수 선택 가능" 안내 문구 노출.</div>
+</div>
+
+<!-- ═══ 4. API CHANGES ═══ -->
+<div class="sec"><div class="sn">04</div><h2>API 변경사항<span class="vt">v1.3</span></h2>
+
+<h3>A. 성적 API — classroom_exam 기준으로 변경</h3>
+<div class="endpoint"><span class="method get">GET</span><span class="ep-path">/api/v1/grades/classroom-exam/{ce_id}/summary</span><span class="ep-desc">학급별 성적 요약</span><span class="ep-role">A T</span></div>
+<div class="endpoint"><span class="method get">GET</span><span class="ep-path">/api/v1/grades/exam/{exam_id}/summary</span><span class="ep-desc">시험 전체 통합 성적 (모든 학급)</span><span class="ep-role">A T</span></div>
+<div class="endpoint"><span class="method get">GET</span><span class="ep-path">/api/v1/grades/classroom-exam/{ce_id}/export?format=csv</span><span class="ep-desc">학급별 성적 내보내기</span><span class="ep-role">A T</span></div>
+
+<h3>B. 시험 시간 연장 API (신규)</h3>
+<div class="endpoint"><span class="method patch">PATCH</span><span class="ep-path">/api/v1/classrooms/{id}/exams/{ce_id}/extend</span><span class="ep-desc">closes_at 연장 (진행 중 세션 TTL도 갱신)</span><span class="ep-role">A T</span></div>
+
+<h3>C. 기존 API에서 제거</h3>
+<div class="code"><span class="c">-- 제거: exam 레벨 QR/다운로드 (학급 레벨로 이동)</span>
+<span class="c">GET /api/v1/exams/{exam_id}/download  → 제거</span>
+<span class="c">GET /api/v1/exams/{exam_id}/qrcode    → 제거</span>
+
+<span class="c">-- 대체: classroom_exam 레벨</span>
+<span class="c">GET /api/v1/classrooms/{id}/exams/{ce_id}/download   → HWP 다운로드</span>
+<span class="c">GET /api/v1/classrooms/{id}/exams/{ce_id}/qrcode     → QR코드</span></div>
+
+<h4>API 최종 수량</h4>
+<div class="sg">
+<div class="si"><div class="sl">v1.2</div><div class="sv mono">48개</div></div>
+<div class="si"><div class="sl">v1.3 추가</div><div class="sv mono">+4개</div></div>
+<div class="si"><div class="sl">v1.3 제거</div><div class="sv mono">-2개</div></div>
+<div class="si"><div class="sl">v1.3 총합</div><div class="sv mono">50개</div></div>
+</div>
+</div>
+
+<!-- ═══ 5. REDIS UPDATES ═══ -->
+<div class="sec"><div class="sn">05</div><h2>Redis 보완<span class="vt">v1.3</span></h2>
+
+<h3>TTL 정책 명확화</h3>
+<div class="code"><span class="c"># 세션 키 TTL 정책 (v1.3 최종)</span>
+
+<span class="k">session:{sid}:info</span>         → <span class="c">TTL 없음. 제출/만료 후 cleanup으로 삭제</span>
+<span class="k">session:{sid}:answers</span>      → <span class="c">TTL 없음. 제출 시 DB 저장 후 cleanup으로 삭제</span>
+<span class="k">session:{sid}:heartbeat</span>    → <span class="c">TTL 60초 (자동 갱신, 미갱신 시 연결 끊김 감지)</span>
+<span class="k">exam_expiry:{sid}</span>          → <span class="c">TTL = 시험시간(초). 만료 시 keyspace notification → 자동 제출</span>
+
+<span class="k">student_token:{token}</span>      → <span class="c">TTL 24시간</span>
+
+<span class="k">exam:{exam_id}:active</span>      → <span class="c">TTL 없음. CLOSED 시 cleanup</span>
+<span class="k">exam:{exam_id}:progress</span>    → <span class="c">TTL 없음. CLOSED 시 cleanup</span></div>
+
+<h3>세션 cleanup 절차</h3>
+<div class="code"><span class="k">async def</span> <span class="f">cleanup_session</span>(session_id, exam_id):
+    <span class="c"># 1. Redis 답안 → DB 저장 (이미 제출된 경우 스킵)</span>
+    answers = <span class="k">await</span> redis.hgetall(<span class="s">f"session:{session_id}:answers"</span>)
+    <span class="k">if</span> answers <span class="k">and not</span> already_submitted(session_id):
+        <span class="k">await</span> <span class="f">save_to_db</span>(session_id, answers, auto_submitted=<span class="b">True</span>)
+
+    <span class="c"># 2. Redis 키 삭제</span>
+    <span class="k">await</span> redis.delete(
+        <span class="s">f"session:{session_id}:info"</span>,
+        <span class="s">f"session:{session_id}:answers"</span>,
+        <span class="s">f"session:{session_id}:heartbeat"</span>
+    )
+
+    <span class="c"># 3. 활성 세션 목록에서 제거</span>
+    <span class="k">await</span> redis.srem(<span class="s">f"exam:{exam_id}:active"</span>, session_id)</div>
+
+<h3>classroom_exam CLOSED 시 일괄 처리</h3>
+<div class="code"><span class="k">async def</span> <span class="f">close_classroom_exam</span>(classroom_exam_id, exam_id):
+    <span class="c"># 1. 활성 세션 전체 조회</span>
+    active_sessions = <span class="k">await</span> redis.smembers(<span class="s">f"exam:{exam_id}:active"</span>)
+
+    <span class="c"># 2. 미제출 세션 자동 제출</span>
+    <span class="k">for</span> sid <span class="k">in</span> active_sessions:
+        <span class="k">await</span> <span class="f">cleanup_session</span>(sid, exam_id)
+
+    <span class="c"># 3. classroom_exams.status = 'CLOSED'</span>
+    <span class="k">await</span> db.update_status(classroom_exam_id, <span class="s">"CLOSED"</span>)
+
+    <span class="c"># 4. 미응시 학생 기록 (submission 없는 학생)</span>
+    all_students = <span class="k">await</span> db.get_classroom_students(classroom_exam_id)
+    submitted_students = <span class="k">await</span> db.get_submitted_students(classroom_exam_id)
+    no_show = all_students - submitted_students
+    <span class="k">for</span> s <span class="k">in</span> no_show:
+        <span class="k">await</span> db.create_submission(s, status=<span class="s">"NO_SHOW"</span>)</div>
+</div>
+
+<!-- ═══ 6. EDGE CASES ═══ -->
+<div class="sec"><div class="sn">06</div><h2>엣지 케이스 처리<span class="vt">v1.3</span></h2>
+
+<table><thead><tr><th>상황</th><th>처리</th></tr></thead><tbody>
+<tr><td><strong>재응시 방지</strong></td><td>(classroom_exam_id, student_id) 조합으로 submissions 조회. submitted_at 있으면 → 결과 페이지. submitted_at null → 이어서 풀기. 없으면 → 새 응시</td></tr>
+<tr><td><strong>동명이인</strong></td><td>(classroom_id, name) UNIQUE 제약 유지. 동명이인 시 교사가 "김민준(1번)", "김민준(2번)" 식으로 구분 등록. 학생 자기 등록 시 중복 이름이면 "이미 등록된 이름입니다. 목록에서 선택하세요" 안내</td></tr>
+<tr><td><strong>자기등록 학생 알림</strong></td><td>학생이 self_register로 추가되면 해당 학급 교사에게 notification 생성: "[1학년 2반] 새 학생 '홍길동'이 자기 등록했습니다"</td></tr>
+<tr><td><strong>시험 시간 연장</strong></td><td>PATCH /extend → classroom_exams.closes_at 업데이트 + 진행 중 모든 세션의 exam_expiry:{sid} TTL 갱신</td></tr>
+<tr><td><strong>CONFIRMED 시험 수정 요청</strong></td><td>EXAM_CONFIRMED 상태에서는 수정 불가. 새 시험지 생성 또는 EXAM_COMPOSE로 롤백(기존 배포 취소 필요)</td></tr>
+<tr><td><strong>같은 시험 다른 학급 결과 비교</strong></td><td>GET /grades/exam/{exam_id}/summary는 모든 학급 통합. 학급별 비교는 프론트엔드에서 학급별 API 호출 후 병렬 표시</td></tr>
+<tr><td><strong>교사 A 시험지를 교사 B가 사용</strong></td><td>MVP: 생성 교사만 사용. 향후: 시험지 복제 기능 추가</td></tr>
+<tr><td><strong>학생 알림 전달</strong></td><td>학생은 계정 없음 → 비동기 알림 불가. 학급 재접속 시 completed_exams에서 결과 확인. 교사에게 "채점 완료" 알림 → 교사가 구두 안내</td></tr>
+</tbody></table>
+</div>
+
+<!-- ═══ 7. FILE STORAGE UPDATE ═══ -->
+<div class="sec"><div class="sn">07</div><h2>파일 저장 구조 업데이트<span class="vt">v1.3</span></h2>
+<div class="code"><span class="c"># S3 버킷 구조 (v1.3)</span>
+exam-storage/
+  batches/{batch_id}/
+    original.hwp
+    answer_sheet.hwp
+  questions/{pkey}/
+    images/img_{n}.png
+    formula_fb_{n}.png
+  exams/{exam_id}/
+    <span class="c"># v1.3: HWP 파일 여기에 없음! (학급별로 이동)</span>
+    preview.html              <span class="c"># 온라인 미리보기용</span>
+  classroom-exams/{ce_id}/    <span class="c"># v1.3 신규</span>
+    paper.hwp                 <span class="c"># 학급별 HWP (QR 포함)</span>
+    qrcode.png                <span class="c"># 학급별 시험 QR</span>
+  classrooms/{classroom_id}/
+    invite_qr.png             <span class="c"># 학급 초대 QR</span>
+  templates/
+    exam_header.hwpml
+    exam_body.hwpml</div>
+</div>
+
+<!-- ═══ SUMMARY ═══ -->
+<div class="sec"><div class="sn">SUMMARY</div><h2>v1.3 최종 요약</h2>
+<div class="sg">
+<div class="si"><div class="sl">DB 테이블</div><div class="sv">25개</div></div>
+<div class="si"><div class="sl">API</div><div class="sv">50개</div></div>
+<div class="si"><div class="sl">파이프라인</div><div class="sv mono">L1 + L2-A + L2-B</div></div>
+<div class="si"><div class="sl">HWP 생성</div><div class="sv mono">학급별 (QR 포함)</div></div>
+<div class="si"><div class="sl">채점</div><div class="sv mono">단일+복수 정답</div></div>
+<div class="si"><div class="sl">배포</div><div class="sv mono">학급별 시간차</div></div>
+<div class="si"><div class="sl">성적 조회</div><div class="sv mono">학급별 / 통합</div></div>
+<div class="si"><div class="sl">Docker</div><div class="sv mono">7 서비스</div></div>
+<div class="si"><div class="sl">개발 기간</div><div class="sv">17주</div></div>
+</div>
+
+<h4>전체 산출물 최종 현황</h4>
+<table><thead><tr><th>문서</th><th>버전</th><th>핵심</th></tr></thead><tbody>
+<tr><td>시스템 설계 초안</td><td>v1.0</td><td>14개 팀 파이프라인, PKey, 검수 기준</td></tr>
+<tr><td>에이전트 스펙</td><td>v2.1 + v1.3 보충</td><td>동작 로직, 복수정답, 배점 할당, L2 분리 반영</td></tr>
+<tr><td>기술 아키텍처</td><td><strong>v1.3</strong></td><td>DB 25개, API 50개, 3계층 파이프라인, 학급별 HWP</td></tr>
+</tbody></table>
+
+<div class="info success"><strong>3개 문서 간 정합성 확보.</strong> L1(문항) → L2-A(시험지 콘텐츠) → L2-B(학급 배포) → 응시 → 채점의 전체 데이터 흐름이 끊김 없이 연결됩니다. Phase 0 착수 준비 완료.</div>
+</div>
+
+<footer class="doc-footer">
+<p>기술 아키텍처 & DB 스키마 설계서 v1.3 · 2025.04</p>
+<p style="margin-top:2px">v1.3: L2 2단계 분리, 학급별 HWP+QR, 복수정답 채점, 50 APIs, 3계층 파이프라인</p>
+</footer>
+
+</div>
+</body>
+</html>

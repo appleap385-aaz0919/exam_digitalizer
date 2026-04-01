@@ -1,0 +1,17 @@
+{
+  "agent": "a01_parser",
+  "description": "파싱팀 mock 응답",
+  "response": {
+    "questions": [
+      {
+        "seq": 1,
+        "text": "다음 식을 계산하시오. 2x(2x+4y-1)",
+        "type": "서술형",
+        "formulas": ["2x\\left(2x+4y-1\\right)"],
+        "images": []
+      }
+    ],
+    "total_questions": 1,
+    "parse_source": "hwpml"
+  }
+}

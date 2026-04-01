@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>에이전트 동작 로직 & 스펙 설계서 v2.1</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1f;--ink-light:#4a4a55;--ink-muted:#8a8a95;--surface:#fafaf8;--card:#ffffff;--border:#e8e8e4;--border-light:#f0f0ec;--accent:#2d5be3;--accent-light:#eef2fd;--accent-dark:#1a3a9e;--pass:#0d8a5e;--pass-bg:#e8f8f0;--fail:#d43b3b;--fail-bg:#fdeaea;--warn:#c27a1a;--warn-bg:#fef6e8;--purple:#6c5ce7;--purple-bg:#f0eeff;--teal:#0d9488;--teal-bg:#e8f7f6;--coral:#e8593c;--coral-bg:#fef0ec;--blue:#2d5be3;--blue-bg:#eef2fd;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--surface);color:var(--ink);line-height:1.75;font-size:14.5px;-webkit-font-smoothing:antialiased;}
+.pw{max-width:1100px;margin:0 auto;padding:60px 40px 120px;}
+.cover{text-align:center;padding:70px 0 45px;border-bottom:1px solid var(--border);margin-bottom:45px;}
+.cover-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);background:var(--accent-light);padding:6px 16px;border-radius:20px;margin-bottom:20px;}
+.cover h1{font-size:30px;font-weight:900;line-height:1.3;margin-bottom:10px;}
+.cover h1 em{font-style:normal;color:var(--accent);}
+.cover-meta{font-size:13px;color:var(--ink-muted);}
+.cover-meta span+span::before{content:'·';margin:0 8px;}
+.cl{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px 28px;margin-bottom:40px;}
+.cl h2{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--fail);margin-bottom:12px;}
+.cl ul{list-style:none;font-size:12.5px;line-height:2;}
+.cl li::before{margin-right:8px;font-size:11px;}
+.cl li.c::before{content:'🔴';}.cl li.e::before{content:'🟡';}.cl li.a::before{content:'🟢';}.cl li.b::before{content:'🔵';}.cl li.f::before{content:'🟣';}
+.toc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px 28px;margin-bottom:40px;}
+.toc h2{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-muted);margin-bottom:12px;}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:3px 24px;}
+.toc a{text-decoration:none;color:var(--ink);font-size:12px;display:block;padding:3px 0;border-bottom:1px solid var(--border-light);}
+.toc a:hover{color:var(--accent);}
+.tn{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-muted);margin-right:6px;}
+.tp{font-size:10px;font-weight:700;margin:8px 0 2px;text-transform:uppercase;letter-spacing:1px;}
+.tp.p1{color:var(--purple);}.tp.p2{color:var(--blue);}.tp.p3{color:var(--coral);}.tp.inf{color:var(--ink-muted);}
+.sec{margin-bottom:44px;}.sn{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);letter-spacing:1px;margin-bottom:4px;}
+.sec h2{font-size:21px;font-weight:900;margin-bottom:4px;}
+.sd{font-size:13px;color:var(--ink-light);margin-bottom:20px;max-width:700px;}
+.sec h3{font-size:15px;font-weight:700;margin:24px 0 10px;padding-bottom:4px;border-bottom:2px solid var(--border);}
+.sec h4{font-size:13.5px;font-weight:700;margin:16px 0 7px;}
+.ac{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:24px;overflow:hidden;}
+.ah{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:8px;}
+.ah h3{font-size:16px;font-weight:800;margin:0;border:none;padding:0;}
+.badges{display:flex;gap:5px;flex-wrap:wrap;}
+.bg{font-size:10px;font-weight:600;padding:3px 9px;border-radius:5px;font-family:'JetBrains Mono',monospace;}
+.bg.work{background:var(--purple-bg);color:var(--purple);}.bg.qa{background:var(--teal-bg);color:var(--teal);}.bg.p1{background:var(--purple-bg);color:var(--purple);}.bg.p2{background:var(--blue-bg);color:var(--blue);}.bg.p3{background:var(--coral-bg);color:var(--coral);}.bg.inf{background:#f0f0ec;color:var(--ink-light);}.bg.new{background:var(--fail-bg);color:var(--fail);}.bg.v21{background:#e8f0fe;color:#1a56db;}
+.ab{padding:18px 22px;}
+.io{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+.iob{padding:12px 14px;border-radius:8px;border:1px solid;}
+.iob.inp{background:#f8f5ff;border-color:rgba(108,92,231,0.15);}
+.iob.out{background:#f0faf7;border-color:rgba(13,148,136,0.15);}
+.iob .il{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;}
+.iob.inp .il{color:var(--purple);}.iob.out .il{color:var(--teal);}
+.iob ul{list-style:none;font-size:12px;line-height:1.8;}
+.iob li::before{content:'→';margin-right:5px;opacity:0.4;}
+.code{background:#1a1a2e;color:#e0e0e8;border-radius:9px;padding:16px 18px;margin:10px 0;font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.65;overflow-x:auto;white-space:pre;tab-size:2;}
+.code .k{color:#74b9ff;}.code .s{color:#55efc4;}.code .n{color:#ffeaa7;}.code .b{color:#fd79a8;}.code .c{color:#636e72;font-style:italic;}.code .f{color:#a29bfe;}
+.steps{counter-reset:step;margin:12px 0;}
+.step{counter-increment:step;display:flex;gap:12px;margin:7px 0;padding:10px 14px;background:var(--card);border:1px solid var(--border-light);border-radius:8px;font-size:12.5px;}
+.step::before{content:counter(step);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:white;background:var(--accent);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+.step.critical{border-left:3px solid var(--fail);background:var(--fail-bg);}.step.critical::before{background:var(--fail);}
+.step.new{border-left:3px solid var(--pass);background:var(--pass-bg);}.step.new::before{background:var(--pass);}
+.step.v21{border-left:3px solid #1a56db;background:#e8f0fe;}.step.v21::before{background:#1a56db;}
+.sc{flex:1;}.sc strong{font-weight:700;}.sc .sub{font-size:11px;color:var(--ink-light);margin-top:2px;}
+table{width:100%;border-collapse:separate;border-spacing:0;margin:10px 0;font-size:12.5px;border:1px solid var(--border);border-radius:9px;overflow:hidden;}
+thead{background:#f5f5f2;}
+th{text-align:left;padding:8px 12px;font-weight:700;font-size:11px;color:var(--ink-light);border-bottom:2px solid var(--border);white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid var(--border-light);vertical-align:top;}
+tbody tr:last-child td{border-bottom:none;}
+.info{padding:11px 15px;border-radius:8px;margin:10px 0;font-size:12.5px;}
+.info.rule{background:var(--accent-light);border:1px solid rgba(45,91,227,0.15);color:var(--accent-dark);}
+.info.warn{background:var(--warn-bg);border:1px solid rgba(194,122,26,0.15);color:#8a5a10;}
+.info.critical{background:var(--fail-bg);border:1px solid rgba(212,59,59,0.15);color:var(--fail);}
+.info.success{background:var(--pass-bg);border:1px solid rgba(13,138,94,0.15);color:#076840;}
+.info strong{font-weight:700;}
+.v2t{display:inline-block;font-size:9px;font-weight:700;background:var(--fail-bg);color:var(--fail);padding:2px 7px;border-radius:4px;margin-left:6px;vertical-align:middle;}
+.v21t{display:inline-block;font-size:9px;font-weight:700;background:#e8f0fe;color:#1a56db;padding:2px 7px;border-radius:4px;margin-left:6px;vertical-align:middle;}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0;}
+.si{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:14px 18px;}
+.si .sl{font-size:10px;color:var(--ink-muted);font-weight:500;margin-bottom:2px;}
+.si .sv{font-size:15px;font-weight:700;}
+.si .sv.mono{font-family:'JetBrains Mono',monospace;font-size:13px;}
+.doc-footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--border);text-align:center;font-size:11px;color:var(--ink-muted);}
+@media print{body{font-size:10.5px;}.pw{padding:16px;}.ac{break-inside:avoid;}}
+</style>
+</head>
+<body>
+<div class="pw">
+
+<header class="cover">
+  <div class="cover-badge">Agent Specification v2.1 — Final Draft</div>
+  <h1>에이전트 동작 로직 & <em>스펙 설계서</em></h1>
+  <div class="cover-meta">
+    <span>14개 에이전트 + 오케스트레이터</span>
+    <span>2계층 상태 관리</span>
+    <span>전체 스키마 정의 완료</span>
+    <span>2025.04</span>
+  </div>
+</header>
+
+<!-- CHANGELOG -->
+<div class="cl">
+  <h2>v2.1 변경 이력 (v2.0 대비)</h2>
+  <ul>
+    <li class="c">exam_paper 스키마 정의 추가 (설계 공백 해소)</li>
+    <li class="c">학생 답안 제출 데이터 모델(student_submission) 정의 추가</li>
+    <li class="c">바이너리 HWP 파싱 전략 상세화 (변환 후 처리 전략 확정)</li>
+    <li class="c">teacher_request에 time_limit_minutes 추가</li>
+    <li class="e">수식 변환 실패 시 폴백 경로 (fallback_image) 정의</li>
+    <li class="e">AI 모델 버전 추적 구조(ai_execution_log) 추가</li>
+    <li class="e">LLM API 장애 시 폴백 정책 정의</li>
+    <li class="e">출제 후 정답 오류 보정(ANSWER_CORRECTION) 플로우 추가</li>
+    <li class="e">AI 호출 비용 최적화 전략 추가</li>
+    <li class="a">테스트 전략 (단위/통합/E2E/회귀/성능) 추가</li>
+    <li class="a">소급 재처리(RETROACTIVE_REPROCESS) 전략 추가</li>
+    <li class="a">문항 폐기/아카이빙 정책 추가</li>
+    <li class="a">다과목 확장 콘텐츠 타입 정의</li>
+    <li class="a">접근성(Accessibility) 설계 추가</li>
+    <li class="a">동시 접속 부하 설계 추가</li>
+    <li class="f">PROD_REVIEW 후 분기 조건 코드 명시 (정합성 수정)</li>
+    <li class="f">EMBEDDING 스테이지 실패 처리 추가</li>
+    <li class="f">GRADE_COMPLETED 후 결과 전달 트리거 추가</li>
+  </ul>
+</div>
+
+<!-- ═══════════════ 본문은 v2.0의 모든 내용을 포함 + v2.1 추가분 ═══════════════ -->
+
+<!-- ═══════════════════════════════════════════════════
+     SECTION: 설계 공백 해소 (v2.1 신규 스키마들)
+     ═══════════════════════════════════════════════════ -->
+<div class="sec">
+  <div class="sn">CORE SCHEMAS</div>
+  <h2>핵심 데이터 스키마 전체 정의<span class="v21t">v2.1 신규</span></h2>
+  <p class="sd">v2.0까지 누락되었던 핵심 스키마들을 모두 정의합니다. 이 스키마들은 에이전트 간 데이터 교환의 계약(contract)입니다.</p>
+</div>
+
+<div class="ac" id="schema-exam">
+  <div class="ah"><h3>exam_paper 스키마<span class="v21t">v2.1</span></h3><div class="badges"><span class="bg v21">SCHEMA</span></div></div>
+  <div class="ab">
+    <div class="info critical"><strong>v2.0 설계 공백 해소:</strong> 시험지 구성팀(#9) output이자 서비스팀(#11)·채점팀(#13)의 input. 전체 파이프라인 L2의 핵심 객체.</div>
+    <div class="code">{
+  <span class="k">"exam_id"</span>: <span class="s">"EX-20250401-001"</span>,
+  <span class="k">"teacher_id"</span>: <span class="s">"T-1001"</span>,
+  <span class="k">"status"</span>: <span class="s">"EXAM_REVIEW"</span>,
+  <span class="k">"conditions"</span>: {
+    <span class="c">// teacher_request.conditions 전체 사본</span>
+    <span class="k">"subject"</span>: <span class="s">"수학"</span>,
+    <span class="k">"grade"</span>: <span class="s">"중1"</span>,
+    <span class="k">"units"</span>: [<span class="s">"좌표평면과 그래프"</span>],
+    <span class="k">"difficulty_distribution"</span>: { <span class="k">"상"</span>: <span class="n">0.2</span>, <span class="k">"중"</span>: <span class="n">0.5</span>, <span class="k">"하"</span>: <span class="n">0.3</span> },
+    <span class="k">"question_types"</span>: { <span class="k">"객관식"</span>: <span class="n">15</span>, <span class="k">"단답형"</span>: <span class="n">5</span>, <span class="k">"서술형"</span>: <span class="n">5</span> },
+    <span class="k">"total_questions"</span>: <span class="n">25</span>,
+    <span class="k">"time_limit_minutes"</span>: <span class="n">50</span>,           <span class="c">// v2.1 추가</span>
+    <span class="k">"exclude_pkeys"</span>: [<span class="s">"QI-2408-0003-00"</span>]
+  },
+  <span class="k">"questions"</span>: [
+    {
+      <span class="k">"sequence"</span>: <span class="n">1</span>,                        <span class="c">// 시험지 내 순번</span>
+      <span class="k">"pkey"</span>: <span class="s">"QI-2408-0001-00"</span>,
+      <span class="k">"group_id"</span>: <span class="s">"GRP-2408-001"</span>,          <span class="c">// 세트 문항이면 그룹ID</span>
+      <span class="k">"points"</span>: <span class="n">4</span>,                          <span class="c">// 배점</span>
+      <span class="k">"question_type"</span>: <span class="s">"객관식"</span>,
+      <span class="k">"difficulty"</span>: <span class="s">"중"</span>,
+      <span class="k">"unit"</span>: <span class="s">"좌표평면과 그래프"</span>,
+      <span class="k">"page_hint"</span>: <span class="n">1</span>                       <span class="c">// 한글파일 생성 시 페이지 배치 힌트</span>
+    },
+    { <span class="k">"sequence"</span>: <span class="n">2</span>, <span class="k">"pkey"</span>: <span class="s">"QI-2408-0002-00"</span>, <span class="k">"group_id"</span>: <span class="s">"GRP-2408-001"</span>, <span class="c">/* ... */</span> }
+    <span class="c">// ...25문항</span>
+  ],
+  <span class="k">"total_points"</span>: <span class="n">100</span>,
+  <span class="k">"time_limit_minutes"</span>: <span class="n">50</span>,
+  <span class="k">"selection_report"</span>: {                     <span class="c">// 선별 근거</span>
+    <span class="k">"actual_distribution"</span>: { <span class="k">"상"</span>: <span class="n">5</span>, <span class="k">"중"</span>: <span class="n">13</span>, <span class="k">"하"</span>: <span class="n">7</span> },
+    <span class="k">"fulfillment_rate"</span>: <span class="n">1.0</span>,
+    <span class="k">"unit_coverage"</span>: { <span class="s">"좌표평면과 그래프"</span>: <span class="n">14</span>, <span class="s">"정비례와 반비례"</span>: <span class="n">11</span> }
+  },
+  <span class="k">"exam_code"</span>: <span class="b">null</span>,                        <span class="c">// 서비스팀에서 생성</span>
+  <span class="k">"qr_code_url"</span>: <span class="b">null</span>,
+  <span class="k">"hwp_file_path"</span>: <span class="b">null</span>,
+  <span class="k">"created_at"</span>: <span class="s">"2025-04-01T10:00:00Z"</span>,
+  <span class="k">"confirmed_by_teacher"</span>: <span class="b">false</span>
+}</div>
+  </div>
+</div>
+
+<div class="ac" id="schema-submission">
+  <div class="ah"><h3>student_submission 스키마<span class="v21t">v2.1</span></h3><div class="badges"><span class="bg v21">SCHEMA</span></div></div>
+  <div class="ab">
+    <div class="info critical"><strong>v2.0 설계 공백 해소:</strong> 채점팀(#13)의 실제 input. 학생이 응시를 완료하면 이 구조로 채점팀에 전달됩니다.</div>
+    <div class="code">{
+  <span class="k">"submission_id"</span>: <span class="s">"SUB-20250401-S2001-001"</span>,
+  <span class="k">"exam_id"</span>: <span class="s">"EX-20250401-001"</span>,
+  <span class="k">"student_id"</span>: <span class="s">"S-2001"</span>,
+  <span class="k">"session"</span>: {
+    <span class="k">"started_at"</span>: <span class="s">"2025-04-01T14:00:00Z"</span>,
+    <span class="k">"submitted_at"</span>: <span class="s">"2025-04-01T14:45:23Z"</span>,
+    <span class="k">"submit_type"</span>: <span class="s">"manual"</span>,          <span class="c">// "manual" | "timeout" | "auto_save"</span>
+    <span class="k">"auto_saved_count"</span>: <span class="n">12</span>,
+    <span class="k">"disconnection_count"</span>: <span class="n">0</span>
+  },
+  <span class="k">"answers"</span>: [
+    {
+      <span class="k">"pkey"</span>: <span class="s">"QI-2408-0003-00"</span>,
+      <span class="k">"sequence"</span>: <span class="n">3</span>,
+      <span class="k">"answer_type"</span>: <span class="s">"choice"</span>,        <span class="c">// "choice" | "short_answer" | "descriptive" | "fill_blank"</span>
+      <span class="k">"value"</span>: <span class="n">2</span>,                       <span class="c">// 객관식: 번호 | 단답형: 문자열 | 서술형: 장문 텍스트</span>
+      <span class="k">"time_spent_seconds"</span>: <span class="n">95</span>,        <span class="c">// 해당 문항에 소요된 시간</span>
+      <span class="k">"changed_count"</span>: <span class="n">1</span>               <span class="c">// 답안 변경 횟수</span>
+    },
+    {
+      <span class="k">"pkey"</span>: <span class="s">"QI-2408-0015-00"</span>,
+      <span class="k">"sequence"</span>: <span class="n">15</span>,
+      <span class="k">"answer_type"</span>: <span class="s">"descriptive"</span>,
+      <span class="k">"value"</span>: <span class="s">"x = 3이므로 y = 2x = 6..."</span>,
+      <span class="k">"time_spent_seconds"</span>: <span class="n">180</span>,
+      <span class="k">"changed_count"</span>: <span class="n">3</span>
+    }
+  ]
+}</div>
+    <div class="info rule"><strong>time_spent_seconds + changed_count 활용:</strong> 오래 고민했는데 틀린 문항(개념 미이해)과 빨리 풀었는데 틀린 문항(부주의)은 취약 원인이 다릅니다. 성취도 분석에서 이 데이터를 활용하여 피드백을 차별화합니다.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     바이너리 HWP 전략
+     ═══════════════════════════════════════════════════ -->
+<div class="ac" id="binary-hwp">
+  <div class="ah"><h3>바이너리 HWP 파싱 전략<span class="v21t">v2.1</span></h3><div class="badges"><span class="bg p1">Phase 1</span><span class="bg v21">v2.1</span></div></div>
+  <div class="ab">
+    <div class="info critical"><strong>v2.0 설계 공백 해소:</strong> 샘플이 모두 HWPML이라 간과했지만, 실제 바이너리 HWP가 투입될 경우의 처리 전략.</div>
+
+    <h4>확정 전략: 변환 후 처리 (Convert-then-Parse)</h4>
+    <div class="info rule"><strong>바이너리 HWP → HWPX 변환 → 기존 XML 파서로 처리.</strong> 바이너리 HWP를 직접 파싱하는 것보다 변환 후 처리가 안정적입니다. pyhwp/olefile은 수식·이미지 추출이 불안정하고, 한글 버전별 차이도 큽니다.</div>
+
+    <div class="steps">
+      <div class="step"><div class="sc"><strong>포맷 감지</strong> — 매직 바이트 확인: <code>D0 CF 11 E0</code> → 바이너리 HWP (OLE2)</div></div>
+      <div class="step"><div class="sc"><strong>LibreOffice 변환</strong> — <code>soffice --headless --convert-to hwpx</code> 실행. 변환 실패 시 <code>PARSE_ERROR</code> + 관리자 알림
+        <div class="sub">sandbox 환경 주의: scripts/office/soffice.py 래퍼 사용 (bare soffice는 seccomp 필터에 걸림)</div></div></div>
+      <div class="step"><div class="sc"><strong>변환 손실 검증</strong> — 변환된 HWPX의 페이지 수, 문항 수, 이미지 수를 원본 메타와 비교. 10% 이상 차이 시 경고
+        <div class="sub">알려진 손실 항목: 일부 특수 글꼴, 한글 전용 OLE 객체, 매우 오래된 수식(Equation 3.0)</div></div></div>
+      <div class="step"><div class="sc"><strong>HWPX/HWPML 파서로 처리</strong> — 변환된 파일을 기존 XML 파싱 로직에 투입. 이후 동일 파이프라인</div></div>
+    </div>
+
+    <h4>직접 파싱 폴백 (변환 실패 시)</h4>
+    <div class="code"><span class="c">// LibreOffice 변환 실패 시 olefile 기반 최소 추출</span>
+<span class="k">import</span> olefile
+
+ole = olefile.OleFileIO(<span class="s">"exam.hwp"</span>)
+<span class="c">// 스트림 구조:</span>
+<span class="c">//   FileHeader     → HWP 버전 정보</span>
+<span class="c">//   DocInfo        → 글꼴, 스타일 정보</span>
+<span class="c">//   BodyText/Section0 → 본문 텍스트 (압축됨, zlib)</span>
+<span class="c">//   BinData/BIN0001.png → 임베딩 이미지</span>
+<span class="c">//   Scripts/DefaultJScript → 매크로</span>
+
+<span class="k">for</span> stream <span class="k">in</span> ole.listdir():
+    <span class="k">if</span> <span class="s">"BodyText"</span> <span class="k">in</span> stream:
+        data = ole.openstream(stream).read()
+        text = zlib.decompress(data, -<span class="n">15</span>)  <span class="c">// raw deflate</span>
+        <span class="c">// 바이너리 레코드 파싱 필요 (HWPTAG_PARA_TEXT 등)</span>
+    <span class="k">if</span> <span class="s">"BinData"</span> <span class="k">in</span> stream:
+        img_data = ole.openstream(stream).read()
+        <span class="c">// 이미지 파일로 저장</span></div>
+    <div class="info warn"><strong>직접 파싱은 텍스트+이미지만 가능.</strong> 수식은 별도 바이너리 레코드(HWPTAG_EQEDIT)에 있어 추출이 매우 불안정합니다. 직접 파싱 시에는 수식을 이미지로 캡처하여 fallback_image로 처리합니다.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     오케스트레이터 정합성 수정
+     ═══════════════════════════════════════════════════ -->
+<div class="ac" id="orch-fix">
+  <div class="ah"><h3>오케스트레이터 정합성 수정<span class="v21t">v2.1</span></h3><div class="badges"><span class="bg inf">INFRA</span><span class="bg v21">v2.1</span></div></div>
+  <div class="ab">
+
+    <h4>수정 1 — PROD_REVIEW 분기 조건 명시</h4>
+    <div class="code"><span class="c">// v2.0에서 누락된 분기 로직</span>
+<span class="k">function</span> <span class="f">getNextAfterProdReview</span>(item) {
+  <span class="k">if</span> (item.answer.answer_source === <span class="s">"ai_derived"</span>
+      && !item.answer.human_confirmed) {
+    <span class="k">return</span> <span class="s">"HUMAN_CONFIRM_ANSWER"</span>;  <span class="c">// 경로 B: 관리자 확인 필수</span>
+  }
+  <span class="c">// 경로 A(정답지) 또는 경로 C(교사 입력): 바로 DATA로</span>
+  <span class="k">return</span> <span class="s">"DATA"</span>;
+}</div>
+
+    <h4>수정 2 — EMBEDDING 실패 처리</h4>
+    <div class="code"><span class="c">// EMBEDDING은 검수 단계가 아닌 자동 처리</span>
+<span class="k">function</span> <span class="f">handleEmbeddingResult</span>(pkey, result) {
+  <span class="k">if</span> (result.success) {
+    <span class="f">transition</span>(pkey, <span class="s">"L1_COMPLETED"</span>);
+    <span class="f">registerToQuestionPool</span>(pkey);
+  } <span class="k">else</span> {
+    <span class="k">if</span> (result.retry_count < <span class="n">3</span>) {
+      <span class="f">retryWithBackoff</span>(pkey, <span class="s">"EMBEDDING"</span>);
+    } <span class="k">else</span> {
+      <span class="f">transition</span>(pkey, <span class="s">"EMBEDDING_ERROR"</span>);
+      <span class="f">alertAdmin</span>(<span class="s">"임베딩 생성 3회 실패"</span>, pkey);
+      <span class="c">// 임베딩 없이도 L1_COMPLETED 가능 (추천 기능만 제한)</span>
+      <span class="f">transition</span>(pkey, <span class="s">"L1_COMPLETED"</span>, { embedding_status: <span class="s">"FAILED"</span> });
+    }
+  }
+}</div>
+
+    <h4>수정 3 — GRADE_COMPLETED 후 결과 전달 트리거</h4>
+    <div class="code"><span class="c">// 채점 검수 통과 후 결과 배포</span>
+<span class="k">function</span> <span class="f">handleGradeCompleted</span>(exam_id, student_id) {
+  <span class="k">const</span> result = db.getGradeResult(exam_id, student_id);
+
+  <span class="c">// 1. 학생에게 결과 전달</span>
+  <span class="f">notifyStudent</span>(student_id, {
+    score: result.total_score,
+    details_url: <span class="s">`/results/${exam_id}/${student_id}`</span>
+  });
+
+  <span class="c">// 2. 교사 대시보드 업데이트</span>
+  <span class="f">updateTeacherDashboard</span>(result.exam_id, {
+    student_id, score: result.total_score,
+    status: <span class="s">"graded"</span>
+  });
+
+  <span class="c">// 3. 추천 문항 준비 (있는 경우)</span>
+  <span class="k">if</span> (result.recommendations.length > <span class="n">0</span>) {
+    <span class="f">prepareRecommendations</span>(student_id, result.recommendations);
+  }
+
+  <span class="c">// 4. xAPI 이벤트 발화</span>
+  <span class="f">fireXapiEvent</span>(<span class="s">"completed"</span>, exam_id, student_id, result);
+}</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     로직 보완
+     ═══════════════════════════════════════════════════ -->
+<div class="ac" id="ai-ops">
+  <div class="ah"><h3>AI 운영 관리 (모델 추적·장애·비용)<span class="v21t">v2.1</span></h3><div class="badges"><span class="bg inf">INFRA</span><span class="bg v21">v2.1</span></div></div>
+  <div class="ab">
+
+    <h4>AI 모델 버전 추적</h4>
+    <div class="code"><span class="c">// 모든 LLM 호출에 필수 첨부</span>
+{
+  <span class="k">"ai_execution_log"</span>: {
+    <span class="k">"agent"</span>: <span class="s">"PRODUCTION"</span>,
+    <span class="k">"task"</span>: <span class="s">"solution_generation"</span>,
+    <span class="k">"model"</span>: <span class="s">"claude-sonnet-4-20250514"</span>,
+    <span class="k">"prompt_template_version"</span>: <span class="s">"SOL_v2.1"</span>,
+    <span class="k">"temperature"</span>: <span class="n">0.3</span>,
+    <span class="k">"input_tokens"</span>: <span class="n">1250</span>,
+    <span class="k">"output_tokens"</span>: <span class="n">890</span>,
+    <span class="k">"latency_ms"</span>: <span class="n">2340</span>,
+    <span class="k">"timestamp"</span>: <span class="s">"2025-04-01T09:30:00Z"</span>
+  }
+}</div>
+
+    <h4>LLM API 장애 폴백 정책</h4>
+    <table>
+      <thead><tr><th>단계</th><th>조건</th><th>처리</th></tr></thead>
+      <tbody>
+        <tr><td>1차 재시도</td><td>API 오류 (5xx, timeout)</td><td>exponential backoff: 2초 → 4초 → 8초 → 16초 → 32초 (최대 5회)</td></tr>
+        <tr><td>대체 모델</td><td>5회 재시도 실패</td><td>primary(Sonnet) → secondary(Haiku) 자동 전환. 품질 저하 가능 → 검수팀에서 추가 검증</td></tr>
+        <tr><td>큐 보관</td><td>대체 모델도 실패</td><td>LLM_UNAVAILABLE 상태로 마킹. 큐에 보관. API 복구 시 자동 재처리</td></tr>
+        <tr><td>비의존 작업</td><td>LLM 불필요 에이전트</td><td>파싱팀, 데이터팀 등은 LLM 무관. 영향 없이 계속 진행</td></tr>
+      </tbody>
+    </table>
+
+    <h4>AI 호출 비용 최적화</h4>
+    <table>
+      <thead><tr><th>에이전트</th><th>작업</th><th>권장 모델</th><th>호출/문항</th></tr></thead>
+      <tbody>
+        <tr><td>메타팀 #3</td><td>영역 분류, 메타 태깅</td><td>Sonnet (정확도 우선)</td><td>1~2회</td></tr>
+        <tr><td>메타검수 #4</td><td>교차 태깅 검증</td><td>Haiku (비용 절감 가능)</td><td>1회</td></tr>
+        <tr><td>제작팀 #5</td><td>풀이 생성</td><td>Sonnet (품질 필수)</td><td>1~3회</td></tr>
+        <tr><td>제작팀 #5</td><td>정답 도출 (경로B)</td><td>Sonnet × 2~3회 (교차 검증)</td><td>2~3회</td></tr>
+        <tr><td>제작검수 #6</td><td>풀이 리뷰, 독립 풀이</td><td>Haiku (리뷰) + Sonnet (풀이)</td><td>2회</td></tr>
+        <tr><td>채점팀 #13</td><td>서술형 채점</td><td>Sonnet</td><td>서술형 문항당 1회</td></tr>
+        <tr><td>채점검수 #14</td><td>채점 리뷰</td><td>Haiku</td><td>서술형 문항당 1회</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="3"><strong>문항당 총 예상 호출</strong></td><td><strong>8~12회 (객관식 기준 6~8회)</strong></td></tr></tfoot>
+    </table>
+  </div>
+</div>
+
+<!-- 정답 보정 -->
+<div class="ac" id="answer-correction">
+  <div class="ah"><h3>출제 후 정답 오류 보정(ANSWER_CORRECTION)<span class="v21t">v2.1</span></h3><div class="badges"><span class="bg inf">INFRA</span><span class="bg v21">v2.1</span></div></div>
+  <div class="ab">
+    <div class="steps">
+      <div class="step"><div class="sc"><strong>보정 요청</strong> — 교사 또는 관리자가 특정 문항의 정답 오류를 신고. ANSWER_CORRECTION 이벤트 발생</div></div>
+      <div class="step"><div class="sc"><strong>영향 범위 산정</strong> — 해당 pkey를 사용한 모든 exam_id 조회 → 해당 시험의 모든 student_submission 조회</div></div>
+      <div class="step"><div class="sc"><strong>재채점</strong> — 해당 문항만 새 정답으로 재채점. 기존 채점 결과는 아카이빙(보정 전/후 모두 보존)</div></div>
+      <div class="step"><div class="sc"><strong>성취도·추천 재계산</strong> — 영향받은 학생들의 성취도 분석, 추천 문항 재생성</div></div>
+      <div class="step"><div class="sc"><strong>알림</strong> — 영향받은 교사·학생에게 정정 알림 발송. 보정 전후 점수 차이 표시</div></div>
+      <div class="step"><div class="sc"><strong>원본 문항 업데이트</strong> — question_pool의 해당 문항 정답 수정. 새 버전 생성(version +1)</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 수식 폴백 -->
+<div class="ac" id="formula-fallback">
+  <div class="ah"><h3>수식 변환 폴백 경로<span class="v21t">v2.1</span></h3><div class="badges"><span class="bg p1">Phase 1</span><span class="bg v21">v2.1</span></div></div>
+  <div class="ab">
+    <h4>segment 타입 확장: render_status + fallback_image</h4>
+    <div class="code"><span class="c">// 변환 성공</span>
+{ <span class="k">"type"</span>: <span class="s">"latex"</span>, <span class="k">"content"</span>: <span class="s">"\\frac{1}{3}"</span>, <span class="k">"hwp_original"</span>: <span class="s">"{1} over {3}"</span>,
+  <span class="k">"render_status"</span>: <span class="s">"success"</span>, <span class="k">"fallback_image"</span>: <span class="b">null</span> }
+
+<span class="c">// 변환 실패 → 이미지 폴백</span>
+{ <span class="k">"type"</span>: <span class="s">"latex"</span>, <span class="k">"content"</span>: <span class="b">null</span>, <span class="k">"hwp_original"</span>: <span class="s">"matrix{...}"</span>,
+  <span class="k">"render_status"</span>: <span class="s">"fallback"</span>, <span class="k">"fallback_image"</span>: <span class="s">"2408_formula_7.png"</span> }
+
+<span class="c">// 폴백 이미지 생성 방법:</span>
+<span class="c">// 1. 원본 HWP의 해당 수식 영역을 좌표 기반으로 크롭</span>
+<span class="c">// 2. 또는 hwp_original을 한글 뷰어에서 렌더링 → 캡처</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     누락 항목 추가
+     ═══════════════════════════════════════════════════ -->
+<div class="sec" style="margin-top:36px;">
+  <div class="sn">OPERATIONS</div>
+  <h2>운영 설계<span class="v21t">v2.1 신규</span></h2>
+</div>
+
+<div class="ac" id="test-strategy">
+  <div class="ah"><h3>테스트 전략<span class="v21t">v2.1</span></h3><div class="badges"><span class="bg inf">OPS</span><span class="bg v21">v2.1</span></div></div>
+  <div class="ab">
+    <table>
+      <thead><tr><th>유형</th><th>범위</th><th>방법</th><th>주기</th></tr></thead>
+      <tbody>
+        <tr><td><strong>단위 테스트</strong></td><td>각 에이전트 개별</td><td>고정 input → 기대 output 검증. 경계값(빈 문항, 수식만 있는 문항, 이미지만 있는 문항) 포함</td><td>코드 변경 시</td></tr>
+        <tr><td><strong>통합 테스트</strong></td><td>작업팀↔검수팀 쌍</td><td>파싱팀 output → 파싱검수팀 input 연결 정상 동작. 합격/반려 양쪽 경로 확인</td><td>코드 변경 시</td></tr>
+        <tr><td><strong>E2E 테스트</strong></td><td>전체 파이프라인</td><td>샘플 HWP 5종 → L1 완료 → 시험지 구성 → 모의 응시 → 채점까지. Golden dataset 기반</td><td>주 1회</td></tr>
+        <tr><td><strong>회귀 테스트</strong></td><td>수정된 에이전트</td><td>기존 통과 케이스 재실행. 1건이라도 실패 시 배포 차단</td><td>배포 전</td></tr>
+        <tr><td><strong>성능 테스트</strong></td><td>병렬 처리</td><td>100문항 동시 투입 시 병목 없는지. 에이전트별 p95 ≤ 120초 확인</td><td>월 1회</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="ac" id="retroactive">
+  <div class="ah"><h3>소급 재처리 전략<span class="v21t">v2.1</span></h3><div class="badges"><span class="bg inf">OPS</span><span class="bg v21">v2.1</span></div></div>
+  <div class="ab">
+    <div class="code"><span class="c">// 에이전트 버그 발견 시 기존 문항 재처리</span>
+{
+  <span class="k">"event"</span>: <span class="s">"RETROACTIVE_REPROCESS"</span>,
+  <span class="k">"scope"</span>: {
+    <span class="k">"filter"</span>: <span class="s">"batch_id IN ('2408','2409') AND current_stage = 'L1_COMPLETED'"</span>,
+    <span class="k">"restart_from"</span>: <span class="s">"META"</span>,     <span class="c">// 이 단계부터 재처리</span>
+    <span class="k">"reason"</span>: <span class="s">"메타팀 태깅 로직 버그 수정"</span>
+  },
+  <span class="k">"action"</span>: {
+    <span class="k">"archive_current"</span>: <span class="b">true</span>,     <span class="c">// 기존 버전 아카이빙</span>
+    <span class="k">"create_new_version"</span>: <span class="b">true</span>,  <span class="c">// 새 버전으로 재파이프라인</span>
+    <span class="k">"update_pool"</span>: <span class="b">true</span>          <span class="c">// 완료 후 question_pool 교체</span>
+  }
+}</div>
+  </div>
+</div>
+
+<div class="ac" id="lifecycle">
+  <div class="ah"><h3>문항 생명주기 관리<span class="v21t">v2.1</span></h3><div class="badges"><span class="bg inf">OPS</span><span class="bg v21">v2.1</span></div></div>
+  <div class="ab">
+    <h4>문항 상태 확장</h4>
+    <table>
+      <thead><tr><th>상태</th><th>설명</th><th>시험지 포함 가능</th></tr></thead>
+      <tbody>
+        <tr><td><code>ACTIVE</code></td><td>정상 운영 중. question_pool에서 검색 가능</td><td>O</td></tr>
+        <tr><td><code>DEPRECATED</code></td><td>교육과정 개정 등으로 사용 비권장. 기존 시험지에서는 유지</td><td>X (신규 시험지에 포함 불가)</td></tr>
+        <tr><td><code>ARCHIVED</code></td><td>완전 폐기. 채점 이력만 보존</td><td>X</td></tr>
+      </tbody>
+    </table>
+    <div class="info rule"><strong>폐기 조건:</strong> ① 교육과정 개정 (관리자 일괄 DEPRECATED) ② 관리자 수동 폐기 ③ 오류율 임계치 초과 (해당 문항 정답 보정 3회 이상) ④ 실제 정답률이 95% 이상 또는 5% 이하 (변별력 없음)</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     다과목 확장
+     ═══════════════════════════════════════════════════ -->
+<div class="ac" id="multi-subject">
+  <div class="ah"><h3>다과목 확장 콘텐츠 타입<span class="v21t">v2.1</span></h3><div class="badges"><span class="bg inf">EXTENSION</span><span class="bg v21">v2.1</span></div></div>
+  <div class="ab">
+    <h4>segment type 확장 맵</h4>
+    <table>
+      <thead><tr><th>과목</th><th>특수 콘텐츠</th><th>segment type</th><th>처리 방식</th></tr></thead>
+      <tbody>
+        <tr><td>수학</td><td>수식</td><td><code>latex</code> (기존)</td><td>HWP Script → LaTeX 변환</td></tr>
+        <tr><td>과학</td><td>화학식 (H₂O 등)</td><td><code>chemical_formula</code></td><td>유니코드 첨자 보존 또는 mhchem LaTeX 패키지</td></tr>
+        <tr><td>과학</td><td>실험 장치 도해</td><td><code>image_ref</code> (기존)</td><td>이미지로 처리</td></tr>
+        <tr><td>영어</td><td>밑줄/빈칸 표시</td><td><code>underline_text</code></td><td>밑줄 범위 시작/끝 좌표 저장</td></tr>
+        <tr><td>영어</td><td>듣기 음원</td><td><code>audio_ref</code></td><td>음원 파일 경로 + 재생 시점 정보</td></tr>
+        <tr><td>영어</td><td>대화문 포맷</td><td><code>dialogue</code></td><td>speaker + utterance 구조체</td></tr>
+        <tr><td>국어</td><td>작품 원문 인용</td><td><code>citation</code></td><td>출처 + 인용 텍스트 구분 저장</td></tr>
+        <tr><td>사회/역사</td><td>연표</td><td><code>timeline</code></td><td>연도 + 사건 배열</td></tr>
+        <tr><td>사회/역사</td><td>지도</td><td><code>image_ref</code> (기존)</td><td>이미지로 처리</td></tr>
+      </tbody>
+    </table>
+    <div class="info rule"><strong>확장 원칙:</strong> 신규 segment type 추가 시, ① type 등록 ② 파싱 규칙 정의 ③ 렌더링 규칙 정의 ④ 한글 역변환 규칙 정의. 4가지를 세트로 정의해야 합니다.</div>
+  </div>
+</div>
+
+<!-- 접근성 -->
+<div class="ac" id="a11y">
+  <div class="ah"><h3>접근성 (Accessibility) 설계<span class="v21t">v2.1</span></h3><div class="badges"><span class="bg inf">UX</span><span class="bg v21">v2.1</span></div></div>
+  <div class="ab">
+    <table>
+      <thead><tr><th>항목</th><th>구현</th></tr></thead>
+      <tbody>
+        <tr><td>스크린 리더</td><td>수식의 alt text 자동 생성 (LaTeX → 자연어 변환: <code>\frac{1}{3}</code> → "3분의 1"). WAI-ARIA role 적용</td></tr>
+        <tr><td>글자 크기</td><td>응시 화면에서 3단계 조절 (기본/크게/매우 크게). 수식도 비례 확대</td></tr>
+        <tr><td>고대비 모드</td><td>배경/텍스트 고대비 테마 제공. 이미지에 고대비 필터 적용</td></tr>
+        <tr><td>키보드 탐색</td><td>Tab으로 문항 이동, 방향키로 선지 선택, Enter로 확정. 마우스 없이 전체 응시 가능</td></tr>
+        <tr><td>시간 연장</td><td>장애 학생을 위한 시간 1.5배 연장 옵션 (교사 설정)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 부하 설계 -->
+<div class="ac" id="load">
+  <div class="ah"><h3>동시 접속 부하 설계<span class="v21t">v2.1</span></h3><div class="badges"><span class="bg inf">INFRA</span><span class="bg v21">v2.1</span></div></div>
+  <div class="ab">
+    <table>
+      <thead><tr><th>규모</th><th>동시접속</th><th>인프라</th></tr></thead>
+      <tbody>
+        <tr><td>학급 단위</td><td>~35명</td><td>단일 서버 충분. WebSocket 35 conn</td></tr>
+        <tr><td>학년 단위</td><td>~300명</td><td>앱 서버 2대 + LB. WebSocket 서버 분리</td></tr>
+        <tr><td>학교 전체</td><td>~1000명</td><td>앱 서버 4대 + Redis Pub/Sub 기반 WebSocket 클러스터</td></tr>
+        <tr><td>지역 단위 (모의고사)</td><td>~10000명</td><td>k8s 오토스케일링 + CDN(정적 자산) + 수식 렌더링 캐시(Redis) + SSE 폴백</td></tr>
+      </tbody>
+    </table>
+    <div class="info rule"><strong>WebSocket 폴백:</strong> 연결 수 상한 초과 시 자동으로 SSE(Server-Sent Events)로 전환. SSE도 불가 시 long-polling(10초 간격). 교사 모니터링은 약간의 지연을 허용.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     FINAL SUMMARY
+     ═══════════════════════════════════════════════════ -->
+<div class="sec" style="margin-top:36px;">
+  <div class="sn">SUMMARY</div>
+  <h2>v2.1 최종 설계 요약</h2>
+
+  <div class="sg">
+    <div class="si"><div class="sl">에이전트</div><div class="sv">14개 + 오케스트레이터</div></div>
+    <div class="si"><div class="sl">상태 관리</div><div class="sv">2계층 (L1/L2)</div></div>
+    <div class="si"><div class="sl">정답 확보</div><div class="sv">3경로 + 관리자 확인</div></div>
+    <div class="si"><div class="sl">합격 기준</div><div class="sv" style="color:var(--pass);">85점 이상</div></div>
+    <div class="si"><div class="sl">HWP 지원</div><div class="sv mono">HWPML + HWPX + Binary</div></div>
+    <div class="si"><div class="sl">수식 매핑</div><div class="sv mono">35+ 패턴 + 폴백</div></div>
+    <div class="si"><div class="sl">보안</div><div class="sv mono">RBAC + AES-256</div></div>
+    <div class="si"><div class="sl">부하</div><div class="sv mono">~10,000 동시접속</div></div>
+    <div class="si"><div class="sl">테스트</div><div class="sv mono">5계층 전략</div></div>
+  </div>
+
+  <h4>핵심 스키마 정의 현황</h4>
+  <table>
+    <thead><tr><th>스키마</th><th>정의 버전</th><th>사용처</th></tr></thead>
+    <tbody>
+      <tr><td>raw_question</td><td>v2.0</td><td>파싱팀 output → 파싱검수·메타팀 input</td></tr>
+      <tr><td>structured_question</td><td>v2.0</td><td>메타팀 output → 메타검수·제작팀 input</td></tr>
+      <tr><td>digital_question</td><td>v2.0</td><td>제작팀 output → 제작검수·데이터팀 input</td></tr>
+      <tr><td>xapi_config</td><td>v2.0</td><td>데이터팀 output → 데이터검수 input</td></tr>
+      <tr><td>teacher_request</td><td>v2.1 (시간 추가)</td><td>교사 → 시험지 구성팀 input</td></tr>
+      <tr><td><strong>exam_paper</strong></td><td><strong>v2.1 신규</strong></td><td>시험지 구성팀 output → 검수·서비스·채점 input</td></tr>
+      <tr><td><strong>student_submission</strong></td><td><strong>v2.1 신규</strong></td><td>학생 응시 결과 → 채점팀 input</td></tr>
+      <tr><td>grade_result</td><td>v2.0</td><td>채점팀 output → 채점검수 input</td></tr>
+      <tr><td>review_result</td><td>v2.0</td><td>모든 검수팀 공통 output</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info success" style="margin-top:16px;">
+    <strong>다음 단계:</strong> ① xAPI 가이드 & 인터페이스 규격 수령 → 데이터팀 스펙 확정 ② 파싱팀 프로토타입 구현 (샘플 HWP 실제 파싱 → raw_question 생성) ③ 각 에이전트 프롬프트 엔지니어링 ④ meta_schema 과목별 상세 정의 ⑤ 테스트 골든 데이터셋 구축
+  </div>
+</div>
+
+<footer class="doc-footer">
+  <p>에이전트 동작 로직 & 스펙 설계서 v2.1 — Final Draft · 2025.04</p>
+  <p style="margin-top:3px;">v1.0 → v2.0: 치명적 결함 3건·로직오류 4건·누락 12건 수정 | v2.0 → v2.1: 설계공백 4건·로직보완 5건·누락 6건·정합성 3건 수정</p>
+</footer>
+
+</div>
+</body>
+</html>
