@@ -71,9 +71,14 @@ class LLMClient:
         max_tokens: int = 4096,
         temperature: float = 0.0,
     ) -> LLMResponse:
-        """LLM 호출 (mock/real 자동 분기)"""
+        """LLM 호출 (mock/proxy/real 자동 분기)"""
         if self._mode == "mock":
             return await self._invoke_mock(system_prompt, user_prompt, agent, ref_id)
+        elif self._mode == "proxy":
+            return await self._invoke_proxy(
+                system_prompt, user_prompt, agent, ref_id,
+                model=model, max_tokens=max_tokens, temperature=temperature,
+            )
         else:
             return await self._invoke_real(
                 system_prompt, user_prompt, agent, ref_id,
@@ -107,6 +112,59 @@ class LLMClient:
             duration_ms=10,
             is_mock=True,
         )
+
+    async def _invoke_proxy(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        agent: str,
+        ref_id: str,
+        model: Optional[str] = None,
+        max_tokens: int = 4096,
+        temperature: float = 0.0,
+    ) -> LLMResponse:
+        """Proxy 모드: Node.js OAuth 프록시를 통해 Claude 구독으로 호출"""
+        import httpx
+
+        proxy_url = f"{settings.LLM_PROXY_URL}/api/query"
+        start_time = time.time()
+
+        try:
+            async with httpx.AsyncClient(timeout=300) as client:
+                resp = await client.post(proxy_url, json={
+                    "system_prompt": system_prompt,
+                    "user_prompt": user_prompt,
+                    "agent": agent,
+                    "ref_id": ref_id,
+                    "model": model or "sonnet",
+                    "max_tokens": max_tokens,
+                    "temperature": temperature,
+                })
+                resp.raise_for_status()
+                data = resp.json()
+
+            duration_ms = int((time.time() - start_time) * 1000)
+            content = data.get("content", "")
+
+            logger.info(
+                "llm_proxy_success",
+                agent=agent, ref_id=ref_id, model=model,
+                duration_ms=duration_ms, cost_usd=data.get("cost_usd", 0),
+            )
+
+            return LLMResponse(
+                content=content,
+                model=data.get("model", model or "sonnet"),
+                prompt_tokens=len(system_prompt + user_prompt) // 4,
+                completion_tokens=len(content) // 4,
+                total_tokens=(len(system_prompt + user_prompt) + len(content)) // 4,
+                duration_ms=duration_ms,
+            )
+
+        except Exception as e:
+            duration_ms = int((time.time() - start_time) * 1000)
+            logger.error("llm_proxy_failed", agent=agent, error=str(e), duration_ms=duration_ms)
+            raise RuntimeError(f"LLM Proxy 호출 실패: {e}")
 
     async def _invoke_real(
         self,

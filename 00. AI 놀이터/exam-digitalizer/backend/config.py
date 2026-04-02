@@ -27,7 +27,8 @@ class Settings(BaseSettings):
 
     # ─── Anthropic ─────────────────────────────────────────────
     ANTHROPIC_API_KEY: str = ""
-    LLM_MODE: Literal["mock", "real"] = "mock"
+    LLM_MODE: Literal["mock", "real", "proxy"] = "mock"
+    LLM_PROXY_URL: str = "http://host.docker.internal:3100"
 
     # ─── OpenAI (임베딩) ─────────────────────────────────────────
     OPENAI_API_KEY: str = ""

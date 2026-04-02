@@ -111,7 +111,9 @@
       "Bash(curl -s -X POST http://localhost:8000/api/v1/auth/login -H \"Content-Type: application/json\" -d '{\"\"email\"\":\"\"teacher@test.com\"\",\"\"password\"\":\"\"password123\"\"}')",
       "Bash(curl -s \"http://localhost:8000/api/v1/join/classroom?invite_code=CLASS-1-2\")",
       "Bash(curl -s \"http://localhost:8000/api/v1/join/exam/EX-20260402-001/questions\")",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:8000/api/v1/classrooms/9483466c-8189-474b-85de-4d49141590c0/qrcode\")"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:8000/api/v1/classrooms/9483466c-8189-474b-85de-4d49141590c0/qrcode\")",
+      "Bash(curl -s http://localhost:3100/health)",
+      "Bash(sleep 4 __NEW_LINE_fbdfbead9ec2b2c5__ docker compose exec -T backend python -c \":*)"
     ]
   }
 }
