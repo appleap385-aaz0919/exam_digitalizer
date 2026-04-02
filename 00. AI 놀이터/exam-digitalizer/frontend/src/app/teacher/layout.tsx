@@ -29,7 +29,7 @@ export default function TeacherLayout({ children }: { children: React.ReactNode 
 
   return (
     <div className="flex min-h-screen">
-      <aside className="w-60 bg-sidebar text-sidebar-foreground flex flex-col">
+      <aside className="w-60 bg-sidebar text-sidebar-foreground flex flex-col" role="navigation" aria-label="메인 메뉴">
         <div className="p-5">
           <Link href="/teacher" className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-sidebar-primary flex items-center justify-center">
@@ -80,7 +80,7 @@ export default function TeacherLayout({ children }: { children: React.ReactNode 
         </div>
       </aside>
 
-      <main className="flex-1 p-6 overflow-auto">
+      <main className="flex-1 p-6 overflow-auto" role="main" aria-label="콘텐츠 영역">
         {children}
       </main>
     </div>

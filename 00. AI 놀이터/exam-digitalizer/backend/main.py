@@ -115,6 +115,7 @@ async def readiness_check():
 from api import (  # noqa: E402
     auth, admin, join, learning_maps, batches,
     questions, exams, classrooms, sessions, grades, notifications,
+    xapi,
 )
 
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["auth"])
@@ -128,3 +129,4 @@ app.include_router(classrooms.router, prefix="/api/v1/classrooms", tags=["classr
 app.include_router(sessions.router, prefix="/api/v1/sessions", tags=["sessions"])
 app.include_router(grades.router, prefix="/api/v1/grades", tags=["grades"])
 app.include_router(notifications.router, prefix="/api/v1/notifications", tags=["notifications"])
+app.include_router(xapi.router, prefix="/api/v1/xapi", tags=["xapi"])

@@ -107,6 +107,30 @@
   }
 }
 
+/* WCAG 2.2: 포커스 인디케이터 */
+*:focus-visible {
+  outline: 2px solid var(--ring) !important;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* WCAG: 최소 터치 대상 크기 44x44px (모바일) */
+@media (pointer: coarse) {
+  button, a, [role="button"], input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* WCAG: 감소된 움직임 선호 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* 스크롤바 스타일링 */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }

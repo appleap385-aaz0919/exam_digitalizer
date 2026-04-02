@@ -19,6 +19,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </script>
       </head>
       <body className="min-h-screen">
+        {/* MathType 수식 입력기 컨테이너 */}
+        <div id="editorContainer" style={{ display: 'none', position: 'absolute', zIndex: 1000, width: 720, background: '#fff', boxShadow: '0 4px 20px rgba(0,0,0,0.2)', borderRadius: 8 }} />
+        <script src="/common-mathtype.js" defer />
         <QueryClientProvider client={queryClient}>
           <ToastProvider>
             {children}
