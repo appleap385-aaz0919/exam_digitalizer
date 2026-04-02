@@ -75,6 +75,59 @@ async def start_session(
     return {"submission_id": submission.id, "status": "started"}
 
 
+@router.post("/answer")
+async def save_answer(
+    request: SaveAnswerRequest,
+    student: dict = Depends(get_current_student),
+    db: AsyncSession = Depends(get_db),
+):
+    """답안 중간 저장 (문항별 실시간 저장)"""
+    student_id = int(student["student_id"])
+
+    # 진행 중인 가장 최근 Submission 조회
+    submission = (await db.execute(
+        select(Submission).where(
+            Submission.student_id == student_id,
+            Submission.status == "IN_PROGRESS",
+        ).order_by(Submission.created_at.desc())
+    )).scalar_one_or_none()
+
+    if not submission:
+        raise HTTPException(status_code=404, detail="진행 중인 시험이 없습니다")
+
+    # 기존 답안 조회 (동일 문항)
+    existing_answer = (await db.execute(
+        select(SubmissionAnswer).where(
+            SubmissionAnswer.submission_id == submission.id,
+            SubmissionAnswer.pkey == request.pkey,
+        )
+    )).scalar_one_or_none()
+
+    now = datetime.now(timezone.utc)
+    answer_value = str(request.value) if request.value is not None else None
+
+    if existing_answer:
+        # 기존 답안 업데이트
+        existing_answer.value = answer_value
+        existing_answer.answer_type = request.answer_type
+        existing_answer.answered_at = now
+    else:
+        # 새 답안 생성
+        new_answer = SubmissionAnswer(
+            submission_id=submission.id,
+            pkey=request.pkey,
+            seq_order=0,
+            answer_type=request.answer_type,
+            value=answer_value,
+            answered_at=now,
+        )
+        db.add(new_answer)
+
+    await db.commit()
+
+    return {"status": "saved", "pkey": request.pkey}
+
+
 @router.post("/submit")
 async def submit_answers(
     student: dict = Depends(get_current_student),

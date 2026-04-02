@@ -662,20 +662,34 @@ export default function StudentPage() {
             <div className="bg-muted/50 rounded-xl p-4 text-sm text-muted-foreground mb-6">
               채점 결과는 선생님이 확인 후 알려드립니다.
             </div>
-            <Button
-              variant="outline"
-              onClick={() => {
-                setStep('code');
-                setSelectedStudent(null);
-                setStudentToken('');
-                setAnswers([]);
-                setExamQuestions([]);
-                setManualName('');
-                setSubmitted(false);
-              }}
-            >
-              처음으로 돌아가기
-            </Button>
+            <div className="flex flex-col gap-2">
+              <Button
+                onClick={async () => {
+                  setAnswers([]);
+                  setExamQuestions([]);
+                  setCurrentExam(null);
+                  setSubmitted(false);
+                  await loadExams(classroom.classroom_id);
+                  setStep('exams');
+                }}
+              >
+                시험 목록으로 돌아가기
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  setStep('code');
+                  setSelectedStudent(null);
+                  setStudentToken('');
+                  setAnswers([]);
+                  setExamQuestions([]);
+                  setManualName('');
+                  setSubmitted(false);
+                }}
+              >
+                다른 학급으로 접속
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>

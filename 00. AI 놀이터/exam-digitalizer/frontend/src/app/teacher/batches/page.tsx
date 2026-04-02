@@ -14,6 +14,7 @@ export default function BatchesPage() {
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadResult, setUploadResult] = useState<string | null>(null);
+  const [dragOver, setDragOver] = useState(false);
   const [selectedBatchId, setSelectedBatchId] = useState<string | null>(null);
   const [previewPkey, setPreviewPkey] = useState<string | null>(null);
 
@@ -210,14 +211,29 @@ export default function BatchesPage() {
 
       <Card>
         <CardContent className="p-6">
-          <div className="border-2 border-dashed border-muted-foreground/20 rounded-xl p-10 text-center hover:border-primary/40 transition-colors">
+          <div
+            className={`border-2 border-dashed rounded-xl p-10 text-center transition-colors ${
+              dragOver ? 'border-primary bg-primary/5' : 'border-muted-foreground/20 hover:border-primary/40'
+            }`}
+            onDragOver={(e) => { e.preventDefault(); e.stopPropagation(); setDragOver(true); }}
+            onDragLeave={(e) => { e.preventDefault(); e.stopPropagation(); setDragOver(false); }}
+            onDrop={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setDragOver(false);
+              const dropped = e.dataTransfer.files?.[0];
+              if (dropped && /\.(hwp|hwpx|hwpml)$/i.test(dropped.name)) {
+                setFile(dropped);
+              }
+            }}
+          >
             <input type="file" accept=".hwp,.hwpx,.hwpml"
               onChange={(e) => setFile(e.target.files?.[0] || null)}
               className="hidden" id="hwp-upload" />
             <label htmlFor="hwp-upload" className="cursor-pointer">
               <Upload className="w-10 h-10 mx-auto mb-3 text-muted-foreground/40" />
               <p className="text-sm text-muted-foreground">
-                {file ? file.name : 'HWP / HWPX / HWPML 파일을 선택하세요'}
+                {file ? file.name : dragOver ? '여기에 놓으세요!' : 'HWP / HWPX / HWPML 파일을 선택하세요'}
               </p>
               <p className="text-xs text-muted-foreground/50 mt-1">또는 여기로 파일을 끌어놓으세요</p>
             </label>

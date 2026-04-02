@@ -148,32 +148,47 @@ def _compute_match_score(
     unit_hint: Optional[str],
     topic_hint: Optional[str],
 ) -> float:
-    """학습맵 노드와 힌트의 매칭 점수 계산"""
+    """학습맵 노드와 힌트의 매칭 점수 계산 (강화된 키워드 매칭)"""
     score = 0.0
 
     if unit_hint:
         # Depth1 매칭
         d1 = node.depth1_name or ""
-        if unit_hint in d1 or d1 in unit_hint:
+        if unit_hint == d1:
+            score += 0.5
+        elif unit_hint in d1 or d1 in unit_hint:
             score += 0.4
         elif _has_common_keywords(unit_hint, d1):
             score += 0.2
+        elif _char_overlap_ratio(unit_hint, d1) > 0.4:
+            score += 0.15
 
         # Depth2 매칭
         d2 = node.depth2_name or ""
-        if unit_hint in d2 or d2 in unit_hint:
+        if unit_hint == d2:
+            score += 0.35
+        elif unit_hint in d2 or d2 in unit_hint:
             score += 0.3
         elif _has_common_keywords(unit_hint, d2):
             score += 0.15
+        elif _char_overlap_ratio(unit_hint, d2) > 0.4:
+            score += 0.1
 
     if topic_hint:
-        # topic_hint는 Depth2나 Depth3에 매칭
+        # topic_hint는 Depth1, Depth2, Depth3 모두에 매칭 시도
+        d1 = node.depth1_name or ""
         d2 = node.depth2_name or ""
         d3 = node.depth3_name or ""
-        if topic_hint in d2 or topic_hint in d3:
+        all_names = f"{d1} {d2} {d3}"
+
+        if topic_hint in d3 or topic_hint in d2:
             score += 0.3
-        elif _has_common_keywords(topic_hint, d2) or _has_common_keywords(topic_hint, d3):
+        elif topic_hint in d1:
+            score += 0.2
+        elif _has_common_keywords(topic_hint, all_names):
             score += 0.15
+        elif _char_overlap_ratio(topic_hint, all_names) > 0.3:
+            score += 0.1
 
     # Leaf 노드 보너스 (더 구체적일수록 좋음)
     if node.is_leaf:
@@ -188,13 +203,36 @@ def _compute_match_score(
 
 
 def _has_common_keywords(text_a: str, text_b: str) -> bool:
-    """두 텍스트에 공통 키워드가 있는지"""
+    """두 텍스트에 공통 키워드가 있는지 (한글 2글자 이상 부분 매칭 포함)"""
     if not text_a or not text_b:
         return False
-    # 2글자 이상 공통 단어
+    # 2글자 이상 공통 단어 (공백 기준)
     words_a = set(w for w in text_a.split() if len(w) >= 2)
     words_b = set(w for w in text_b.split() if len(w) >= 2)
-    return bool(words_a & words_b)
+    if words_a & words_b:
+        return True
+    # 부분 문자열 매칭 (한글 특성 — "덧셈"이 "덧셈과 뺄셈"에 포함)
+    for wa in words_a:
+        for wb in words_b:
+            if len(wa) >= 2 and len(wb) >= 2 and (wa in wb or wb in wa):
+                return True
+    return False
+
+
+def _char_overlap_ratio(text_a: str, text_b: str) -> float:
+    """두 텍스트의 글자 겹침 비율 (조사/공백 제거 후)"""
+    if not text_a or not text_b:
+        return 0.0
+    # 조사 및 공백 제거
+    import re
+    clean_a = re.sub(r'[과와의을를에서는이가도로]', '', text_a.replace(' ', ''))
+    clean_b = re.sub(r'[과와의을를에서는이가도로]', '', text_b.replace(' ', ''))
+    if not clean_a or not clean_b:
+        return 0.0
+    set_a = set(clean_a)
+    set_b = set(clean_b)
+    overlap = len(set_a & set_b)
+    return overlap / max(len(set_a), len(set_b))
 
 
 async def _get_linked_standards(
