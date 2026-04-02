@@ -1,5 +1,6 @@
 """학생 접속 (비인증) — QR/초대코드로 접속 후 이름 선택/입력"""
 import secrets
+from datetime import datetime, timezone
 
 import structlog
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -11,6 +12,7 @@ from core.deps import get_db, get_redis
 from models.classroom import Classroom, ClassroomStudent, ClassroomExam
 from models.exam import Exam, ExamQuestion
 from models.question import QuestionProduced, QuestionRaw, QuestionMetadata
+from models.submission import Submission, SubmissionAnswer
 from schemas.auth import StudentTokenRequest, StudentTokenResponse
 from schemas.common import ErrorCode
 
@@ -260,3 +262,183 @@ async def get_classroom_exams_for_student(
             "closes_at": ce.closes_at.isoformat() if ce.closes_at else None,
         })
     return {"data": exams}
+
+
+# ── 학생 세션 (비인증) ──────────────────────────────────────
+
+async def _verify_student_token(token: str, redis: aioredis.Redis) -> dict:
+    """student_token → Redis에서 학생 정보 조회"""
+    key = f"student_token:{token}"
+    data = await redis.hgetall(key)
+    if not data:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="유효하지 않은 학생 토큰")
+    return data
+
+
+@router.post("/sessions/start")
+async def student_start_session(
+    data: dict,
+    db: AsyncSession = Depends(get_db),
+    redis: aioredis.Redis = Depends(get_redis),
+):
+    """학생 응시 시작 (비인증 — student_token으로 본인 확인)"""
+    student_token: str = data.get("student_token", "")
+    classroom_exam_id: int = data.get("classroom_exam_id", 0)
+    if not student_token or not classroom_exam_id:
+        raise HTTPException(status_code=400, detail="student_token과 classroom_exam_id 필요")
+
+    student_info = await _verify_student_token(student_token, redis)
+    student_id = int(student_info.get("student_id", 0))
+    if student_id == 0:
+        raise HTTPException(status_code=400, detail="유효하지 않은 학생 ID")
+
+    # 재응시 방지
+    existing = (await db.execute(
+        select(Submission).where(
+            Submission.classroom_exam_id == classroom_exam_id,
+            Submission.student_id == student_id,
+        )
+    )).scalar_one_or_none()
+
+    if existing and existing.submitted_at:
+        raise HTTPException(status_code=400, detail="이미 제출한 시험입니다")
+    if existing:
+        return {"submission_id": existing.id, "status": "resumed"}
+
+    submission = Submission(
+        classroom_exam_id=classroom_exam_id,
+        student_id=student_id,
+        started_at=datetime.now(timezone.utc),
+        status="IN_PROGRESS",
+    )
+    db.add(submission)
+    await db.commit()
+    await db.refresh(submission)
+
+    logger.info("session_started", submission_id=submission.id, student_id=student_id)
+    return {"submission_id": submission.id, "status": "started"}
+
+
+@router.post("/sessions/submit")
+async def student_submit_answers(
+    data: dict,
+    db: AsyncSession = Depends(get_db),
+    redis: aioredis.Redis = Depends(get_redis),
+):
+    """답안 제출 (비인증 — student_token + answers)"""
+    student_token: str = data.get("student_token", "")
+    submission_id: int = data.get("submission_id", 0)
+    answers: list = data.get("answers", [])
+
+    if not student_token or not submission_id:
+        raise HTTPException(status_code=400, detail="student_token과 submission_id 필요")
+
+    student_info = await _verify_student_token(student_token, redis)
+    student_id = int(student_info.get("student_id", 0))
+
+    submission = (await db.execute(
+        select(Submission).where(
+            Submission.id == submission_id,
+            Submission.student_id == student_id,
+        )
+    )).scalar_one_or_none()
+
+    if not submission:
+        raise HTTPException(status_code=404, detail="세션을 찾을 수 없습니다")
+    if submission.submitted_at:
+        raise HTTPException(status_code=400, detail="이미 제출한 시험입니다")
+
+    # 답안 저장
+    now = datetime.now(timezone.utc)
+    for ans in answers:
+        sa = SubmissionAnswer(
+            submission_id=submission_id,
+            pkey=ans.get("pkey", ""),
+            seq_order=ans.get("seq", 0),
+            answer_type=ans.get("question_type") or "short_answer",
+            value=ans.get("value"),
+            answered_at=now if ans.get("value") else None,
+        )
+        db.add(sa)
+
+    # 제출 완료
+    submission.submitted_at = now
+    submission.status = "SUBMITTED"
+    await db.commit()
+
+    # 자동 채점 (규칙 기반 — 객관식/단답형)
+    try:
+        await _auto_grade(db, submission, answers)
+    except Exception as e:
+        logger.warning("auto_grade_failed", error=str(e))
+
+    logger.info("session_submitted", submission_id=submission_id, student_id=student_id, answer_count=len(answers))
+    return {"submission_id": submission_id, "status": "SUBMITTED", "answer_count": len(answers)}
+
+
+async def _auto_grade(db: AsyncSession, submission: Submission, raw_answers: list) -> None:
+    """규칙 기반 자동 채점: 정답 비교 후 GradeResult + SubmissionAnswer.is_correct 업데이트"""
+    from models.submission import GradeResult
+
+    # 시험 문항 + 정답 로드
+    ce = (await db.execute(
+        select(ClassroomExam).where(ClassroomExam.id == submission.classroom_exam_id)
+    )).scalar_one()
+
+    exam_questions = (await db.execute(
+        select(ExamQuestion).where(ExamQuestion.exam_id == ce.exam_id).order_by(ExamQuestion.seq_order)
+    )).scalars().all()
+
+    # pkey → {correct_answer, points}
+    answer_key: dict[str, dict] = {}
+    for eq in exam_questions:
+        produced = (await db.execute(
+            select(QuestionProduced).where(QuestionProduced.pkey == eq.pkey)
+        )).scalar_one_or_none()
+        correct = None
+        if produced and produced.answer_correct:
+            ac = produced.answer_correct
+            correct = ac.get("correct", [ac.get("value")]) if isinstance(ac, dict) else [str(ac)]
+        answer_key[eq.pkey] = {"correct": correct, "points": eq.points_current}
+
+    # 채점
+    total_score = 0.0
+    max_score = sum(ak["points"] for ak in answer_key.values())
+    correct_count = 0
+
+    # SubmissionAnswer에 is_correct, score 업데이트
+    sa_list = (await db.execute(
+        select(SubmissionAnswer).where(SubmissionAnswer.submission_id == submission.id)
+    )).scalars().all()
+
+    for sa in sa_list:
+        key = answer_key.get(sa.pkey)
+        if not key or not key["correct"]:
+            continue
+        student_val = (sa.value or "").strip()
+        correct_vals = [str(c).strip() for c in key["correct"]] if key["correct"] else []
+        is_correct = student_val in correct_vals
+        sa.is_correct = is_correct
+        sa.score = key["points"] if is_correct else 0.0
+        if is_correct:
+            total_score += key["points"]
+            correct_count += 1
+
+    # GradeResult 생성
+    gr = GradeResult(
+        submission_id=submission.id,
+        total_score=total_score,
+        max_score=max_score,
+        percentage=round(total_score / max_score * 100, 1) if max_score > 0 else 0,
+        correct_count=correct_count,
+        total_count=len(sa_list),
+        graded_at=datetime.now(timezone.utc),
+        graded_by="auto",
+    )
+    db.add(gr)
+
+    submission.total_score = total_score
+    submission.status = "GRADED"
+    await db.commit()
+
+    logger.info("auto_grade_complete", submission_id=submission.id, score=total_score, max=max_score)

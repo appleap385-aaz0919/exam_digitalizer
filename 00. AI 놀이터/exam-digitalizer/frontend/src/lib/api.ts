@@ -87,6 +87,12 @@ export const examApi = {
   confirm: (id: string) => api.post(`/exams/${id}/confirm`),
   updatePoints: (examId: string, seq: number, points: number) =>
     api.patch(`/exams/${examId}/questions/${seq}/points`, { points }),
+  addQuestion: (examId: string, pkey: string, points: number) =>
+    api.post(`/exams/${examId}/questions`, { pkey, points }),
+  removeQuestion: (examId: string, pkey: string) =>
+    api.delete(`/exams/${examId}/questions/${pkey}`),
+  reorder: (examId: string, questionPkeys: string[]) =>
+    api.put(`/exams/${examId}/reorder`, { question_pkeys: questionPkeys }),
 };
 
 // ─── Classrooms ─────────────────────────────────────
@@ -129,6 +135,10 @@ export const studentApi = {
     publicApi.get(`/join/classroom/${classroomId}/exams`),
   getExamQuestions: (examId: string) =>
     publicApi.get(`/join/exam/${examId}/questions`),
+  startSession: (classroomExamId: number, studentToken: string) =>
+    publicApi.post('/join/sessions/start', { classroom_exam_id: classroomExamId, student_token: studentToken }),
+  submitSession: (submissionId: number, studentToken: string, answers: { pkey: string; seq: number; value: string; question_type?: string }[]) =>
+    publicApi.post('/join/sessions/submit', { submission_id: submissionId, student_token: studentToken, answers }),
 };
 
 // ─── Sessions (CBT) ────────────────────────────────

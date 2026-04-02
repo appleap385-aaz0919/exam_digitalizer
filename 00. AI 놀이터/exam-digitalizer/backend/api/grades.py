@@ -53,13 +53,29 @@ async def classroom_exam_summary(
 
     avg_score = total_score_sum / graded_count if graded_count > 0 else 0
 
+    scores = [s["total_score"] for s in students if s["total_score"] is not None]
+    max_scores = [s["max_score"] for s in students if s["max_score"] is not None]
+    total_points = max_scores[0] if max_scores else 100
+
     return {
         "classroom_exam_id": ce_id,
         "total_students": len(students),
-        "submitted": sum(1 for s in students if s["status"] == "SUBMITTED"),
+        "submitted_count": sum(1 for s in students if s["status"] in ("SUBMITTED", "GRADED")),
         "graded": graded_count,
-        "average_score": round(avg_score, 1),
-        "students": students,
+        "avg_score": round(avg_score, 1),
+        "max_score": max(scores) if scores else 0,
+        "min_score": min(scores) if scores else 0,
+        "total_points": total_points,
+        "submissions": [
+            {
+                "id": s["student_id"],
+                "student_name": s["student_name"],
+                "score": s["total_score"],
+                "status": "graded" if s["total_score"] is not None else s["status"].lower(),
+                "submitted_at": s["submitted_at"],
+            }
+            for s in students
+        ],
     }
 
 

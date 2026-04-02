@@ -9,7 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import {
-  ClipboardList, Plus, ArrowLeft, ChevronUp, ChevronDown, X, Eye, Search, Map,
+  ClipboardList, Plus, ArrowLeft, ChevronUp, ChevronDown, X, Eye, Search, Map, Pencil, Trash2, Save,
 } from 'lucide-react';
 
 interface CartItem {
@@ -84,6 +84,7 @@ export default function ExamsPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedExamId, setSelectedExamId] = useState<string | null>(null);
   const [previewPkey, setPreviewPkey] = useState<string | null>(null);
+  const [editing, setEditing] = useState(false);
   const [questionSource, setQuestionSource] = useState<'search' | 'map'>('search');
 
   // 학습맵 상태
@@ -216,38 +217,108 @@ export default function ExamsPage() {
         </Card>
       )}
 
-      {/* ── 상세 보기 ── */}
-      {tab === 'list' && selectedExamId && examDetail.data && (
-        <Card>
-          <CardHeader className="pb-4">
-            <Button variant="ghost" size="sm" className="w-fit -ml-2 mb-2" onClick={() => setSelectedExamId(null)}>
-              <ArrowLeft className="w-4 h-4 mr-1" /> 목록으로
-            </Button>
-            <div className="flex items-start justify-between">
-              <div>
-                <CardTitle>{examDetail.data.data.title}</CardTitle>
-                <p className="text-xs text-muted-foreground mt-1 font-mono">{examDetail.data.data.id} · {examDetail.data.data.total_questions}문항 · {examDetail.data.data.total_points}점</p>
+      {/* ── 상세 보기 (편집 가능) ── */}
+      {tab === 'list' && selectedExamId && examDetail.data && (() => {
+        const ed = examDetail.data.data;
+        const eqList = ed.questions ?? [];
+        return (
+          <Card>
+            <CardHeader className="pb-4">
+              <div className="flex items-center justify-between mb-2">
+                <Button variant="ghost" size="sm" className="-ml-2" onClick={() => { setSelectedExamId(null); setEditing(false); }}>
+                  <ArrowLeft className="w-4 h-4 mr-1" /> 목록으로
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => setEditing(!editing)}>
+                  <Pencil className="w-3.5 h-3.5 mr-1" /> {editing ? '편집 종료' : '편집'}
+                </Button>
               </div>
-              <Badge variant={examStatusBadge(examDetail.data.data.status)}>{examDetail.data.data.status}</Badge>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <table className="w-full text-sm">
-              <thead><tr className="border-b text-left text-muted-foreground text-xs"><th className="py-2 w-12">#</th><th>문항 ID</th><th className="text-right w-24">배점</th><th className="text-right w-20">미리보기</th></tr></thead>
-              <tbody className="divide-y">
-                {(examDetail.data.data.questions ?? []).map((eq: any) => (
-                  <tr key={eq.seq_order} className="hover:bg-accent/30">
-                    <td className="py-3 text-muted-foreground">{eq.seq_order}</td>
-                    <td className="font-mono text-xs py-3">{eq.pkey}</td>
-                    <td className="text-right font-semibold py-3">{eq.points_current}점</td>
-                    <td className="text-right py-3"><Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => setPreviewPkey(eq.pkey)}><Eye className="w-3.5 h-3.5" /></Button></td>
+              <div className="flex items-start justify-between">
+                <div>
+                  <CardTitle>{ed.title}</CardTitle>
+                  <p className="text-xs text-muted-foreground mt-1 font-mono">{ed.id} · {ed.total_questions}문항 · {ed.total_points}점 · {ed.time_limit_minutes}분</p>
+                </div>
+                <Badge variant={examStatusBadge(ed.status)}>{ed.status}</Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b text-left text-muted-foreground text-xs">
+                    <th className="py-2 w-12">#</th>
+                    <th>문항 ID</th>
+                    <th className="text-right w-24">배점</th>
+                    <th className="text-right w-28">{editing ? '편집' : '미리보기'}</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </CardContent>
-        </Card>
-      )}
+                </thead>
+                <tbody className="divide-y">
+                  {eqList.map((eq: any, idx: number) => (
+                    <tr key={eq.pkey || eq.seq_order} className="hover:bg-accent/30">
+                      <td className="py-3 text-muted-foreground">{eq.seq_order}</td>
+                      <td className="font-mono text-xs py-3">{eq.pkey}</td>
+                      <td className="text-right py-3">
+                        {editing ? (
+                          <Input type="number" defaultValue={eq.points_current} min={1} max={30}
+                            className="w-16 h-7 text-xs text-center ml-auto"
+                            onBlur={async (e) => {
+                              const pts = +e.target.value;
+                              if (pts !== eq.points_current) {
+                                await examApi.updatePoints(ed.id, eq.seq_order, pts);
+                                queryClient.invalidateQueries({ queryKey: ['examDetail', selectedExamId] });
+                              }
+                            }} />
+                        ) : (
+                          <span className="font-semibold">{eq.points_current}점</span>
+                        )}
+                      </td>
+                      <td className="text-right py-3">
+                        <div className="flex items-center justify-end gap-1">
+                          {editing && (
+                            <>
+                              <Button variant="ghost" size="sm" className="h-7 w-7 p-0"
+                                disabled={idx === 0}
+                                onClick={async () => {
+                                  const pkeys = eqList.map((e: any) => e.pkey);
+                                  [pkeys[idx], pkeys[idx - 1]] = [pkeys[idx - 1], pkeys[idx]];
+                                  await examApi.reorder(ed.id, pkeys);
+                                  queryClient.invalidateQueries({ queryKey: ['examDetail', selectedExamId] });
+                                }}>
+                                <ChevronUp className="w-3.5 h-3.5" />
+                              </Button>
+                              <Button variant="ghost" size="sm" className="h-7 w-7 p-0"
+                                disabled={idx === eqList.length - 1}
+                                onClick={async () => {
+                                  const pkeys = eqList.map((e: any) => e.pkey);
+                                  [pkeys[idx], pkeys[idx + 1]] = [pkeys[idx + 1], pkeys[idx]];
+                                  await examApi.reorder(ed.id, pkeys);
+                                  queryClient.invalidateQueries({ queryKey: ['examDetail', selectedExamId] });
+                                }}>
+                                <ChevronDown className="w-3.5 h-3.5" />
+                              </Button>
+                              <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-destructive hover:text-destructive"
+                                onClick={async () => {
+                                  await examApi.removeQuestion(ed.id, eq.pkey);
+                                  queryClient.invalidateQueries({ queryKey: ['examDetail', selectedExamId] });
+                                }}>
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </Button>
+                            </>
+                          )}
+                          <Button variant="ghost" size="sm" className="h-7 w-7 p-0" onClick={() => setPreviewPkey(eq.pkey)}>
+                            <Eye className="w-3.5 h-3.5" />
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {eqList.length === 0 && (
+                <p className="py-8 text-center text-sm text-muted-foreground">문항이 없습니다</p>
+              )}
+            </CardContent>
+          </Card>
+        );
+      })()}
 
       {/* ── 새 시험지 만들기 ── */}
       {tab === 'create' && (

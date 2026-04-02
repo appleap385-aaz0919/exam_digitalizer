@@ -215,3 +215,109 @@ async def update_question_points(
     await db.commit()
 
     return {"exam_id": exam_id, "seq": seq, "points": request.points, "total_points": exam.total_points}
+
+
+class AddQuestionRequest(BaseModel):
+    pkey: str
+    points: float = 3.0
+
+
+class ReorderRequest(BaseModel):
+    question_pkeys: list[str]  # 새로운 순서의 pkey 목록
+
+
+@router.post("/{exam_id}/questions")
+async def add_question_to_exam(
+    exam_id: str,
+    request: AddQuestionRequest,
+    db: AsyncSession = Depends(get_db),
+    _user: dict = Depends(require_teacher),
+):
+    """시험지에 문항 추가"""
+    exam = (await db.execute(select(Exam).where(Exam.id == exam_id))).scalar_one_or_none()
+    if not exam:
+        raise HTTPException(status_code=404, detail="시험지를 찾을 수 없습니다")
+
+    # 중복 검사
+    existing = (await db.execute(
+        select(ExamQuestion).where(ExamQuestion.exam_id == exam_id, ExamQuestion.pkey == request.pkey)
+    )).scalar_one_or_none()
+    if existing:
+        raise HTTPException(status_code=400, detail="이미 포함된 문항입니다")
+
+    # 마지막 순서 + 1
+    max_seq = (await db.execute(
+        select(func.max(ExamQuestion.seq_order)).where(ExamQuestion.exam_id == exam_id)
+    )).scalar() or 0
+
+    eq = ExamQuestion(
+        exam_id=exam_id, pkey=request.pkey,
+        seq_order=max_seq + 1,
+        points_auto=request.points, points_current=request.points,
+    )
+    db.add(eq)
+    exam.total_questions += 1
+    exam.total_points = int(exam.total_points + request.points)
+    await db.commit()
+
+    return {"exam_id": exam_id, "pkey": request.pkey, "seq_order": eq.seq_order}
+
+
+@router.delete("/{exam_id}/questions/{pkey}")
+async def remove_question_from_exam(
+    exam_id: str,
+    pkey: str,
+    db: AsyncSession = Depends(get_db),
+    _user: dict = Depends(require_teacher),
+):
+    """시험지에서 문항 제거"""
+    exam = (await db.execute(select(Exam).where(Exam.id == exam_id))).scalar_one_or_none()
+    if not exam:
+        raise HTTPException(status_code=404, detail="시험지를 찾을 수 없습니다")
+
+    eq = (await db.execute(
+        select(ExamQuestion).where(ExamQuestion.exam_id == exam_id, ExamQuestion.pkey == pkey)
+    )).scalar_one_or_none()
+    if not eq:
+        raise HTTPException(status_code=404, detail="해당 문항이 시험지에 없습니다")
+
+    await db.delete(eq)
+
+    # 순서 재정렬
+    remaining = (await db.execute(
+        select(ExamQuestion).where(ExamQuestion.exam_id == exam_id)
+        .order_by(ExamQuestion.seq_order)
+    )).scalars().all()
+    for i, r in enumerate(remaining):
+        r.seq_order = i + 1
+
+    exam.total_questions = len(remaining)
+    exam.total_points = int(sum(r.points_current for r in remaining))
+    await db.commit()
+
+    return {"exam_id": exam_id, "removed": pkey, "total_questions": exam.total_questions}
+
+
+@router.put("/{exam_id}/reorder")
+async def reorder_exam_questions(
+    exam_id: str,
+    request: ReorderRequest,
+    db: AsyncSession = Depends(get_db),
+    _user: dict = Depends(require_teacher),
+):
+    """시험지 문항 순서 변경"""
+    exam = (await db.execute(select(Exam).where(Exam.id == exam_id))).scalar_one_or_none()
+    if not exam:
+        raise HTTPException(status_code=404, detail="시험지를 찾을 수 없습니다")
+
+    eqs = (await db.execute(
+        select(ExamQuestion).where(ExamQuestion.exam_id == exam_id)
+    )).scalars().all()
+    eq_map = {eq.pkey: eq for eq in eqs}
+
+    for i, pkey in enumerate(request.question_pkeys):
+        if pkey in eq_map:
+            eq_map[pkey].seq_order = i + 1
+
+    await db.commit()
+    return {"exam_id": exam_id, "order": request.question_pkeys}

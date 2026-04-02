@@ -65,6 +65,7 @@ export default function StudentPage() {
   const [manualName, setManualName] = useState('');
   const [manualNumber, setManualNumber] = useState<number | ''>('');
   const [submitted, setSubmitted] = useState(false);
+  const [submissionId, setSubmissionId] = useState<number | null>(null);
   const [remainingSeconds, setRemainingSeconds] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -137,6 +138,14 @@ export default function StudentPage() {
       setCurrentExam({ ...exam, ...res.data });
       setExamQuestions(qs);
       setAnswers(qs.map(q => ({ pkey: q.pkey, seq: q.seq_order, value: '' })));
+
+      // 세션 시작 (DB에 Submission 생성)
+      try {
+        const sessionRes = await studentApi.startSession(exam.id, studentToken);
+        setSubmissionId(sessionRes.data.submission_id);
+      } catch {
+        // 세션 생성 실패해도 CBT 자체는 진행 가능
+      }
       setCurrentQ(0);
       setSubmitted(false);
       // 타이머 시작
@@ -164,8 +173,27 @@ export default function StudentPage() {
     setAnswers(prev => prev.map((a, i) => i === currentQ ? { ...a, value } : a));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (timerRef.current) clearInterval(timerRef.current);
+
+    // 답안 DB 제출
+    if (submissionId && studentToken) {
+      try {
+        await studentApi.submitSession(
+          submissionId,
+          studentToken,
+          answers.map((a, i) => ({
+            pkey: a.pkey,
+            seq: a.seq,
+            value: a.value,
+            question_type: examQuestions[i]?.question_type || undefined,
+          })),
+        );
+      } catch {
+        // 제출 실패해도 결과 화면으로 이동 (오프라인 대비)
+      }
+    }
+
     setSubmitted(true);
     setStep('result');
   };
