@@ -111,6 +111,12 @@ async def readiness_check():
     return result
 
 
+@app.get("/stats", tags=["health"])
+async def system_stats():
+    from core.health import get_system_stats
+    return await get_system_stats()
+
+
 # ─── API 라우터 등록 ──────────────────────────────────────────────
 from api import (  # noqa: E402
     auth, admin, join, learning_maps, batches,

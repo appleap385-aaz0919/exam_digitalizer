@@ -64,3 +64,45 @@ async def check_all_dependencies() -> dict:
         "redis": redis_status,
         "s3": s3_status,
     }
+
+
+async def get_system_stats() -> dict:
+    """시스템 통계 (모니터링 대시보드용)"""
+    stats = {}
+    try:
+        from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+        from sqlalchemy.orm import sessionmaker
+        from sqlalchemy import text
+        from config import settings
+
+        engine = create_async_engine(settings.DATABASE_URL, pool_pre_ping=True)
+        async_session = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+
+        async with async_session() as db:
+            counts = {}
+            for table in ["questions", "exams", "classrooms", "submissions", "grade_results"]:
+                result = await db.execute(text(f"SELECT count(*) FROM {table}"))
+                counts[table] = result.scalar()
+            stats["counts"] = counts
+
+            # 최근 활동
+            result = await db.execute(text(
+                "SELECT count(*) FROM submissions WHERE created_at > now() - interval '24 hours'"
+            ))
+            stats["submissions_24h"] = result.scalar()
+
+        await engine.dispose()
+    except Exception as e:
+        stats["error"] = str(e)
+
+    try:
+        import redis.asyncio as aioredis
+        from config import settings
+        client = aioredis.from_url(settings.REDIS_URL)
+        queue_len = await client.xlen("pipeline:tasks")
+        stats["queue_length"] = queue_len
+        await client.aclose()
+    except Exception:
+        stats["queue_length"] = -1
+
+    return stats

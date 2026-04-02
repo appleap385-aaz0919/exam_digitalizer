@@ -1,0 +1,26 @@
+{
+  "name": "claude-sdk-typescript-oauth",
+  "version": "2.0.0",
+  "description": "Claude Agent SDK OAuth examples with thinking, agents, and structured output (no API key required)",
+  "type": "module",
+  "scripts": {
+    "test": "tsx tests/test-hello.ts",
+    "test:hello": "tsx tests/test-hello.ts",
+    "test:thinking": "tsx tests/test-thinking.ts",
+    "test:agents": "tsx tests/test-agents.ts",
+    "test:structured": "tsx tests/test-structured-output.ts",
+    "test:mcp": "tsx tests/test-oauth-with-mcp.ts",
+    "test:skills": "tsx tests/test-oauth-with-skills.ts",
+    "test:all": "npm run test:hello && npm run test:thinking && npm run test:agents && npm run test:structured"
+  },
+  "keywords": ["claude", "oauth", "agent-sdk", "thinking", "agents"],
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "^0.2.84"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.10",
+    "typescript": "^5.7.3",
+    "tsx": "^4.19.2"
+  }
+}
