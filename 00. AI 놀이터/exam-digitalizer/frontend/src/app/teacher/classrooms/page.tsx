@@ -7,7 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Plus, School, QrCode, Users, ClipboardCheck, Download, Pencil, Check, X, Trash2 } from 'lucide-react';
 
 export default function ClassroomsPage() {
@@ -116,16 +115,12 @@ export default function ClassroomsPage() {
                 placeholder="학급명 (예: 1학년 3반)"
                 className="flex-1"
               />
-              <Select value={grade} onValueChange={setGrade}>
-                <SelectTrigger className="w-28">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {[1, 2, 3, 4, 5, 6].map(g => (
-                    <SelectItem key={g} value={String(g)}>{g}학년</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <select value={grade} onChange={e => setGrade(e.target.value)}
+                className="h-9 px-3 rounded-lg border bg-background text-sm">
+                {[1, 2, 3, 4, 5, 6].map(g => (
+                  <option key={g} value={String(g)}>{g}학년</option>
+                ))}
+              </select>
               <Button onClick={() => createMutation.mutate()} disabled={!name.trim()}>생성</Button>
               <Button variant="outline" onClick={() => setShowCreate(false)}>취소</Button>
             </div>

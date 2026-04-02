@@ -37,7 +37,7 @@ class Settings(BaseSettings):
     # ─── 앱 설정 ─────────────────────────────────────────────────
     APP_ENV: Literal["development", "test", "production"] = "development"
     LOG_LEVEL: str = "INFO"
-    CORS_ORIGINS: str = "http://localhost:3000"
+    CORS_ORIGINS: str = "http://localhost:3000,http://localhost:3200"
 
     # ─── 워커 설정 ───────────────────────────────────────────────
     AGENT_TIMEOUT_SECONDS: int = 300

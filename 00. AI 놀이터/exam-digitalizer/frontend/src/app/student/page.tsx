@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
 import { studentApi } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -31,15 +30,15 @@ type SelectMode = 'list' | 'manual';
 
 export default function StudentPage() {
   const [step, setStep] = useState<'code' | 'select' | 'exams' | 'cbt' | 'confirm' | 'result'>('code');
-  const searchParams = useSearchParams();
   const [inviteCode, setInviteCode] = useState('');
 
   // QR코드에서 진입 시 초대코드 자동 입력 + 자동 접속
   useEffect(() => {
-    const code = searchParams.get('code');
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get('code');
     if (code && step === 'code' && !classroom) {
       setInviteCode(code);
-      // 자동 접속 시도
       (async () => {
         try {
           const res = await studentApi.findClassroom(code);
@@ -49,7 +48,7 @@ export default function StudentPage() {
         } catch { /* 실패 시 수동 입력 */ }
       })();
     }
-  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const [classroom, setClassroom] = useState<any>(null);
   const [students, setStudents] = useState<any[]>([]);
   const [selectedStudent, setSelectedStudent] = useState<any>(null);
@@ -225,13 +224,13 @@ export default function StudentPage() {
               <p className="text-sm text-muted-foreground mt-1">선생님께 받은 초대 코드를 입력하세요</p>
             </div>
             <div className="space-y-4">
-              <Input
+              <input
                 value={inviteCode}
                 onChange={e => setInviteCode(e.target.value.toUpperCase())}
                 onKeyDown={e => e.key === 'Enter' && !loading && handleCodeSubmit()}
                 placeholder="초대 코드 입력"
-                className="text-center text-xl tracking-[0.3em] h-14 font-mono font-bold"
                 maxLength={20}
+                className="w-full text-center text-xl tracking-[0.3em] h-14 font-mono font-bold border rounded-xl px-4 bg-background focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
               {error && <p className="text-sm text-destructive text-center">{error}</p>}
               <Button

@@ -69,6 +69,7 @@ services:
     environment:
       - LLM_MODE=proxy
       - LLM_PROXY_URL=http://host.docker.internal:3100
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:3200
     ports:
       - "8000:8000"
     volumes:
@@ -140,8 +141,10 @@ services:
     container_name: exam_frontend
     env_file:
       - .env
+    environment:
+      - HOSTNAME=0.0.0.0
     ports:
-      - "3000:3000"
+      - "3200:3000"
     depends_on:
       - backend
     networks:

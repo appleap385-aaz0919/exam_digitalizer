@@ -120,7 +120,12 @@
       "Bash(docker compose exec -T backend python3 -c \":*)",
       "Bash(sleep 3 __NEW_LINE_62af0ab376bed4d7__ docker compose exec -T backend python3 -c \":*)",
       "Bash(sleep 3 __NEW_LINE_04d3a3522288fa41__ docker compose exec -T backend python3 -c \":*)",
-      "Bash(__NEW_LINE_cc42fe84bf99c8f2__ echo:*)"
+      "Bash(__NEW_LINE_cc42fe84bf99c8f2__ echo:*)",
+      "Bash(docker ps:*)",
+      "Bash(curl -s -X POST http://localhost:8000/api/v1/auth/login -H \"Content-Type: application/json\" -d '{\"\"\"\"email\"\"\"\":\"\"\"\"teacher01@test.com\"\"\"\",\"\"\"\"password\"\"\"\":\"\"\"\"teacher1234\"\"\"\"}')",
+      "Bash(docker info:*)",
+      "Bash(curl -s -X POST http://localhost:8000/api/auth/login -H \"Content-Type: application/json\" -d '{\"\"email\"\":\"\"teacher01@test.com\"\",\"\"password\"\":\"\"teacher1234\"\"}')",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3200/)"
     ]
   }
 }
