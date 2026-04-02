@@ -90,3 +90,25 @@
     font-family: 'Noto Sans KR', system-ui, sans-serif;
   }
 }
+
+/* 반응형: 태블릿 CBT 대응 */
+@media (max-width: 768px) {
+  /* 교사 사이드바 축소 */
+  aside { width: 3.5rem !important; overflow: hidden; }
+  aside span, aside p, aside h2 { display: none; }
+  aside nav a { justify-content: center; padding-left: 0; padding-right: 0; }
+
+  /* 그리드 1열로 */
+  .grid-cols-3, .grid-cols-4, .grid-cols-5 {
+    grid-template-columns: 1fr !important;
+  }
+  .col-span-2, .col-span-3 {
+    grid-column: span 1 !important;
+  }
+}
+
+/* 스크롤바 스타일링 */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--muted-foreground); border-radius: 3px; opacity: 0.3; }
+::-webkit-scrollbar-thumb:hover { opacity: 0.6; }
