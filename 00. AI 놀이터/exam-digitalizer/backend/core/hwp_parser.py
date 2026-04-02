@@ -265,85 +265,131 @@ class HwpmlParser:
     def _split_into_questions(
         self, paragraphs: list[list], result: ParseResult
     ) -> None:
-        """문단 목록을 문항 번호 기준으로 분리"""
-        current_question: Optional[RawQuestion] = None
+        """전체 텍스트를 합친 뒤 문항 번호 패턴으로 분리 (문단 경계 무시)
+
+        기존 방식(문단 단위)으로는 같은 <P> 안에 여러 문항이 있을 때 놓침.
+        → 세그먼트를 전부 펼치고, 텍스트를 합친 뒤 정규식으로 분리.
+        """
+        # 1단계: 모든 세그먼트를 하나의 플랫 리스트로 + 전체 텍스트 조합
+        all_segments: list = []
+        for para in paragraphs:
+            all_segments.extend(para)
+
+        full_text = ""
+        seg_positions: list[tuple[int, int, object]] = []  # (start, end, segment)
+        for seg in all_segments:
+            if isinstance(seg, TextSegment):
+                start = len(full_text)
+                full_text += seg.content
+                seg_positions.append((start, len(full_text), seg))
+            elif isinstance(seg, FormulaSegment):
+                start = len(full_text)
+                placeholder = f" [EQ:{id(seg)}] "
+                full_text += placeholder
+                seg_positions.append((start, len(full_text), seg))
+            elif isinstance(seg, ImageSegment):
+                start = len(full_text)
+                placeholder = f" [IMG:{id(seg)}] "
+                full_text += placeholder
+                seg_positions.append((start, len(full_text), seg))
+
+        if not full_text.strip():
+            return
+
+        # 2단계: 문항 번호 + 그룹 위치 찾기
+        # 그룹: [1-3], [11-12]
+        g_pattern = re.compile(r"\[(\d{1,3})\s*[-~]\s*(\d{1,3})\]")
+        groups_found: list[tuple[int, int, int]] = []
+        for gm in g_pattern.finditer(full_text):
+            groups_found.append((gm.start(), int(gm.group(1)), int(gm.group(2))))
+
+        # 문항번호: 모든 "N." 패턴을 수집한 뒤 순차 증가 필터링
+        # 패턴: 숫자(1~3자리) + 마침표 + 공백(0~2개)
+        q_pattern = re.compile(r"(\d{1,3})[.．]\s{0,2}")
+        all_candidates: list[tuple[int, int]] = []
+        for m in q_pattern.finditer(full_text):
+            all_candidates.append((m.start(), int(m.group(1))))
+
+        # 순차 증가 시퀀스 추출: 1부터 시작해서 최대 길이 시퀀스 찾기
+        boundaries: list[tuple[int, int]] = []
+        target = 1
+        for pos, seq in all_candidates:
+            if seq == target:
+                boundaries.append((pos, seq))
+                target = seq + 1
+
+        if not boundaries:
+            # 번호 패턴이 없으면 전체를 하나의 문항으로
+            q = RawQuestion(seq_num=1)
+            q.segments = list(all_segments)
+            self._finalize_question(q)
+            result.questions.append(q)
+            return
+
+        # 3단계: 경계 기준으로 텍스트 구간 나누기
         current_group: Optional[QuestionGroup] = None
-        pending_passage: list = []  # 그룹 지문
 
-        for para_segments in paragraphs:
-            # 첫 텍스트 세그먼트로 문항번호/그룹 판정
-            first_text = self._get_first_text(para_segments)
+        for idx, (pos, seq) in enumerate(boundaries):
+            # 다음 문항 시작 위치 (마지막이면 끝까지)
+            next_pos = boundaries[idx + 1][0] if idx + 1 < len(boundaries) else len(full_text)
 
-            # 세트 문항 그룹 감지: [1-3]
-            group_match = GROUP_PATTERN.match(first_text) if first_text else None
-            if group_match:
-                start, end = int(group_match.group(1)), int(group_match.group(2))
-                label = f"[{start}-{end}]"
-                current_group = QuestionGroup(
-                    group_label=label,
-                    start_num=start,
-                    end_num=end,
-                )
-                # 그룹 지문은 이 문단 나머지 + 다음 문항번호 나올 때까지
-                remaining = first_text[group_match.end():]
-                if remaining.strip():
-                    current_group.passage_segments.append(TextSegment(content=remaining))
-                # 비텍스트 세그먼트도 지문에 포함
-                for seg in para_segments:
-                    if isinstance(seg, (FormulaSegment, ImageSegment)):
-                        current_group.passage_segments.append(seg)
-                result.groups.append(current_group)
-                continue
+            # 그룹 판정
+            for gpos, gs, ge in groups_found:
+                if gpos < pos and gs <= seq <= ge:
+                    if current_group is None or current_group.group_label != f"[{gs}-{ge}]":
+                        current_group = QuestionGroup(
+                            group_label=f"[{gs}-{ge}]",
+                            start_num=gs,
+                            end_num=ge,
+                        )
+                        # 그룹 지문: 그룹 태그 ~ 첫 문항 사이
+                        passage_text = full_text[gpos:pos].strip()
+                        gm2 = g_pattern.match(passage_text)
+                        if gm2:
+                            passage_text = passage_text[gm2.end():].strip()
+                        if passage_text:
+                            current_group.passage_segments.append(TextSegment(content=passage_text))
+                        result.groups.append(current_group)
+                    break
+            else:
+                if current_group and seq > current_group.end_num:
+                    current_group = None
 
-            # 문항번호 감지: "1."
-            num_match = QUESTION_NUM_PATTERN.match(first_text) if first_text else None
-            if num_match:
-                # 이전 문항 저장
-                if current_question:
-                    self._finalize_question(current_question)
-                    result.questions.append(current_question)
+            # 문항 텍스트 추출
+            q_text = full_text[pos:next_pos]
+            # 번호 제거: "1.  텍스트" → "텍스트"
+            q_text = re.sub(r"^\d{1,3}[.．]\s*", "", q_text).strip()
 
-                seq = int(num_match.group(1))
-                current_question = RawQuestion(seq_num=seq)
+            q = RawQuestion(seq_num=seq)
+            if current_group and current_group.start_num <= seq <= current_group.end_num:
+                q.group_id = current_group.group_label
 
-                # 그룹 소속 판정
-                if current_group and current_group.start_num <= seq <= current_group.end_num:
-                    current_question.group_id = current_group.group_label
-                else:
-                    current_group = None  # 그룹 범위 밖이면 그룹 종료
+            # 해당 구간의 세그먼트 수집
+            for seg_start, seg_end, seg in seg_positions:
+                if seg_start >= pos and seg_end <= next_pos:
+                    if isinstance(seg, TextSegment):
+                        # 번호 부분 제거한 텍스트
+                        content = seg.content
+                        if seg_start == pos:
+                            content = re.sub(r"^\d{1,3}[.．]\s*", "", content)
+                        if content.strip():
+                            q.segments.append(TextSegment(content=content.strip()))
+                    else:
+                        q.segments.append(seg)
 
-                # 문항번호 뒤의 텍스트
-                remaining = first_text[num_match.end():]
-                if remaining.strip():
-                    current_question.segments.append(TextSegment(content=remaining))
+            # 세그먼트가 비었으면 텍스트로 직접 추가
+            if not q.segments and q_text:
+                q.segments.append(TextSegment(content=q_text))
 
-                # 나머지 세그먼트
-                for seg in para_segments[1:] if len(para_segments) > 1 else []:
-                    current_question.segments.append(seg)
-                continue
-
-            # 선지 감지: ①②③④⑤
-            if current_question and first_text and CHOICE_PATTERN.search(first_text):
-                # 선지를 choices에 추가
-                for part in re.split(r"(?=[①②③④⑤])", first_text):
+            # 선지 추출
+            if CHOICE_PATTERN.search(q_text):
+                for part in re.split(r"(?=[①②③④⑤])", q_text):
                     part = part.strip()
-                    if part:
-                        current_question.choices.append(part)
-                continue
+                    if part and CHOICE_PATTERN.match(part):
+                        q.choices.append(part)
 
-            # 일반 문단 — 현재 문항에 추가
-            if current_question:
-                for seg in para_segments:
-                    current_question.segments.append(seg)
-            elif current_group:
-                # 그룹 지문 계속
-                for seg in para_segments:
-                    current_group.passage_segments.append(seg)
-
-        # 마지막 문항 저장
-        if current_question:
-            self._finalize_question(current_question)
-            result.questions.append(current_question)
+            self._finalize_question(q)
+            result.questions.append(q)
 
     def _finalize_question(self, q: RawQuestion) -> None:
         """문항 후처리: 타입 판정, 통계 계산"""

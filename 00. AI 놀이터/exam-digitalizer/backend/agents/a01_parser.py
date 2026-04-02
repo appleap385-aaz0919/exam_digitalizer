@@ -219,11 +219,17 @@ class ParserAgent(BaseAgent):
 
     def _upload_images(self, images: dict[str, bytes], pkey: str) -> dict[str, str]:
         """이미지를 S3에 업로드하고 경로 매핑 반환"""
+        import re as _re
         uploaded = {}
-        for bin_id, img_bytes in images.items():
-            s3_key = f"questions/{pkey}/images/img_{bin_id}.png"
-            upload_file(BytesIO(img_bytes), s3_key, content_type="image/png")
-            uploaded[bin_id] = s3_key
+        for idx, (bin_id, img_bytes) in enumerate(images.items()):
+            # bin_id에 한글/특수문자가 있을 수 있으므로 영문 인덱스로 대체
+            safe_id = _re.sub(r"[^a-zA-Z0-9_\-]", "", str(bin_id)) or f"img{idx}"
+            s3_key = f"questions/{pkey}/images/{safe_id}.png"
+            try:
+                upload_file(BytesIO(img_bytes), s3_key, content_type="image/png")
+                uploaded[bin_id] = s3_key
+            except Exception as e:
+                logger.warning("image_upload_failed", bin_id=bin_id, error=str(e))
         return uploaded
 
     def _update_image_paths(

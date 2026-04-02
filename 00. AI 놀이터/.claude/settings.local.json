@@ -113,7 +113,14 @@
       "Bash(curl -s \"http://localhost:8000/api/v1/join/exam/EX-20260402-001/questions\")",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:8000/api/v1/classrooms/9483466c-8189-474b-85de-4d49141590c0/qrcode\")",
       "Bash(curl -s http://localhost:3100/health)",
-      "Bash(sleep 4 __NEW_LINE_fbdfbead9ec2b2c5__ docker compose exec -T backend python -c \":*)"
+      "Bash(sleep 4 __NEW_LINE_fbdfbead9ec2b2c5__ docker compose exec -T backend python -c \":*)",
+      "Bash(1 __NEW_LINE_a3aef43fd1fe01d2__ echo \"[Questions created]\" docker compose exec -T db psql -U postgres exam_digitalizer -t -c \"SELECT count\\(*\\) || '''' questions'''' FROM questions;\" 2)",
+      "Bash(1 __NEW_LINE_a3aef43fd1fe01d2__ echo \"[Question details]\" docker compose exec -T db psql -U postgres exam_digitalizer -t -c \"SELECT pkey, current_stage FROM questions ORDER BY seq_num LIMIT 10;\" 2)",
+      "Bash(1 __NEW_LINE_a3aef43fd1fe01d2__ echo \"[Worker logs - last 10]\" docker compose logs worker --tail=15)",
+      "Bash(docker compose exec -T backend python3 -c \":*)",
+      "Bash(sleep 3 __NEW_LINE_62af0ab376bed4d7__ docker compose exec -T backend python3 -c \":*)",
+      "Bash(sleep 3 __NEW_LINE_04d3a3522288fa41__ docker compose exec -T backend python3 -c \":*)",
+      "Bash(__NEW_LINE_cc42fe84bf99c8f2__ echo:*)"
     ]
   }
 }
