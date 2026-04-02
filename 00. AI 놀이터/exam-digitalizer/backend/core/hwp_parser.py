@@ -41,6 +41,12 @@ GROUP_PATTERN = re.compile(r"^\[(\d{1,3})\s*[-~]\s*(\d{1,3})\]")
 CHOICE_PATTERN = re.compile(r"[①②③④⑤]")
 CHOICE_CHARS = "①②③④⑤"
 
+# 하이픈 구분자 (17개 이상의 연속 하이픈)
+HYPHEN_SEPARATOR = re.compile(r"-{10,}")
+# 정답/해설 추출 패턴 (개발팀 파서 참조)
+ANSWER_PATTERN = re.compile(r"(?:정답|답)\s*[:：]?\s*(.+?)(?=\n\s*(?:해설|풀이)|$)", re.DOTALL)
+EXPLANATION_PATTERN = re.compile(r"(?:해설|풀이)\s*[:：]?\s*(.+)", re.DOTALL)
+
 
 @dataclass
 class FormulaSegment:

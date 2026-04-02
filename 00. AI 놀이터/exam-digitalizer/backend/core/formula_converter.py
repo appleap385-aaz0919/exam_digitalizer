@@ -85,6 +85,9 @@ _STRUCTURAL_PATTERNS: list[tuple[re.Pattern, callable]] = [
     # a _{b} → a_{b}
     (re.compile(r"(\S+)\s*_\s*\{([^}]*)\}"),
      lambda m: f"{m.group(1)}_{{{m.group(2)}}}"),
+    # 숫자/숫자 분수 (예: 3/4 → \frac{3}{4})
+    (re.compile(r"(?<!\w)(\d+)\s*/\s*(\d+)(?!\w)"),
+     lambda m: f"\\frac{{{m.group(1)}}}{{{m.group(2)}}}"),
 ]
 
 # 3. 합/적분/극한 계열 (lambda 치환)
@@ -160,6 +163,29 @@ _SYMBOL_MAP = {
     "FORALL": r"\forall", "EXISTS": r"\exists",
     "DOT": r"\cdot",
     "PRIME": r"'",
+    # 삼각/로그 함수
+    "sin": r"\sin", "cos": r"\cos", "tan": r"\tan",
+    "cot": r"\cot", "sec": r"\sec", "csc": r"\csc",
+    "log": r"\log", "ln": r"\ln", "exp": r"\exp",
+    "max": r"\max", "min": r"\min",
+}
+
+# 8. 유니코드 기호 → LaTeX 직접 변환 (HTML 내 실제 문자 대응)
+_UNICODE_MAP = {
+    "×": r"\times", "÷": r"\div", "±": r"\pm", "∓": r"\mp",
+    "·": r"\cdot", "√": r"\sqrt",
+    "∑": r"\sum", "∏": r"\prod", "∫": r"\int", "∮": r"\oint",
+    "≤": r"\leq", "≥": r"\geq", "≠": r"\neq", "≈": r"\approx",
+    "≡": r"\equiv", "∼": r"\sim", "∝": r"\propto",
+    "∈": r"\in", "∉": r"\notin", "⊂": r"\subset", "⊃": r"\supset",
+    "∪": r"\cup", "∩": r"\cap", "∅": r"\emptyset",
+    "∀": r"\forall", "∃": r"\exists",
+    "∂": r"\partial", "∇": r"\nabla", "∞": r"\infty",
+    "∠": r"\angle", "△": r"\triangle", "⊥": r"\perp", "∥": r"\parallel",
+    "∴": r"\therefore", "∵": r"\because",
+    "→": r"\rightarrow", "←": r"\leftarrow",
+    "⇒": r"\Rightarrow", "⇐": r"\Leftarrow", "⇔": r"\Leftrightarrow",
+    "°": r"^{\circ}",
 }
 
 # 6. 행렬
@@ -264,9 +290,14 @@ def _convert_step_by_step(script: str, warnings: list[str]) -> str:
         # lambda 사용: replacement의 역슬래시를 re가 그룹참조로 해석하는 문제 방지
         result = re.sub(rf"\b{re.escape(hwp)}\b", lambda _m, _l=latex: _l, result)
 
-    # 7단계: 특수 기호 변환
+    # 7단계: 특수 기호 변환 (키워드)
     for hwp, latex in _SYMBOL_MAP.items():
         result = re.sub(rf"\b{re.escape(hwp)}\b", lambda _m, _l=latex: _l, result)
+
+    # 8단계: 유니코드 기호 → LaTeX (HTML에서 온 실제 문자)
+    for char, latex in _UNICODE_MAP.items():
+        if char in result:
+            result = result.replace(char, latex)
 
     return result
 
