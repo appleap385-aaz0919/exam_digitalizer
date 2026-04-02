@@ -1,6 +1,10 @@
 import asyncio
+import os
 import pytest
 from httpx import AsyncClient, ASGITransport
+
+# 테스트 환경에서는 항상 mock 모드 (실제 LLM 호출 방지)
+os.environ["LLM_MODE"] = "mock"
 
 from main import app
 

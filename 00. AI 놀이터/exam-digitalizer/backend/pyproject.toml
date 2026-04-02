@@ -44,6 +44,7 @@ dependencies = [
     # HWP
     "lxml>=5.2.1",
     "Pillow>=10.3.0",
+    "qrcode>=7.4",
 
     # Utils
     "structlog>=24.1.0",
