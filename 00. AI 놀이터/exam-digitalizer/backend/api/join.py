@@ -10,7 +10,7 @@ import redis.asyncio as aioredis
 from core.deps import get_db, get_redis
 from models.classroom import Classroom, ClassroomStudent, ClassroomExam
 from models.exam import Exam, ExamQuestion
-from models.question import QuestionProduced, QuestionRaw
+from models.question import QuestionProduced, QuestionRaw, QuestionMetadata
 from schemas.auth import StudentTokenRequest, StudentTokenResponse
 from schemas.common import ErrorCode
 
@@ -208,13 +208,17 @@ async def get_exam_questions_for_student(
             select(QuestionRaw).where(QuestionRaw.pkey == eq.pkey)
         )).scalar_one_or_none()
 
+        meta = (await db.execute(
+            select(QuestionMetadata).where(QuestionMetadata.pkey == eq.pkey)
+        )).scalar_one_or_none()
+
         questions.append({
             "pkey": eq.pkey,
             "seq_order": eq.seq_order,
             "points": eq.points_current,
             "render_html": produced.render_html if produced else None,
             "raw_text": raw.raw_text if raw else None,
-            "question_type": None,
+            "question_type": meta.question_type if meta else None,
         })
 
     return {
@@ -232,23 +236,27 @@ async def get_classroom_exams_for_student(
     classroom_id: str,
     db: AsyncSession = Depends(get_db),
 ):
-    """학생용 — 학급에 배포된 시험 목록 조회 (비인증)"""
+    """학생용 — 학급에 배포된 시험 목록 조회 (비인증, Exam join)"""
+    from sqlalchemy.orm import selectinload
     result = await db.execute(
         select(ClassroomExam).where(
             ClassroomExam.classroom_id == classroom_id,
             ClassroomExam.deleted_at.is_(None),
-        ).order_by(ClassroomExam.created_at.desc())
+        ).options(selectinload(ClassroomExam.exam))
+        .order_by(ClassroomExam.created_at.desc())
     )
-    exams = [
-        {
+    exams = []
+    for ce in result.scalars():
+        exam = ce.exam
+        exams.append({
             "id": ce.id,
             "exam_id": ce.exam_id,
-            "exam_title": ce.exam_id,  # exam join은 생략, 프론트에서 exam_id로 표시
+            "exam_title": exam.title if exam else ce.exam_id,
+            "total_questions": exam.total_questions if exam else 0,
+            "total_points": exam.total_points if exam else 0,
             "status": ce.status,
-            "time_limit_minutes": ce.time_limit_minutes,
+            "time_limit_minutes": ce.time_limit_minutes or (exam.time_limit_minutes if exam else 50),
             "opens_at": ce.opens_at.isoformat() if ce.opens_at else None,
             "closes_at": ce.closes_at.isoformat() if ce.closes_at else None,
-        }
-        for ce in result.scalars()
-    ]
+        })
     return {"data": exams}

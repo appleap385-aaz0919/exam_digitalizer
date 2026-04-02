@@ -2,19 +2,32 @@
 
 import { useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { batchApi } from '@/lib/api';
+import { batchApi, questionApi } from '@/lib/api';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Upload, FileUp } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Upload, FileUp, ArrowLeft, Eye, ChevronRight } from 'lucide-react';
 
 export default function BatchesPage() {
   const queryClient = useQueryClient();
   const [file, setFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState(false);
   const [uploadResult, setUploadResult] = useState<string | null>(null);
+  const [selectedBatchId, setSelectedBatchId] = useState<string | null>(null);
+  const [previewPkey, setPreviewPkey] = useState<string | null>(null);
 
   const batches = useQuery({ queryKey: ['batches'], queryFn: () => batchApi.list() });
+  const batchQuestions = useQuery({
+    queryKey: ['batchQuestions', selectedBatchId],
+    queryFn: () => batchApi.getQuestions(selectedBatchId!, 1),
+    enabled: !!selectedBatchId,
+  });
+  const previewDetail = useQuery({
+    queryKey: ['questionDetail', previewPkey],
+    queryFn: () => questionApi.get(previewPkey!),
+    enabled: !!previewPkey,
+  });
 
   const handleUpload = async () => {
     if (!file) return;
@@ -32,6 +45,162 @@ export default function BatchesPage() {
     }
   };
 
+  const batchList = batches.data?.data.data ?? [];
+  const qList: any[] = batchQuestions.data?.data.data ?? [];
+  const previewData = previewDetail.data?.data;
+
+  // 배치 상세 보기
+  if (selectedBatchId) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center gap-3">
+          <Button variant="ghost" size="sm" onClick={() => setSelectedBatchId(null)}>
+            <ArrowLeft className="w-4 h-4 mr-1" /> 목록으로
+          </Button>
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">배치 문항 상세</h1>
+            <p className="text-muted-foreground text-sm mt-0.5 font-mono">{selectedBatchId}</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-4">
+          {/* 문항 리스트 */}
+          <Card className="max-h-[78vh] overflow-y-auto">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm text-muted-foreground">
+                파싱된 문항 ({batchQuestions.data?.data.meta?.total ?? qList.length})
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-2">
+              {batchQuestions.isLoading && (
+                <p className="text-xs text-muted-foreground py-8 text-center">불러오는 중...</p>
+              )}
+              <div className="space-y-1">
+                {qList.map((q: any) => (
+                  <button
+                    key={q.pkey}
+                    onClick={() => setPreviewPkey(q.pkey)}
+                    className={`w-full text-left px-3 py-2.5 rounded-lg text-sm transition-colors group ${
+                      previewPkey === q.pkey
+                        ? 'bg-primary text-primary-foreground'
+                        : 'hover:bg-accent'
+                    }`}
+                  >
+                    <div className="font-mono text-xs">{q.pkey}</div>
+                    <div className="flex gap-1.5 mt-1">
+                      <Badge
+                        variant={previewPkey === q.pkey ? 'outline' : 'secondary'}
+                        className={`text-[10px] py-0 h-4 ${previewPkey === q.pkey ? 'border-primary-foreground/40 text-primary-foreground' : ''}`}
+                      >
+                        {q.metadata?.question_type || '-'}
+                      </Badge>
+                      <Badge
+                        variant="outline"
+                        className={`text-[10px] py-0 h-4 ${previewPkey === q.pkey ? 'border-primary-foreground/40 text-primary-foreground' : ''}`}
+                      >
+                        {q.metadata?.difficulty || '-'}
+                      </Badge>
+                      <Badge
+                        variant={previewPkey === q.pkey ? 'outline' : (
+                          q.current_stage === 'PROD_REVIEW' || q.current_stage === 'L1_COMPLETED' ? 'default' : 'secondary'
+                        )}
+                        className={`text-[10px] py-0 h-4 ${previewPkey === q.pkey ? 'border-primary-foreground/40 text-primary-foreground' : ''}`}
+                      >
+                        {q.current_stage}
+                      </Badge>
+                    </div>
+                  </button>
+                ))}
+              </div>
+              {qList.length === 0 && !batchQuestions.isLoading && (
+                <p className="text-xs text-muted-foreground py-8 text-center">
+                  파싱 중이거나 문항이 없습니다.
+                </p>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* 문항 상세 미리보기 */}
+          <div className="col-span-2">
+            <Card className="max-h-[78vh] overflow-y-auto">
+              <CardContent className="p-6">
+                {previewPkey && previewData ? (
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h2 className="font-mono text-sm font-bold">{previewData.pkey}</h2>
+                      <Badge>{previewData.current_stage}</Badge>
+                    </div>
+
+                    {/* 렌더링 HTML 미리보기 */}
+                    {previewData.produced?.render_html ? (
+                      <div>
+                        <p className="text-xs font-medium text-muted-foreground mb-2">렌더링 미리보기</p>
+                        <div
+                          className="p-4 border rounded-lg bg-card text-sm leading-relaxed"
+                          dangerouslySetInnerHTML={{ __html: previewData.produced.render_html }}
+                        />
+                      </div>
+                    ) : null}
+
+                    {/* 원문 */}
+                    {previewData.raw?.raw_text ? (
+                      <div>
+                        <p className="text-xs font-medium text-muted-foreground mb-2">원문 (파싱 결과)</p>
+                        <div className="p-4 bg-muted/40 rounded-lg text-sm whitespace-pre-wrap font-mono leading-relaxed">
+                          {previewData.raw.raw_text}
+                        </div>
+                      </div>
+                    ) : null}
+
+                    {/* 정답 */}
+                    {previewData.produced?.answer_correct !== undefined && (
+                      <div className="p-3 bg-emerald-50 dark:bg-emerald-950/30 rounded-lg border border-emerald-200/50">
+                        <span className="text-xs font-semibold text-emerald-700">정답</span>
+                        <div className="mt-1 text-sm">{JSON.stringify(previewData.produced.answer_correct)}</div>
+                      </div>
+                    )}
+
+                    {/* 메타정보 */}
+                    {previewData.metadata && (
+                      <div>
+                        <p className="text-xs font-medium text-muted-foreground mb-2">메타정보</p>
+                        <div className="grid grid-cols-3 gap-2">
+                          {Object.entries(previewData.metadata).map(([k, v]: [string, any]) =>
+                            v && k !== 'tags' && k !== 'learning_map_id' ? (
+                              <div key={k} className="p-2 bg-muted/40 rounded text-xs">
+                                <span className="text-muted-foreground">{k}</span>
+                                <div className="font-medium mt-0.5 truncate">{String(v)}</div>
+                              </div>
+                            ) : null
+                          )}
+                        </div>
+                        {previewData.metadata?.tags && (
+                          <div className="flex gap-1 mt-2 flex-wrap">
+                            {(previewData.metadata.tags as string[]).map((t: string, i: number) => (
+                              <Badge key={i} variant="secondary" className="text-xs">{t}</Badge>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ) : previewPkey && previewDetail.isLoading ? (
+                  <div className="py-20 text-center text-sm text-muted-foreground">불러오는 중...</div>
+                ) : (
+                  <div className="py-20 text-center text-muted-foreground text-sm">
+                    <Eye className="w-10 h-10 mx-auto mb-3 opacity-15" />
+                    <p>왼쪽에서 문항을 선택하면 미리보기가 표시됩니다</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 메인 (업로드 + 배치 목록)
   return (
     <div className="space-y-6">
       <div>
@@ -73,22 +242,30 @@ export default function BatchesPage() {
         <CardHeader><CardTitle className="text-base">업로드 이력</CardTitle></CardHeader>
         <CardContent className="p-0">
           <div className="divide-y">
-            {(batches.data?.data.data ?? []).map((b: any) => (
-              <div key={b.id} className="px-6 py-3.5 flex items-center justify-between">
+            {batchList.map((b: any) => (
+              <button
+                key={b.id}
+                onClick={() => setSelectedBatchId(b.id)}
+                className="w-full text-left px-6 py-4 flex items-center justify-between hover:bg-accent/50 transition-colors group"
+              >
                 <div>
-                  <span className="font-mono text-sm">{b.id}</span>
+                  <span className="font-mono text-sm font-medium">{b.id}</span>
                   <span className="text-xs text-muted-foreground ml-2">{b.subject}</span>
+                  <div className="text-xs text-muted-foreground mt-0.5">
+                    {b.total_questions}문항 추출
+                    {b.created_at && ` · ${new Date(b.created_at).toLocaleString('ko-KR')}`}
+                  </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-xs text-muted-foreground">{b.total_questions}문항</span>
                   <Badge variant={
                     b.status === 'COMPLETED' ? 'default' :
                     b.status === 'PARSING' ? 'secondary' : 'outline'
                   }>{b.status}</Badge>
+                  <ChevronRight className="w-4 h-4 text-muted-foreground/30 group-hover:text-muted-foreground transition-colors" />
                 </div>
-              </div>
+              </button>
             ))}
-            {(batches.data?.data.data ?? []).length === 0 && (
+            {batchList.length === 0 && (
               <div className="px-6 py-10 text-center text-sm text-muted-foreground">
                 업로드된 배치가 없습니다
               </div>

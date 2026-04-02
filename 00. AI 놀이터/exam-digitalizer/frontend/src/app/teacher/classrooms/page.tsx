@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Plus, School, QrCode, Users, ClipboardCheck, Download, Pencil, Check, X } from 'lucide-react';
+import { Plus, School, QrCode, Users, ClipboardCheck, Download, Pencil, Check, X, Trash2 } from 'lucide-react';
 
 export default function ClassroomsPage() {
   const queryClient = useQueryClient();
@@ -60,6 +60,13 @@ export default function ClassroomsPage() {
   const updateStudentMutation = useMutation({
     mutationFn: ({ studentId, data }: { studentId: number; data: { name?: string; student_number?: number } }) =>
       classroomApi.updateStudent(selectedId!, studentId, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['classStudents', selectedId] });
+      setEditingStudent(null);
+    },
+  });
+  const deleteStudentMutation = useMutation({
+    mutationFn: (studentId: number) => classroomApi.deleteStudent(selectedId!, studentId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['classStudents', selectedId] });
       setEditingStudent(null);
@@ -178,12 +185,11 @@ export default function ClassroomsPage() {
                           {selected.invite_code}
                         </div>
                       </div>
-                      <div className="w-20 h-20 bg-muted rounded-xl flex items-center justify-center border-2 border-dashed border-muted-foreground/20">
-                        <div className="text-center">
-                          <QrCode className="w-8 h-8 mx-auto text-muted-foreground/30" />
-                          <div className="text-[9px] text-muted-foreground mt-1">{selected.invite_code}</div>
-                        </div>
-                      </div>
+                      <img
+                        src={classroomApi.qrcodeUrl(selected.id)}
+                        alt={`QR: ${selected.invite_code}`}
+                        className="w-20 h-20 rounded-xl border"
+                      />
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground mt-4 bg-muted/50 rounded-lg p-3">
@@ -259,6 +265,13 @@ export default function ClassroomsPage() {
                               className="text-emerald-600 hover:text-emerald-700 disabled:opacity-30"
                             >
                               <Check className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              onClick={() => { if (confirm(`${editName} 학생을 삭제하시겠습니까?`)) deleteStudentMutation.mutate(s.id); }}
+                              className="text-destructive/50 hover:text-destructive"
+                              title="학생 삭제"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
                             </button>
                             <button onClick={() => setEditingStudent(null)} className="text-muted-foreground hover:text-foreground">
                               <X className="w-3.5 h-3.5" />

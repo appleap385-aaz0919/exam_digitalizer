@@ -99,6 +99,10 @@ export const classroomApi = {
   listStudents: (classroomId: string) => api.get(`/classrooms/${classroomId}/students`),
   updateStudent: (classroomId: string, studentId: number, data: { name?: string; student_number?: number }) =>
     api.patch(`/classrooms/${classroomId}/students/${studentId}`, data),
+  deleteStudent: (classroomId: string, studentId: number) =>
+    api.delete(`/classrooms/${classroomId}/students/${studentId}`),
+  qrcodeUrl: (classroomId: string) =>
+    `${API_BASE}/api/v1/classrooms/${classroomId}/qrcode`,
   deployExam: (classroomId: string, data: any) =>
     api.post(`/classrooms/${classroomId}/exams`, data),
   listExams: (classroomId: string) => api.get(`/classrooms/${classroomId}/exams`),

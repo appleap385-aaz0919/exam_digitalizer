@@ -104,7 +104,14 @@
       "Bash(npx shadcn@latest add button card input badge table tabs dialog select separator -y)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/teacher)",
       "Bash(MSYS_NO_PATHCONV=1 \"/c/Program Files/Docker/Docker/resources/bin/docker.exe\" compose -f \"/d/jaehyuk.myung/claude_demo/Demo_21_출제 마법사/00. AI 놀이터/exam-digitalizer/docker-compose.yml\" exec -T db psql -U postgres examdb -c \"SELECT id, name, invite_code FROM classrooms LIMIT 5; SELECT id, title, status FROM exams LIMIT 5;\")",
-      "Bash(docker compose:*)"
+      "Bash(docker compose:*)",
+      "Bash(curl -s http://localhost:8000/api/v1/join/classroom?invite_code=test)",
+      "Bash(curl -s http://localhost:8000/api/v1/health)",
+      "Bash(curl -sv http://localhost:8000/api/v1/join/classroom?invite_code=test)",
+      "Bash(curl -s -X POST http://localhost:8000/api/v1/auth/login -H \"Content-Type: application/json\" -d '{\"\"email\"\":\"\"teacher@test.com\"\",\"\"password\"\":\"\"password123\"\"}')",
+      "Bash(curl -s \"http://localhost:8000/api/v1/join/classroom?invite_code=CLASS-1-2\")",
+      "Bash(curl -s \"http://localhost:8000/api/v1/join/exam/EX-20260402-001/questions\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"http://localhost:8000/api/v1/classrooms/9483466c-8189-474b-85de-4d49141590c0/qrcode\")"
     ]
   }
 }

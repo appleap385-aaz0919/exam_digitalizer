@@ -10,15 +10,16 @@ GET   /api/v1/classrooms/{id}/exams               — 학급 시험 목록
 GET   /api/v1/classrooms/{id}/exams/{ce_id}/download — HWP 다운로드
 PATCH /api/v1/classrooms/{id}/exams/{ce_id}/extend — 시험 시간 연장
 """
+import io
 import uuid
 from datetime import datetime, timezone
 
+import qrcode  # type: ignore
 from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.responses import RedirectResponse, StreamingResponse
 from pydantic import BaseModel
 from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from fastapi.responses import RedirectResponse
 
 from core.deps import get_db, get_redis, require_teacher
 from core.queue import PIPELINE_TASKS_STREAM, publish_task
@@ -183,6 +184,52 @@ async def update_student(
     return {"id": student.id, "name": student.name, "student_number": student.student_number}
 
 
+@router.delete("/{classroom_id}/students/{student_id}")
+async def delete_student(
+    classroom_id: str,
+    student_id: int,
+    db: AsyncSession = Depends(get_db),
+    _user: dict = Depends(require_teacher),
+):
+    """학생 삭제"""
+    student = (await db.execute(
+        select(ClassroomStudent).where(
+            ClassroomStudent.id == student_id,
+            ClassroomStudent.classroom_id == classroom_id,
+        )
+    )).scalar_one_or_none()
+    if not student:
+        raise HTTPException(status_code=404, detail="학생을 찾을 수 없습니다")
+    await db.delete(student)
+    await db.commit()
+    return {"deleted": True, "student_id": student_id}
+
+
+@router.get("/{classroom_id}/qrcode")
+async def get_classroom_qrcode(
+    classroom_id: str,
+    db: AsyncSession = Depends(get_db),
+):
+    """학급 초대코드 QR 이미지 (PNG) — 인증 불필요"""
+    classroom = (await db.execute(
+        select(Classroom).where(Classroom.id == classroom_id, Classroom.deleted_at.is_(None))
+    )).scalar_one_or_none()
+    if not classroom:
+        raise HTTPException(status_code=404, detail="학급을 찾을 수 없습니다")
+
+    # 학생 접속 URL (프론트엔드 학생 페이지 + 초대코드)
+    student_url = f"http://localhost:3000/student?code={classroom.invite_code}"
+    qr = qrcode.QRCode(version=1, box_size=8, border=2)
+    qr.add_data(student_url)
+    qr.make(fit=True)
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    buf.seek(0)
+    return StreamingResponse(buf, media_type="image/png")
+
+
 @router.post("/{classroom_id}/exams")
 async def deploy_exam(
     classroom_id: str,
@@ -215,7 +262,8 @@ async def deploy_exam(
             "classroom": {"id": classroom_id, "name": c.name},
         },
     )
-    ce.status = "HWP_GENERATING"
+    # HWP 생성은 비동기로 진행되지만, 학생 응시는 바로 가능하도록 ACTIVE로 전이
+    ce.status = "ACTIVE"
     await db.commit()
 
     return {"classroom_exam_id": ce.id, "status": ce.status}
@@ -262,7 +310,7 @@ async def download_hwp(
         raise HTTPException(status_code=404, detail="배포된 시험을 찾을 수 없습니다")
     if not ce.hwp_file_path:
         raise HTTPException(status_code=404, detail="HWP 파일이 아직 생성되지 않았습니다 (상태: " + ce.status + ")")
-    url = get_presigned_url(ce.hwp_file_path, expires=300)
+    url = get_presigned_url(ce.hwp_file_path, expiry_seconds=300)
     return RedirectResponse(url=url)
 
 

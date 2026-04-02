@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { studentApi } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,7 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import {
   GraduationCap, ChevronLeft, ChevronRight,
-  BookOpen, CheckCircle, AlertTriangle,
+  BookOpen, CheckCircle, AlertTriangle, Clock,
 } from 'lucide-react';
 
 interface ExamQuestion {
@@ -30,7 +31,25 @@ type SelectMode = 'list' | 'manual';
 
 export default function StudentPage() {
   const [step, setStep] = useState<'code' | 'select' | 'exams' | 'cbt' | 'confirm' | 'result'>('code');
+  const searchParams = useSearchParams();
   const [inviteCode, setInviteCode] = useState('');
+
+  // QR코드에서 진입 시 초대코드 자동 입력 + 자동 접속
+  useEffect(() => {
+    const code = searchParams.get('code');
+    if (code && step === 'code' && !classroom) {
+      setInviteCode(code);
+      // 자동 접속 시도
+      (async () => {
+        try {
+          const res = await studentApi.findClassroom(code);
+          setClassroom(res.data);
+          setStudents(res.data.students ?? []);
+          setStep('select');
+        } catch { /* 실패 시 수동 입력 */ }
+      })();
+    }
+  }, [searchParams]); // eslint-disable-line react-hooks/exhaustive-deps
   const [classroom, setClassroom] = useState<any>(null);
   const [students, setStudents] = useState<any[]>([]);
   const [selectedStudent, setSelectedStudent] = useState<any>(null);
@@ -46,6 +65,8 @@ export default function StudentPage() {
   const [manualName, setManualName] = useState('');
   const [manualNumber, setManualNumber] = useState<number | ''>('');
   const [submitted, setSubmitted] = useState(false);
+  const [remainingSeconds, setRemainingSeconds] = useState(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   // ── helpers ──────────────────────────────────────────────
   const loadExams = async (classroomId: string) => {
@@ -118,6 +139,19 @@ export default function StudentPage() {
       setAnswers(qs.map(q => ({ pkey: q.pkey, seq: q.seq_order, value: '' })));
       setCurrentQ(0);
       setSubmitted(false);
+      // 타이머 시작
+      const minutes = res.data.time_limit_minutes ?? 50;
+      setRemainingSeconds(minutes * 60);
+      if (timerRef.current) clearInterval(timerRef.current);
+      timerRef.current = setInterval(() => {
+        setRemainingSeconds(prev => {
+          if (prev <= 1) {
+            if (timerRef.current) clearInterval(timerRef.current);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
       setStep('cbt');
     } catch {
       setError('시험 정보를 불러오는 데 실패했습니다.');
@@ -131,8 +165,22 @@ export default function StudentPage() {
   };
 
   const handleSubmit = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
     setSubmitted(true);
     setStep('result');
+  };
+
+  // 시간 초과 시 자동 제출
+  useEffect(() => {
+    if (step === 'cbt' && remainingSeconds === 0 && !submitted) {
+      handleSubmit();
+    }
+  }, [remainingSeconds, step, submitted]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const formatTime = (s: number) => {
+    const m = Math.floor(s / 60);
+    const sec = s % 60;
+    return `${m}:${String(sec).padStart(2, '0')}`;
   };
 
   // ── 초대 코드 입력 ───────────────────────────────────────
@@ -345,6 +393,13 @@ export default function StudentPage() {
             <div className="text-xs text-muted-foreground">{selectedStudent?.name}</div>
           </div>
           <div className="flex items-center gap-2">
+            <Badge
+              variant={remainingSeconds < 300 ? 'destructive' : 'outline'}
+              className="font-mono flex items-center gap-1"
+            >
+              <Clock className="w-3 h-3" />
+              {formatTime(remainingSeconds)}
+            </Badge>
             <Badge variant="outline" className="font-mono">
               {currentQ + 1} / {total}문항
             </Badge>
@@ -414,16 +469,46 @@ export default function StudentPage() {
                   )}
                 </div>
 
-                {/* 답안 입력 */}
+                {/* 답안 입력 — 유형별 분기 */}
                 <div>
                   <label className="text-sm font-medium text-muted-foreground block mb-2">답안 입력</label>
-                  <textarea
-                    value={answer?.value ?? ''}
-                    onChange={e => updateAnswer(e.target.value)}
-                    placeholder="답을 입력하세요"
-                    rows={3}
-                    className="w-full px-4 py-3 border rounded-xl text-sm resize-none bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 transition"
-                  />
+
+                  {q.question_type === '객관식' ? (
+                    /* 객관식: 1~5번 라디오 버튼 */
+                    <div className="grid grid-cols-5 gap-2">
+                      {[1, 2, 3, 4, 5].map(n => (
+                        <button
+                          key={n}
+                          onClick={() => updateAnswer(String(n))}
+                          className={`py-3 rounded-xl text-sm font-semibold border-2 transition-all ${
+                            answer?.value === String(n)
+                              ? 'bg-primary text-primary-foreground border-primary shadow-md scale-105'
+                              : 'bg-card border-muted-foreground/20 hover:border-primary/50 hover:bg-accent'
+                          }`}
+                        >
+                          {n}
+                        </button>
+                      ))}
+                    </div>
+                  ) : q.question_type === '단답형' ? (
+                    /* 단답형: 짧은 입력 */
+                    <Input
+                      value={answer?.value ?? ''}
+                      onChange={e => updateAnswer(e.target.value)}
+                      placeholder="답을 입력하세요"
+                      className="h-12 text-base"
+                      autoFocus
+                    />
+                  ) : (
+                    /* 서술형 / 기타: 텍스트 영역 */
+                    <textarea
+                      value={answer?.value ?? ''}
+                      onChange={e => updateAnswer(e.target.value)}
+                      placeholder="답을 입력하세요"
+                      rows={4}
+                      className="w-full px-4 py-3 border rounded-xl text-sm resize-none bg-background focus:outline-none focus:ring-2 focus:ring-primary/30 transition"
+                    />
+                  )}
                 </div>
               </CardContent>
             </Card>
