@@ -45,10 +45,12 @@ export default function LearningMapsPage() {
   });
 
   const treeData: any[] = tree.data?.data.data ?? [];
-  const depth2Items: any[] = selectedD1
-    ? treeData.find((d: any) => d.depth1_number === selectedD1)?.children ?? [] : [];
-  const depth3Items: any[] = selectedD2
-    ? depth2Items.find((d: any) => d.depth2_number === selectedD2)?.children ?? [] : [];
+  const selectedD1Data = selectedD1 ? treeData.find((d: any) => d.depth1_number === selectedD1) : null;
+  const depth2Items: any[] = selectedD1Data?.children ?? [];
+  const selectedD2Data = selectedD2 ? depth2Items.find((d: any) => d.depth2_number === selectedD2) : null;
+  const depth3Items: any[] = selectedD2Data?.children ?? [];
+  // 소단원이 없는 중단원은 node_id를 직접 가짐
+  const d2NodeId = selectedD2Data?.node_id ?? null;
 
   const reset = () => { setSelectedD1(null); setSelectedD2(null); setSelectedNodeId(null); };
 
@@ -116,7 +118,15 @@ export default function LearningMapsPage() {
               {depth2Items.map((d2: any) => (
                 <button
                   key={d2.depth2_number}
-                  onClick={() => { setSelectedD2(d2.depth2_number); setSelectedNodeId(null); }}
+                  onClick={() => {
+                    setSelectedD2(d2.depth2_number);
+                    // 소단원이 없고 중단원에 node_id가 있으면 바로 문항 표시
+                    if ((d2.children ?? []).length === 0 && d2.node_id) {
+                      setSelectedNodeId(d2.node_id);
+                    } else {
+                      setSelectedNodeId(null);
+                    }
+                  }}
                   className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
                     selectedD2 === d2.depth2_number
                       ? 'bg-primary text-primary-foreground'
@@ -155,7 +165,9 @@ export default function LearningMapsPage() {
                     : d3.question_count > 0 ? 'text-primary' : 'text-muted-foreground'
                   }`}>({d3.question_count ?? 0})</span>
                 </button>
-              )) : <p className="text-xs text-muted-foreground">소단원이 없습니다</p>}
+              )) : d2NodeId ? (
+                <p className="text-xs text-muted-foreground">소단원 없음 — 중단원에 직접 매핑됩니다</p>
+              ) : <p className="text-xs text-muted-foreground">소단원이 없습니다</p>}
             </div>
           ) : <p className="text-xs text-muted-foreground">중단원을 선택하세요</p>}
         </div>
@@ -201,7 +213,7 @@ export default function LearningMapsPage() {
               </div>
             )
           ) : (
-            <p className="text-xs text-muted-foreground">소단원을 선택하세요</p>
+            <p className="text-xs text-muted-foreground">단원을 선택하세요</p>
           )}
         </div>
       </div>
@@ -235,7 +247,7 @@ export default function LearningMapsPage() {
                 <div>
                   <p className="text-xs font-medium text-muted-foreground mb-2">렌더링 미리보기</p>
                   <div
-                    className="p-4 border rounded-lg bg-card text-sm leading-relaxed"
+                    className="render-preview p-4 border rounded-lg bg-card text-sm leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: previewData.produced.render_html }}
                   />
                 </div>

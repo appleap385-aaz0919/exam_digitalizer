@@ -11,7 +11,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <head>
-        <title>시험 문항 디지털라이징 시스템</title>
+        <title>출제 마법사 — 시험 문항 디지털라이징</title>
+        <meta name="description" content="AI 기반 HWP 시험지 디지털라이징 시스템" />
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='28' font-size='28'>📝</text></svg>" />
         {/* eslint-disable-next-line @next/next/no-css-tags */}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}

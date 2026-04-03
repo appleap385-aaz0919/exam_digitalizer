@@ -482,7 +482,7 @@ export default function StudentPage() {
                 <div className="mb-6">
                   {q.render_html ? (
                     <div
-                      className="p-4 bg-muted/40 rounded-xl text-sm leading-relaxed"
+                      className="render-preview p-4 bg-muted/40 rounded-xl text-sm leading-relaxed"
                       dangerouslySetInnerHTML={{ __html: q.render_html }}
                     />
                   ) : q.raw_text ? (

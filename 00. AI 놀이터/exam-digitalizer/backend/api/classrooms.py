@@ -251,8 +251,32 @@ async def deploy_exam(
     await db.commit()
     await db.refresh(ce)
 
-    # L2-B 파이프라인 시작
+    # L2-B 파이프라인 시작 — 문항 데이터 포함
+    from models.exam import ExamQuestion
+    from models.question import QuestionProduced, QuestionMetadata
+
     c = (await db.execute(select(Classroom).where(Classroom.id == classroom_id))).scalar_one()
+
+    eq_rows = (await db.execute(
+        select(ExamQuestion, QuestionProduced, QuestionMetadata)
+        .outerjoin(QuestionProduced, QuestionProduced.pkey == ExamQuestion.pkey)
+        .outerjoin(QuestionMetadata, QuestionMetadata.pkey == ExamQuestion.pkey)
+        .where(ExamQuestion.exam_id == request.exam_id)
+        .order_by(ExamQuestion.seq_order)
+    )).all()
+
+    exam_questions = []
+    for eq, produced, meta in eq_rows:
+        exam_questions.append({
+            "pkey": eq.pkey,
+            "seq_order": eq.seq_order,
+            "points": eq.points_current,
+            "question_text": produced.content_latex or produced.content_html or "" if produced else "",
+            "question_type": meta.question_type if meta else "",
+            "choices": [],
+            "metadata": {"question_type": meta.question_type, "difficulty": meta.difficulty} if meta else {},
+        })
+
     await publish_task(
         redis, PIPELINE_TASKS_STREAM, "a11_service",
         ref_id=str(ce.id), level="L2B",
@@ -260,7 +284,9 @@ async def deploy_exam(
             "classroom_exam_id": ce.id,
             "exam_id": request.exam_id,
             "classroom": {"id": classroom_id, "name": c.name},
+            "exam_questions": exam_questions,
         },
+        stage="HWP_GENERATING",
     )
     # HWP 생성은 비동기로 진행되지만, 학생 응시는 바로 가능하도록 ACTIVE로 전이
     ce.status = "ACTIVE"

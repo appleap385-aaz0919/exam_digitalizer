@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+/* Pretendard Variable — 한국 시장 표준 폰트 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
 
 @import "tw-animate-css";
 
@@ -10,75 +11,78 @@
 
 @layer base {
   .theme {
-    --font-heading: 'Noto Sans KR', var(--font-sans);
-    --font-sans: 'Noto Sans KR', var(--font-sans);
+    --font-heading: 'Pretendard Variable', 'Pretendard', var(--font-sans);
+    --font-sans: 'Pretendard Variable', 'Pretendard', var(--font-sans);
   }
   :root {
-    --background: oklch(0.98 0.005 240);
-    --foreground: oklch(0.15 0.02 250);
+    /* 따뜻한 슬레이트 기반 — 차가운 인디고에서 따뜻한 뉴트럴로 전환 */
+    --background: oklch(0.975 0.002 260);
+    --foreground: oklch(0.13 0.02 260);
     --card: oklch(1 0 0);
-    --card-foreground: oklch(0.15 0.02 250);
+    --card-foreground: oklch(0.13 0.02 260);
     --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.15 0.02 250);
-    --primary: oklch(0.45 0.18 260);
-    --primary-foreground: oklch(0.98 0 0);
-    --secondary: oklch(0.95 0.02 240);
-    --secondary-foreground: oklch(0.25 0.05 250);
-    --muted: oklch(0.96 0.01 250);
-    --muted-foreground: oklch(0.5 0.02 250);
-    --accent: oklch(0.92 0.04 250);
-    --accent-foreground: oklch(0.25 0.05 250);
+    --popover-foreground: oklch(0.13 0.02 260);
+    /* 딥 인디고 → 틸/에메랄드 악센트로 전환 */
+    --primary: oklch(0.50 0.14 165);
+    --primary-foreground: oklch(0.99 0 0);
+    --secondary: oklch(0.96 0.008 260);
+    --secondary-foreground: oklch(0.25 0.03 260);
+    --muted: oklch(0.965 0.005 260);
+    --muted-foreground: oklch(0.46 0.015 260);
+    --accent: oklch(0.94 0.02 165);
+    --accent-foreground: oklch(0.20 0.04 165);
     --destructive: oklch(0.55 0.22 25);
-    --border: oklch(0.90 0.01 250);
-    --input: oklch(0.90 0.01 250);
-    --ring: oklch(0.45 0.18 260);
-    --chart-1: oklch(0.45 0.18 260);
-    --chart-2: oklch(0.60 0.15 150);
+    --border: oklch(0.92 0.005 260);
+    --input: oklch(0.92 0.005 260);
+    --ring: oklch(0.50 0.14 165);
+    --chart-1: oklch(0.50 0.14 165);
+    --chart-2: oklch(0.58 0.16 250);
     --chart-3: oklch(0.65 0.18 50);
     --chart-4: oklch(0.55 0.20 300);
     --chart-5: oklch(0.70 0.15 80);
-    --radius: 0.625rem;
-    --sidebar: oklch(0.18 0.04 250);
-    --sidebar-foreground: oklch(0.92 0.01 250);
-    --sidebar-primary: oklch(0.55 0.20 260);
-    --sidebar-primary-foreground: oklch(0.98 0 0);
-    --sidebar-accent: oklch(0.25 0.05 250);
-    --sidebar-accent-foreground: oklch(0.92 0.01 250);
-    --sidebar-border: oklch(0.28 0.04 250);
-    --sidebar-ring: oklch(0.45 0.18 260);
+    --radius: 0.75rem;
+    /* 사이드바 — 딥 다크 슬레이트 */
+    --sidebar: oklch(0.14 0.025 260);
+    --sidebar-foreground: oklch(0.90 0.01 260);
+    --sidebar-primary: oklch(0.60 0.16 165);
+    --sidebar-primary-foreground: oklch(0.99 0 0);
+    --sidebar-accent: oklch(0.22 0.03 260);
+    --sidebar-accent-foreground: oklch(0.92 0.01 260);
+    --sidebar-border: oklch(0.24 0.02 260);
+    --sidebar-ring: oklch(0.50 0.14 165);
   }
   .dark {
-    --background: oklch(0.14 0.02 250);
-    --foreground: oklch(0.96 0.01 250);
-    --card: oklch(0.20 0.03 250);
-    --card-foreground: oklch(0.96 0.01 250);
-    --popover: oklch(0.20 0.03 250);
-    --popover-foreground: oklch(0.96 0.01 250);
-    --primary: oklch(0.55 0.20 260);
-    --primary-foreground: oklch(0.98 0 0);
-    --secondary: oklch(0.26 0.04 250);
-    --secondary-foreground: oklch(0.96 0.01 250);
-    --muted: oklch(0.26 0.04 250);
-    --muted-foreground: oklch(0.65 0.02 250);
-    --accent: oklch(0.26 0.04 250);
-    --accent-foreground: oklch(0.96 0.01 250);
+    --background: oklch(0.12 0.015 260);
+    --foreground: oklch(0.96 0.01 260);
+    --card: oklch(0.17 0.02 260);
+    --card-foreground: oklch(0.96 0.01 260);
+    --popover: oklch(0.17 0.02 260);
+    --popover-foreground: oklch(0.96 0.01 260);
+    --primary: oklch(0.60 0.16 165);
+    --primary-foreground: oklch(0.99 0 0);
+    --secondary: oklch(0.23 0.03 260);
+    --secondary-foreground: oklch(0.96 0.01 260);
+    --muted: oklch(0.23 0.03 260);
+    --muted-foreground: oklch(0.62 0.015 260);
+    --accent: oklch(0.23 0.03 260);
+    --accent-foreground: oklch(0.96 0.01 260);
     --destructive: oklch(0.65 0.20 25);
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.55 0.20 260);
-    --chart-1: oklch(0.55 0.20 260);
-    --chart-2: oklch(0.65 0.18 150);
+    --ring: oklch(0.60 0.16 165);
+    --chart-1: oklch(0.60 0.16 165);
+    --chart-2: oklch(0.65 0.18 250);
     --chart-3: oklch(0.70 0.18 50);
     --chart-4: oklch(0.60 0.22 300);
     --chart-5: oklch(0.75 0.15 80);
-    --sidebar: oklch(0.18 0.04 250);
-    --sidebar-foreground: oklch(0.96 0.01 250);
-    --sidebar-primary: oklch(0.55 0.20 260);
-    --sidebar-primary-foreground: oklch(0.98 0 0);
-    --sidebar-accent: oklch(0.26 0.04 250);
-    --sidebar-accent-foreground: oklch(0.96 0.01 250);
+    --sidebar: oklch(0.10 0.02 260);
+    --sidebar-foreground: oklch(0.96 0.01 260);
+    --sidebar-primary: oklch(0.60 0.16 165);
+    --sidebar-primary-foreground: oklch(0.99 0 0);
+    --sidebar-accent: oklch(0.20 0.03 260);
+    --sidebar-accent-foreground: oklch(0.96 0.01 260);
     --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.55 0.20 260);
+    --sidebar-ring: oklch(0.60 0.16 165);
   }
   * {
     border-color: var(--border);
@@ -87,18 +91,50 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
-    font-family: 'Noto Sans KR', system-ui, sans-serif;
+    font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  /* 한국어 타이포그래피 최적화 */
+  p, li, dd, td, th, label, span {
+    letter-spacing: -0.01em;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+}
+
+/* 글로벌 트랜지션 — 모든 인터랙티브 요소에 부드러운 전환 */
+@layer utilities {
+  button, a, [role="button"], input, select, textarea, .transition-all {
+    transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1);
+  }
+}
+
+/* 카드 호버 깊이감 */
+@layer components {
+  .card-hover {
+    transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1),
+                box-shadow 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px -8px rgba(0, 0, 0, 0.08),
+                0 4px 10px -4px rgba(0, 0, 0, 0.04);
+  }
+  .card-hover:active {
+    transform: translateY(0) scale(0.995);
   }
 }
 
 /* 반응형: 태블릿 CBT 대응 */
 @media (max-width: 768px) {
-  /* 교사 사이드바 축소 */
   aside { width: 3.5rem !important; overflow: hidden; }
   aside span, aside p, aside h2 { display: none; }
   aside nav a { justify-content: center; padding-left: 0; padding-right: 0; }
-
-  /* 그리드 1열로 */
   .grid-cols-3, .grid-cols-4, .grid-cols-5 {
     grid-template-columns: 1fr !important;
   }
@@ -114,7 +150,7 @@
   border-radius: 4px;
 }
 
-/* WCAG: 최소 터치 대상 크기 44x44px (모바일) */
+/* WCAG: 최소 터치 대상 크기 (모바일) */
 @media (pointer: coarse) {
   button, a, [role="button"], input, select, textarea {
     min-height: 44px;
@@ -131,8 +167,30 @@
   }
 }
 
-/* 스크롤바 스타일링 */
-::-webkit-scrollbar { width: 6px; height: 6px; }
+/* 스크롤바 — 미니멀 */
+::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--muted-foreground); border-radius: 3px; opacity: 0.3; }
-::-webkit-scrollbar-thumb:hover { opacity: 0.6; }
+::-webkit-scrollbar-thumb { background: oklch(0.7 0.01 260 / 30%); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: oklch(0.5 0.01 260 / 50%); }
+
+/* smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* 렌더링 미리보기 — 외부 HTML 인라인 스타일 오버라이드 */
+.render-preview,
+.render-preview * {
+  background-color: white !important;
+  color: #1a1a1a !important;
+}
+.render-preview img {
+  max-width: 100%;
+  height: auto;
+}
+.render-preview table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.render-preview td, .render-preview th {
+  border: 1px solid #e5e5e5 !important;
+  padding: 6px 10px;
+}

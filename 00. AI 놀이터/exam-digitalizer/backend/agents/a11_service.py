@@ -81,6 +81,9 @@ class ServiceAgent(BaseAgent):
             hwp_s3_path = f"classroom-exams/{classroom_exam_id}/paper.hwp"
             self._upload_to_s3(hwp_bytes, hwp_s3_path, "application/hwp")
 
+            # 5. classroom_exams DB 업데이트
+            await self._update_classroom_exam(classroom_exam_id, hwp_s3_path, qr_s3_path)
+
             log.info(
                 "hwp_generation_completed",
                 hwp_path=hwp_s3_path,
@@ -182,6 +185,31 @@ class ServiceAgent(BaseAgent):
   </BODY>
 </HWPML>"""
         return hwpml.encode("utf-8")
+
+    async def _update_classroom_exam(
+        self, classroom_exam_id: str | int, hwp_path: str, qr_path: str,
+    ) -> None:
+        """classroom_exams 테이블에 HWP/QR 경로 저장"""
+        try:
+            from sqlalchemy import update
+            from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+            from sqlalchemy.orm import sessionmaker
+
+            from config import settings
+            from models.classroom import ClassroomExam
+
+            engine = create_async_engine(settings.DATABASE_URL, echo=False)
+            factory = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+            async with factory() as db:
+                await db.execute(
+                    update(ClassroomExam)
+                    .where(ClassroomExam.id == int(classroom_exam_id))
+                    .values(hwp_file_path=hwp_path, exam_qr_path=qr_path)
+                )
+                await db.commit()
+            await engine.dispose()
+        except Exception as e:
+            logger.warning("classroom_exam_update_failed", error=str(e))
 
     def _upload_to_s3(self, data: bytes, key: str, content_type: str) -> None:
         """S3 업로드 (storage 모듈 사용)"""

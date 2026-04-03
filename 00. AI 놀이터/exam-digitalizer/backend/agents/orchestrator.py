@@ -23,7 +23,7 @@ from core.queue import (
     publish_task,
     setup_streams,
 )
-from models.classroom import ClassroomExam
+from models.classroom import Classroom, ClassroomExam
 from models.pipeline import PipelineHistory, PipelineState
 
 logger = structlog.get_logger()
@@ -35,8 +35,7 @@ L1_TRANSITIONS = {
     "META":             ("META_REVIEW",   "a04_meta_reviewer"),
     "META_REVIEW":      ("PRODUCTION",    "a05_producer"),
     "PRODUCTION":       ("PROD_REVIEW",   "a06_prod_reviewer"),
-    # PROD_REVIEW 분기: answer_source == "ai_derived" → HUMAN_CONFIRM_ANSWER
-    "PROD_REVIEW":      None,  # 특수 처리
+    "PROD_REVIEW":      ("DATA",          "a07_data"),
     "HUMAN_CONFIRM":    ("DATA",          "a07_data"),
     "DATA":             ("DATA_REVIEW",   "a08_data_reviewer"),
     "DATA_REVIEW":      ("EMBEDDING",     "embedding"),
@@ -117,7 +116,7 @@ class Orchestrator:
             elif result == "REJECT":
                 await self._reject_stage(redis, db, ref_id, level, stage, reject_reason, score, score_detail)
             elif result == "ERROR":
-                await self._handle_error(db, ref_id, level, stage, reject_reason)
+                await self._handle_error(redis, db, ref_id, level, stage, reject_reason)
 
     async def _advance_stage(
         self, redis, db: AsyncSession,
@@ -208,13 +207,48 @@ class Orchestrator:
         logger.info("stage_rejected", ref_id=ref_id, from_stage=stage, to_stage=prev_stage)
 
     async def _handle_error(
-        self, db: AsyncSession,
+        self, redis, db: AsyncSession,
         ref_id: str, level: str, stage: str, error_msg: str,
     ) -> None:
+        """에러 처리: 자동 재시도 (최대 3회) 후 ERROR 상태로 전환"""
+        MAX_ERROR_RETRIES = 3
+
+        state = await self._get_pipeline_state(db, ref_id, level)
+        error_count = (state.error_retry_count if state and hasattr(state, 'error_retry_count') else 0) + 1
+
+        if error_count <= MAX_ERROR_RETRIES:
+            # 재시도: 같은 스테이지의 에이전트에 다시 작업 발행
+            retry_agent = self._get_agent_for_stage(level, stage)
+            if retry_agent:
+                await self._record_history(
+                    db, ref_id, level, stage, stage, "ERROR_RETRY",
+                    None, {"error": error_msg, "retry": error_count},
+                )
+                payload = await self._assemble_payload(db, ref_id, level, stage)
+                await publish_task(
+                    redis, PIPELINE_TASKS_STREAM, retry_agent, ref_id, level, payload, stage=stage,
+                )
+                await db.commit()
+                logger.warning(
+                    "pipeline_error_retry",
+                    ref_id=ref_id, level=level, stage=stage,
+                    retry=error_count, max_retries=MAX_ERROR_RETRIES,
+                    error=error_msg,
+                )
+                return
+
+        # 재시도 초과 → ERROR 상태
         await self._update_pipeline_state(db, ref_id, level, "ERROR", stage, None)
-        await self._record_history(db, ref_id, level, stage, stage, "ERROR", None, {"error": error_msg})
+        await self._record_history(
+            db, ref_id, level, stage, stage, "ERROR",
+            None, {"error": error_msg, "retries_exhausted": error_count},
+        )
         await db.commit()
-        logger.error("pipeline_error", ref_id=ref_id, level=level, stage=stage, error=error_msg)
+        logger.error(
+            "pipeline_error_final",
+            ref_id=ref_id, level=level, stage=stage,
+            error=error_msg, retries=error_count,
+        )
 
     async def _dispatch_per_question(
         self, redis, db: AsyncSession,
@@ -293,7 +327,7 @@ class Orchestrator:
             elif level == "L2A":
                 base["exam_id"] = ref_id
             elif level == "L2B":
-                base["classroom_exam_id"] = ref_id
+                base = await self._assemble_l2b_payload(db, ref_id, stage, base)
         except Exception as e:
             logger.warning("payload_assemble_partial", ref_id=ref_id, stage=stage, error=str(e))
 
@@ -481,6 +515,59 @@ class Orchestrator:
             .where(Question.pkey == pkey)
             .values(version=Question.version + 1)
         )
+
+    async def _assemble_l2b_payload(
+        self, db: AsyncSession, ref_id: str, stage: str, base: dict,
+    ) -> dict:
+        """L2-B 스테이지별 payload 조립"""
+        from models.exam import ExamQuestion
+        from models.question import QuestionMetadata, QuestionProduced
+
+        base["classroom_exam_id"] = ref_id
+
+        try:
+            ce_id = int(ref_id)
+            ce = (await db.execute(
+                select(ClassroomExam).where(ClassroomExam.id == ce_id)
+            )).scalar_one_or_none()
+
+            if ce:
+                base["exam_id"] = ce.exam_id
+
+                classroom = (await db.execute(
+                    select(Classroom).where(Classroom.id == ce.classroom_id)
+                )).scalar_one_or_none()
+
+                if classroom:
+                    base["classroom"] = {"id": str(classroom.id), "name": classroom.name}
+
+                # HWP_REVIEW: 서비스팀 출력이 필요하지만 DB에 별도 저장 안 됨
+                # → service_output은 이전 스테이지 결과에서 전달됨
+                if stage in ("HWP_GENERATING",):
+                    eq_rows = (await db.execute(
+                        select(ExamQuestion, QuestionProduced, QuestionMetadata)
+                        .outerjoin(QuestionProduced, QuestionProduced.pkey == ExamQuestion.pkey)
+                        .outerjoin(QuestionMetadata, QuestionMetadata.pkey == ExamQuestion.pkey)
+                        .where(ExamQuestion.exam_id == ce.exam_id)
+                        .order_by(ExamQuestion.seq_order)
+                    )).all()
+
+                    base["exam_questions"] = [
+                        {
+                            "pkey": eq.pkey,
+                            "seq_order": eq.seq_order,
+                            "points": eq.points_current,
+                            "question_text": (p.content_latex or p.content_html or "") if p else "",
+                            "question_type": m.question_type if m else "",
+                            "choices": [],
+                            "metadata": {"question_type": m.question_type, "difficulty": m.difficulty} if m else {},
+                        }
+                        for eq, p, m in eq_rows
+                    ]
+        except (ValueError, Exception) as e:
+            logger.warning("l2b_payload_assemble_error", ref_id=ref_id, error=str(e))
+
+        return base
 
     async def _sync_classroom_exam_status(
         self, db: AsyncSession, ref_id: str, stage: str

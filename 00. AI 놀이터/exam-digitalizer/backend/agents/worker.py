@@ -39,6 +39,7 @@ def _build_agent_registry() -> dict:
     from agents.a12_service_reviewer import ServiceReviewerAgent
     from agents.a13_grader import GraderAgent
     from agents.a14_grade_reviewer import GradeReviewerAgent
+    from agents.embedding_agent import EmbeddingAgent
     from agents.dummy_agent import DummyAgent, DummyReviewer
 
     return {
@@ -56,6 +57,8 @@ def _build_agent_registry() -> dict:
         "a12_service_reviewer": ServiceReviewerAgent(),
         "a13_grader": GraderAgent(),
         "a14_grade_reviewer": GradeReviewerAgent(),
+        # 임베딩
+        "embedding": EmbeddingAgent(),
         # 더미 (테스트/폴백)
         "dummy": DummyAgent(),
         "dummy_reviewer": DummyReviewer(),

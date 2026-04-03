@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8002';
 
 const api = axios.create({
   baseURL: `${API_BASE}/api/v1`,
@@ -139,6 +139,14 @@ export const studentApi = {
     publicApi.post('/join/sessions/start', { classroom_exam_id: classroomExamId, student_token: studentToken }),
   submitSession: (submissionId: number, studentToken: string, answers: { pkey: string; seq: number; value: string; question_type?: string }[]) =>
     publicApi.post('/join/sessions/submit', { submission_id: submissionId, student_token: studentToken, answers }),
+};
+
+// ─── Admin / Human Review ──────────────────────────
+export const adminApi = {
+  getMetrics: () => api.get('/admin/metrics'),
+  listHumanReview: () => api.get('/admin/human-review'),
+  approveHumanReview: (pkey: string) => api.post(`/admin/human-review/${pkey}/approve`),
+  rejectHumanReview: (pkey: string) => api.post(`/admin/human-review/${pkey}/reject`),
 };
 
 // ─── Sessions (CBT) ────────────────────────────────

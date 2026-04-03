@@ -9,6 +9,7 @@ DB의 학습맵 트리에서 가장 적합한 노드를 찾고,
   → learning_maps 트리 탐색
   → 최적 노드 반환 + 연결된 curriculum_standards 메타 상속
 """
+import re
 from dataclasses import dataclass, field
 from typing import Optional
 
@@ -74,12 +75,15 @@ async def match_learning_map(
             school_level = "H"
 
     # 1단계: 학년+학기+Depth1 단원명으로 후보 축소
+    # 학기=0인 항목도 포함 (학기 구분 없는 학습맵 — 중/고등)
     query = select(LearningMap)
     filters = []
     if grade:
         filters.append(LearningMap.grade == grade)
     if semester:
-        filters.append(LearningMap.semester == semester)
+        filters.append(
+            or_(LearningMap.semester == semester, LearningMap.semester == 0)
+        )
     if school_level:
         filters.append(LearningMap.school_level == school_level)
     if filters:
@@ -202,19 +206,43 @@ def _compute_match_score(
     return min(1.0, score)
 
 
+_KOREAN_PARTICLES = re.compile(r'[과와의을를에서는이가도로으며]$')
+
+
+def _strip_particle(word: str) -> str:
+    """한국어 단어에서 말미 조사 제거: '문자와' → '문자', '도형과' → '도형'"""
+    if len(word) <= 1:
+        return word
+    return _KOREAN_PARTICLES.sub('', word)
+
+
 def _has_common_keywords(text_a: str, text_b: str) -> bool:
-    """두 텍스트에 공통 키워드가 있는지 (한글 2글자 이상 부분 매칭 포함)"""
+    """두 텍스트에 공통 키워드가 있는지 (조사 제거 + 어근 비교)"""
     if not text_a or not text_b:
         return False
-    # 2글자 이상 공통 단어 (공백 기준)
-    words_a = set(w for w in text_a.split() if len(w) >= 2)
-    words_b = set(w for w in text_b.split() if len(w) >= 2)
-    if words_a & words_b:
+
+    # 조사 제거 후 2글자 이상 어근 추출
+    stems_a = set(
+        s for w in text_a.split()
+        if len(w) >= 2
+        for s in (w, _strip_particle(w))
+        if len(s) >= 2
+    )
+    stems_b = set(
+        s for w in text_b.split()
+        if len(w) >= 2
+        for s in (w, _strip_particle(w))
+        if len(s) >= 2
+    )
+
+    # 정확 매칭 (조사 제거 후)
+    if stems_a & stems_b:
         return True
-    # 부분 문자열 매칭 (한글 특성 — "덧셈"이 "덧셈과 뺄셈"에 포함)
-    for wa in words_a:
-        for wb in words_b:
-            if len(wa) >= 2 and len(wb) >= 2 and (wa in wb or wb in wa):
+
+    # 부분 문자열 매칭 (한글 특성 — "문자"가 "문자와"에 포함, "도형"이 "도형과"에 포함)
+    for sa in stems_a:
+        for sb in stems_b:
+            if len(sa) >= 2 and len(sb) >= 2 and (sa in sb or sb in sa):
                 return True
     return False
 
@@ -224,9 +252,8 @@ def _char_overlap_ratio(text_a: str, text_b: str) -> float:
     if not text_a or not text_b:
         return 0.0
     # 조사 및 공백 제거
-    import re
-    clean_a = re.sub(r'[과와의을를에서는이가도로]', '', text_a.replace(' ', ''))
-    clean_b = re.sub(r'[과와의을를에서는이가도로]', '', text_b.replace(' ', ''))
+    clean_a = re.sub(r'[과와의을를에서는이가도로으며]', '', text_a.replace(' ', ''))
+    clean_b = re.sub(r'[과와의을를에서는이가도로으며]', '', text_b.replace(' ', ''))
     if not clean_a or not clean_b:
         return 0.0
     set_a = set(clean_a)
@@ -338,6 +365,9 @@ async def get_tree_for_selection(
                 "learning_map_id": node.learning_map_id,
                 "question_count": node_q_count,
             }
+        elif d3_key == "00" or not node.depth3_name:
+            # 소단원 없는 중단원 — node_id를 중단원에 직접 부여
+            d2["node_id"] = node.id
 
     # dict → list 변환
     result_tree = []
@@ -345,12 +375,15 @@ async def get_tree_for_selection(
         children_2 = []
         for d2 in sorted(d1["children"].values(), key=lambda x: x["depth2_number"]):
             children_3 = sorted(d2["children"].values(), key=lambda x: x["depth3_number"])
-            children_2.append({
+            d2_item = {
                 "depth2_number": d2["depth2_number"],
                 "depth2_name": d2["depth2_name"],
                 "children": children_3,
                 "question_count": d2["question_count"],
-            })
+            }
+            if "node_id" in d2:
+                d2_item["node_id"] = d2["node_id"]
+            children_2.append(d2_item)
         result_tree.append({
             "depth1_number": d1["depth1_number"],
             "depth1_name": d1["depth1_name"],

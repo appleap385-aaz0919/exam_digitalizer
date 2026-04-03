@@ -541,7 +541,7 @@ export default function ExamsPage() {
               {previewData.produced?.render_html ? (
                 <div>
                   <p className="text-xs font-medium text-muted-foreground mb-2">렌더링 미리보기</p>
-                  <div className="p-4 border rounded-lg bg-card text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: previewData.produced.render_html }} />
+                  <div className="render-preview p-4 border rounded-lg bg-card text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: previewData.produced.render_html }} />
                 </div>
               ) : previewData.raw?.raw_text ? (
                 <div>

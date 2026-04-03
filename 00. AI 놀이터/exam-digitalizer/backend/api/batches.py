@@ -179,6 +179,80 @@ async def get_batch_questions(
     return {"data": questions, "meta": {"total": total, "page": page, "limit": limit}}
 
 
+@router.post("/{batch_id}/retry")
+async def retry_batch_pipeline(
+    batch_id: str,
+    current_user: dict = Depends(require_teacher),
+    db: AsyncSession = Depends(get_db),
+    redis=Depends(get_redis),
+):
+    """멈춘 파이프라인 재시작 — ERROR 상태인 문항을 현재 스테이지에서 재시도"""
+    from models.pipeline import PipelineState
+    from models.question import QuestionRaw, QuestionStructured
+    from core.queue import PIPELINE_TASKS_STREAM, publish_task
+
+    # 배치 내 문항 조회
+    result = await db.execute(select(Question).where(Question.batch_id == batch_id))
+    questions = result.scalars().all()
+    if not questions:
+        raise HTTPException(status_code=404, detail="배치를 찾을 수 없습니다")
+
+    # L1 전이표에서 스테이지→에이전트 매핑
+    STAGE_AGENT_MAP = {
+        "PARSING": "a01_parser", "PARSE_REVIEW": "a02_parse_reviewer",
+        "META": "a03_meta", "META_REVIEW": "a04_meta_reviewer",
+        "PRODUCTION": "a05_producer", "PROD_REVIEW": "a06_prod_reviewer",
+        "DATA": "a07_data", "DATA_REVIEW": "a08_data_reviewer",
+    }
+
+    retried = 0
+    for q in questions:
+        # PipelineState가 ERROR인 문항만 재시도
+        ps = (await db.execute(
+            select(PipelineState).where(PipelineState.ref_id == q.pkey)
+        )).scalar_one_or_none()
+
+        is_error = (ps and ps.status == "ERROR") or q.current_stage in STAGE_AGENT_MAP
+        if not is_error and ps and ps.status != "ERROR":
+            continue
+
+        stage = q.current_stage
+        agent = STAGE_AGENT_MAP.get(stage)
+        if not agent:
+            continue
+
+        # payload 구성 (structured_question 포함)
+        payload = {"pkey": q.pkey, "batch_id": q.batch_id, "ref_id": q.pkey}
+
+        if stage in ("PRODUCTION", "PROD_REVIEW", "META_REVIEW"):
+            sq = (await db.execute(
+                select(QuestionStructured).where(QuestionStructured.pkey == q.pkey)
+            )).scalar_one_or_none()
+            if sq:
+                payload["structured_question"] = {
+                    "pkey": q.pkey,
+                    "question_text": sq.question_text or "",
+                    "segments": [], "choices": [], "metadata": {},
+                }
+
+        if stage in ("META", "PARSE_REVIEW"):
+            raw = (await db.execute(
+                select(QuestionRaw).where(QuestionRaw.pkey == q.pkey)
+            )).scalar_one_or_none()
+            if raw:
+                payload["raw_question"] = {"raw_text": raw.raw_text or ""}
+
+        # PipelineState 복구
+        if ps and ps.status == "ERROR":
+            ps.status = "IN_PROGRESS"
+
+        await publish_task(redis, PIPELINE_TASKS_STREAM, agent, q.pkey, "L1", payload, stage=stage)
+        retried += 1
+
+    await db.commit()
+    return {"batch_id": batch_id, "retried": retried, "total": len(questions)}
+
+
 def _get_ext(filename: str) -> str:
     if "." in filename:
         return "." + filename.rsplit(".", 1)[-1].lower()

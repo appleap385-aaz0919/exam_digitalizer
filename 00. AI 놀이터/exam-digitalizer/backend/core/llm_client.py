@@ -122,49 +122,67 @@ class LLMClient:
         model: Optional[str] = None,
         max_tokens: int = 4096,
         temperature: float = 0.0,
+        max_retries: int = 3,
     ) -> LLMResponse:
-        """Proxy 모드: Node.js OAuth 프록시를 통해 Claude 구독으로 호출"""
+        """Proxy 모드: Node.js OAuth 프록시를 통해 Claude 구독으로 호출 (재시도 포함)"""
         import httpx
 
         proxy_url = f"{settings.LLM_PROXY_URL}/api/query"
-        start_time = time.time()
+        last_error = None
 
-        try:
-            async with httpx.AsyncClient(timeout=300) as client:
-                resp = await client.post(proxy_url, json={
-                    "system_prompt": system_prompt,
-                    "user_prompt": user_prompt,
-                    "agent": agent,
-                    "ref_id": ref_id,
-                    "model": model or "sonnet",
-                    "max_tokens": max_tokens,
-                    "temperature": temperature,
-                })
-                resp.raise_for_status()
-                data = resp.json()
+        for attempt in range(max_retries):
+            start_time = time.time()
+            try:
+                async with httpx.AsyncClient(timeout=300) as client:
+                    resp = await client.post(proxy_url, json={
+                        "system_prompt": system_prompt,
+                        "user_prompt": user_prompt,
+                        "agent": agent,
+                        "ref_id": ref_id,
+                        "model": model or "sonnet",
+                        "max_tokens": max_tokens,
+                        "temperature": temperature,
+                    })
+                    resp.raise_for_status()
+                    data = resp.json()
 
-            duration_ms = int((time.time() - start_time) * 1000)
-            content = data.get("content", "")
+                duration_ms = int((time.time() - start_time) * 1000)
+                content = data.get("content", "")
 
-            logger.info(
-                "llm_proxy_success",
-                agent=agent, ref_id=ref_id, model=model,
-                duration_ms=duration_ms, cost_usd=data.get("cost_usd", 0),
-            )
+                logger.info(
+                    "llm_proxy_success",
+                    agent=agent, ref_id=ref_id, model=model,
+                    duration_ms=duration_ms, cost_usd=data.get("cost_usd", 0),
+                )
 
-            return LLMResponse(
-                content=content,
-                model=data.get("model", model or "sonnet"),
-                prompt_tokens=len(system_prompt + user_prompt) // 4,
-                completion_tokens=len(content) // 4,
-                total_tokens=(len(system_prompt + user_prompt) + len(content)) // 4,
-                duration_ms=duration_ms,
-            )
+                return LLMResponse(
+                    content=content,
+                    model=data.get("model", model or "sonnet"),
+                    prompt_tokens=len(system_prompt + user_prompt) // 4,
+                    completion_tokens=len(content) // 4,
+                    total_tokens=(len(system_prompt + user_prompt) + len(content)) // 4,
+                    duration_ms=duration_ms,
+                )
 
-        except Exception as e:
-            duration_ms = int((time.time() - start_time) * 1000)
-            logger.error("llm_proxy_failed", agent=agent, error=str(e), duration_ms=duration_ms)
-            raise RuntimeError(f"LLM Proxy 호출 실패: {e}")
+            except Exception as e:
+                duration_ms = int((time.time() - start_time) * 1000)
+                last_error = e
+                wait_seconds = 2 ** attempt * 5  # 5s, 10s, 20s
+                logger.warning(
+                    "llm_proxy_retry",
+                    agent=agent, ref_id=ref_id, error=str(e),
+                    attempt=attempt + 1, max_retries=max_retries,
+                    wait_seconds=wait_seconds, duration_ms=duration_ms,
+                )
+                if attempt < max_retries - 1:
+                    await asyncio.sleep(wait_seconds)
+
+        logger.error(
+            "llm_proxy_failed",
+            agent=agent, ref_id=ref_id, error=str(last_error),
+            attempts=max_retries,
+        )
+        raise RuntimeError(f"LLM Proxy 호출 실패 ({max_retries}회 재시도 후): {last_error}")
 
     async def _invoke_real(
         self,

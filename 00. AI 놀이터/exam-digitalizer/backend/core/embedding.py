@@ -40,7 +40,9 @@ async def embed_text(
 
     model = model or settings.EMBEDDING_MODEL
 
-    if settings.LLM_MODE == "mock":
+    if settings.LLM_MODE == "mock" or not settings.OPENAI_API_KEY:
+        if not settings.OPENAI_API_KEY and settings.LLM_MODE != "mock":
+            logger.debug("embedding_fallback_mock", reason="OPENAI_API_KEY not set")
         return _mock_embedding(text)
 
     return await _real_embedding(text, model)
@@ -64,7 +66,7 @@ async def embed_batch(
 
     model = model or settings.EMBEDDING_MODEL
 
-    if settings.LLM_MODE == "mock":
+    if settings.LLM_MODE == "mock" or not settings.OPENAI_API_KEY:
         return [_mock_embedding(t) for t in texts]
 
     return await _real_embedding_batch(texts, model)

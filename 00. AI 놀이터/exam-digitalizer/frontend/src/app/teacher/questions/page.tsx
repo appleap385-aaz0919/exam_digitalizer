@@ -117,7 +117,7 @@ export default function QuestionsPage() {
                       <div className="p-4 border rounded-lg bg-white">
                         <span className="text-xs text-gray-500 font-medium block mb-2">렌더링 미리보기</span>
                         <div
-                          className="leading-relaxed"
+                          className="render-preview leading-relaxed"
                           dangerouslySetInnerHTML={{ __html: qDetail.produced.render_html }}
                         />
                       </div>
